@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{c876c796-1ce7-4927-be94-1e14a13692ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{94bddc39-6535-4320-98d1-7e896e404a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physic">
+      <UniqueIdentifier>{5948e2ae-0aef-4f81-acd7-6026102096e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{feb57413-b279-4fc6-9b2b-89dfbe02af54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{448df26c-b2d9-4efa-b0a3-c97b21e889c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{d1939f5a-48dd-4d8d-9a4e-88c2e2d84bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Header">
+      <UniqueIdentifier>{5c0b5620-c323-4dfb-93b1-eeaae20f34d2}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Core\Source">
+      <UniqueIdentifier>{67485753-f8e4-483b-928a-5bd1a3045f82}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
+    <Filter Include="Graphic\Header">
+      <UniqueIdentifier>{0c6af328-f049-47ae-985f-1f35f3f88210}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Graphic\Source">
+      <UniqueIdentifier>{6dff0186-43ce-4b58-8a84-b174a40d85d7}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\GameEngine.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\GameEngine.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>
