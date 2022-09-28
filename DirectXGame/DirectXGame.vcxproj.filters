@@ -43,11 +43,17 @@
     <ClInclude Include="Core\GameEngine.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Timer.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
       <Filter>Core\Source</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Core\Timer.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
