@@ -1,6 +1,8 @@
 #include "GameEngine.h"
 #include <fstream>
+#include "../Graphic/Graphic.h"
 #include "../Utils/json.hpp"
+#include "../Utils/Debug.h"
 
 using json = nlohmann::json;
 
@@ -48,6 +50,10 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     
     // Create window depend on loaded config
     CreateGameWindow(nCmdShow);
+
+    // Init graphic
+    Graphic* graphic = Graphic::GetInstance();
+    graphic->Init(this->_hwnd, this->_fps);
 
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
@@ -108,6 +114,8 @@ void GameEngine::CreateGameWindow(int nCmdShow)
 
     ShowWindow(this->_hwnd, nCmdShow);
     UpdateWindow(this->_hwnd);
+    SetDebugWindow(this->_hwnd);
+
     return;
 }
 
