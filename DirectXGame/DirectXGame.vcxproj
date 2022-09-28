@@ -108,6 +108,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);d3d10.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,12 +136,17 @@
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Graphic\Graphic.h" />
+    <ClInclude Include="Utils\Debug.h" />
     <ClInclude Include="Utils\json.hpp" />
+    <ClInclude Include="Utils\Property.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
+    <ClCompile Include="Graphic\Graphic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utils\Debug.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

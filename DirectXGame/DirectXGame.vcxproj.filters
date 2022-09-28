@@ -64,6 +64,15 @@
     <ClInclude Include="Utils\json.hpp">
       <Filter>Utils\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\Property.h">
+      <Filter>Utils\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\Graphic.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Debug.h">
+      <Filter>Utils\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -72,6 +81,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Core\Timer.cpp">
       <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Graphic.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Debug.cpp">
+      <Filter>Utils\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
