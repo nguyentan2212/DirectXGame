@@ -1,6 +1,5 @@
 #include <Windows.h>
-#include <string>
-using namespace std;
+#include "Core/GameEngine.h"
 
 #ifndef UNICODE
 #define UNICODE
@@ -10,7 +9,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 {
 
 	// Register the window class.
-	string className = "My Game";
+	GameEngine* app = GameEngine::GetInstance();
+	app->Init(hInstance, nCmdShow);
+	app->Run();
 
 	return 0;
 }
