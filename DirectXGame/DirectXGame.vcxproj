@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Utils\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp" />

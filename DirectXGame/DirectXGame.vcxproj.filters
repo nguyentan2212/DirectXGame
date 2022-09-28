@@ -38,6 +38,14 @@
       <UniqueIdentifier>{6dff0186-43ce-4b58-8a84-b174a40d85d7}</UniqueIdentifier>
       <Extensions>cpp</Extensions>
     </Filter>
+    <Filter Include="Utils\Header">
+      <UniqueIdentifier>{d80c732a-ac1a-48b7-887b-b524f919b530}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="Utils\Source">
+      <UniqueIdentifier>{5f85a0b8-e8dc-4ff8-bffc-694e5aa787e6}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h">
@@ -45,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="Core\Timer.h">
       <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\json.hpp">
+      <Filter>Utils\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
