@@ -2,6 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Assets\config.json">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -45,6 +48,10 @@
     <Filter Include="Utils\Source">
       <UniqueIdentifier>{5f85a0b8-e8dc-4ff8-bffc-694e5aa787e6}</UniqueIdentifier>
       <Extensions>cpp</Extensions>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{6fb9d2ca-c3ab-4902-9bf8-bc5e8d502b36}</UniqueIdentifier>
+      <Extensions>json;png</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>

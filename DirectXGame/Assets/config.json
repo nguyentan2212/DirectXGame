@@ -1,0 +1,9 @@
+{
+  "config": {
+    "fps": 60,
+    "window": {
+      "width": 600,
+      "height": 400
+    }
+  }
+}

@@ -1,11 +1,15 @@
 #pragma once
 #include <Windows.h>
+#include <string>
 #include "Timer.h"
 
 #define FPS 60
-#define WINDDOW_WIDTH 600
-#define WINDOW_HEIGHT 400
-#define GAME_TITLE L"My Game"
+#define WINDDOW_WIDTH 300
+#define WINDOW_HEIGHT 200
+#define GAME_TITLE L"My Name"
+#define DEFAULT_CONFIG "Assets/config.json"
+
+using namespace::std;
 
 class GameEngine
 {
@@ -27,8 +31,9 @@ private:
 	HINSTANCE _hInstance;
 	HWND _hwnd;
 	Timer* _timer;
-	float _width = WINDDOW_WIDTH, _height = WINDOW_HEIGHT;
-	const float _fps = FPS;
+
+	int _width = WINDDOW_WIDTH, _height = WINDOW_HEIGHT;
+	float _fps = FPS;
 
 	static GameEngine* _instance;
 };

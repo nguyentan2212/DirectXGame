@@ -1,5 +1,8 @@
 #include "GameEngine.h"
-#include <string>
+#include <fstream>
+#include "../Utils/json.hpp"
+
+using json = nlohmann::json;
 
 GameEngine* GameEngine::_instance = nullptr;
 
@@ -33,6 +36,17 @@ GameEngine* GameEngine::GetInstance()
 void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
 {
     this->_hInstance = hInstance;
+    
+    // Load config file
+    fstream file(DEFAULT_CONFIG);
+    json jsonFile = json::parse(file);
+    json config = jsonFile["config"];
+
+    this->_fps = config["fps"].get<float>();
+    this->_width = config["window"]["width"].get<int>();
+    this->_height = config["window"]["height"].get<int>();
+    
+    // Create window depend on loaded config
     CreateGameWindow(nCmdShow);
 
     this->_timer = new Timer(this->_fps);
