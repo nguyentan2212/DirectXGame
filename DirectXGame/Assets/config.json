@@ -4,6 +4,18 @@
     "window": {
       "width": 600,
       "height": 400
-    }
+    },
+    "textures": [
+      {
+        "name": "super mario",
+        "image": "Assets/Textures/super-mario.png",
+        "size": {
+          "w": 632,
+          "h": 32
+        },
+        "transparentColor": "4491BE",
+        "spritePath": "Assets/Textures/super-mario.json"
+      }
+    ]
   }
 }
