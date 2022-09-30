@@ -1,0 +1,292 @@
+{
+    "meta": {
+        "image": "Assets/Textures/super-mario.png",
+        "name": "super-mario",
+        "size": {
+            "w": 632,
+            "h": 32
+        },
+        "transparentColor": "4491BE"
+    },
+    "sprites": [
+        {
+            "name": "super-mario/0",
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/1",
+            "frame": {
+                "x": 16,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/2",
+            "frame": {
+                "x": 32,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/3",
+            "frame": {
+                "x": 48,
+                "y": 0,
+                "w": 16,
+                "h": 24
+            }
+        },
+        {
+            "name": "super-mario/4",
+            "frame": {
+                "x": 64,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/5",
+            "frame": {
+                "x": 80,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/6",
+            "frame": {
+                "x": 104,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/7",
+            "frame": {
+                "x": 128,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/8",
+            "frame": {
+                "x": 152,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/9",
+            "frame": {
+                "x": 176,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/10",
+            "frame": {
+                "x": 192,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/11",
+            "frame": {
+                "x": 208,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/12",
+            "frame": {
+                "x": 224,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/13",
+            "frame": {
+                "x": 240,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/14",
+            "frame": {
+                "x": 256,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/15",
+            "frame": {
+                "x": 272,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/16",
+            "frame": {
+                "x": 296,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/17",
+            "frame": {
+                "x": 312,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/18",
+            "frame": {
+                "x": 336,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/19",
+            "frame": {
+                "x": 360,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/20",
+            "frame": {
+                "x": 384,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/21",
+            "frame": {
+                "x": 408,
+                "y": 0,
+                "w": 16,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/22",
+            "frame": {
+                "x": 424,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/23",
+            "frame": {
+                "x": 448,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/24",
+            "frame": {
+                "x": 472,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/25",
+            "frame": {
+                "x": 496,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/26",
+            "frame": {
+                "x": 520,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/27",
+            "frame": {
+                "x": 544,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/28",
+            "frame": {
+                "x": 568,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/29",
+            "frame": {
+                "x": 592,
+                "y": 0,
+                "w": 24,
+                "h": 32
+            }
+        },
+        {
+            "name": "super-mario/30",
+            "frame": {
+                "x": 616,
+                "y": 0,
+                "w": 16,
+                "h": 24
+            }
+        }
+    ]
+}
