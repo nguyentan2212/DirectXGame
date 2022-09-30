@@ -131,12 +131,15 @@
     <None Include="Assets\config.json">
       <DeploymentContent>false</DeploymentContent>
     </None>
+    <None Include="Assets\Textures\super-mario.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Graphic\Graphic.h" />
+    <ClInclude Include="Graphic\Texture.h" />
+    <ClInclude Include="Graphic\TextureService.h" />
     <ClInclude Include="Utils\Debug.h" />
     <ClInclude Include="Utils\json.hpp" />
     <ClInclude Include="Utils\Property.h" />
@@ -145,8 +148,13 @@
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Graphic\Graphic.cpp" />
+    <ClCompile Include="Graphic\Texture.cpp" />
+    <ClCompile Include="Graphic\TextureService.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Utils\Debug.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\super-mario.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

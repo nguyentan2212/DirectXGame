@@ -5,6 +5,9 @@
     <None Include="Assets\config.json">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\Textures\super-mario.json">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -73,6 +76,12 @@
     <ClInclude Include="Utils\Debug.h">
       <Filter>Utils\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\Texture.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\TextureService.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -88,5 +97,16 @@
     <ClCompile Include="Utils\Debug.cpp">
       <Filter>Utils\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\Texture.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\TextureService.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\super-mario.png">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include <fstream>
 #include "../Graphic/Graphic.h"
+#include "../Graphic/TextureService.h"
 #include "../Utils/json.hpp"
 #include "../Utils/Debug.h"
 
@@ -55,6 +56,11 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     Graphic* graphic = Graphic::GetInstance();
     graphic->Init(this->_hwnd, this->_fps);
 
+    // Init texture service
+    TextureService* textures = TextureService::GetInstance();
+    textures->Init(config["textures"]);
+
+    // Timer begin
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
 }
