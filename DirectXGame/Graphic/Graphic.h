@@ -1,13 +1,14 @@
 #pragma once
 #include <d3d10.h>
 #include <d3dx10.h>
+#include "Texture.h"
 
 class Graphic
 {
 public:
 	static Graphic* GetInstance();
 	void Init(HWND hwnd, int fps);
-
+	Texture* CreateTexture(LPCWSTR texturePath);
 
 private:
 	// Backbuffer width & height, will be set during Direct3D initialization
