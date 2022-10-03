@@ -11,7 +11,9 @@ class TextureService
 {
 public:
 	static TextureService* GetInstance();
+
 	void Init(json config);
+	Texture* GetTexture(string name);
 
 private:
 	TextureService();

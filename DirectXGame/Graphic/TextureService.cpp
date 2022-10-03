@@ -26,14 +26,20 @@ void TextureService::Init(json config)
     {
         string name = item["name"].get<string>();
 
-        string sSpritePath = item["spritePath"].get<string>();
-        wstring wSpritePath = wstring(sSpritePath.begin(), sSpritePath.end());
-        LPCWSTR spritePath = wSpritePath.c_str();
-
         string simage = item["image"].get<string>();
         wstring wimage = wstring(simage.begin(), simage.end());
         LPCWSTR image = wimage.c_str();
 
         this->_textures[name] = graphic->CreateTexture(image);
     }
+}
+
+Texture* TextureService::GetTexture(string name)
+{
+    Texture* texture = this->_textures[name];
+    if (texture == nullptr)
+    {
+        DebugOut(L"[ERROR] Texture name: '%s' not found !\n", name);
+    }
+    return texture;
 }
