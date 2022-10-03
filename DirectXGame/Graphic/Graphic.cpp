@@ -214,6 +214,20 @@ Texture* Graphic::CreateTexture(LPCWSTR texturePath)
 	return new Texture(tex, gSpriteTextureRV);
 }
 
+void Graphic::BeginRender()
+{
+	this->_pD3DDevice->ClearRenderTargetView(this->_pRenderTargetView, BACKGROUND_COLOR);
+	this->_spriteObject->Begin(D3DX10_SPRITE_SORT_TEXTURE);
+	FLOAT NewBlendFactor[4] = { 0,0,0,0 };
+	this->_pD3DDevice->OMSetBlendState(this->_pBlendStateAlpha, NewBlendFactor, 0xffffffff);
+}
+
+void Graphic::EndRender()
+{
+	this->_spriteObject->End();
+	this->_pSwapChain->Present(0, 0);
+}
+
 Graphic::~Graphic()
 {
 }

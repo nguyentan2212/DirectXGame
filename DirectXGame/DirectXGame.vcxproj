@@ -138,6 +138,8 @@
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Graphic\Graphic.h" />
+    <ClInclude Include="Graphic\Sprite.h" />
+    <ClInclude Include="Graphic\SpriteService.h" />
     <ClInclude Include="Graphic\Texture.h" />
     <ClInclude Include="Graphic\TextureService.h" />
     <ClInclude Include="Utils\Debug.h" />
@@ -148,6 +150,8 @@
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Graphic\Graphic.cpp" />
+    <ClCompile Include="Graphic\Sprite.cpp" />
+    <ClCompile Include="Graphic\SpriteService.cpp" />
     <ClCompile Include="Graphic\Texture.cpp" />
     <ClCompile Include="Graphic\TextureService.cpp" />
     <ClCompile Include="main.cpp" />

@@ -82,6 +82,12 @@
     <ClInclude Include="Graphic\TextureService.h">
       <Filter>Graphic\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\Sprite.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\SpriteService.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -101,6 +107,12 @@
       <Filter>Graphic\Source</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\TextureService.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\Sprite.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\SpriteService.cpp">
       <Filter>Graphic\Source</Filter>
     </ClCompile>
   </ItemGroup>

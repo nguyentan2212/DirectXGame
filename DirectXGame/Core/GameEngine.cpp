@@ -2,6 +2,7 @@
 #include <fstream>
 #include "../Graphic/Graphic.h"
 #include "../Graphic/TextureService.h"
+#include "../Graphic/SpriteService.h"
 #include "../Utils/json.hpp"
 #include "../Utils/Debug.h"
 
@@ -54,11 +55,16 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
 
     // Init graphic
     Graphic* graphic = Graphic::GetInstance();
-    graphic->Init(this->_hwnd, this->_fps);
+    graphic->Init(this->_hwnd, (int)this->_fps);
 
     // Init texture service
     TextureService* textures = TextureService::GetInstance();
     textures->Init(config["textures"]);
+
+    // Init sprite service. MUST AFTER TEXTURE SERVICE INIT
+    SpriteService* sprites = SpriteService::GetInstance();
+    // Load sprite sheets for textures
+    sprites->Init(config["textures"]);
 
     // Timer begin
     this->_timer = new Timer(this->_fps);
@@ -85,6 +91,15 @@ void GameEngine::Update(float deltaTime)
 
 void GameEngine::Render()
 {
+    SpriteService* sprites = SpriteService::GetInstance();
+    Sprite* sprite = sprites->GetSprite("super-mario/0");
+
+    Graphic* graphic = Graphic::GetInstance();
+    graphic->BeginRender();
+
+    sprite->Draw(8, 16);
+
+    graphic->EndRender();
 }
 
 void GameEngine::CreateGameWindow(int nCmdShow)
