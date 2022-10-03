@@ -3,21 +3,7 @@
 
 Graphic* Graphic::_instance = nullptr;
 
-Graphic::Graphic()
-{
-
-}
-
-Graphic* Graphic::GetInstance()
-{
-    if (_instance == nullptr)
-    {
-        _instance = new Graphic();
-    }
-    return _instance;
-}
-
-void Graphic::Init(HWND hwnd, int fps)
+void Graphic::CreateSwapChain(HWND hwnd, int fps)
 {
 	// retrieve client area width & height so that we can create backbuffer height & width accordingly 
 	RECT r;
@@ -58,10 +44,13 @@ void Graphic::Init(HWND hwnd, int fps)
 		DebugOut((wchar_t*)L"[ERROR] D3D10CreateDeviceAndSwapChain has failed %s %d", _W(__FILE__), __LINE__);
 		return;
 	}
+}
 
+void Graphic::CreateRenderTarget()
+{
 	// Get the back buffer from the swapchain
 	ID3D10Texture2D* pBackBuffer;
-	hr = this->_pSwapChain->GetBuffer(0, __uuidof(ID3D10Texture2D), (LPVOID*)&pBackBuffer);
+	HRESULT hr = this->_pSwapChain->GetBuffer(0, __uuidof(ID3D10Texture2D), (LPVOID*)&pBackBuffer);
 	if (hr != S_OK)
 	{
 		DebugOut((wchar_t*)L"[ERROR] pSwapChain->GetBuffer has failed %s %d", _W(__FILE__), __LINE__);
@@ -80,7 +69,10 @@ void Graphic::Init(HWND hwnd, int fps)
 
 	// set the render target
 	this->_pD3DDevice->OMSetRenderTargets(1, &this->_pRenderTargetView, NULL);
+}
 
+void Graphic::CreateViewPortAndSpriteObject()
+{
 	// create and set the viewport
 	D3D10_VIEWPORT viewPort;
 	viewPort.Width = this->_backBufferWidth;
@@ -91,16 +83,6 @@ void Graphic::Init(HWND hwnd, int fps)
 	viewPort.TopLeftY = 0;
 	this->_pD3DDevice->RSSetViewports(1, &viewPort);
 
-
-	// create the sprite object to handle sprite drawing 
-	hr = D3DX10CreateSprite(this->_pD3DDevice, 0, &this->_spriteObject);
-
-	if (hr != S_OK)
-	{
-		DebugOut((wchar_t*)L"[ERROR] D3DX10CreateSprite has failed %s %d", _W(__FILE__), __LINE__);
-		return;
-	}
-
 	// Create the projection matrix using the values in the viewport
 	D3DXMATRIX matProjection;
 	D3DXMatrixOrthoOffCenterLH(&matProjection,
@@ -110,8 +92,20 @@ void Graphic::Init(HWND hwnd, int fps)
 		(float)viewPort.Height,
 		0.1f,
 		10);
-	hr = this->_spriteObject->SetProjectionTransform(&matProjection);
 
+	// create the sprite object to handle sprite drawing 
+	HRESULT hr = D3DX10CreateSprite(this->_pD3DDevice, 0, &this->_spriteObject);
+
+	if (hr != S_OK)
+	{
+		DebugOut((wchar_t*)L"[ERROR] D3DX10CreateSprite has failed %s %d", _W(__FILE__), __LINE__);
+		return;
+	}
+	hr = this->_spriteObject->SetProjectionTransform(&matProjection);
+}
+
+void Graphic::CreateBlendState()
+{
 	// Initialize the blend state for alpha drawing
 	D3D10_BLEND_DESC StateDesc;
 	ZeroMemory(&StateDesc, sizeof(D3D10_BLEND_DESC));
@@ -125,9 +119,30 @@ void Graphic::Init(HWND hwnd, int fps)
 	StateDesc.BlendOpAlpha = D3D10_BLEND_OP_ADD;
 	StateDesc.RenderTargetWriteMask[0] = D3D10_COLOR_WRITE_ENABLE_ALL;
 	this->_pD3DDevice->CreateBlendState(&StateDesc, &this->_pBlendStateAlpha);
+}
+
+Graphic::Graphic()
+{
+
+}
+
+Graphic* Graphic::GetInstance()
+{
+    if (_instance == nullptr)
+    {
+        _instance = new Graphic();
+    }
+    return _instance;
+}
+
+void Graphic::Init(HWND hwnd, int fps)
+{
+	CreateSwapChain(hwnd, fps);
+	CreateRenderTarget();
+	CreateViewPortAndSpriteObject();
+	CreateBlendState();
 
 	DebugOut((wchar_t*)L"[INFO] InitDirectX has been successful\n");
-
 	return;
 }
 
