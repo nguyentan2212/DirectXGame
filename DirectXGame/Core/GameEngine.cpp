@@ -3,6 +3,7 @@
 #include "../Graphic/Graphic.h"
 #include "../Graphic/TextureService.h"
 #include "../Graphic/SpriteService.h"
+#include "../Graphic/AnimationService.h"
 #include "../Utils/json.hpp"
 #include "../Utils/Debug.h"
 
@@ -66,6 +67,10 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     // Load sprite sheets for textures
     sprites->Init(config["textures"]);
 
+    // Init animation service. MUST AFTER SPRITE SERVICE
+    AnimationService* animations = AnimationService::GetInstance();
+    animations->Init(config["animations"]);
+
     // Timer begin
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
@@ -87,17 +92,22 @@ void GameEngine::Run()
 
 void GameEngine::Update(float deltaTime)
 {
+    AnimationService* animations = AnimationService::GetInstance();
+    animations->GetAnimation("super mario run")->Update(deltaTime);
 }
 
 void GameEngine::Render()
 {
-    SpriteService* sprites = SpriteService::GetInstance();
-    Sprite* sprite = sprites->GetSprite("super-mario/0");
+    /*SpriteService* sprites = SpriteService::GetInstance();
+    Sprite* sprite = sprites->GetSprite("super-mario/0");*/
+
+    AnimationService* animations = AnimationService::GetInstance();
 
     Graphic* graphic = Graphic::GetInstance();
     graphic->BeginRender();
 
-    sprite->Draw(8, 16);
+    // sprite->Draw(8, 16);
+    animations->GetAnimation("super mario run")->Render(8, 16);
 
     graphic->EndRender();
 }

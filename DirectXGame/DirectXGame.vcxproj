@@ -128,15 +128,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Assets\Animations\super-mario.json" />
     <None Include="Assets\config.json">
       <DeploymentContent>false</DeploymentContent>
     </None>
+    <None Include="Assets\Textures\bounding-box.json" />
     <None Include="Assets\Textures\super-mario.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Graphic\Animation.h" />
+    <ClInclude Include="Graphic\AnimationFrame.h" />
+    <ClInclude Include="Graphic\AnimationService.h" />
     <ClInclude Include="Graphic\Graphic.h" />
     <ClInclude Include="Graphic\Sprite.h" />
     <ClInclude Include="Graphic\SpriteService.h" />
@@ -149,6 +154,9 @@
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
+    <ClCompile Include="Graphic\Animation.cpp" />
+    <ClCompile Include="Graphic\AnimationFrame.cpp" />
+    <ClCompile Include="Graphic\AnimationService.cpp" />
     <ClCompile Include="Graphic\Graphic.cpp" />
     <ClCompile Include="Graphic\Sprite.cpp" />
     <ClCompile Include="Graphic\SpriteService.cpp" />
@@ -158,6 +166,7 @@
     <ClCompile Include="Utils\Debug.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\Textures\bounding-box.png" />
     <Image Include="Assets\Textures\super-mario.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
