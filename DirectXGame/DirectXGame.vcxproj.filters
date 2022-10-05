@@ -5,8 +5,14 @@
     <None Include="Assets\config.json">
       <Filter>Assets</Filter>
     </None>
+    <None Include="Assets\Textures\bounding-box.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
     <None Include="Assets\Textures\super-mario.json">
-      <Filter>Assets</Filter>
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="Assets\Animations\super-mario.json">
+      <Filter>Assets\Animations</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +62,12 @@
       <UniqueIdentifier>{6fb9d2ca-c3ab-4902-9bf8-bc5e8d502b36}</UniqueIdentifier>
       <Extensions>json;png</Extensions>
     </Filter>
+    <Filter Include="Assets\Textures">
+      <UniqueIdentifier>{798258e6-75aa-432a-98c2-c6accef43e9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Animations">
+      <UniqueIdentifier>{22242a2e-18f5-49e5-a31f-25ffdac5457a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h">
@@ -88,6 +100,15 @@
     <ClInclude Include="Graphic\SpriteService.h">
       <Filter>Graphic\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\Animation.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\AnimationFrame.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\AnimationService.h">
+      <Filter>Graphic\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -115,10 +136,22 @@
     <ClCompile Include="Graphic\SpriteService.cpp">
       <Filter>Graphic\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\Animation.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\AnimationFrame.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\AnimationService.cpp">
+      <Filter>Graphic\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\Textures\bounding-box.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
     <Image Include="Assets\Textures\super-mario.png">
-      <Filter>Assets</Filter>
+      <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
 </Project>
