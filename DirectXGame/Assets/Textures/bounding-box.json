@@ -1,0 +1,13 @@
+{
+  "sprites": [
+    {
+      "name": "bounding-box",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 697,
+        "h": 765
+      }
+    }
+  ]
+}

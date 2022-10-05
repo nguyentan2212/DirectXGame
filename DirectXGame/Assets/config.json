@@ -15,6 +15,20 @@
         },
         "transparentColor": "4491BE",
         "spritePath": "Assets/Textures/super-mario.json"
+      },
+      {
+        "name": "bounding-box",
+        "image": "Assets/Textures/bounding-box.png",
+        "size": {
+          "w": 697,
+          "h": 765
+        },
+        "spritePath": "Assets/Textures/bounding-box.json"
+      }
+    ],
+    "animations": [
+      {
+        "animationPath": "Assets/Animations/super-mario.json"
       }
     ]
   }

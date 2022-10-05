@@ -1,0 +1,19 @@
+{
+  "animations": [
+    {
+      "name": "super mario run",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "super-mario/0"
+        },
+        {
+          "sprite": "super-mario/1"
+        },
+        {
+          "sprite": "super-mario/2"
+        }
+      ]
+    }
+  ]
+}
