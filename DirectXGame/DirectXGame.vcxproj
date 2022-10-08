@@ -108,7 +108,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);d3d10.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);d3d10.lib;dxguid.lib;dinput8.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h" />
+    <ClInclude Include="Core\GameObject.h" />
+    <ClInclude Include="Core\KeyboardHandler.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Graphic\Animation.h" />
     <ClInclude Include="Graphic\AnimationFrame.h" />
@@ -153,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp" />
+    <ClCompile Include="Core\GameObject.cpp" />
+    <ClCompile Include="Core\KeyboardHandler.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="Graphic\AnimationFrame.cpp" />
