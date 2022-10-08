@@ -9,7 +9,7 @@ using namespace::std;
 class Animation
 {
 public:
-	Animation(DWORD defaultTime);
+	Animation(DWORD defaultTime = 100);
 
 	void AddFrame(string spriteName, DWORD time = 0);
 	void AddFrame(Sprite* sprite, DWORD time = 0);
