@@ -149,6 +149,7 @@
     <ClInclude Include="Graphic\SpriteService.h" />
     <ClInclude Include="Graphic\Texture.h" />
     <ClInclude Include="Graphic\TextureService.h" />
+    <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Utils\Debug.h" />
     <ClInclude Include="Utils\json.hpp" />
     <ClInclude Include="Utils\Property.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Graphic\Texture.cpp" />
     <ClCompile Include="Graphic\TextureService.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Math\Vector.cpp" />
     <ClCompile Include="Utils\Debug.cpp" />
   </ItemGroup>
   <ItemGroup>

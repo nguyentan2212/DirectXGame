@@ -68,6 +68,14 @@
     <Filter Include="Assets\Animations">
       <UniqueIdentifier>{22242a2e-18f5-49e5-a31f-25ffdac5457a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Header">
+      <UniqueIdentifier>{c382c3b2-124e-4270-9633-b4216aeeadd8}</UniqueIdentifier>
+      <Extensions>.h</Extensions>
+    </Filter>
+    <Filter Include="Math\Source">
+      <UniqueIdentifier>{6cfa4371-249f-4a44-b968-b5a916248025}</UniqueIdentifier>
+      <Extensions>.cpp</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h">
@@ -109,6 +117,15 @@
     <ClInclude Include="Graphic\AnimationService.h">
       <Filter>Graphic\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Core\KeyboardHandler.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameObject.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector.h">
+      <Filter>Math\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -144,6 +161,15 @@
     </ClCompile>
     <ClCompile Include="Graphic\AnimationService.cpp">
       <Filter>Graphic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\KeyboardHandler.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameObject.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector.cpp">
+      <Filter>Math\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
