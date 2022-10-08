@@ -3,6 +3,7 @@
 #include <string>
 #include "Timer.h"
 #include "KeyboardHandler.h"
+#include "GameObject.h"
 
 #define FPS 60
 #define WINDDOW_WIDTH 300
@@ -36,6 +37,8 @@ private:
 
 	int _width = WINDDOW_WIDTH, _height = WINDOW_HEIGHT;
 	float _fps = FPS;
+
+	GameObject* obj;
 
 	static GameEngine* _instance;
 };

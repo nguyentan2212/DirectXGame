@@ -77,6 +77,9 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     // Timer begin
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
+
+    this->obj = new GameObject(animations->GetAnimation("super mario run"));
+    this->obj->position = Vector(16, 32);
 }
 
 void GameEngine::Run()
@@ -96,8 +99,7 @@ void GameEngine::Run()
 
 void GameEngine::Update(float deltaTime)
 {
-    AnimationService* animations = AnimationService::GetInstance();
-    animations->GetAnimation("super mario run")->Update(deltaTime);
+    this->obj->Update(deltaTime);
 }
 
 void GameEngine::Render()
@@ -111,7 +113,7 @@ void GameEngine::Render()
     graphic->BeginRender();
 
     // sprite->Draw(8, 16);
-    animations->GetAnimation("super mario run")->Render(8, 16);
+    this->obj->Render();
 
     graphic->EndRender();
 }
