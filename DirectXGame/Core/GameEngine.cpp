@@ -54,6 +54,9 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     // Create window depend on loaded config
     CreateGameWindow(nCmdShow);
 
+    // Init keyboard handler
+    this->_keyboardHandler = new KeyboardHandler(this->_hInstance, this->_hwnd);
+
     // Init graphic
     Graphic* graphic = Graphic::GetInstance();
     graphic->Init(this->_hwnd, (int)this->_fps);
@@ -83,6 +86,7 @@ void GameEngine::Run()
         float delta = 0;
         if (this->_timer->Tick(delta))
         {
+            this->_keyboardHandler->Processing();
             // OUTPUT((to_string(delta) + " \n").c_str());
             Update(delta);
         }
@@ -170,4 +174,5 @@ GameEngine::~GameEngine()
 {
     delete this->_hInstance;
     delete this->_timer;
+    delete this->_keyboardHandler;
 }

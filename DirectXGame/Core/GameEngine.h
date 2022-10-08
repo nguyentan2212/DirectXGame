@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include "Timer.h"
+#include "KeyboardHandler.h"
 
 #define FPS 60
 #define WINDDOW_WIDTH 300
@@ -31,6 +32,7 @@ private:
 	HINSTANCE _hInstance;
 	HWND _hwnd;
 	Timer* _timer;
+	KeyboardHandler* _keyboardHandler;
 
 	int _width = WINDDOW_WIDTH, _height = WINDOW_HEIGHT;
 	float _fps = FPS;
