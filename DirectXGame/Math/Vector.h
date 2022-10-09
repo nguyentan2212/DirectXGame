@@ -12,6 +12,10 @@ public:
 
 #pragma region Operators
     void operator=(const Vector& vec);
+    Vector operator+(const Vector& other);
+    Vector operator-(const Vector& other);
+    Vector operator*(float n);
+    Vector operator/(float n);
 #pragma endregion
 
 #pragma region properties
