@@ -6,6 +6,7 @@
 #include "../Graphic/AnimationService.h"
 #include "../Utils/json.hpp"
 #include "../Utils/Debug.h"
+#include "../Game/Mario/Mario.h"
 
 using json = nlohmann::json;
 
@@ -78,7 +79,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
 
-    this->obj = new GameObject();
+    this->obj = new Mario();
     this->obj->position = VECTOR2D(8, 16);
 }
 
