@@ -76,6 +76,14 @@
       <UniqueIdentifier>{6cfa4371-249f-4a44-b968-b5a916248025}</UniqueIdentifier>
       <Extensions>.cpp</Extensions>
     </Filter>
+    <Filter Include="Physic\Header">
+      <UniqueIdentifier>{b2c8d62a-2817-4085-ad3e-91af2d20ab21}</UniqueIdentifier>
+      <Extensions>.h</Extensions>
+    </Filter>
+    <Filter Include="Physic\Source">
+      <UniqueIdentifier>{552972b5-84ce-4993-8137-c99d449bbac6}</UniqueIdentifier>
+      <Extensions>.cpp</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h">
@@ -123,7 +131,7 @@
     <ClInclude Include="Core\GameObject.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vector.h">
+    <ClInclude Include="Math\CMath.h">
       <Filter>Math\Header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -167,9 +175,6 @@
     </ClCompile>
     <ClCompile Include="Core\GameObject.cpp">
       <Filter>Core\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Vector.cpp">
-      <Filter>Math\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

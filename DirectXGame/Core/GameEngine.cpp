@@ -79,7 +79,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     this->_timer->Start();
 
     this->obj = new GameObject(animations->GetAnimation("super mario run"));
-    this->obj->position = Vector(16, 32);
+    this->obj->position = VECTOR2D(16, 32);
 }
 
 void GameEngine::Run()
