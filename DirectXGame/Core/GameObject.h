@@ -1,16 +1,16 @@
 #pragma once
 #include <vector>
+#include "../Graphic/AnimationService.h"
 #include "../Utils/Property.h"
 #include "../Utils/CMath.h"
-#include "../Graphic/Animation.h"
 
 using namespace::std;
 
 class GameObject
 {
 public: 
-	GameObject(Animation* animation);
-	~GameObject();
+	GameObject();
+	virtual ~GameObject();
 
 	virtual void Update(float deltaTime);
 	virtual void Render();
@@ -21,28 +21,33 @@ public:
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);
 
+	void AddChildObject(GameObject* child);
+	void RemoveChildObject(GameObject* child);
+
 	VECTOR2D GetWorldPosition();
 
 #pragma region Properties
 	PROPERTY(VECTOR2D, position);
 	GET(position) { return this->_position; }
-	SET(position) { Translate(value); }
+	SET(position) { this->_position = value; OnTransformChanged(); }
+	
+	PROPERTY(VECTOR2D, velocity);
+	GET(velocity) { return this->_velocity; }
+	SET(velocity) { this->_velocity = value; }
 #pragma endregion
 
 protected:
-	Animation* _animation;
 	GameObject* _parent;
-	vector<GameObject*> _child;
+	vector<GameObject*> _children;
 #pragma region Transform
 	VECTOR2D _position;
+	VECTOR2D _velocity; // units per milisecond.
 	MATRIX _worldMatrix;
-	MATRIX _translationMatrix;
 	bool _isTransformChanged;
 
 	virtual void OnTransformChanged();
 
 	void CalculateWorldMatrix();
-	void CalculateWorldMatrix(MATRIX* matrixOut);
 #pragma endregion
 };
 

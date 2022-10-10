@@ -1,28 +1,32 @@
 #include "GameObject.h"
 
-GameObject::GameObject(Animation* animation)
+GameObject::GameObject()
 {
 	this->_position = VECTOR2D(0.0f, 0.0f);
-	this->_animation = animation;
 	this->_isTransformChanged = false;
 	this->_parent = nullptr;
-	this->_child = vector<GameObject*>(0);
+	this->_children = vector<GameObject*>(0);
 }
 
 GameObject::~GameObject()
 {
-	delete this->_animation;
 }
 
 void GameObject::Update(float deltaTime)
 {
-	this->_animation->Update(deltaTime);
+	if (this->_velocity != VECTOR2D(0.0f, 0.0f))
+	{
+		Translate(this->_velocity / deltaTime);
+	}
+	AnimationService* animations = AnimationService::GetInstance();
+	animations->GetAnimation("super mario run")->Update(deltaTime);
 }
 
 void GameObject::Render()
 {
 	VECTOR2D worldPosition = GetWorldPosition();
-	this->_animation->Render(worldPosition.x, worldPosition.y);
+	AnimationService* animations = AnimationService::GetInstance();
+	animations->GetAnimation("super mario run")->Render(worldPosition.x, worldPosition.y);
 }
 
 /// <summary>
@@ -48,8 +52,7 @@ void GameObject::OnKeyDown(int keyCode)
 /// <param name="y">The y.</param>
 void GameObject::Translate(float x, float y)
 {
-	D3DXMatrixTranslation(&this->_translationMatrix, x, y, 0.0f);
-	OnTransformChanged();
+	Translate(VECTOR2D(x, y));
 }
 
 /// <summary>
@@ -58,7 +61,36 @@ void GameObject::Translate(float x, float y)
 /// <param name="vec">The vec.</param>
 void GameObject::Translate(VECTOR2D vec)
 {
-	Translate(vec.x, vec.y);
+	this->_position += vec;
+	OnTransformChanged();
+}
+
+/// <summary>
+/// Adds the child object.
+/// </summary>
+/// <param name="child">The child.</param>
+void GameObject::AddChildObject(GameObject* child)
+{
+	vector<GameObject*>::iterator it = find(this->_children.begin(), this->_children.end(), child);
+	if (it == this->_children.end())
+	{
+		this->_children.push_back(child);
+		child->_parent = this;
+	}
+}
+
+/// <summary>
+/// Removes the child object.
+/// </summary>
+/// <param name="child">The child.</param>
+void GameObject::RemoveChildObject(GameObject* child)
+{
+	vector<GameObject*>::iterator it = find(this->_children.begin(), this->_children.end(), child);
+	if (it != this->_children.end())
+	{
+		this->_children.erase(it);
+		child->_parent = nullptr;
+	}
 }
 
 /// <summary>
@@ -68,8 +100,10 @@ void GameObject::Translate(VECTOR2D vec)
 VECTOR2D GameObject::GetWorldPosition()
 {
 	CalculateWorldMatrix();
+
+	VECTOR2D origin = VECTOR2D(0.0f, 0.0f);
 	VECTOR result;
-	D3DXVec2Transform(&result, &this->_position, &this->_worldMatrix);
+	D3DXVec2Transform(&result, &origin, &this->_worldMatrix);
 	return VECTOR2D(result);
 }
 
@@ -84,24 +118,18 @@ void GameObject::CalculateWorldMatrix()
 		MATRIX parentWorldMatrix;
 		D3DXMatrixIdentity(&parentWorldMatrix); // initialize with an identity matrix
 
+		MATRIX translationMatrix;
+		D3DXMatrixTranslation(&translationMatrix, this->_position.x, this->_position.y, 0.0f);
+
 		// if this is a child => get its parent's world matrix
 		if (this->_parent != nullptr)
 		{
-			this->_parent->CalculateWorldMatrix(&parentWorldMatrix);
+			this->_parent->CalculateWorldMatrix();
+			parentWorldMatrix = this->_parent->_worldMatrix;
 		}
-		this->_worldMatrix = this->_translationMatrix * parentWorldMatrix;
+		this->_worldMatrix = translationMatrix * parentWorldMatrix;
 		this->_isTransformChanged = false;
 	}
-}
-
-/// <summary>
-/// Calculates the world matrix.
-/// </summary>
-/// <param name="matrixOut">A copy of the world matrix that was re-calculated.</param>
-void GameObject::CalculateWorldMatrix(MATRIX* matrixOut)
-{
-	CalculateWorldMatrix();
-	matrixOut = new MATRIX(this->_worldMatrix);
 }
 
 /// <summary>
@@ -110,7 +138,7 @@ void GameObject::CalculateWorldMatrix(MATRIX* matrixOut)
 void GameObject::OnTransformChanged()
 {
 	this->_isTransformChanged = true;
-	for (GameObject* child : this->_child)
+	for (GameObject* child : this->_children)
 	{
 		child->OnTransformChanged();
 	}
