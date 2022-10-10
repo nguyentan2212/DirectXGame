@@ -25,9 +25,6 @@
     <Filter Include="Physic">
       <UniqueIdentifier>{5948e2ae-0aef-4f81-acd7-6026102096e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{feb57413-b279-4fc6-9b2b-89dfbe02af54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{448df26c-b2d9-4efa-b0a3-c97b21e889c6}</UniqueIdentifier>
     </Filter>
@@ -67,14 +64,6 @@
     </Filter>
     <Filter Include="Assets\Animations">
       <UniqueIdentifier>{22242a2e-18f5-49e5-a31f-25ffdac5457a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Header">
-      <UniqueIdentifier>{c382c3b2-124e-4270-9633-b4216aeeadd8}</UniqueIdentifier>
-      <Extensions>.h</Extensions>
-    </Filter>
-    <Filter Include="Math\Source">
-      <UniqueIdentifier>{6cfa4371-249f-4a44-b968-b5a916248025}</UniqueIdentifier>
-      <Extensions>.cpp</Extensions>
     </Filter>
     <Filter Include="Physic\Header">
       <UniqueIdentifier>{b2c8d62a-2817-4085-ad3e-91af2d20ab21}</UniqueIdentifier>
