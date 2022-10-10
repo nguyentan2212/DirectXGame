@@ -1,7 +1,9 @@
 #include "GameObject.h"
+#include "../Utils/Debug.h"
 
-GameObject::GameObject()
+GameObject::GameObject(ObjectState* state)
 {
+	this->_state = state;
 	this->_position = VECTOR2D(0.0f, 0.0f);
 	this->_isTransformChanged = false;
 	this->_parent = nullptr;
@@ -10,6 +12,8 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+	delete this->_state;
+	delete this->_parent;
 }
 
 void GameObject::Update(float deltaTime)
@@ -18,15 +22,13 @@ void GameObject::Update(float deltaTime)
 	{
 		Translate(this->_velocity / deltaTime);
 	}
-	AnimationService* animations = AnimationService::GetInstance();
-	animations->GetAnimation("super mario run")->Update(deltaTime);
+	this->_state->Update(deltaTime);
 }
 
 void GameObject::Render()
 {
 	VECTOR2D worldPosition = GetWorldPosition();
-	AnimationService* animations = AnimationService::GetInstance();
-	animations->GetAnimation("super mario run")->Render(worldPosition.x, worldPosition.y);
+	this->_state->GetAnimation()->Render(worldPosition.x, worldPosition.y);
 }
 
 /// <summary>
@@ -105,6 +107,24 @@ VECTOR2D GameObject::GetWorldPosition()
 	VECTOR result;
 	D3DXVec2Transform(&result, &origin, &this->_worldMatrix);
 	return VECTOR2D(result);
+}
+
+/// <summary>
+/// Transitions to specific state.
+/// </summary>
+/// <param name="state">The state.</param>
+void GameObject::TransitionTo(ObjectState* state)
+{
+	if (state == nullptr)
+	{
+		DebugOut((wchar_t*)L"[ERROR] GameObject transition to NULL STATE");
+		return;
+	}
+	DebugOut((wchar_t*)L"[INFO] GameObject transition to %s", typeid(state).name());
+	if (this->_state != nullptr)
+		delete this->_state;
+	this->_state = state;
+	this->_state->context = this;
 }
 
 /// <summary>
