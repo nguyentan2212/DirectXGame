@@ -1,7 +1,7 @@
 {
   "animations": [
     {
-      "name": "super mario run",
+      "name": "super mario run left",
       "defaultTime": 100,
       "frames": [
         {
@@ -12,6 +12,15 @@
         },
         {
           "sprite": "super-mario/2"
+        }
+      ]
+    },
+    {
+      "name": "super mario sit left",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "super-mario/3"
         }
       ]
     }
