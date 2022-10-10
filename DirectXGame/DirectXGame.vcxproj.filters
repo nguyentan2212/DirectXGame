@@ -131,8 +131,8 @@
     <ClInclude Include="Core\GameObject.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Math\CMath.h">
-      <Filter>Math\Header</Filter>
+    <ClInclude Include="Utils\CMath.h">
+      <Filter>Utils\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "../Utils/Property.h"
-#include "../Math/CMath.h"
+#include "../Utils/CMath.h"
 #include "../Graphic/Animation.h"
 
 using namespace::std;
