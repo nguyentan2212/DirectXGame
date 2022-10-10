@@ -73,6 +73,12 @@
       <UniqueIdentifier>{552972b5-84ce-4993-8137-c99d449bbac6}</UniqueIdentifier>
       <Extensions>.cpp</Extensions>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a6a11720-0a55-49d1-a3e7-9933b0fa97f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Mario">
+      <UniqueIdentifier>{521d2320-fefe-4aab-bebf-4a5abd949e24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h">
@@ -123,6 +129,18 @@
     <ClInclude Include="Utils\CMath.h">
       <Filter>Utils\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Core\ObjectState.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\Mario.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioRunState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioSitState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -164,6 +182,15 @@
     </ClCompile>
     <ClCompile Include="Core\GameObject.cpp">
       <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\Mario.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioRunState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioSitState.cpp">
+      <Filter>Game\Mario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

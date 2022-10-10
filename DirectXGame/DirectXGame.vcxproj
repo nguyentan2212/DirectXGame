@@ -140,7 +140,11 @@
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\KeyboardHandler.h" />
+    <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Game\Mario\Mario.h" />
+    <ClInclude Include="Game\Mario\MarioRunState.h" />
+    <ClInclude Include="Game\Mario\MarioSitState.h" />
     <ClInclude Include="Graphic\Animation.h" />
     <ClInclude Include="Graphic\AnimationFrame.h" />
     <ClInclude Include="Graphic\AnimationService.h" />
@@ -159,6 +163,9 @@
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
+    <ClCompile Include="Game\Mario\Mario.cpp" />
+    <ClCompile Include="Game\Mario\MarioRunState.cpp" />
+    <ClCompile Include="Game\Mario\MarioSitState.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="Graphic\AnimationFrame.cpp" />
     <ClCompile Include="Graphic\AnimationService.cpp" />
