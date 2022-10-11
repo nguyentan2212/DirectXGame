@@ -5,5 +5,7 @@ class Mario: public GameObject
 {
 public:
 	Mario();
+
+	void Render() override;
 };
 
