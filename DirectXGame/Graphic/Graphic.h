@@ -38,10 +38,12 @@ private:
 	ID3D10BlendState* _pBlendStateAlpha = NULL;			
 	// Sprite handling object 
 	LPD3DX10SPRITE _spriteObject = NULL;
+	ID3D10RasterizerState* _pRS;
 
 	void CreateSwapChain(HWND hwnd, int fps);
 	void CreateRenderTarget();
 	void CreateViewPortAndSpriteObject();
+	void CreateRasterizerState();
 	void CreateBlendState();
 
 	Graphic();

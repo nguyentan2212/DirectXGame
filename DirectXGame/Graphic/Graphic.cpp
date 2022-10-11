@@ -104,6 +104,25 @@ void Graphic::CreateViewPortAndSpriteObject()
 	hr = this->_spriteObject->SetProjectionTransform(&matProjection);
 }
 
+void Graphic::CreateRasterizerState()
+{
+	D3D10_RASTERIZER_DESC rasterizerState;
+
+	rasterizerState.CullMode = D3D10_CULL_NONE;
+	rasterizerState.FillMode = D3D10_FILL_SOLID;
+	rasterizerState.FrontCounterClockwise = false;
+	rasterizerState.DepthBias = false;
+	rasterizerState.DepthBiasClamp = 0;
+	rasterizerState.SlopeScaledDepthBias = 0;
+	rasterizerState.DepthClipEnable = true;
+	rasterizerState.ScissorEnable = false;
+	rasterizerState.MultisampleEnable = false;
+	rasterizerState.AntialiasedLineEnable = true;
+
+	this->_pD3DDevice->CreateRasterizerState(&rasterizerState, &this->_pRS);
+	this->_pD3DDevice->RSSetState(this->_pRS);
+}
+
 void Graphic::CreateBlendState()
 {
 	// Initialize the blend state for alpha drawing
@@ -140,6 +159,7 @@ void Graphic::Init(HWND hwnd, int fps)
 	CreateSwapChain(hwnd, fps);
 	CreateRenderTarget();
 	CreateViewPortAndSpriteObject();
+	CreateRasterizerState();
 	CreateBlendState();
 
 	DebugOut((wchar_t*)L"[INFO] InitDirectX has been successful\n");
