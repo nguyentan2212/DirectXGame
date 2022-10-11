@@ -4,7 +4,7 @@
 MarioSitState::MarioSitState(): ObjectState()
 {
 	AnimationService* animations = AnimationService::GetInstance();
-	this->_animation = animations->GetAnimation("super mario sit left");
+	this->_animation = animations->GetAnimation("super mario sit");
 }
 
 void MarioSitState::Update(float deltaTime)

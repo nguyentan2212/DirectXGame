@@ -5,7 +5,7 @@
 MarioRunState::MarioRunState(): ObjectState()
 {
     AnimationService* animations = AnimationService::GetInstance();
-    this->_animation = animations->GetAnimation("super mario run left");
+    this->_animation = animations->GetAnimation("super mario run");
     
 }
 
