@@ -10,7 +10,7 @@ class ObjectState
 {
 public:
 	ObjectState() { this->_context = nullptr; this->_animation = nullptr; }
-	~ObjectState() { delete this->_context; }
+	~ObjectState();
 
 	/// <summary>
 	/// Updates object's state based on this state.
