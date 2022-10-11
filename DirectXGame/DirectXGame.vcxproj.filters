@@ -192,6 +192,9 @@
     <ClCompile Include="Game\Mario\MarioSitState.cpp">
       <Filter>Game\Mario</Filter>
     </ClCompile>
+    <ClCompile Include="Core\ObjectState.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png">

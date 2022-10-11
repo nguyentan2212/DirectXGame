@@ -162,6 +162,7 @@
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />
+    <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioRunState.cpp" />
