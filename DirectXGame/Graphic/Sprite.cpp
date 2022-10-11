@@ -35,7 +35,7 @@ Sprite::~Sprite()
     }
 }
 
-void Sprite::Draw(float x, float y)
+void Sprite::Draw(float x, float y, bool isFlipped)
 {
     D3DXMATRIX matTranslation;
 
@@ -45,8 +45,18 @@ void Sprite::Draw(float x, float y)
     Graphic* graphic = Graphic::GetInstance();
     D3DXMatrixTranslation(&matTranslation, x, graphic->backBufferHeight - y, 0.1f);
 
+    if (isFlipped)
+    {
+        D3DXMatrixScaling(&this->_matScaling, (float)this->_width * -1.0f, (float)this->_height, 1.0f);
+    }
+
     this->_sprite.matWorld = this->_matScaling * matTranslation;
     graphic->spriteHandler->DrawSpritesImmediate(&this->_sprite, 1, 0, 0);
+}
+
+void Sprite::Draw(VECTOR2D position, bool isFlipped)
+{
+    Draw(position.x, position.y, isFlipped);
 }
 
 RECT Sprite::GetBounderBox()

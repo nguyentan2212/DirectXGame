@@ -37,7 +37,12 @@ void Animation::Update(float deltaTime)
 	}
 }
 
-void Animation::Render(float x, float y)
+void Animation::Render(VECTOR2D position, bool isFlipped)
 {
-	this->_frames[this->_currentFrame]->sprite->Draw(x, y);
+	Render(position.x, position.y, isFlipped);
+}
+
+void Animation::Render(float x, float y, bool isFlipped)
+{
+	this->_frames[this->_currentFrame]->sprite->Draw(x, y, isFlipped);
 }

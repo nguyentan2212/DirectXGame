@@ -15,7 +15,8 @@ public:
 	void AddFrame(Sprite* sprite, DWORD time = 0);
 
 	void Update(float deltaTime);
-	void Render(float x, float y);
+	void Render(float x, float y, bool isFlipped = false);
+	void Render(VECTOR2D position, bool isFlipped = false);
 
 private:
 	DWORD _defaultTime;
