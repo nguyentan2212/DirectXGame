@@ -5,3 +5,14 @@
 #define VECTOR2D D3DXVECTOR2
 
 #define MATRIX D3DXMATRIX
+
+#define DIRECTION Direction
+
+enum Direction 
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	NONE
+};
