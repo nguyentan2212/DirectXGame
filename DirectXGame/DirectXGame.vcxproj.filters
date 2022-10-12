@@ -141,6 +141,12 @@
     <ClInclude Include="Game\Mario\MarioSitState.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Mario\MarioJumpState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioIdleState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -194,6 +200,12 @@
     </ClCompile>
     <ClCompile Include="Core\ObjectState.cpp">
       <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioJumpState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioIdleState.cpp">
+      <Filter>Game\Mario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

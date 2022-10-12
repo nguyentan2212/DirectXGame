@@ -143,6 +143,8 @@
     <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
+    <ClInclude Include="Game\Mario\MarioIdleState.h" />
+    <ClInclude Include="Game\Mario\MarioJumpState.h" />
     <ClInclude Include="Game\Mario\MarioRunState.h" />
     <ClInclude Include="Game\Mario\MarioSitState.h" />
     <ClInclude Include="Graphic\Animation.h" />
@@ -165,6 +167,8 @@
     <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
+    <ClCompile Include="Game\Mario\MarioIdleState.cpp" />
+    <ClCompile Include="Game\Mario\MarioJumpState.cpp" />
     <ClCompile Include="Game\Mario\MarioRunState.cpp" />
     <ClCompile Include="Game\Mario\MarioSitState.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
