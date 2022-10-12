@@ -23,6 +23,24 @@
           "sprite": "super-mario/3"
         }
       ]
+    },
+    {
+      "name": "super mario idle",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "super-mario/0"
+        }
+      ]
+    },
+    {
+      "name": "super mario jump",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "super-mario/0"
+        }
+      ]
     }
   ]
 }
