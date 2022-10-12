@@ -81,6 +81,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
 
     this->obj = new Mario();
     this->obj->position = VECTOR2D(50, 50);
+    this->_keyboardHandler->AddListener(this->obj);
 }
 
 void GameEngine::Run()
