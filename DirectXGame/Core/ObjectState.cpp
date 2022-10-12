@@ -3,5 +3,4 @@
 
 ObjectState::~ObjectState()
 {
-	delete this->_context;
 }
