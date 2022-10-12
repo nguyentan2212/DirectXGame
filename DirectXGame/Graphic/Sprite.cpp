@@ -37,7 +37,7 @@ Sprite::~Sprite()
 
 void Sprite::Draw(float x, float y, bool isFlipped)
 {
-    D3DXMATRIX matTranslation;
+    MATRIX matTranslation;
 
     x = (FLOAT)floor(x);
     y = (FLOAT)floor(y);
@@ -45,12 +45,13 @@ void Sprite::Draw(float x, float y, bool isFlipped)
     Graphic* graphic = Graphic::GetInstance();
     D3DXMatrixTranslation(&matTranslation, x, graphic->backBufferHeight - y, 0.1f);
 
+    MATRIX matScaling = this->_matScaling;
     if (isFlipped)
     {
-        D3DXMatrixScaling(&this->_matScaling, (float)this->_width * -1.0f, (float)this->_height, 1.0f);
+        D3DXMatrixScaling(&matScaling, (float)this->_width * -1.0f, (float)this->_height, 1.0f);
     }
 
-    this->_sprite.matWorld = this->_matScaling * matTranslation;
+    this->_sprite.matWorld = matScaling * matTranslation;
     graphic->spriteHandler->DrawSpritesImmediate(&this->_sprite, 1, 0, 0);
 }
 
