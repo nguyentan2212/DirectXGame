@@ -2,6 +2,7 @@
 #include <string>
 #include "../Graphic/Animation.h"
 #include "../Utils/Property.h"
+#include "../Utils/Debug.h"
 
 using namespace::std;
 
@@ -29,8 +30,16 @@ public:
 
 #pragma region Commands
 	virtual void Idle() {}
-	virtual void Run() {}
-	virtual void Jump() {}
+	/// <summary>
+	/// Runs the specified speed.
+	/// </summary>
+	/// <param name="speed">speed smaller than 0 => run to left, greater than 0 => run to right</param>
+	virtual void Run(float speed) {}
+	/// <summary>
+	/// Jumps the specified speed.
+	/// </summary>
+	/// <param name="speed">speed greater than 0 => go down</param>
+	virtual void Jump(float speed) {}
 	virtual void Fire() {}
 	virtual void Sit() {}
 	virtual void Hit() {}
