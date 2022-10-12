@@ -3,11 +3,12 @@
 
 GameObject::GameObject(ObjectState* state)
 {
-	this->_state = state;
 	this->_position = VECTOR2D(0.0f, 0.0f);
 	this->_isTransformChanged = false;
+	this->_direction = DIRECTION::LEFT;
 	this->_parent = nullptr;
 	this->_children = vector<GameObject*>(0);
+	TransitionTo(state);
 }
 
 GameObject::~GameObject()
@@ -120,7 +121,7 @@ void GameObject::TransitionTo(ObjectState* state)
 		DebugOut((wchar_t*)L"[ERROR] GameObject transition to NULL STATE");
 		return;
 	}
-	DebugOut((wchar_t*)L"[INFO] GameObject transition to %s", typeid(state).name());
+
 	if (this->_state != nullptr)
 		delete this->_state;
 	this->_state = state;

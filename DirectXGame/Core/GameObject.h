@@ -36,6 +36,9 @@ public:
 	PROPERTY(VECTOR2D, velocity);
 	GET(velocity) { return this->_velocity; }
 	SET(velocity) { this->_velocity = value; }
+
+	R_PROPERTY(DIRECTION, direction);
+	GET(direction) { return this->_direction; }
 #pragma endregion
 
 protected:
@@ -48,6 +51,7 @@ protected:
 	VECTOR2D _velocity; // units per milisecond.
 	MATRIX _worldMatrix;
 	bool _isTransformChanged;
+	DIRECTION _direction;
 
 	virtual void OnTransformChanged();
 
