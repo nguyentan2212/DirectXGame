@@ -38,7 +38,7 @@ public:
 	/// <summary>
 	/// Jumps the specified speed.
 	/// </summary>
-	/// <param name="speed">speed greater than 0 => go down</param>
+	/// <param name="speed">speed greater than 0 => go up</param>
 	virtual void Jump(float speed) {}
 	virtual void Fire() {}
 	virtual void Sit() {}
