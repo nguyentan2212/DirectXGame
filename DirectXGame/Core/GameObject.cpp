@@ -32,7 +32,11 @@ void GameObject::Update(float deltaTime)
 void GameObject::Render()
 {
 	VECTOR2D worldPosition = GetWorldPosition();
-	this->_state->GetAnimation()->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
+	Animation* animation = this->_state->GetAnimation();
+	if (animation != nullptr)
+	{
+		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
+	}
 }
 
 /// <summary>
