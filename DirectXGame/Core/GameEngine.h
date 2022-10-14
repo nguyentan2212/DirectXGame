@@ -39,7 +39,7 @@ private:
 	float _fps = FPS;
 
 	GameObject* obj;
-
+	GameObject* emptyObj;
 	static GameEngine* _instance;
 };
 

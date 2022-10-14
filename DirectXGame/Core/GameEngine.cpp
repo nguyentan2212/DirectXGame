@@ -7,6 +7,7 @@
 #include "../Utils/json.hpp"
 #include "../Utils/Debug.h"
 #include "../Game/Mario/Mario.h"
+#include "EmptyObjectState.h"
 
 using json = nlohmann::json;
 
@@ -81,8 +82,9 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
 
     this->obj = new Mario();
     this->obj->position = VECTOR2D(50, 60);
-    Box box = obj->GetBoundingBox();
-    DebugOut(L"[INFO] Bounding box x= %f, y= %f, w= %f, h= %f \n", box.x, box.y, box.width, box.height);
+    
+    this->emptyObj = new GameObject(new EmptyObjectState(20, 40));
+    this->emptyObj->position = VECTOR2D(100, 60);
     this->_keyboardHandler->AddListener(this->obj);
 }
 
@@ -104,6 +106,7 @@ void GameEngine::Run()
 void GameEngine::Update(float deltaTime)
 {
     this->obj->Update(deltaTime);
+    this->emptyObj->Update(deltaTime);
 }
 
 void GameEngine::Render()
@@ -117,8 +120,10 @@ void GameEngine::Render()
     graphic->Begin();
     graphic->BeginSprite();
     this->obj->Render();
+    this->emptyObj->Render();
     graphic->EndSprite();
-    obj->DrawBoundingBox();
+    this->obj->DrawBoundingBox();
+    this->emptyObj->DrawBoundingBox();
     graphic->End();
 }
 
