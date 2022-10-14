@@ -80,7 +80,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     this->_timer->Start();
 
     this->obj = new Mario();
-    this->obj->position = VECTOR2D(0, 0);
+    this->obj->position = VECTOR2D(50, 60);
     this->_keyboardHandler->AddListener(this->obj);
 }
 

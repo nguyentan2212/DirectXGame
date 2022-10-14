@@ -88,8 +88,8 @@ void Graphic::CreateViewPortAndSpriteObject()
 	D3DXMatrixOrthoOffCenterLH(&this->_matProjection,
 		(float)viewPort.TopLeftX,
 		(float)viewPort.Width,
-		(float)viewPort.TopLeftY,
 		(float)viewPort.Height,
+		(float)viewPort.TopLeftY,
 		0.1f,
 		10);
 
@@ -376,7 +376,6 @@ void Graphic::DrawBox(float x, float y, float w, float h)
 	v[2] = vertex(D3DXVECTOR3(pBottomRight.x, pBottomRight.y, 0), D3DXVECTOR4(0, 1, 0, 1));
 	v[3] = vertex(D3DXVECTOR3(pTopLeft.x, pBottomRight.y, 0), D3DXVECTOR4(0, 0, 1, 1));
 
-	DebugOut(L"[INFO] vector x: %f - y: %f \n", pBottomRight.x, pBottomRight.y);
 	this->_pVertexBuffer->Unmap();
 
 	//create indexes for a box 

@@ -24,7 +24,7 @@ Sprite::Sprite(float x, float y, float width, float height, Texture* texture)
     this->_sprite.ColorModulate = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
     this->_sprite.TextureIndex = 0;
 
-    D3DXMatrixScaling(&this->_matScaling, (float)width, (float)height, 1.0f);
+    D3DXMatrixScaling(&this->_matScaling, (float)width, (float)height * -1.0f, 1.0f);
 }
 
 Sprite::~Sprite()
@@ -48,7 +48,7 @@ void Sprite::Draw(float x, float y, bool isFlipped)
     MATRIX matScaling = this->_matScaling;
     if (isFlipped)
     {
-        D3DXMatrixScaling(&matScaling, (float)this->_width * -1.0f, (float)this->_height, 1.0f);
+        D3DXMatrixScaling(&matScaling, (float)this->_width * -1.0f, (float)this->_height * -1.0f, 1.0f);
     }
 
     this->_sprite.matWorld = matScaling * matTranslation;
