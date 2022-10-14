@@ -12,7 +12,7 @@ public:
 
     void Draw(float x, float y, bool isFlipped = false);
     void Draw(VECTOR2D position, bool isFlipped = false);
-    RECT GetBounderBox();
+    RECT GetBoundingBox();
 
 private:
     float _x;

@@ -88,8 +88,8 @@ void Graphic::CreateViewPortAndSpriteObject()
 	D3DXMatrixOrthoOffCenterLH(&this->_matProjection,
 		(float)viewPort.TopLeftX,
 		(float)viewPort.Width,
-		(float)viewPort.Height,
 		(float)viewPort.TopLeftY,
+		(float)viewPort.Height,
 		0.1f,
 		10);
 
@@ -357,12 +357,10 @@ void Graphic::DrawBox(float x, float y, float w, float h)
 	D3DXVECTOR2 topLeft(x, y);
 	D3DXVECTOR2 pTopLeft;
 	D3DXVec2TransformCoord(&pTopLeft, &topLeft, &this->_matProjection);
-	pTopLeft.y *= -1;
 
 	D3DXVECTOR2 bottomRight(x + w, y + h);
 	D3DXVECTOR2 pBottomRight;
 	D3DXVec2TransformCoord(&pBottomRight, &bottomRight, &this->_matProjection);
-	pBottomRight.y *= -1;
 
 	//fill vertex buffer with vertices
 	UINT numVertices = 4;

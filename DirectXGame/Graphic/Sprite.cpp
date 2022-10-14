@@ -24,7 +24,7 @@ Sprite::Sprite(float x, float y, float width, float height, Texture* texture)
     this->_sprite.ColorModulate = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
     this->_sprite.TextureIndex = 0;
 
-    D3DXMatrixScaling(&this->_matScaling, (float)width, (float)height * -1.0f, 1.0f);
+    D3DXMatrixScaling(&this->_matScaling, (float)width, (float)height, 1.0f);
 }
 
 Sprite::~Sprite()
@@ -43,12 +43,12 @@ void Sprite::Draw(float x, float y, bool isFlipped)
     y = (FLOAT)floor(y);
 
     Graphic* graphic = Graphic::GetInstance();
-    D3DXMatrixTranslation(&matTranslation, x, graphic->backBufferHeight - y, 0.1f);
+    D3DXMatrixTranslation(&matTranslation, x, y, 0.1f);
 
     MATRIX matScaling = this->_matScaling;
     if (isFlipped)
     {
-        D3DXMatrixScaling(&matScaling, (float)this->_width * -1.0f, (float)this->_height * -1.0f, 1.0f);
+        D3DXMatrixScaling(&matScaling, (float)this->_width * -1.0f, (float)this->_height, 1.0f);
     }
 
     this->_sprite.matWorld = matScaling * matTranslation;
@@ -60,7 +60,7 @@ void Sprite::Draw(VECTOR2D position, bool isFlipped)
     Draw(position.x, position.y, isFlipped);
 }
 
-RECT Sprite::GetBounderBox()
+RECT Sprite::GetBoundingBox()
 {
     RECT rect = RECT();
     rect.left = (long)this->_x;
