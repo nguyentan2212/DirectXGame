@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "../Utils/Debug.h"
+#include "../Graphic/Graphic.h"
 
 GameObject::GameObject(ObjectState* state)
 {
@@ -8,6 +9,8 @@ GameObject::GameObject(ObjectState* state)
 	this->_direction = DIRECTION::LEFT;
 	this->_parent = nullptr;
 	this->_children = vector<GameObject*>(0);
+	this->_showBoundingBox = false;
+	this->_isFlipped = false;
 	TransitionTo(state);
 }
 
@@ -29,7 +32,7 @@ void GameObject::Update(float deltaTime)
 void GameObject::Render()
 {
 	VECTOR2D worldPosition = GetWorldPosition();
-	this->_state->GetAnimation()->Render(worldPosition.x, worldPosition.y);
+	this->_state->GetAnimation()->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
 }
 
 /// <summary>
@@ -126,6 +129,29 @@ void GameObject::TransitionTo(ObjectState* state)
 		delete this->_state;
 	this->_state = state;
 	this->_state->context = this;
+}
+
+/// <summary>
+/// Gets the bounding box.
+/// </summary>
+/// <returns></returns>
+Box GameObject::GetBoundingBox()
+{
+	if (this->_state != nullptr)
+	{
+		return this->_state->GetBoundingBox();
+	}
+	return Box();
+}
+
+/// <summary>
+/// Draws the bounding box.
+/// </summary>
+void GameObject::DrawBoundingBox()
+{
+	Graphic* graphic = Graphic::GetInstance();
+	Box boundingBox = GetBoundingBox();
+	graphic->DrawBox(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
 }
 
 /// <summary>

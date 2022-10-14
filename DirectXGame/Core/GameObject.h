@@ -28,6 +28,9 @@ public:
 	VECTOR2D GetWorldPosition();
 	void TransitionTo(ObjectState* state);
 
+	virtual Box GetBoundingBox();
+	void DrawBoundingBox();
+
 #pragma region Properties
 	PROPERTY(VECTOR2D, position);
 	GET(position) { return this->_position; }
@@ -39,12 +42,18 @@ public:
 
 	R_PROPERTY(DIRECTION, direction);
 	GET(direction) { return this->_direction; }
+
+	PROPERTY(bool, showBoundingBox);
+	GET(showBoundingBox) { return this->_showBoundingBox; }
+	SET(showBoundingBox) { this->_showBoundingBox = value; }
 #pragma endregion
 
 protected:
 	GameObject* _parent;
 	vector<GameObject*> _children;
 	ObjectState* _state;
+	bool _showBoundingBox;
+	bool _isFlipped;
 
 #pragma region Transform
 	VECTOR2D _position;
