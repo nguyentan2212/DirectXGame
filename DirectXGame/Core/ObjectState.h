@@ -3,6 +3,7 @@
 #include "../Graphic/Animation.h"
 #include "../Utils/Property.h"
 #include "../Utils/Debug.h"
+#include "../Utils/CMath.h"
 
 using namespace::std;
 
@@ -24,6 +25,12 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	virtual Animation* GetAnimation() = 0;
+
+	/// <summary>
+	/// Gets the bounding box.
+	/// </summary>
+	/// <returns></returns>
+	virtual Box GetBoundingBox();
 
 	W_PROPERTY(GameObject*, context);
 	SET(context) { this->_context = value; }
@@ -49,5 +56,7 @@ public:
 protected:
 	GameObject* _context;
 	Animation* _animation;
+	float _width = 0.0f;
+	float _height = 0.0f;
 };
 
