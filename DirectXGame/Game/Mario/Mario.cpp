@@ -33,7 +33,7 @@ void Mario::OnKeyDown(int keyCode)
 	{
 	case DIK_UP:
 		DebugOut((wchar_t*)L"[INFO] Key input UP \n");
-		this->_state->Jump(-SPEED);
+		this->_state->Jump(SPEED);
 		break;
 	case DIK_DOWN:
 		DebugOut((wchar_t*)L"[INFO] Key input DOWN \n");
