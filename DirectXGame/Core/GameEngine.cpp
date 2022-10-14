@@ -81,6 +81,8 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
 
     this->obj = new Mario();
     this->obj->position = VECTOR2D(50, 60);
+    Box box = obj->GetBoundingBox();
+    DebugOut(L"[INFO] Bounding box x= %f, y= %f, w= %f, h= %f \n", box.x, box.y, box.width, box.height);
     this->_keyboardHandler->AddListener(this->obj);
 }
 
@@ -113,13 +115,10 @@ void GameEngine::Render()
 
     Graphic* graphic = Graphic::GetInstance();
     graphic->Begin();
-
-    graphic->DrawBox(10, 20, 50, 30);
-
     graphic->BeginSprite();
     this->obj->Render();
     graphic->EndSprite();
-
+    obj->DrawBoundingBox();
     graphic->End();
 }
 
