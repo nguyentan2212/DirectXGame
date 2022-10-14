@@ -6,14 +6,30 @@
 
 #define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255, 0.0f)
 
+struct vertex
+{
+	D3DXVECTOR3 pos;
+	D3DXVECTOR4 color;
+
+	vertex(D3DXVECTOR3 p, D3DXVECTOR4 c)
+	{
+		pos = p;
+		color = c;
+	}
+};
+
 class Graphic
 {
 public:
 	static Graphic* GetInstance();
 	void Init(HWND hwnd, int fps);
 	Texture* CreateTexture(LPCWSTR texturePath);
-	void BeginRender();
-	void EndRender();
+	void Begin();
+	void BeginSprite();
+	void EndSprite();
+	void End();
+
+	void DrawBox(float x, float y, float w, float h);
 
 #pragma region Properties
 	R_PROPERTY(int, backBufferWidth);
@@ -40,11 +56,26 @@ private:
 	LPD3DX10SPRITE _spriteObject = NULL;
 	ID3D10RasterizerState* _pRS;
 
+	//input layout and vertex buffer
+	ID3D10Buffer* _pVertexBuffer;
+	ID3D10InputLayout* _pVertexLayout;
+	ID3D10Buffer* _pIndexBuffer;
+
+	//effects and techniques
+	ID3D10Effect* _pBasicEffect;
+	ID3D10EffectTechnique* _pBasicTechnique;
+
+	//technique desc
+	D3D10_TECHNIQUE_DESC _techDesc;
+
+	D3DXMATRIX _matProjection;
+
 	void CreateSwapChain(HWND hwnd, int fps);
 	void CreateRenderTarget();
 	void CreateViewPortAndSpriteObject();
 	void CreateRasterizerState();
 	void CreateBlendState();
+	void CreateVertexAndIndexBuffer();
 
 	Graphic();
 	~Graphic();

@@ -84,8 +84,8 @@ void Graphic::CreateViewPortAndSpriteObject()
 	this->_pD3DDevice->RSSetViewports(1, &viewPort);
 
 	// Create the projection matrix using the values in the viewport
-	D3DXMATRIX matProjection;
-	D3DXMatrixOrthoOffCenterLH(&matProjection,
+	
+	D3DXMatrixOrthoOffCenterLH(&this->_matProjection,
 		(float)viewPort.TopLeftX,
 		(float)viewPort.Width,
 		(float)viewPort.TopLeftY,
@@ -101,7 +101,8 @@ void Graphic::CreateViewPortAndSpriteObject()
 		DebugOut((wchar_t*)L"[ERROR] D3DX10CreateSprite has failed %s %d", _W(__FILE__), __LINE__);
 		return;
 	}
-	hr = this->_spriteObject->SetProjectionTransform(&matProjection);
+	hr = this->_spriteObject->SetProjectionTransform(&this->_matProjection);
+	
 }
 
 void Graphic::CreateRasterizerState()
@@ -140,6 +141,85 @@ void Graphic::CreateBlendState()
 	this->_pD3DDevice->CreateBlendState(&StateDesc, &this->_pBlendStateAlpha);
 }
 
+void Graphic::CreateVertexAndIndexBuffer()
+{
+	//Load Basic Effect and Technique 
+	//--------------------------------------------------------------
+	HRESULT hr = D3DX10CreateEffectFromFile(L"basic.fx",
+		NULL, NULL,
+		"fx_4_0",
+		D3D10_SHADER_ENABLE_STRICTNESS,
+		0,
+		this->_pD3DDevice,
+		NULL,
+		NULL,
+		&this->_pBasicEffect,
+		NULL,
+		NULL);
+	if (FAILED(hr))
+	{
+		DebugOut((wchar_t*)L"[ERROR] D3DX10CreateEffectFromFile has failed %s %d", _W(__FILE__), __LINE__);
+		return;
+	}
+
+	this->_pBasicTechnique = this->_pBasicEffect->GetTechniqueByName("Render");
+	
+	this->_pBasicTechnique->GetDesc(&_techDesc);
+	//Create Input Layout
+	//--------------------------------------------------------------	
+
+	D3D10_INPUT_ELEMENT_DESC layout[] =
+	{
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D10_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D10_INPUT_PER_VERTEX_DATA, 0 }
+	};
+	UINT numElements = 2;
+
+	D3D10_PASS_DESC PassDesc;
+	this->_pBasicTechnique->GetPassByIndex(0)->GetDesc(&PassDesc);
+	hr = this->_pD3DDevice->CreateInputLayout(layout,
+		numElements,
+		PassDesc.pIAInputSignature,
+		PassDesc.IAInputSignatureSize,
+		&this->_pVertexLayout);
+
+	// Set the input layout
+	this->_pD3DDevice->IASetInputLayout(this->_pVertexLayout);
+
+	//create vertex buffer (space for 100 vertices)
+	//---------------------------------------------------------------------------------
+	UINT numVertices = 100;
+
+	D3D10_BUFFER_DESC bd;
+	bd.Usage = D3D10_USAGE_DYNAMIC;
+	bd.ByteWidth = sizeof(vertex) * numVertices;
+	bd.BindFlags = D3D10_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = D3D10_CPU_ACCESS_WRITE;
+	bd.MiscFlags = 0;
+
+	hr = this->_pD3DDevice->CreateBuffer(&bd, NULL, &this->_pVertexBuffer);
+	if (FAILED(hr))
+	{
+		DebugOut((wchar_t*)L"[ERROR] Create Vertex Buffer has failed %s %d", _W(__FILE__), __LINE__);
+		return;
+	}
+
+	bd.ByteWidth = sizeof(unsigned int) * numVertices;
+	bd.BindFlags = D3D10_BIND_INDEX_BUFFER;
+	hr = this->_pD3DDevice->CreateBuffer(&bd, NULL, &this->_pIndexBuffer);
+	if (FAILED(hr))
+	{
+		DebugOut((wchar_t*)L"[ERROR] Create Index Buffer has failed %s %d", _W(__FILE__), __LINE__);
+		return;
+	}
+
+	// Set vertex buffer
+	UINT stride = sizeof(vertex);
+	UINT offset = 0;
+	this->_pD3DDevice->IASetVertexBuffers(0, 1, &this->_pVertexBuffer, &stride, &offset);
+	this->_pD3DDevice->IASetIndexBuffer(this->_pIndexBuffer, DXGI_FORMAT_R32_UINT, offset);
+}
+
 Graphic::Graphic()
 {
 
@@ -161,6 +241,7 @@ void Graphic::Init(HWND hwnd, int fps)
 	CreateViewPortAndSpriteObject();
 	CreateRasterizerState();
 	CreateBlendState();
+	CreateVertexAndIndexBuffer();
 
 	DebugOut((wchar_t*)L"[INFO] InitDirectX has been successful\n");
 	return;
@@ -249,20 +330,89 @@ Texture* Graphic::CreateTexture(LPCWSTR texturePath)
 	return new Texture(tex, gSpriteTextureRV);
 }
 
-void Graphic::BeginRender()
+void Graphic::Begin()
 {
 	this->_pD3DDevice->ClearRenderTargetView(this->_pRenderTargetView, BACKGROUND_COLOR);
-	this->_spriteObject->Begin(D3DX10_SPRITE_SORT_TEXTURE);
 	FLOAT NewBlendFactor[4] = { 0,0,0,0 };
 	this->_pD3DDevice->OMSetBlendState(this->_pBlendStateAlpha, NewBlendFactor, 0xffffffff);
 }
 
-void Graphic::EndRender()
+void Graphic::BeginSprite()
+{
+	this->_spriteObject->Begin(D3DX10_SPRITE_SORT_TEXTURE | D3DX10_SPRITE_SAVE_STATE);
+}
+
+void Graphic::EndSprite()
 {
 	this->_spriteObject->End();
+}
+
+void Graphic::End()
+{
 	this->_pSwapChain->Present(0, 0);
+}
+
+void Graphic::DrawBox(float x, float y, float w, float h)
+{
+	D3DXVECTOR2 topLeft(x, y);
+	D3DXVECTOR2 pTopLeft;
+	D3DXVec2TransformCoord(&pTopLeft, &topLeft, &this->_matProjection);
+	pTopLeft.y *= -1;
+
+	D3DXVECTOR2 bottomRight(x + w, y + h);
+	D3DXVECTOR2 pBottomRight;
+	D3DXVec2TransformCoord(&pBottomRight, &bottomRight, &this->_matProjection);
+	pBottomRight.y *= -1;
+
+	//fill vertex buffer with vertices
+	UINT numVertices = 4;
+	vertex* v = NULL;
+
+	//lock vertex buffer for CPU use
+	this->_pVertexBuffer->Map(D3D10_MAP_WRITE_DISCARD, 0, (void**)&v);
+
+	v[0] = vertex(D3DXVECTOR3(pTopLeft.x, pTopLeft.y, 0), D3DXVECTOR4(1, 0, 0, 1));
+	v[1] = vertex(D3DXVECTOR3(pBottomRight.x, pTopLeft.y, 0), D3DXVECTOR4(1, 1, 0, 1));
+	v[2] = vertex(D3DXVECTOR3(pBottomRight.x, pBottomRight.y, 0), D3DXVECTOR4(0, 1, 0, 1));
+	v[3] = vertex(D3DXVECTOR3(pTopLeft.x, pBottomRight.y, 0), D3DXVECTOR4(0, 0, 1, 1));
+
+	DebugOut(L"[INFO] vector x: %f - y: %f \n", pBottomRight.x, pBottomRight.y);
+	this->_pVertexBuffer->Unmap();
+
+	//create indexes for a box 
+	unsigned int* indexes = NULL;
+
+	this->_pIndexBuffer->Map(D3D10_MAP_WRITE_DISCARD, 0, (void**)&indexes);
+
+	indexes[0] = 0;
+	indexes[1] = 1;
+	indexes[2] = 2;
+	indexes[3] = 3;
+	indexes[4] = 0;
+
+	this->_pIndexBuffer->Unmap();
+
+	// Set primitive topology 
+	this->_pD3DDevice->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+	for (UINT p = 0; p < this->_techDesc.Passes; ++p)
+	{
+		//apply technique
+		this->_pBasicTechnique->GetPassByIndex(p)->Apply(0);
+
+		//draw
+		this->_pD3DDevice->DrawIndexed(5, 0, 0);
+	}
 }
 
 Graphic::~Graphic()
 {
+	if (this->_pRenderTargetView) this->_pRenderTargetView->Release();
+	if (this->_pSwapChain) this->_pSwapChain->Release();
+	if (this->_pD3DDevice) this->_pD3DDevice->Release();
+	if (this->_pVertexBuffer) this->_pVertexBuffer->Release();
+	if (this->_pVertexLayout) this->_pVertexLayout->Release();
+	if (this->_pIndexBuffer) this->_pIndexBuffer->Release();
+	if (this->_pRS) this->_pRS->Release();
+	if (this->_pBasicEffect) this->_pBasicEffect->Release();
 }
