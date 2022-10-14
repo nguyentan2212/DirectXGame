@@ -80,7 +80,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     this->_timer->Start();
 
     this->obj = new Mario();
-    this->obj->position = VECTOR2D(50, 50);
+    this->obj->position = VECTOR2D(0, 0);
     this->_keyboardHandler->AddListener(this->obj);
 }
 
@@ -112,12 +112,15 @@ void GameEngine::Render()
     AnimationService* animations = AnimationService::GetInstance();
 
     Graphic* graphic = Graphic::GetInstance();
-    graphic->BeginRender();
+    graphic->Begin();
 
-    // sprite->Draw(8, 16);
+    graphic->DrawBox(10, 20, 50, 30);
+
+    graphic->BeginSprite();
     this->obj->Render();
+    graphic->EndSprite();
 
-    graphic->EndRender();
+    graphic->End();
 }
 
 void GameEngine::CreateGameWindow(int nCmdShow)
