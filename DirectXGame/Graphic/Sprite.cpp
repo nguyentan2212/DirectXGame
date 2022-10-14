@@ -59,13 +59,3 @@ void Sprite::Draw(VECTOR2D position, bool isFlipped)
 {
     Draw(position.x, position.y, isFlipped);
 }
-
-RECT Sprite::GetBoundingBox()
-{
-    RECT rect = RECT();
-    rect.left = (long)this->_x;
-    rect.top = (long)this->_y;
-    rect.right = rect.left + (long)this->_width;
-    rect.bottom = rect.top + (long)this->_height;
-    return rect;
-}
