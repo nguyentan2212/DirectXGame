@@ -143,6 +143,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\EmptyObjectState.h" />
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\KeyboardHandler.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Utils\Property.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\EmptyObjectState.cpp" />
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />
