@@ -216,4 +216,7 @@
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="basic.fx" />
+  </ItemGroup>
 </Project>
