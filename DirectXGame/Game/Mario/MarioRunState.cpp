@@ -25,7 +25,7 @@ Animation* MarioRunState::GetAnimation()
 
 void MarioRunState::Jump(float speed)
 {
-    this->_context->velocity += VECTOR2D(speed, 0);
+    this->_context->velocity += VECTOR2D(0, speed);
     this->_context->TransitionTo(new MarioJumpState());
 }
 
