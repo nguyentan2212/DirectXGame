@@ -9,6 +9,8 @@ MarioJumpState::MarioJumpState()
     AnimationService* animations = AnimationService::GetInstance();
     this->_animation = animations->GetAnimation("super mario jump");
 
+    this->_width = 16.0f;
+    this->_height = 32.0f;
     DebugOut((wchar_t*)L"[INFO] Mario transition to Jump State \n");
 }
 

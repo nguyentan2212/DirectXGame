@@ -8,6 +8,8 @@ MarioSitState::MarioSitState(): ObjectState()
 	AnimationService* animations = AnimationService::GetInstance();
 	this->_animation = animations->GetAnimation("super mario sit");
 
+	this->_width = 16.0f;
+	this->_height = 24.0f;
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Sit State \n");
 }
 

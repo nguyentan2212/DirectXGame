@@ -10,6 +10,8 @@ MarioIdleState::MarioIdleState()
 	AnimationService* animations = AnimationService::GetInstance();
 	this->_animation = animations->GetAnimation("super mario idle");
 
+	this->_width = 16.0f;
+	this->_height = 32.0f;
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Idle State \n");
 }
 

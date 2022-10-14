@@ -5,6 +5,7 @@
 
 Mario::Mario(): GameObject(new MarioIdleState())
 {
+	this->_showBoundingBox = true;
 }
 
 void Mario::Update(float deltaTime)
@@ -22,9 +23,8 @@ void Mario::Update(float deltaTime)
 
 void Mario::Render()
 {
-	VECTOR2D worldPosition = GetWorldPosition();
-	bool isFlipped = this->_direction == DIRECTION::LEFT ? false : true;
-	this->_state->GetAnimation()->Render(worldPosition.x, worldPosition.y, isFlipped);
+	_isFlipped = this->_direction == DIRECTION::LEFT ? false : true;
+	GameObject::Render();
 }
 
 void Mario::OnKeyDown(int keyCode)
