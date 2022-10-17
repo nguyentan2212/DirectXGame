@@ -24,7 +24,7 @@ void GameObject::Update(float deltaTime)
 {
 	if (this->_velocity != VECTOR2D(0.0f, 0.0f))
 	{
-		Translate(this->_velocity / deltaTime);
+		Translate(this->_velocity * deltaTime / 1000);
 	}
 	this->_state->Update(deltaTime);
 }
@@ -156,6 +156,10 @@ void GameObject::DrawBoundingBox()
 	Graphic* graphic = Graphic::GetInstance();
 	Box boundingBox = GetBoundingBox();
 	graphic->DrawBox(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
+}
+
+void GameObject::OnCollision(CollisionEvent colEvent)
+{
 }
 
 /// <summary>

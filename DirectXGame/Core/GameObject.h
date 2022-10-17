@@ -4,6 +4,7 @@
 #include "../Graphic/AnimationService.h"
 #include "../Utils/Property.h"
 #include "../Utils/CMath.h"
+#include "../Physic/CollisionEvent.h"
 
 using namespace::std;
 
@@ -31,6 +32,8 @@ public:
 	virtual Box GetBoundingBox();
 	void DrawBoundingBox();
 
+	virtual void OnCollision(CollisionEvent colEvent);
+
 #pragma region Properties
 	PROPERTY(VECTOR2D, position);
 	GET(position) { return this->_position; }
@@ -57,7 +60,7 @@ protected:
 
 #pragma region Transform
 	VECTOR2D _position;
-	VECTOR2D _velocity; // units per milisecond.
+	VECTOR2D _velocity; // units per second.
 	MATRIX _worldMatrix;
 	bool _isTransformChanged;
 	DIRECTION _direction;
