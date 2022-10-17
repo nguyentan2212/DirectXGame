@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include "CollisionEvent.h"
 #include "../Utils/CMath.h"
 #include "../Core/GameObject.h"
 
@@ -9,9 +10,9 @@ class CollisionManager
 {
 public:
 	static CollisionManager* GetInstance();
-	DIRECTION CalcAABB(GameObject* objA, GameObject* objB);
+	CollisionEvent CalcAABB(GameObject* objA, GameObject* objB, float deltaTime);
 	bool IsCollision(Box boxA, Box boxB);
-	void Processing();
+	void Processing(float deltaTime);
 
 	void AddListener(GameObject* listener);
 	void RemoveListener(GameObject* listener);
