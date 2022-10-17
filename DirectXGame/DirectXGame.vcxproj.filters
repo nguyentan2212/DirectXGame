@@ -153,6 +153,9 @@
     <ClInclude Include="Physic\CollisionManager.h">
       <Filter>Physic\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Physic\CollisionEvent.h">
+      <Filter>Physic\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -217,6 +220,9 @@
       <Filter>Core\Source</Filter>
     </ClCompile>
     <ClCompile Include="Physic\CollisionManager.cpp">
+      <Filter>Physic\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Physic\CollisionEvent.cpp">
       <Filter>Physic\Source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -162,6 +162,7 @@
     <ClInclude Include="Graphic\SpriteService.h" />
     <ClInclude Include="Graphic\Texture.h" />
     <ClInclude Include="Graphic\TextureService.h" />
+    <ClInclude Include="Physic\CollisionEvent.h" />
     <ClInclude Include="Physic\CollisionManager.h" />
     <ClInclude Include="Utils\CMath.h" />
     <ClInclude Include="Utils\Debug.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Graphic\Texture.cpp" />
     <ClCompile Include="Graphic\TextureService.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Physic\CollisionEvent.cpp" />
     <ClCompile Include="Physic\CollisionManager.cpp" />
     <ClCompile Include="Utils\Debug.cpp" />
   </ItemGroup>
