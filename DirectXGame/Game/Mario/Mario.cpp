@@ -67,3 +67,9 @@ void Mario::OnKeyUp(int keyCode)
 		break;
 	}
 }
+
+void Mario::OnCollision(CollisionEvent colEvent)
+{
+	this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+	this->_velocity.x = 0.0f;
+}

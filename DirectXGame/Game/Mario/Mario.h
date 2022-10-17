@@ -2,7 +2,7 @@
 #include <dinput.h>
 #include "../../Core/GameObject.h"
 
-#define SPEED 10
+#define SPEED 50
 class Mario: public GameObject
 {
 public:
@@ -13,5 +13,6 @@ public:
 
 	void OnKeyDown(int keyCode) override;
 	void OnKeyUp(int keyCode) override;
+	void OnCollision(CollisionEvent colEvent) override;
 };
 
