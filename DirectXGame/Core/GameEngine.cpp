@@ -6,6 +6,7 @@
 #include "../Graphic/AnimationService.h"
 #include "../Utils/json.hpp"
 #include "../Utils/Debug.h"
+#include "../Physic/CollisionManager.h"
 #include "../Game/Mario/Mario.h"
 #include "EmptyObjectState.h"
 
@@ -76,20 +77,25 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     AnimationService* animations = AnimationService::GetInstance();
     animations->Init(config["animations"]);
 
+    // Init collision manager
+    CollisionManager* collision = CollisionManager::GetInstance();
     // Timer begin
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
 
     this->obj = new Mario();
     this->obj->position = VECTOR2D(50, 60);
+    collision->AddListener(obj);
+    this->_keyboardHandler->AddListener(this->obj);
     
     this->emptyObj = new GameObject(new EmptyObjectState(20, 40));
     this->emptyObj->position = VECTOR2D(100, 60);
-    this->_keyboardHandler->AddListener(this->obj);
+    collision->AddListener(emptyObj);
 }
 
 void GameEngine::Run()
 {
+    CollisionManager* collision = CollisionManager::GetInstance();
     while (ProcessMessages())
     {
         float delta = 0;
@@ -97,6 +103,7 @@ void GameEngine::Run()
         {
             this->_keyboardHandler->Processing();
             // OUTPUT((to_string(delta) + " \n").c_str());
+            collision->Processing(delta);
             Update(delta);
         }
         Render();
