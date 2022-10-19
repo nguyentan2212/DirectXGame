@@ -1,0 +1,940 @@
+{
+  "sprites": [
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 2,
+        "y": 2
+      },
+      "name": "bricks/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 22,
+        "y": 2
+      },
+      "name": "bricks/10"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 42,
+        "y": 2
+      },
+      "name": "bricks/12"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 62,
+        "y": 2
+      },
+      "name": "bricks/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 82,
+        "y": 2
+      },
+      "name": "bricks/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 102,
+        "y": 2
+      },
+      "name": "bricks/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 122,
+        "y": 2
+      },
+      "name": "bricks/9"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 142,
+        "y": 2
+      },
+      "name": "clouds/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 162,
+        "y": 2
+      },
+      "name": "clouds/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 182,
+        "y": 2
+      },
+      "name": "clouds/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 202,
+        "y": 2
+      },
+      "name": "coins/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 222,
+        "y": 2
+      },
+      "name": "coins/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 242,
+        "y": 2
+      },
+      "name": "grass/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 262,
+        "y": 2
+      },
+      "name": "grass/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 282,
+        "y": 2
+      },
+      "name": "grass/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 302,
+        "y": 2
+      },
+      "name": "grass/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 322,
+        "y": 2
+      },
+      "name": "ground/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 342,
+        "y": 2
+      },
+      "name": "ground/11"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 362,
+        "y": 2
+      },
+      "name": "ground/13"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 382,
+        "y": 2
+      },
+      "name": "ground/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 402,
+        "y": 2
+      },
+      "name": "ground/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 422,
+        "y": 2
+      },
+      "name": "ground/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 442,
+        "y": 2
+      },
+      "name": "ground/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 462,
+        "y": 2
+      },
+      "name": "panels/black/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 482,
+        "y": 2
+      },
+      "name": "panels/black/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 502,
+        "y": 2
+      },
+      "name": "panels/black/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 522,
+        "y": 2
+      },
+      "name": "panels/black/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 542,
+        "y": 2
+      },
+      "name": "panels/black/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 562,
+        "y": 2
+      },
+      "name": "panels/blue/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 582,
+        "y": 2
+      },
+      "name": "panels/blue/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 602,
+        "y": 2
+      },
+      "name": "panels/blue/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 622,
+        "y": 2
+      },
+      "name": "panels/blue/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 642,
+        "y": 2
+      },
+      "name": "panels/green/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 662,
+        "y": 2
+      },
+      "name": "panels/green/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 682,
+        "y": 2
+      },
+      "name": "panels/green/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 702,
+        "y": 2
+      },
+      "name": "panels/green/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 722,
+        "y": 2
+      },
+      "name": "panels/green/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 742,
+        "y": 2
+      },
+      "name": "panels/orange/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 762,
+        "y": 2
+      },
+      "name": "panels/orange/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 782,
+        "y": 2
+      },
+      "name": "panels/orange/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 802,
+        "y": 2
+      },
+      "name": "panels/orange/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 822,
+        "y": 2
+      },
+      "name": "panels/pink/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 842,
+        "y": 2
+      },
+      "name": "panels/pink/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 862,
+        "y": 2
+      },
+      "name": "panels/pink/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 882,
+        "y": 2
+      },
+      "name": "panels/pink/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 902,
+        "y": 2
+      },
+      "name": "panels/pink/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 922,
+        "y": 2
+      },
+      "name": "panels/white/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 942,
+        "y": 2
+      },
+      "name": "panels/white/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 962,
+        "y": 2
+      },
+      "name": "panels/white/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 982,
+        "y": 2
+      },
+      "name": "panels/white/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 1002,
+        "y": 2
+      },
+      "name": "pines/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 1022,
+        "y": 2
+      },
+      "name": "pines/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 2,
+        "y": 22
+      },
+      "name": "bricks/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 22,
+        "y": 22
+      },
+      "name": "bricks/11"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 42,
+        "y": 22
+      },
+      "name": "bricks/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 62,
+        "y": 22
+      },
+      "name": "bricks/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 82,
+        "y": 22
+      },
+      "name": "bricks/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 102,
+        "y": 22
+      },
+      "name": "bricks/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 122,
+        "y": 22
+      },
+      "name": "clouds/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 142,
+        "y": 22
+      },
+      "name": "clouds/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 162,
+        "y": 22
+      },
+      "name": "clouds/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 182,
+        "y": 22
+      },
+      "name": "clouds/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 202,
+        "y": 22
+      },
+      "name": "coins/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 222,
+        "y": 22
+      },
+      "name": "grass/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 242,
+        "y": 22
+      },
+      "name": "grass/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 262,
+        "y": 22
+      },
+      "name": "grass/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 282,
+        "y": 22
+      },
+      "name": "grass/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 302,
+        "y": 22
+      },
+      "name": "ground/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 322,
+        "y": 22
+      },
+      "name": "ground/10"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 342,
+        "y": 22
+      },
+      "name": "ground/12"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 362,
+        "y": 22
+      },
+      "name": "ground/14"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 382,
+        "y": 22
+      },
+      "name": "ground/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 402,
+        "y": 22
+      },
+      "name": "ground/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 422,
+        "y": 22
+      },
+      "name": "ground/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 442,
+        "y": 22
+      },
+      "name": "ground/9"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 462,
+        "y": 22
+      },
+      "name": "panels/black/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 482,
+        "y": 22
+      },
+      "name": "panels/black/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 502,
+        "y": 22
+      },
+      "name": "panels/black/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 522,
+        "y": 22
+      },
+      "name": "panels/black/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 542,
+        "y": 22
+      },
+      "name": "panels/blue/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 562,
+        "y": 22
+      },
+      "name": "panels/blue/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 582,
+        "y": 22
+      },
+      "name": "panels/blue/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 602,
+        "y": 22
+      },
+      "name": "panels/blue/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 622,
+        "y": 22
+      },
+      "name": "panels/blue/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 642,
+        "y": 22
+      },
+      "name": "panels/green/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 662,
+        "y": 22
+      },
+      "name": "panels/green/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 682,
+        "y": 22
+      },
+      "name": "panels/green/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 702,
+        "y": 22
+      },
+      "name": "panels/green/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 722,
+        "y": 22
+      },
+      "name": "panels/orange/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 742,
+        "y": 22
+      },
+      "name": "panels/orange/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 762,
+        "y": 22
+      },
+      "name": "panels/orange/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 782,
+        "y": 22
+      },
+      "name": "panels/orange/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 802,
+        "y": 22
+      },
+      "name": "panels/orange/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 822,
+        "y": 22
+      },
+      "name": "panels/pink/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 842,
+        "y": 22
+      },
+      "name": "panels/pink/3"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 862,
+        "y": 22
+      },
+      "name": "panels/pink/5"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 882,
+        "y": 22
+      },
+      "name": "panels/pink/7"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 902,
+        "y": 22
+      },
+      "name": "panels/white/0"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 922,
+        "y": 22
+      },
+      "name": "panels/white/2"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 942,
+        "y": 22
+      },
+      "name": "panels/white/4"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 962,
+        "y": 22
+      },
+      "name": "panels/white/6"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 982,
+        "y": 22
+      },
+      "name": "panels/white/8"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 1002,
+        "y": 22
+      },
+      "name": "pines/1"
+    },
+    {
+      "frame": {
+        "h": 16,
+        "w": 16,
+        "x": 1022,
+        "y": 22
+      },
+      "name": "pines/3"
+    }
+  ]
+}

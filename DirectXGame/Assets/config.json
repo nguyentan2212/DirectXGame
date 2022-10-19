@@ -13,7 +13,6 @@
           "w": 632,
           "h": 32
         },
-        "transparentColor": "4491BE",
         "spritePath": "Assets/Textures/super-mario.json"
       },
       {
@@ -24,12 +23,24 @@
           "h": 765
         },
         "spritePath": "Assets/Textures/bounding-box.json"
+      },
+      {
+        "name": "mics",
+        "image": "Assets/Textures/mics.png",
+        "size": {
+          "w": 1040,
+          "h": 40
+        },
+        "spritePath": "Assets/Textures/mics.json"
       }
     ],
     "animations": [
       {
         "animationPath": "Assets/Animations/super-mario.json"
       }
+    ],
+    "scenes": [
+      "Assets/Tilemaps/stage-1.json"
     ]
   }
 }
