@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "KeyboardHandler.h"
 #include "GameObject.h"
+#include "Scene.h"
 
 #define FPS 60
 #define WINDDOW_WIDTH 300
@@ -40,6 +41,7 @@ private:
 
 	GameObject* obj;
 	GameObject* emptyObj;
+	Scene* scene;
 	static GameEngine* _instance;
 };
 

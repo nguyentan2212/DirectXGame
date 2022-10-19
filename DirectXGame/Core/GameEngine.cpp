@@ -91,6 +91,8 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     this->emptyObj = new GameObject(new EmptyObjectState(20, 40));
     this->emptyObj->position = VECTOR2D(100, 60);
     collision->AddListener(emptyObj);
+
+    scene = new Scene(config["scenes"][0].get<string>());
 }
 
 void GameEngine::Run()
@@ -126,6 +128,7 @@ void GameEngine::Render()
     Graphic* graphic = Graphic::GetInstance();
     graphic->Begin();
     graphic->BeginSprite();
+    this->scene->Render();
     this->obj->Render();
     this->emptyObj->Render();
     graphic->EndSprite();
