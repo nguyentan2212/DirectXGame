@@ -139,7 +139,9 @@
       <DeploymentContent>false</DeploymentContent>
     </None>
     <None Include="Assets\Textures\bounding-box.json" />
+    <None Include="Assets\Textures\mics.json" />
     <None Include="Assets\Textures\super-mario.json" />
+    <None Include="Assets\Tilemaps\stage-1.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +150,7 @@
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\KeyboardHandler.h" />
     <ClInclude Include="Core\ObjectState.h" />
+    <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioIdleState.h" />
@@ -175,6 +178,7 @@
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />
     <ClCompile Include="Core\ObjectState.cpp" />
+    <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioIdleState.cpp" />
@@ -196,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png" />
+    <Image Include="Assets\Textures\mics.png" />
     <Image Include="Assets\Textures\super-mario.png" />
   </ItemGroup>
   <ItemGroup>
