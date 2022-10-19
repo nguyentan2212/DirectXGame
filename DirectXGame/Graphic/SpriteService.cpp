@@ -28,6 +28,7 @@ void SpriteService::Init(json config)
 	{
 		string textureName = item["name"].get<string>();
 		Texture* texture = textures->GetTexture(textureName);
+		int count = 0;
 
 		string spritePath = item["spritePath"].get<string>();
 		fstream file(spritePath);
@@ -41,11 +42,14 @@ void SpriteService::Init(json config)
 			float w = sprite["frame"]["w"].get<float>();
 			float h = sprite["frame"]["h"].get<float>();
 			
-			this->_sprites[name] = new Sprite(x, y, w, h, texture);
+			Sprite* pSprite = new Sprite(x, y, w, h, texture);
+			this->_sprites[name] = pSprite;
+			this->_spritesById[textureName + to_string(count)] = pSprite;
 
 			wstring wname = wstring(name.begin(), name.end());
 			LPCWSTR pwname = wname.c_str();
 			DebugOut(L"[INFO] Sprite name:'%s' load success !\n", pwname);
+			count++;
 		}
 	}
 }
@@ -56,6 +60,16 @@ Sprite* SpriteService::GetSprite(string name)
 	if (sprite == nullptr)
 	{
 		DebugOut(L"[ERROR] Sprite name: '%s' not found !\n", name);
+	}
+	return sprite;
+}
+
+Sprite* SpriteService::GetSprite(string textureName, int index)
+{
+	Sprite* sprite = this->_spritesById[textureName + to_string(index)];
+	if (sprite == nullptr)
+	{
+		DebugOut(L"[ERROR] Sprite id: '%s%d' not found !\n", textureName, index);
 	}
 	return sprite;
 }
