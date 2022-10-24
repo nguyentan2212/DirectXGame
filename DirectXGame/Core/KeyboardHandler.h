@@ -13,7 +13,8 @@ using namespace::std;
 class KeyboardHandler
 {
 public:
-	KeyboardHandler(HINSTANCE hInstance, HWND hwnd);
+	void Initialize(HINSTANCE hInstance, HWND hwnd);
+	static KeyboardHandler* GetInstance();
 	~KeyboardHandler();
 
 	void Processing();
@@ -21,6 +22,7 @@ public:
 	void RemoveListener(GameObject* listener);
 
 private:
+	KeyboardHandler();
 	LPDIRECTINPUT8       _di;		// The DirectInput object         
 	LPDIRECTINPUTDEVICE8 _didv;		// The keyboard device 
 
@@ -30,5 +32,6 @@ private:
 	list<GameObject*> _listeners;
 	void OnKeyUp(int keyCode);
 	void OnKeyDown(int keyCode);
+	static KeyboardHandler* _instance;
 };
 

@@ -1,12 +1,19 @@
 #include "KeyboardHandler.h"
 #include "../Utils/Debug.h"
 
-KeyboardHandler::KeyboardHandler(HINSTANCE hInstance, HWND hwnd)
+KeyboardHandler* KeyboardHandler::_instance = nullptr;
+
+KeyboardHandler::KeyboardHandler()
 {
-	HRESULT hr = DirectInput8Create(hInstance, 
-		DIRECTINPUT_VERSION, 
-		IID_IDirectInput8, 
-		(VOID**)&this->_di, 
+	
+}
+
+void KeyboardHandler::Initialize(HINSTANCE hInstance, HWND hwnd)
+{
+	HRESULT hr = DirectInput8Create(hInstance,
+		DIRECTINPUT_VERSION,
+		IID_IDirectInput8,
+		(VOID**)&this->_di,
 		NULL);
 
 	if (hr != DI_OK)
@@ -42,6 +49,15 @@ KeyboardHandler::KeyboardHandler(HINSTANCE hInstance, HWND hwnd)
 	}
 
 	DebugOut(L"[INFO] Keyboard has been initialized successfully\n");
+}
+
+KeyboardHandler* KeyboardHandler::GetInstance()
+{
+	if (_instance == nullptr)
+	{
+		_instance = new KeyboardHandler();
+	}
+	return _instance;
 }
 
 void KeyboardHandler::Processing()
