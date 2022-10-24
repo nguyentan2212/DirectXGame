@@ -1,46 +1,45 @@
 {
-  "config": {
-    "fps": 60,
-    "window": {
-      "width": 600,
-      "height": 400
+  "fps": 60,
+  "window": {
+    "width": 600,
+    "height": 400
+  },
+  "textures": [
+    {
+      "name": "super-mario",
+      "type": "spritesheet",
+      "image": "Assets/Textures/super-mario.png",
+      "size": {
+        "w": 632,
+        "h": 32
+      },
+      "spritePath": "Assets/Textures/super-mario.json"
     },
-    "textures": [
-      {
-        "name": "super-mario",
-        "image": "Assets/Textures/super-mario.png",
-        "size": {
-          "w": 632,
-          "h": 32
-        },
-        "spritePath": "Assets/Textures/super-mario.json"
+    {
+      "name": "bounding-box",
+      "type": "spritesheet",
+      "image": "Assets/Textures/bounding-box.png",
+      "size": {
+        "w": 697,
+        "h": 765
       },
-      {
-        "name": "bounding-box",
-        "image": "Assets/Textures/bounding-box.png",
-        "size": {
-          "w": 697,
-          "h": 765
-        },
-        "spritePath": "Assets/Textures/bounding-box.json"
+      "spritePath": "Assets/Textures/bounding-box.json"
+    },
+    {
+      "name": "mics",
+      "type": "tileset",
+      "image": "Assets/Textures/mics.png",
+      "size": {
+        "w": 1040,
+        "h": 40
       },
-      {
-        "name": "mics",
-        "image": "Assets/Textures/mics.png",
-        "size": {
-          "w": 1040,
-          "h": 40
-        },
-        "spritePath": "Assets/Textures/mics.json"
-      }
-    ],
-    "animations": [
-      {
-        "animationPath": "Assets/Animations/super-mario.json"
-      }
-    ],
-    "scenes": [
-      "Assets/Tilemaps/stage-1.json"
-    ]
-  }
+      "spritePath": "Assets/Textures/mics.json"
+    }
+  ],
+  "animations": [
+    "Assets/Animations/super-mario.json"
+  ],
+  "scenes": [
+    "Assets/Tilemaps/stage-1.json"
+  ]
 }

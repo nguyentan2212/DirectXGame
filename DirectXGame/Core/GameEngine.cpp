@@ -47,8 +47,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     
     // Load config file
     fstream file(DEFAULT_CONFIG);
-    json jsonFile = json::parse(file);
-    json config = jsonFile["config"];
+    json config = json::parse(file);
 
     this->_fps = config["fps"].get<float>();
     this->_width = config["window"]["width"].get<int>();

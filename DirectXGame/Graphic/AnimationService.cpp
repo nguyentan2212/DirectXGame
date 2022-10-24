@@ -20,9 +20,8 @@ AnimationService* AnimationService::GetInstance()
 
 void AnimationService::Init(json config)
 {
-    for (json item : config)
+    for (string animationPath : config)
     {
-        string animationPath = item["animationPath"].get<string>();
         fstream file(animationPath);
 
         json fileJson = json::parse(file);
