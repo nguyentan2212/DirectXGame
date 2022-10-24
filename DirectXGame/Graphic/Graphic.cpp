@@ -370,9 +370,9 @@ void Graphic::DrawBox(float x, float y, float w, float h)
 	this->_pVertexBuffer->Map(D3D10_MAP_WRITE_DISCARD, 0, (void**)&v);
 
 	v[0] = vertex(D3DXVECTOR3(pTopLeft.x, pTopLeft.y, 0), D3DXVECTOR4(1, 0, 0, 1));
-	v[1] = vertex(D3DXVECTOR3(pBottomRight.x, pTopLeft.y, 0), D3DXVECTOR4(1, 1, 0, 1));
-	v[2] = vertex(D3DXVECTOR3(pBottomRight.x, pBottomRight.y, 0), D3DXVECTOR4(0, 1, 0, 1));
-	v[3] = vertex(D3DXVECTOR3(pTopLeft.x, pBottomRight.y, 0), D3DXVECTOR4(0, 0, 1, 1));
+	v[1] = vertex(D3DXVECTOR3(pBottomRight.x, pTopLeft.y, 0), D3DXVECTOR4(1, 0, 0, 1));
+	v[2] = vertex(D3DXVECTOR3(pBottomRight.x, pBottomRight.y, 0), D3DXVECTOR4(1, 0, 0, 1));
+	v[3] = vertex(D3DXVECTOR3(pTopLeft.x, pBottomRight.y, 0), D3DXVECTOR4(1, 0, 0, 1));
 
 	this->_pVertexBuffer->Unmap();
 

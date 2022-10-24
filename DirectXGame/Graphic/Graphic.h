@@ -4,7 +4,7 @@
 #include "Texture.h"
 #include "../Utils/Property.h"
 
-#define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255, 0.0f)
+#define BACKGROUND_COLOR D3DXCOLOR(175.0f/255, 249.0f/255, 240.0f/255, 0.0f)
 
 struct vertex
 {
