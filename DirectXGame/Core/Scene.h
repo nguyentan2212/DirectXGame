@@ -16,7 +16,7 @@ public:
 	virtual void Render();
 	virtual void DrawBoundingBox();
 
-private:
+protected:
 	int _width;
 	int _height;
 	int _tileWidth;
@@ -27,5 +27,6 @@ private:
 
 	virtual void InitTilemap(json config);
 	virtual void InitObjects(json config);
+	virtual void RenderTileMap();
 };
 

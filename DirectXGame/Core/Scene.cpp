@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include "EmptyObjectState.h"
+#include "KeyboardHandler.h"
+#include "../Physic/CollisionManager.h"
 #include "../Graphic/SpriteService.h"
 #include "../Graphic/Graphic.h"
 
@@ -15,6 +17,12 @@ Scene::Scene(string configPath)
 
 void Scene::Update(float deltaTime)
 {
+	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+	keyboard->Processing();
+
+	CollisionManager* collision = CollisionManager::GetInstance();
+	collision->Processing(deltaTime);
+
 	for (GameObject* obj : this->_gameObjects)
 	{
 		obj->Update(deltaTime);
@@ -23,17 +31,10 @@ void Scene::Update(float deltaTime)
 
 void Scene::Render()
 {
-	for (int i = 0; i < this->_width; i++)
+	RenderTileMap();
+	for (GameObject* obj : this->_gameObjects)
 	{
-		for (int j = 0; j < this->_height; j++)
-		{
-			if (this->_tilemap[j][i] != nullptr)
-			{
-				float x = i * this->_tileWidth + this->_tileWidth / 2.0f;
-				float y = j * this->_tileHight + this->_tileHight / 2.0f;
-				this->_tilemap[j][i]->Draw(VECTOR2D(x, y));
-			}
-		}
+		obj->Render();
 	}
 }
 
@@ -80,6 +81,7 @@ void Scene::InitTilemap(json config)
 
 void Scene::InitObjects(json config)
 {
+	CollisionManager* collision = CollisionManager::GetInstance();
 	for (json item : config)
 	{
 		GameObject* obj = new GameObject(new EmptyObjectState(item["width"], item["height"]));
@@ -87,5 +89,22 @@ void Scene::InitObjects(json config)
 		obj->name = item["name"].get<string>();
 		obj->showBoundingBox = true;
 		this->_gameObjects.push_back(obj);
+		collision->AddListener(obj);
+	}
+}
+
+void Scene::RenderTileMap()
+{
+	for (int i = 0; i < this->_width; i++)
+	{
+		for (int j = 0; j < this->_height; j++)
+		{
+			if (this->_tilemap[j][i] != nullptr)
+			{
+				float x = i * this->_tileWidth + this->_tileWidth / 2.0f;
+				float y = j * this->_tileHight + this->_tileHight / 2.0f;
+				this->_tilemap[j][i]->Draw(VECTOR2D(x, y));
+			}
+		}
 	}
 }

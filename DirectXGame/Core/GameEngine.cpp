@@ -9,6 +9,7 @@
 #include "../Physic/CollisionManager.h"
 #include "../Game/Mario/Mario.h"
 #include "EmptyObjectState.h"
+#include "KeyboardHandler.h"
 
 using json = nlohmann::json;
 
@@ -57,7 +58,8 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     CreateGameWindow(nCmdShow);
 
     // Init keyboard handler
-    this->_keyboardHandler = new KeyboardHandler(this->_hInstance, this->_hwnd);
+    KeyboardHandler* keyboardHandler = KeyboardHandler::GetInstance();
+    keyboardHandler->Initialize(this->_hInstance, this->_hwnd);
 
     // Init graphic
     Graphic* graphic = Graphic::GetInstance();
@@ -76,64 +78,58 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     AnimationService* animations = AnimationService::GetInstance();
     animations->Init(config["animations"]);
 
-    // Init collision manager
-    CollisionManager* collision = CollisionManager::GetInstance();
     // Timer begin
     this->_timer = new Timer(this->_fps);
     this->_timer->Start();
-
-    this->obj = new Mario();
-    this->obj->position = VECTOR2D(50, 60);
-    collision->AddListener(obj);
-    this->_keyboardHandler->AddListener(this->obj);
-    
-    this->emptyObj = new GameObject(new EmptyObjectState(20, 40));
-    this->emptyObj->position = VECTOR2D(100, 60);
-    collision->AddListener(emptyObj);
-
-    scene = new Scene(config["scenes"][0].get<string>());
 }
 
 void GameEngine::Run()
 {
-    CollisionManager* collision = CollisionManager::GetInstance();
     while (ProcessMessages())
     {
         float delta = 0;
         if (this->_timer->Tick(delta))
         {
-            this->_keyboardHandler->Processing();
-            // OUTPUT((to_string(delta) + " \n").c_str());
-            collision->Processing(delta);
             Update(delta);
         }
         Render();
     }
 }
 
+void GameEngine::AddScene(Scene* scene)
+{
+    this->_scenes.push_back(scene);
+    if (this->_currentScene == nullptr)
+    {
+        this->_currentScene = scene;
+    }
+}
+
 void GameEngine::Update(float deltaTime)
 {
-    this->obj->Update(deltaTime);
-    this->emptyObj->Update(deltaTime);
+    if (this->_currentScene == nullptr)
+    {
+        return;
+    }
+    this->_currentScene->Update(deltaTime);
 }
 
 void GameEngine::Render()
 {
-    /*SpriteService* sprites = SpriteService::GetInstance();
-    Sprite* sprite = sprites->GetSprite("super-mario/0");*/
-
-    AnimationService* animations = AnimationService::GetInstance();
-
+    if (this->_currentScene == nullptr)
+    {
+        return;
+    }
     Graphic* graphic = Graphic::GetInstance();
     graphic->Begin();
     graphic->BeginSprite();
-    this->scene->Render();
-    this->obj->Render();
-    this->emptyObj->Render();
+    // Begin draw sprites
+    this->_currentScene->Render();
+    // End draw sprites
     graphic->EndSprite();
-    this->obj->DrawBoundingBox();
-    this->emptyObj->DrawBoundingBox();
-    this->scene->DrawBoundingBox();
+    // Begin draw boxes
+    this->_currentScene->DrawBoundingBox();
+    // End draw boxes
     graphic->End();
 }
 
@@ -195,5 +191,4 @@ GameEngine::~GameEngine()
 {
     delete this->_hInstance;
     delete this->_timer;
-    delete this->_keyboardHandler;
 }

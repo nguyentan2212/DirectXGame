@@ -1,8 +1,8 @@
 #pragma once
+#include <vector>
 #include <Windows.h>
 #include <string>
 #include "Timer.h"
-#include "KeyboardHandler.h"
 #include "GameObject.h"
 #include "Scene.h"
 
@@ -21,6 +21,7 @@ public:
 	void Init(HINSTANCE hInstance, int nCmdShow);
 
 	void Run();
+	void AddScene(Scene* scene);
 private:
 	GameEngine();
 	~GameEngine();
@@ -34,14 +35,13 @@ private:
 	HINSTANCE _hInstance;
 	HWND _hwnd;
 	Timer* _timer;
-	KeyboardHandler* _keyboardHandler;
 
 	int _width = WINDDOW_WIDTH, _height = WINDOW_HEIGHT;
 	float _fps = FPS;
 
-	GameObject* obj;
-	GameObject* emptyObj;
-	Scene* scene;
+	vector<Scene*> _scenes;
+	Scene* _currentScene;
+
 	static GameEngine* _instance;
 };
 
