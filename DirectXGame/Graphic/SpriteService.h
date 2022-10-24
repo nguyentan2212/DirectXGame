@@ -19,8 +19,9 @@ public:
 private:
 	SpriteService();
 	~SpriteService();
+	void InitSpriteSheet(string textureName, json config);
+	void InitTileset(string textureName, json config);
 	map<string, Sprite*> _sprites;
-	map<string, Sprite*> _spritesById;
 
 	static SpriteService* _instance;
 };
