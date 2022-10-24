@@ -49,6 +49,10 @@ public:
 	PROPERTY(bool, showBoundingBox);
 	GET(showBoundingBox) { return this->_showBoundingBox; }
 	SET(showBoundingBox) { this->_showBoundingBox = value; }
+
+	PROPERTY(string, name);
+	GET(name) { return this->_name; }
+	SET(name) { this->_name = value; }
 #pragma endregion
 
 protected:
@@ -57,6 +61,7 @@ protected:
 	ObjectState* _state;
 	bool _showBoundingBox;
 	bool _isFlipped;
+	string _name;
 
 #pragma region Transform
 	VECTOR2D _position;

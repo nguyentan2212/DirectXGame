@@ -133,6 +133,7 @@ void GameEngine::Render()
     graphic->EndSprite();
     this->obj->DrawBoundingBox();
     this->emptyObj->DrawBoundingBox();
+    this->scene->DrawBoundingBox();
     graphic->End();
 }
 
