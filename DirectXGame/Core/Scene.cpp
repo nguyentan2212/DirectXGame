@@ -1,16 +1,16 @@
 #include "Scene.h"
 #include <string>
 #include <fstream>
+#include "EmptyObjectState.h"
 #include "../Graphic/SpriteService.h"
+#include "../Graphic/Graphic.h"
 
 Scene::Scene(string configPath)
 {
 	fstream file(configPath);
 	json config = json::parse(file);
-
-	InitTilemap(config);
 	this->_gameObjects = vector<GameObject*>(0);
-
+	InitTilemap(config);
 }
 
 void Scene::Update(float deltaTime)
@@ -34,6 +34,14 @@ void Scene::Render()
 				this->_tilemap[j][i]->Draw(VECTOR2D(x, y));
 			}
 		}
+	}
+}
+
+void Scene::DrawBoundingBox()
+{
+	for (GameObject* obj : this->_gameObjects)
+	{
+		obj->DrawBoundingBox();
 	}
 }
 
@@ -66,5 +74,18 @@ void Scene::InitTilemap(json config)
 			this->_tilemap[row][col] = sprites->GetSprite(tileset, index);
 		}
 		count++;
+	}
+	InitObjects(config["objects"]);
+}
+
+void Scene::InitObjects(json config)
+{
+	for (json item : config)
+	{
+		GameObject* obj = new GameObject(new EmptyObjectState(item["width"], item["height"]));
+		obj->position = VECTOR2D(item["x"], (float)this->_height * this->_tileHight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
+		obj->name = item["name"].get<string>();
+		obj->showBoundingBox = true;
+		this->_gameObjects.push_back(obj);
 	}
 }

@@ -14,6 +14,7 @@ public:
 
 	virtual void Update(float deltaTime);
 	virtual void Render();
+	virtual void DrawBoundingBox();
 
 private:
 	int _width;
@@ -25,5 +26,6 @@ private:
 	vector<vector<Sprite*>> _tilemap;
 
 	virtual void InitTilemap(json config);
+	virtual void InitObjects(json config);
 };
 
