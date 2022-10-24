@@ -157,6 +157,7 @@
     <ClInclude Include="Game\Mario\MarioJumpState.h" />
     <ClInclude Include="Game\Mario\MarioRunState.h" />
     <ClInclude Include="Game\Mario\MarioSitState.h" />
+    <ClInclude Include="Game\Scenes\CSceneOne.h" />
     <ClInclude Include="Graphic\Animation.h" />
     <ClInclude Include="Graphic\AnimationFrame.h" />
     <ClInclude Include="Graphic\AnimationService.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Game\Mario\MarioJumpState.cpp" />
     <ClCompile Include="Game\Mario\MarioRunState.cpp" />
     <ClCompile Include="Game\Mario\MarioSitState.cpp" />
+    <ClCompile Include="Game\Scenes\CSceneOne.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="Graphic\AnimationFrame.cpp" />
     <ClCompile Include="Graphic\AnimationService.cpp" />

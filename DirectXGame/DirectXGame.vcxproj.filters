@@ -88,6 +88,9 @@
     <Filter Include="Assets\Tilemaps">
       <UniqueIdentifier>{62255499-b0b1-4ec2-80e6-9154ca20f84c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{71547433-44d7-4671-87f0-ab4498de6aa2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\GameEngine.h">
@@ -168,6 +171,9 @@
     <ClInclude Include="Core\Scene.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Scenes\CSceneOne.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -239,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="Core\Scene.cpp">
       <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\CSceneOne.cpp">
+      <Filter>Game\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
