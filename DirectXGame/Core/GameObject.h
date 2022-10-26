@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "ObjectState.h"
+#include "../Graphic/Graphic.h"
 #include "../Graphic/AnimationService.h"
 #include "../Utils/Property.h"
 #include "../Utils/CMath.h"

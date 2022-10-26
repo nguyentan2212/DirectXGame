@@ -31,7 +31,10 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Render()
 {
-	VECTOR2D worldPosition = GetWorldPosition();
+	Graphic* graphic = Graphic::GetInstance();
+	VECTOR2D cameraPosition = graphic->cameraPosition;
+
+	VECTOR2D worldPosition = GetWorldPosition() - cameraPosition;
 	Animation* animation = this->_state->GetAnimation();
 	if (animation != nullptr)
 	{
