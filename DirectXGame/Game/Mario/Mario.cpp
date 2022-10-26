@@ -19,6 +19,10 @@ void Mario::Update(float deltaTime)
 		this->_direction = DIRECTION::RIGHT;
 	}
 	GameObject::Update(deltaTime);
+	Graphic* graphic = Graphic::GetInstance();
+	VECTOR2D cameraPosition = graphic->cameraPosition;
+	cameraPosition += this->_velocity * deltaTime / 1000;
+	graphic->cameraPosition = cameraPosition;
 }
 
 void Mario::Render()
