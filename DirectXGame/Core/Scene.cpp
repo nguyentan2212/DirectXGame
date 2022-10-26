@@ -95,6 +95,9 @@ void Scene::InitObjects(json config)
 
 void Scene::RenderTileMap()
 {
+	Graphic* graphic = Graphic::GetInstance();
+	VECTOR2D cameraPosition = graphic->cameraPosition;
+
 	for (int i = 0; i < this->_width; i++)
 	{
 		for (int j = 0; j < this->_height; j++)
@@ -103,7 +106,7 @@ void Scene::RenderTileMap()
 			{
 				float x = i * this->_tileWidth + this->_tileWidth / 2.0f;
 				float y = j * this->_tileHight + this->_tileHight / 2.0f;
-				this->_tilemap[j][i]->Draw(VECTOR2D(x, y));
+				this->_tilemap[j][i]->Draw(VECTOR2D(x, y) - cameraPosition);
 			}
 		}
 	}
