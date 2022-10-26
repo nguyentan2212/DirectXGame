@@ -243,6 +243,7 @@ void Graphic::Init(HWND hwnd, int fps)
 	CreateBlendState();
 	CreateVertexAndIndexBuffer();
 
+	this->_cameraPosition = D3DXVECTOR2(0, 0);
 	DebugOut((wchar_t*)L"[INFO] InitDirectX has been successful\n");
 	return;
 }

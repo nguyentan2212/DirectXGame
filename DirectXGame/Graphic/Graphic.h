@@ -40,6 +40,10 @@ public:
 
 	R_PROPERTY(LPD3DX10SPRITE, spriteHandler);
 	GET(spriteHandler) { return this->_spriteObject; }
+
+	PROPERTY(D3DXVECTOR2, cameraPosition);
+	GET(cameraPosition) { return this->_cameraPosition; }
+	SET(cameraPosition) { this->_cameraPosition = value; }
 #pragma endregion
 
 private:
@@ -69,6 +73,7 @@ private:
 	D3D10_TECHNIQUE_DESC _techDesc;
 
 	D3DXMATRIX _matProjection;
+	D3DXVECTOR2 _cameraPosition;
 
 	void CreateSwapChain(HWND hwnd, int fps);
 	void CreateRenderTarget();
