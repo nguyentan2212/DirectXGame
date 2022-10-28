@@ -7,6 +7,7 @@ public:
 	MarioRunState();
 	void Update(float deltaTime) override;
 	Animation* GetAnimation() override;
+	void OnCollision(CollisionEvent colEvent) override;
 
 #pragma region Commands
 	void Jump(float speed) override;

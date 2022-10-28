@@ -15,3 +15,7 @@ Box ObjectState::GetBoundingBox()
 
 	return Box(result.x, result.y, this->_width, this->_height);
 }
+
+void ObjectState::OnCollision(CollisionEvent colEvent)
+{
+}

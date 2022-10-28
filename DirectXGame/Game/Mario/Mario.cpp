@@ -71,8 +71,7 @@ void Mario::OnKeyUp(int keyCode)
 
 void Mario::OnCollision(CollisionEvent colEvent)
 {
-	this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
-	this->_velocity = VECTOR2D(0, 0);
+	this->_state->OnCollision(colEvent);
 	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
 }
 

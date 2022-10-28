@@ -4,6 +4,7 @@
 #include "../Utils/Property.h"
 #include "../Utils/Debug.h"
 #include "../Utils/CMath.h"
+#include "../Physic/CollisionEvent.h"
 
 using namespace::std;
 
@@ -31,6 +32,8 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	virtual Box GetBoundingBox();
+
+	virtual void OnCollision(CollisionEvent colEvent);
 
 	W_PROPERTY(GameObject*, context);
 	SET(context) { this->_context = value; }

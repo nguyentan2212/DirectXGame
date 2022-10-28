@@ -25,6 +25,12 @@ Animation* MarioRunState::GetAnimation()
     return this->_animation;
 }
 
+void MarioRunState::OnCollision(CollisionEvent colEvent)
+{
+    this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+    this->_context->velocity = VECTOR2D(0, 0);
+}
+
 void MarioRunState::Jump(float speed)
 {
     this->_context->velocity += VECTOR2D(0, speed);
