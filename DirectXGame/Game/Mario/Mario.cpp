@@ -19,10 +19,7 @@ void Mario::Update(float deltaTime)
 		this->_direction = DIRECTION::RIGHT;
 	}
 	GameObject::Update(deltaTime);
-	Graphic* graphic = Graphic::GetInstance();
-	VECTOR2D cameraPosition = graphic->cameraPosition;
-	cameraPosition += this->_velocity * deltaTime / 1000;
-	graphic->cameraPosition = cameraPosition;
+	CameraFollowMario(deltaTime);
 }
 
 void Mario::Render()
@@ -77,4 +74,25 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
 	this->_velocity = VECTOR2D(0, 0);
 	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
+}
+
+void Mario::CameraFollowMario(float deltaTime)
+{
+	Graphic* graphic = Graphic::GetInstance();
+	VECTOR2D cameraPosition = graphic->cameraPosition;
+	//cameraPosition += this->_velocity * deltaTime / 1000;
+	VECTOR2D cameraSize = VECTOR2D(graphic->backBufferWidth, graphic->backBufferHeight);
+	VECTOR2D cameraCenter = cameraPosition + cameraSize / 2.0f;
+	VECTOR2D transVector = GetWorldPosition() - cameraCenter;
+	
+	cameraPosition += transVector;
+	if (cameraPosition.x < 0)
+	{
+		cameraPosition.x = 0;
+	}
+	if (cameraPosition.y <= 0)
+	{
+		cameraPosition.y = 0;
+	}
+	graphic->cameraPosition = cameraPosition;
 }
