@@ -20,27 +20,27 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, GameObject* objB, fl
     VECTOR2D vA = objA->velocity;
     VECTOR2D vB = objB->velocity;
 
+    // both objs are moving => objA move & objB stand idle
+    if (vB != VECTOR2D(0.0f, 0.0f))
+    {
+        vA -= vB;
+        vB = VECTOR2D(0.0f, 0.0f);
+    }
+
     Box boxA = objA->GetBoundingBox();
     Box boxB = objB->GetBoundingBox();
 
     VECTOR2D dA = vA * deltaTime / 1000;
     // broad phase
     Box broadPhaseBox = Box(boxA);
-    broadPhaseBox.x += dA.x;
-    broadPhaseBox.y += dA.y;
-    broadPhaseBox.width += dA.x;
-    broadPhaseBox.height += dA.y;
+    broadPhaseBox.x = vA.x > 0 ? boxA.x : boxA.x + dA.x;
+    broadPhaseBox.y = vA.y > 0 ? boxA.y : boxA.y + dA.y;
+    broadPhaseBox.width = vA.x > 0 ? boxA.width + dA.x : boxA.width - dA.x;
+    broadPhaseBox.height = vA.y > 0 ? boxA.height + dA.y : boxA.height - dA.y;
 
     if (IsCollision(broadPhaseBox, boxB) == false)
     {
         return CollisionEvent::NoCollision();
-    }
-
-    // both objs are moving => objA move & objB stand idle
-    if (vB != VECTOR2D(0.0f, 0.0f))
-    {
-        vA -= vB;
-        vB = VECTOR2D(0.0f, 0.0f);
     }
 
     float dxEntry, dxExit;
@@ -136,6 +136,55 @@ bool CollisionManager::IsCollision(Box boxA, Box boxB)
         return false;
     }
     return true;
+}
+
+bool CollisionManager::RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance)
+{
+    Box boxA = objA->GetBoundingBox();
+    Box boxB = objB->GetBoundingBox();
+
+    VECTOR2D dA;
+    switch (direction)
+    {
+    case UP:
+        dA = VECTOR2D(0, distance);
+        break;
+    case DOWN:
+        dA = VECTOR2D(0, -distance);
+        break;
+    case LEFT:
+        dA = VECTOR2D(-distance, 0);
+        break;
+    case RIGHT:
+        dA = VECTOR2D(distance, 0);
+        break;
+    default:
+        break;
+    }
+    // broad phase
+    Box broadPhaseBox = Box(boxA);
+    broadPhaseBox.x = dA.x > 0 ? boxA.x : boxA.x + dA.x;
+    broadPhaseBox.y = dA.y > 0 ? boxA.y : boxA.y + dA.y;
+    broadPhaseBox.width = dA.x > 0 ? boxA.width + dA.x : boxA.width - dA.x;
+    broadPhaseBox.height = dA.y > 0 ? boxA.height + dA.y : boxA.height - dA.y;
+
+    return IsCollision(broadPhaseBox, boxB);
+}
+
+list<GameObject*> CollisionManager::RayCastWith(GameObject* objRoot, DIRECTION direction, float distance)
+{
+    list<GameObject*> results;
+    for (GameObject* obj : this->_listeners)
+    {
+        if (objRoot != obj)
+        {
+            if (RayCastBetween(objRoot, obj, direction, distance))
+            {
+                results.push_back(obj);
+            }
+        }
+    }
+    return results;
 }
 
 void CollisionManager::Processing(float deltaTime)

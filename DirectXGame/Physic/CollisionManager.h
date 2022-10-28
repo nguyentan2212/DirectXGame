@@ -14,6 +14,9 @@ public:
 	bool IsCollision(Box boxA, Box boxB);
 	void Processing(float deltaTime);
 
+	bool RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance);
+	list<GameObject*> RayCastWith(GameObject* objRoot, DIRECTION direction, float distance);
+
 	void AddListener(GameObject* listener);
 	void RemoveListener(GameObject* listener);
 private:
