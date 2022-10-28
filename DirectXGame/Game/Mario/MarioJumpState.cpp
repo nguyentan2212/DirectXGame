@@ -17,6 +17,9 @@ MarioJumpState::MarioJumpState()
 void MarioJumpState::Update(float deltaTime)
 {
     this->_animation->Update(deltaTime);
+    VECTOR2D v = this->_context->velocity;
+    v.y += GRAVITY * deltaTime / 1000.0f;
+    this->_context->velocity = v;
 }
 
 Animation* MarioJumpState::GetAnimation()
@@ -24,15 +27,19 @@ Animation* MarioJumpState::GetAnimation()
     return this->_animation;
 }
 
+void MarioJumpState::OnCollision(CollisionEvent colEvent)
+{
+    if (colEvent.direction == DIRECTION::DOWN)
+    {
+        this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+        this->_context->velocity = VECTOR2D(0.0f, 0.0f);
+        this->_context->TransitionTo(new MarioIdleState());
+    }
+}
+
 void MarioJumpState::Run(float speed)
 {
     VECTOR2D v = this->_context->velocity;
     v.x = speed;
     this->_context->velocity = v;
-}
-
-void MarioJumpState::Idle()
-{
-    this->_context->velocity = VECTOR2D(0.0f, 0.0f);
-    this->_context->TransitionTo(new MarioIdleState());
 }

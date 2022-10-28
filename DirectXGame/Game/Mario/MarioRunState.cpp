@@ -27,8 +27,11 @@ Animation* MarioRunState::GetAnimation()
 
 void MarioRunState::OnCollision(CollisionEvent colEvent)
 {
-    this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
-    this->_context->velocity = VECTOR2D(0, 0);
+    if (colEvent.collisionObj->name == "pine")
+    {
+        this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+        this->_context->velocity = VECTOR2D(0, 0);
+    }
 }
 
 void MarioRunState::Jump(float speed)
