@@ -4,9 +4,9 @@
 #include <dinput.h>
 #include "GameObject.h"
 
-#define DIRECTINPUT_VERSION 0x0800
-#define KEYBOARD_BUFFER_SIZE 1024
-#define KEYBOARD_STATE_SIZE 256
+constexpr auto DINPUT_VERSION = 0x0800;
+constexpr int KEYBOARD_BUFFER_SIZE = 1024;
+constexpr int KEYBOARD_STATE_SIZE = 256;
 
 using namespace::std;
 

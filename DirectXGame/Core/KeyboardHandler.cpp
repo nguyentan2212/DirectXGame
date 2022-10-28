@@ -11,7 +11,7 @@ KeyboardHandler::KeyboardHandler()
 void KeyboardHandler::Initialize(HINSTANCE hInstance, HWND hwnd)
 {
 	HRESULT hr = DirectInput8Create(hInstance,
-		DIRECTINPUT_VERSION,
+		DINPUT_VERSION,
 		IID_IDirectInput8,
 		(VOID**)&this->_di,
 		NULL);
