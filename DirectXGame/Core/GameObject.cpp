@@ -27,6 +27,10 @@ void GameObject::Update(float deltaTime)
 		Translate(this->_velocity * deltaTime / 1000);
 	}
 	this->_state->Update(deltaTime);
+	for (GameObject* obj : this->_children)
+	{
+		obj->Update(deltaTime);
+	}
 }
 
 void GameObject::Render()
@@ -39,6 +43,10 @@ void GameObject::Render()
 	if (animation != nullptr)
 	{
 		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
+	}
+	for (GameObject* obj : this->_children)
+	{
+		obj->Render();
 	}
 }
 
@@ -159,6 +167,11 @@ void GameObject::DrawBoundingBox()
 	Graphic* graphic = Graphic::GetInstance();
 	Box boundingBox = GetBoundingBox();
 	graphic->DrawBox(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
+
+	for (GameObject* obj : this->_children)
+	{
+		obj->DrawBoundingBox();
+	}
 }
 
 void GameObject::OnCollision(CollisionEvent colEvent)
