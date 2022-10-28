@@ -2,14 +2,31 @@
 #include "MarioRunState.h"
 #include "MarioSitState.h"
 #include "MarioIdleState.h"
+#include "../../Physic/CollisionManager.h"
 
 Mario::Mario(): GameObject(new MarioIdleState())
 {
 	this->_showBoundingBox = true;
+	this->_state->Jump(0);
 }
 
 void Mario::Update(float deltaTime)
 {
+	this->_isGrounded = false;
+	CollisionManager* collision = CollisionManager::GetInstance();
+	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 30);
+	for (GameObject* obj : results)
+	{
+		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
+		{
+			this->_isGrounded = true;
+			DebugOut((wchar_t*)L"[INFO] Mario is GROUNDED \n");
+		}
+	}
+	if (this->_isGrounded == false && this->_velocity.y <= 0)
+	{
+		this->_state->Jump(0);
+	}
 	if (this->_velocity.x < 0)
 	{
 		this->_direction = DIRECTION::LEFT;
@@ -79,8 +96,7 @@ void Mario::CameraFollowMario(float deltaTime)
 {
 	Graphic* graphic = Graphic::GetInstance();
 	VECTOR2D cameraPosition = graphic->cameraPosition;
-	//cameraPosition += this->_velocity * deltaTime / 1000;
-	VECTOR2D cameraSize = VECTOR2D(graphic->backBufferWidth, graphic->backBufferHeight);
+	VECTOR2D cameraSize = VECTOR2D((float)graphic->backBufferWidth, (float)graphic->backBufferHeight);
 	VECTOR2D cameraCenter = cameraPosition + cameraSize / 2.0f;
 	VECTOR2D transVector = GetWorldPosition() - cameraCenter;
 	

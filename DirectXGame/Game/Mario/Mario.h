@@ -2,7 +2,7 @@
 #include <dinput.h>
 #include "../../Core/GameObject.h"
 
-#define SPEED 100
+constexpr float SPEED = 100;
 class Mario: public GameObject
 {
 public:
@@ -17,5 +17,6 @@ public:
 
 private:
 	void CameraFollowMario(float deltaTime);
+	bool _isGrounded = false;
 };
 
