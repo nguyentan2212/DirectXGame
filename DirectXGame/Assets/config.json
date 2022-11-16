@@ -34,6 +34,26 @@
         "h": 40
       },
       "spritePath": "Assets/Textures/mics.json"
+    },
+    {
+      "name": "world-map-1",
+      "type": "tileset",
+      "image": "Assets/Textures/world-map-1.png",
+      "size": {
+        "w": 188,
+        "h": 69
+      },
+      "spritePath": "Assets/Textures/world-map-1.json"
+    },
+    {
+      "name": "world-map-2",
+      "type": "tileset",
+      "image": "Assets/Textures/world-map-2.png",
+      "size": {
+        "w": 64,
+        "h": 37
+      },
+      "spritePath": "Assets/Textures/world-map-2.json"
     }
   ],
   "animations": [
