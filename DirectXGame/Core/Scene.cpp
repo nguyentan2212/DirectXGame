@@ -50,9 +50,14 @@ void Scene::InitTilemap(json config)
 {
 	this->_height = config["height"];
 	this->_width = config["width"];
-	this->_tileHight = config["tileheight"];
+	this->_tileHeight = config["tileheight"];
 	this->_tileWidth = config["tilewidth"];
-	string tileset = config["tileset"]["name"].get<string>();
+	//string tileset = config["tileset"]["name"].get<string>();
+	for (json item : config["tileset"])
+	{
+		this->_tilesetNames.push_back(item["name"].get<string>());
+		this->_tilesetFirstIds.push_back(item["firstgid"].get<int>());
+	}
 
 	SpriteService* sprites = SpriteService::GetInstance();
 
@@ -71,8 +76,18 @@ void Scene::InitTilemap(json config)
 
 		if (index > 0)
 		{
-			index--;
-			this->_tilemap[row][col] = sprites->GetSprite(tileset, index);
+			int i = 0;
+			while (i < this->_tilesetFirstIds.size() && index >= this->_tilesetFirstIds[i])
+			{
+				i++;
+			}
+			i--;
+			if (i != 0)
+			{
+				DebugOut(L"[ERROR] first id error: '%d' at index: '%d'!\n", i, index);
+			}
+			index -= this->_tilesetFirstIds[i];
+			this->_tilemap[row][col] = sprites->GetSprite(this->_tilesetNames[i], index);
 		}
 		count++;
 	}
@@ -85,7 +100,7 @@ void Scene::InitObjects(json config)
 	for (json item : config)
 	{
 		GameObject* obj = new GameObject(new EmptyObjectState(item["width"], item["height"]));
-		obj->position = VECTOR2D(item["x"], (float)this->_height * this->_tileHight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
+		obj->position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->name = item["name"].get<string>();
 		obj->showBoundingBox = true;
 		this->_gameObjects.push_back(obj);
@@ -104,8 +119,11 @@ void Scene::RenderTileMap()
 		{
 			if (this->_tilemap[j][i] != nullptr)
 			{
-				float x = i * this->_tileWidth + this->_tileWidth / 2.0f;
-				float y = j * this->_tileHight + this->_tileHight / 2.0f;
+				float tileCenterX = max(this->_tileWidth, this->_tilemap[j][i]->width) / 2.0f;
+				float tileCenterY = max(this->_tileHeight, this->_tilemap[j][i]->height) / 2.0f;
+
+				float x = i * this->_tileWidth + tileCenterX;
+				float y = j * this->_tileHeight + tileCenterY;
 				this->_tilemap[j][i]->Draw(VECTOR2D(x, y) - cameraPosition);
 			}
 		}
