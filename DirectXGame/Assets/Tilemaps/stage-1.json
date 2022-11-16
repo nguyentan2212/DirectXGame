@@ -3,9 +3,12 @@
   "width": 180,
   "tileheight": 16,
   "tilewidth": 16,
-  "tileset": {
-    "name": "mics"
-  },
+  "tileset": [
+    {
+      "name": "mics",
+      "firstgid": 1
+    }
+  ],
   "objects": [
     {
       "class": "",
