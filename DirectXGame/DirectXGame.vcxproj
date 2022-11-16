@@ -141,7 +141,10 @@
     <None Include="Assets\Textures\bounding-box.json" />
     <None Include="Assets\Textures\mics.json" />
     <None Include="Assets\Textures\super-mario.json" />
+    <None Include="Assets\Textures\world-map-1.json" />
+    <None Include="Assets\Textures\world-map-2.json" />
     <None Include="Assets\Tilemaps\stage-1.json" />
+    <None Include="Assets\Tilemaps\world-map.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +161,7 @@
     <ClInclude Include="Game\Mario\MarioRunState.h" />
     <ClInclude Include="Game\Mario\MarioSitState.h" />
     <ClInclude Include="Game\Scenes\CSceneOne.h" />
+    <ClInclude Include="Game\Scenes\CSceneWorldMap.h" />
     <ClInclude Include="Graphic\Animation.h" />
     <ClInclude Include="Graphic\AnimationFrame.h" />
     <ClInclude Include="Graphic\AnimationService.h" />
@@ -187,6 +191,7 @@
     <ClCompile Include="Game\Mario\MarioRunState.cpp" />
     <ClCompile Include="Game\Mario\MarioSitState.cpp" />
     <ClCompile Include="Game\Scenes\CSceneOne.cpp" />
+    <ClCompile Include="Game\Scenes\CSceneWorldMap.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="Graphic\AnimationFrame.cpp" />
     <ClCompile Include="Graphic\AnimationService.cpp" />
@@ -204,6 +209,8 @@
     <Image Include="Assets\Textures\bounding-box.png" />
     <Image Include="Assets\Textures\mics.png" />
     <Image Include="Assets\Textures\super-mario.png" />
+    <Image Include="Assets\Textures\world-map-1.png" />
+    <Image Include="Assets\Textures\world-map-2.png" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="basic.fx" />

@@ -20,6 +20,15 @@
     <None Include="Assets\Tilemaps\stage-1.json">
       <Filter>Assets\Tilemaps</Filter>
     </None>
+    <None Include="Assets\Textures\world-map-1.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="Assets\Textures\world-map-2.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="Assets\Tilemaps\world-map.json">
+      <Filter>Assets\Tilemaps</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -174,6 +183,9 @@
     <ClInclude Include="Game\Scenes\CSceneOne.h">
       <Filter>Game\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Scenes\CSceneWorldMap.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -249,6 +261,9 @@
     <ClCompile Include="Game\Scenes\CSceneOne.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Scenes\CSceneWorldMap.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png">
@@ -258,6 +273,12 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="Assets\Textures\mics.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\world-map-1.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\world-map-2.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
