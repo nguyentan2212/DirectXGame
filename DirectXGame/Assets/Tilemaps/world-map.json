@@ -1,8 +1,8 @@
 {
   "height": 24,
   "width": 40,
-  "tileheight": 8,
-  "tilewidth": 8,
+  "tileheight": 16,
+  "tilewidth": 16,
   "tileset": [
     {
       "name": "world-map-2",
@@ -637,7 +637,7 @@
     3,
     2,
     17,
-    0,
+    71,
     0,
     18,
     15,
