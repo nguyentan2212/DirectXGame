@@ -7,7 +7,7 @@
 #include "Scene.h"
 
 #define FPS 60
-#define WINDDOW_WIDTH 300
+#define WINDOW_WIDTH 300
 #define WINDOW_HEIGHT 200
 #define GAME_TITLE L"My Name"
 #define DEFAULT_CONFIG "Assets/config.json"
@@ -36,7 +36,7 @@ private:
 	HWND _hwnd;
 	Timer* _timer;
 
-	int _width = WINDDOW_WIDTH, _height = WINDOW_HEIGHT;
+	int _width = WINDOW_WIDTH, _height = WINDOW_HEIGHT;
 	float _fps = FPS;
 
 	vector<Scene*> _scenes;

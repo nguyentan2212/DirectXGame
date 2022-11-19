@@ -1,6 +1,6 @@
 #include "GameObject.h"
+#include "Camera.h"
 #include "../Utils/Debug.h"
-#include "../Graphic/Graphic.h"
 
 GameObject::GameObject(ObjectState* state)
 {
@@ -35,8 +35,8 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Render()
 {
-	Graphic* graphic = Graphic::GetInstance();
-	VECTOR2D cameraPosition = graphic->cameraPosition;
+	Camera* camera = Camera::GetInstance();
+	VECTOR2D cameraPosition = camera->position;
 
 	VECTOR2D worldPosition = GetWorldPosition() - cameraPosition;
 	Animation* animation = this->_state->GetAnimation();

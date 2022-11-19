@@ -186,6 +186,9 @@
     <ClInclude Include="Game\Scenes\CSceneWorldMap.h">
       <Filter>Game\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Camera.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -263,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="Game\Scenes\CSceneWorldMap.cpp">
       <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Camera.cpp">
+      <Filter>Core\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

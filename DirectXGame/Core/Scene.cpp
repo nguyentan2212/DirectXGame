@@ -3,9 +3,9 @@
 #include <fstream>
 #include "EmptyObjectState.h"
 #include "KeyboardHandler.h"
+#include "Camera.h"
 #include "../Physic/CollisionManager.h"
 #include "../Graphic/SpriteService.h"
-#include "../Graphic/Graphic.h"
 
 Scene::Scene(string configPath)
 {
@@ -27,6 +27,8 @@ void Scene::Update(float deltaTime)
 	{
 		obj->Update(deltaTime);
 	}
+	Camera* camera = Camera::GetInstance();
+	camera->Update(deltaTime);
 }
 
 void Scene::Render()
@@ -110,8 +112,8 @@ void Scene::InitObjects(json config)
 
 void Scene::RenderTileMap()
 {
-	Graphic* graphic = Graphic::GetInstance();
-	VECTOR2D cameraPosition = graphic->cameraPosition;
+	Camera* camera = Camera::GetInstance();
+	VECTOR2D cameraPosition = camera->position;
 
 	for (int i = 0; i < this->_width; i++)
 	{

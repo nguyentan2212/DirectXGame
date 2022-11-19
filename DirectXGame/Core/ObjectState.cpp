@@ -1,6 +1,6 @@
 #include "ObjectState.h"
 #include "GameObject.h"
-#include "../Graphic/Graphic.h"
+#include "Camera.h"
 
 ObjectState::~ObjectState()
 {
@@ -8,9 +8,9 @@ ObjectState::~ObjectState()
 
 Box ObjectState::GetBoundingBox()
 {
-	Graphic* graphic = Graphic::GetInstance();
+	Camera* camera = Camera::GetInstance();
 
-	VECTOR2D result = this->_context->GetWorldPosition() - graphic->cameraPosition;
+	VECTOR2D result = this->_context->GetWorldPosition() - camera->position;
 	result -= VECTOR2D(this->_width, this->_height) / 2;
 
 	return Box(result.x, result.y, this->_width, this->_height);

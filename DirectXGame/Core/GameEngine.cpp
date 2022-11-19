@@ -10,6 +10,7 @@
 #include "../Game/Mario/Mario.h"
 #include "EmptyObjectState.h"
 #include "KeyboardHandler.h"
+#include "Camera.h"
 
 using json = nlohmann::json;
 
@@ -77,6 +78,10 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
     // Init animation service. MUST AFTER SPRITE SERVICE
     AnimationService* animations = AnimationService::GetInstance();
     animations->Init(config["animations"]);
+
+    // Init camera
+    Camera* camera = Camera::GetInstance();
+    camera->Init(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     // Timer begin
     this->_timer = new Timer(this->_fps);
