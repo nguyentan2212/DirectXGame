@@ -16,7 +16,6 @@ public:
 	void OnCollision(CollisionEvent colEvent) override;
 
 private:
-	void CameraFollowMario(float deltaTime);
 	bool _isGrounded = false;
 };
 
