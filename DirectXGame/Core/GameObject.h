@@ -27,6 +27,8 @@ public:
 	void AddChildObject(GameObject* child);
 	void RemoveChildObject(GameObject* child);
 
+	string GetStateName() const;
+
 	VECTOR2D GetWorldPosition();
 	void TransitionTo(ObjectState* state);
 
@@ -72,8 +74,8 @@ protected:
 	DIRECTION _direction;
 
 	virtual void OnTransformChanged();
-
 	void CalculateWorldMatrix();
+	virtual Animation* GetAnimation();
 #pragma endregion
 };
 

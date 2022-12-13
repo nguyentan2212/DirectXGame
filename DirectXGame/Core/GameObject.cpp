@@ -9,7 +9,7 @@ GameObject::GameObject(ObjectState* state)
 	this->_direction = DIRECTION::LEFT;
 	this->_parent = nullptr;
 	this->_children = vector<GameObject*>(0);
-	this->_showBoundingBox = false;
+	this->_showBoundingBox = true;
 	this->_isFlipped = false;
 	TransitionTo(state);
 }
@@ -26,7 +26,11 @@ void GameObject::Update(float deltaTime)
 	{
 		Translate(this->_velocity * deltaTime / 1000);
 	}
-	this->_state->Update(deltaTime);
+	Animation* ani = GetAnimation();
+	if (ani)
+	{
+		ani->Update(deltaTime);
+	}
 	for (GameObject* obj : this->_children)
 	{
 		obj->Update(deltaTime);
@@ -39,7 +43,7 @@ void GameObject::Render()
 	VECTOR2D cameraPosition = camera->position;
 
 	VECTOR2D worldPosition = GetWorldPosition() - cameraPosition;
-	Animation* animation = this->_state->GetAnimation();
+	Animation* animation = GetAnimation();
 	if (animation != nullptr)
 	{
 		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
@@ -112,6 +116,15 @@ void GameObject::RemoveChildObject(GameObject* child)
 		this->_children.erase(it);
 		child->_parent = nullptr;
 	}
+}
+
+string GameObject::GetStateName() const
+{
+	if (this->_state)
+	{
+		return this->_state->name;
+	}
+	return "";
 }
 
 /// <summary>
@@ -201,6 +214,11 @@ void GameObject::CalculateWorldMatrix()
 		this->_worldMatrix = translationMatrix * parentWorldMatrix;
 		this->_isTransformChanged = false;
 	}
+}
+
+Animation* GameObject::GetAnimation()
+{
+	return nullptr;
 }
 
 /// <summary>
