@@ -84,10 +84,10 @@ void Scene::InitTilemap(json config)
 				i++;
 			}
 			i--;
-			if (i != 0)
+			/*if (i != 0)
 			{
 				DebugOut(L"[ERROR] first id error: '%d' at index: '%d'!\n", i, index);
-			}
+			}*/
 			index -= this->_tilesetFirstIds[i];
 			this->_tilemap[row][col] = sprites->GetSprite(this->_tilesetNames[i], index);
 		}
