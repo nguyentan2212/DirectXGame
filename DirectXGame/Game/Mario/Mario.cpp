@@ -1,20 +1,19 @@
 #include "Mario.h"
-#include "MarioRunState.h"
-#include "MarioSitState.h"
 #include "MarioIdleState.h"
+#include "MarioJumpState.h"
 #include "../../Physic/CollisionManager.h"
 
 Mario::Mario(): GameObject(new MarioIdleState())
 {
 	this->_showBoundingBox = true;
-	this->_state->Jump(0);
+	this->velocity = VECTOR2D(0.0f, -100.0f);
 }
 
 void Mario::Update(float deltaTime)
 {
 	this->_isGrounded = false;
 	CollisionManager* collision = CollisionManager::GetInstance();
-	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 30);
+	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 10);
 	for (GameObject* obj : results)
 	{
 		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
@@ -23,9 +22,11 @@ void Mario::Update(float deltaTime)
 			DebugOut((wchar_t*)L"[INFO] Mario is GROUNDED \n");
 		}
 	}
-	if (this->_isGrounded == false && this->_velocity.y <= 0)
+	if (this->_isGrounded == false)
 	{
-		this->_state->Jump(0);
+		//not on ground
+		this->velocity = VECTOR2D(0.0f, -100.0f);
+		TransitionTo(new MarioJumpState());
 	}
 	if (this->_velocity.x < 0)
 	{
@@ -46,47 +47,24 @@ void Mario::Render()
 
 void Mario::OnKeyDown(int keyCode)
 {
-	switch (keyCode)
-	{
-	case DIK_UP:
-		DebugOut((wchar_t*)L"[INFO] Key input UP \n");
-		this->_state->Jump(SPEED);
-		break;
-	case DIK_DOWN:
-		DebugOut((wchar_t*)L"[INFO] Key input DOWN \n");
-		this->_state->Sit();
-		break;
-	case DIK_LEFT:
-		DebugOut((wchar_t*)L"[INFO] Key input LEFT \n");
-		this->_state->Run(-SPEED);
-		break;
-	case DIK_RIGHT:
-		DebugOut((wchar_t*)L"[INFO] Key input RIGHT \n");
-		this->_state->Run(SPEED);
-		break;
-	default:
-		this->_state->Idle();
-		break;
-	}
+	this->_state->OnKeyDown(keyCode);
 }
 
 void Mario::OnKeyUp(int keyCode)
 {
-	switch (keyCode)
-	{
-	case DIK_UP:
-	case DIK_DOWN:
-	case DIK_LEFT:
-	case DIK_RIGHT:
-		this->_state->Idle();
-		break;
-	default:
-		break;
-	}
+	this->_state->OnKeyUp(keyCode);
 }
 
 void Mario::OnCollision(CollisionEvent colEvent)
 {
 	this->_state->OnCollision(colEvent);
 	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
+}
+
+Animation* Mario::GetAnimation()
+{
+	string stateName = "super mario " + this->_state->name;
+
+	AnimationService* animations = AnimationService::GetInstance();
+	return animations->GetAnimation(stateName);
 }

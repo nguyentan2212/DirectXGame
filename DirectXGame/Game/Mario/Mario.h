@@ -17,5 +17,6 @@ public:
 
 private:
 	bool _isGrounded = false;
+	Animation* GetAnimation() override;
 };
 
