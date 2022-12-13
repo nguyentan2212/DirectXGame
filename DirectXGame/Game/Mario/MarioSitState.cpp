@@ -2,28 +2,23 @@
 #include "../../Graphic/AnimationService.h"
 #include "../../Core/GameObject.h"
 #include "MarioIdleState.h"
+#include <dinput.h>
 
 MarioSitState::MarioSitState(): ObjectState()
 {
 	AnimationService* animations = AnimationService::GetInstance();
-	this->_animation = animations->GetAnimation("super mario sit");
+	// this->_animation = animations->GetAnimation("super mario sit");
 
 	this->_width = 16.0f;
 	this->_height = 24.0f;
+	this->_name = "sit";
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Sit State \n");
 }
 
-void MarioSitState::Update(float deltaTime)
+void MarioSitState::OnKeyUp(int keyCode)
 {
-	this->_animation->Update(deltaTime);
-}
-
-Animation* MarioSitState::GetAnimation()
-{
-	return this->_animation;
-}
-
-void MarioSitState::Idle()
-{
-	this->_context->TransitionTo(new MarioIdleState());
+	if (keyCode == DIK_DOWN)
+	{
+		this->_context->TransitionTo(new MarioIdleState());
+	}
 }

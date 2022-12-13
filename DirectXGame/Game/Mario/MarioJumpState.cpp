@@ -3,28 +3,17 @@
 #include "../../Core/GameObject.h"
 #include "MarioRunState.h"
 #include "MarioIdleState.h"
+#include <dinput.h>
 
 MarioJumpState::MarioJumpState()
 {
     AnimationService* animations = AnimationService::GetInstance();
-    this->_animation = animations->GetAnimation("super mario jump");
+    //this->_animation = animations->GetAnimation("super mario jump");
 
     this->_width = 16.0f;
     this->_height = 32.0f;
+    this->_name = "jump";
     DebugOut((wchar_t*)L"[INFO] Mario transition to Jump State \n");
-}
-
-void MarioJumpState::Update(float deltaTime)
-{
-    this->_animation->Update(deltaTime);
-    VECTOR2D v = this->_context->velocity;
-    v.y += GRAVITY * deltaTime / 1000.0f;
-    this->_context->velocity = v;
-}
-
-Animation* MarioJumpState::GetAnimation()
-{
-    return this->_animation;
 }
 
 void MarioJumpState::OnCollision(CollisionEvent colEvent)
@@ -37,9 +26,14 @@ void MarioJumpState::OnCollision(CollisionEvent colEvent)
     }
 }
 
-void MarioJumpState::Run(float speed)
+void MarioJumpState::OnKeyDown(int keyCode)
 {
-    VECTOR2D v = this->_context->velocity;
-    v.x = speed;
-    this->_context->velocity = v;
+}
+
+void MarioJumpState::OnKeyUp(int keyCode)
+{
+    if (keyCode == DIK_UP)
+    {
+        this->_context->velocity = VECTOR2D(0.0f, -100.0f);
+    }
 }
