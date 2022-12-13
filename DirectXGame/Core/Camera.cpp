@@ -17,10 +17,20 @@ Camera::~Camera()
 	}
 }
 
+VECTOR2D Camera::GetFollowObjPosition()
+{
+	if (this->_followedObj == nullptr)
+	{
+		VECTOR2D cameraCenter = this->_position + VECTOR2D(this->_width, this->_height) / 2.0f;
+		return cameraCenter;
+	}
+	return this->_followedObj->GetWorldPosition();
+}
+
 void Camera::Update(float deltaTime)
 {
 	VECTOR2D cameraCenter = this->_position + VECTOR2D(this->_width, this->_height) / 2.0f;
-	VECTOR2D transVector = this->_followedObj->GetWorldPosition() - cameraCenter;
+	VECTOR2D transVector = GetFollowObjPosition() - cameraCenter;
 	this->_position += transVector + this->_translateVector;
 
 	if (this->_position.x < this->_bottomLeft.x)

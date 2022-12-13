@@ -43,6 +43,8 @@ private:
 	VECTOR2D _bottomLeft;
 	VECTOR2D _topRight;
 
+	VECTOR2D GetFollowObjPosition();
+
 	static Camera* _instance;
 };
 
