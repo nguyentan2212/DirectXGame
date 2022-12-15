@@ -54,6 +54,26 @@
         "h": 37
       },
       "spritePath": "Assets/Textures/world-map-2.json"
+    },
+    {
+      "name": "small-mario",
+      "type": "spritesheet",
+      "image": "Assets/Textures/small-mario.png",
+      "size": {
+        "w": 132,
+        "h": 60
+      },
+      "spritePath": "Assets/Textures/small-mario.json"
+    },
+    {
+      "name": "raccoon-mario",
+      "type": "spritesheet",
+      "image": "Assets/Textures/raccoon-mario.png",
+      "size": {
+        "w": 668,
+        "h": 60
+      },
+      "spritePath": "Assets/Textures/raccoon-mario.json"
     }
   ],
   "animations": [
