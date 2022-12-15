@@ -1,16 +1,14 @@
 #include "MarioIdleState.h"
-#include "../../Graphic/AnimationService.h"
 #include "../../Core/GameObject.h"
 #include "MarioRunState.h"
 #include "MarioJumpState.h"
 #include "MarioSitState.h"
+#include "MarioKickState.h"
+#include "MarioHoldState.h"
 #include <dinput.h>
 
 MarioIdleState::MarioIdleState()
 {
-	AnimationService* animations = AnimationService::GetInstance();
-	// this->_animation = animations->GetAnimation("super mario idle");
-
 	this->_width = 16.0f;
 	this->_height = 32.0f;
 	this->_name = "idle";
@@ -26,7 +24,7 @@ void MarioIdleState::OnKeyDown(int keyCode)
 	}
 	else if (keyCode == DIK_DOWN)
 	{
-		this->_context->velocity = VECTOR2D(0.0f, 0.0f);
+		// this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 		this->_context->TransitionTo(new MarioSitState());
 	}
 	else if (keyCode == DIK_LEFT || keyCode == DIK_RIGHT)
@@ -34,5 +32,15 @@ void MarioIdleState::OnKeyDown(int keyCode)
 		int direction = (keyCode - DIK_LEFT) - 1;
 		this->_context->velocity = VECTOR2D(direction * 50, 0.0f);
 		this->_context->TransitionTo(new MarioRunState());
+	}
+	else if (keyCode == DIK_K)
+	{
+		// this->_context->velocity = VECTOR2D(0.0f, 0.0f);
+		this->_context->TransitionTo(new MarioKickState());
+	}
+	else if (keyCode == DIK_H)
+	{
+		// this->_context->velocity = VECTOR2D(0.0f, 0.0f);
+		this->_context->TransitionTo(new MarioHoldState());
 	}
 }

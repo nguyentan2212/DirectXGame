@@ -1,5 +1,4 @@
 #include "MarioJumpState.h"
-#include "../../Graphic/AnimationService.h"
 #include "../../Core/GameObject.h"
 #include "MarioRunState.h"
 #include "MarioIdleState.h"
@@ -7,9 +6,6 @@
 
 MarioJumpState::MarioJumpState()
 {
-    AnimationService* animations = AnimationService::GetInstance();
-    //this->_animation = animations->GetAnimation("super mario jump");
-
     this->_width = 16.0f;
     this->_height = 32.0f;
     this->_name = "jump";

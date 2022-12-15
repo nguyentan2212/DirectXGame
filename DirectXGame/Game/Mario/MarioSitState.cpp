@@ -1,14 +1,10 @@
 #include "MarioSitState.h"
-#include "../../Graphic/AnimationService.h"
 #include "../../Core/GameObject.h"
 #include "MarioIdleState.h"
 #include <dinput.h>
 
 MarioSitState::MarioSitState(): ObjectState()
 {
-	AnimationService* animations = AnimationService::GetInstance();
-	// this->_animation = animations->GetAnimation("super mario sit");
-
 	this->_width = 16.0f;
 	this->_height = 24.0f;
 	this->_name = "sit";

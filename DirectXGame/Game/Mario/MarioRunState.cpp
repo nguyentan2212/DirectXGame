@@ -1,16 +1,13 @@
 #include "MarioRunState.h"
-#include "../../Graphic/AnimationService.h"
 #include "../../Core/GameObject.h"
 #include "MarioJumpState.h"
 #include "MarioIdleState.h"
 #include "MarioSitState.h"
+#include "MarioRunAndHoldState.h"
 #include <dinput.h>
 
 MarioRunState::MarioRunState(): ObjectState()
 {
-    AnimationService* animations = AnimationService::GetInstance();
-    //this->_animation = animations->GetAnimation("super mario run");
-
     this->_width = 16.0f;
     this->_height = 32.0f;
 	this->_name = "run";
@@ -37,6 +34,10 @@ void MarioRunState::OnKeyDown(int keyCode)
 	{
 		this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 		this->_context->TransitionTo(new MarioSitState());
+	}
+	else if (keyCode == DIK_H)
+	{
+		this->_context->TransitionTo(new MarioRunAndHoldState());
 	}
 }
 
