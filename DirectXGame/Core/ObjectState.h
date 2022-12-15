@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "../Graphic/Animation.h"
 #include "../Utils/Property.h"
 #include "../Utils/Debug.h"
 #include "../Utils/CMath.h"
