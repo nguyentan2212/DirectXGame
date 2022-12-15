@@ -41,6 +41,36 @@
           "sprite": "super-mario/4"
         }
       ]
+    },
+    {
+      "name": "super mario hold",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "super-mario/12"
+        }
+      ]
+    },
+    {
+      "name": "super mario run and hold",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "super-mario/13"
+        },
+        {
+          "sprite": "super-mario/14"
+        }
+      ]
+    },
+    {
+      "name": "super mario kick",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "super-mario/15"
+        }
+      ]
     }
   ]
 }
