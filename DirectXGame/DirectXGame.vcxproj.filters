@@ -29,6 +29,12 @@
     <None Include="Assets\Tilemaps\world-map.json">
       <Filter>Assets\Tilemaps</Filter>
     </None>
+    <None Include="Assets\Textures\raccoon-mario.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="Assets\Textures\small-mario.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -189,6 +195,15 @@
     <ClInclude Include="Core\Camera.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Mario\MarioKickState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioRunAndHoldState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioHoldState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -270,6 +285,15 @@
     <ClCompile Include="Core\Camera.cpp">
       <Filter>Core\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Mario\MarioKickState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioRunAndHoldState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioHoldState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png">
@@ -285,6 +309,12 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="Assets\Textures\world-map-2.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\raccoon-mario.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\small-mario.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>

@@ -140,6 +140,8 @@
     </None>
     <None Include="Assets\Textures\bounding-box.json" />
     <None Include="Assets\Textures\mics.json" />
+    <None Include="Assets\Textures\raccoon-mario.json" />
+    <None Include="Assets\Textures\small-mario.json" />
     <None Include="Assets\Textures\super-mario.json" />
     <None Include="Assets\Textures\world-map-1.json" />
     <None Include="Assets\Textures\world-map-2.json" />
@@ -157,8 +159,11 @@
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
+    <ClInclude Include="Game\Mario\MarioHoldState.h" />
     <ClInclude Include="Game\Mario\MarioIdleState.h" />
     <ClInclude Include="Game\Mario\MarioJumpState.h" />
+    <ClInclude Include="Game\Mario\MarioKickState.h" />
+    <ClInclude Include="Game\Mario\MarioRunAndHoldState.h" />
     <ClInclude Include="Game\Mario\MarioRunState.h" />
     <ClInclude Include="Game\Mario\MarioSitState.h" />
     <ClInclude Include="Game\Scenes\CSceneOne.h" />
@@ -188,8 +193,11 @@
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
+    <ClCompile Include="Game\Mario\MarioHoldState.cpp" />
     <ClCompile Include="Game\Mario\MarioIdleState.cpp" />
     <ClCompile Include="Game\Mario\MarioJumpState.cpp" />
+    <ClCompile Include="Game\Mario\MarioKickState.cpp" />
+    <ClCompile Include="Game\Mario\MarioRunAndHoldState.cpp" />
     <ClCompile Include="Game\Mario\MarioRunState.cpp" />
     <ClCompile Include="Game\Mario\MarioSitState.cpp" />
     <ClCompile Include="Game\Scenes\CSceneOne.cpp" />
@@ -210,6 +218,8 @@
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png" />
     <Image Include="Assets\Textures\mics.png" />
+    <Image Include="Assets\Textures\raccoon-mario.png" />
+    <Image Include="Assets\Textures\small-mario.png" />
     <Image Include="Assets\Textures\super-mario.png" />
     <Image Include="Assets\Textures\world-map-1.png" />
     <Image Include="Assets\Textures\world-map-2.png" />
