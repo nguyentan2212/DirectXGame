@@ -4,8 +4,12 @@
 class MarioRunAndHoldState: public ObjectState
 {
 public:
-	MarioRunAndHoldState();
+	MarioRunAndHoldState(int direction);
+	void OnTransition() override;
 	void OnKeyDown(int keyCode) override;
 	void OnKeyUp(int keyCode) override;
+
+private:
+	int direction;
 };
 

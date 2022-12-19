@@ -4,9 +4,13 @@
 class MarioRunState: public ObjectState
 {
 public:
-	MarioRunState();
+	MarioRunState(int direction);
+	void OnTransition() override;
 	void OnCollision(CollisionEvent colEvent) override;
 	void OnKeyDown(int keyCode) override;
 	void OnKeyUp(int keyCode) override;
+
+private:
+	int direction;
 };
 

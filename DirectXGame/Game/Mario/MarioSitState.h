@@ -5,6 +5,7 @@ class MarioSitState: public ObjectState
 {
 public:
 	MarioSitState();
+	void OnTransition() override;
 	void OnKeyUp(int keyCode) override;
 };
 
