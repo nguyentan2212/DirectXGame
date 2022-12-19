@@ -14,6 +14,9 @@ public:
 	ObjectState() { this->_context = nullptr; this->_name = ""; }
 	~ObjectState();
 
+	virtual void OnTransition() {};
+	virtual void Update(float deltaTime) {};
+
 	virtual void OnKeyDown(int keyCode) {};
 	virtual void OnKeyUp(int keyCode) {};
 
