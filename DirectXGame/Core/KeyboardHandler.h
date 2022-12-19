@@ -20,7 +20,7 @@ public:
 	void Processing();
 	void AddListener(GameObject* listener);
 	void RemoveListener(GameObject* listener);
-
+	bool IsKeyDown(int keyCode);
 private:
 	KeyboardHandler();
 	LPDIRECTINPUT8       _di;		// The DirectInput object         

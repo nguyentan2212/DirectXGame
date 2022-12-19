@@ -133,6 +133,11 @@ void KeyboardHandler::OnKeyDown(int keyCode)
 	}
 }
 
+bool KeyboardHandler::IsKeyDown(int keyCode)
+{
+	return (_keyStates[keyCode] & 0x80) > 0;
+}
+
 KeyboardHandler::~KeyboardHandler()
 {
 	this->_di->Release();
