@@ -77,7 +77,8 @@
     }
   ],
   "animations": [
-    "Assets/Animations/super-mario.json"
+    "Assets/Animations/super-mario.json",
+    "Assets/Animations/small-mario.json"
   ],
   "scenes": [
     "Assets/Tilemaps/stage-1.json"

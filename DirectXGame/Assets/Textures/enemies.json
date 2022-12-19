@@ -1,0 +1,274 @@
+{
+  "sprites": [
+      {
+        "name": "enemies/venus-fire-trap/0",
+        "frame": {
+            "x": 2,
+            "y": 2,
+            "w": 16,
+            "h": 32
+        }
+      },
+      {
+        "name": "enemies/goomba/0",
+        "frame": {
+            "x": 2,
+            "y": 38,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/1",
+        "frame": {
+            "x": 22,
+            "y": 2,
+            "w": 16,
+            "h": 32
+        }
+      },
+      {
+        "name": "enemies/goomba/1",
+        "frame": {
+            "x": 22,
+            "y": 38,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/2",
+        "frame": {
+            "x": 42,
+            "y": 2,
+            "w": 16,
+            "h": 32
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/2",
+        "frame": {
+            "x": 42,
+            "y": 38,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/3",
+        "frame": {
+            "x": 62,
+            "y": 2,
+            "w": 16,
+            "h": 32
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/3",
+        "frame": {
+            "x": 62,
+            "y": 38,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/1",
+        "frame": {
+            "x": 82,
+            "y": 2,
+            "w": 16,
+            "h": 27
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/4",
+        "frame": {
+            "x": 82,
+            "y": 33,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/1",
+        "frame": {
+            "x": 102,
+            "y": 2,
+            "w": 16,
+            "h": 27
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/5",
+        "frame": {
+            "x": 102,
+            "y": 33,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/0",
+        "frame": {
+            "x": 122,
+            "y": 2,
+            "w": 16,
+            "h": 26
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/0",
+        "frame": {
+            "x": 122,
+            "y": 32,
+            "w": 16,
+            "h": 26
+        }
+      },
+      {
+        "name": "enemies/koopa-paratroopa/6",
+        "frame": {
+            "x": 142,
+            "y": 32,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/2",
+        "frame": {
+            "x": 162,
+            "y": 32,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/3",
+        "frame": {
+            "x": 142,
+            "y": 2,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/4",
+        "frame": {
+            "x": 162,
+            "y": 2,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/5",
+        "frame": {
+            "x": 182,
+            "y": 2,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/koopa-troopa/6",
+        "frame": {
+            "x": 182,
+            "y": 22,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/paragoomba/0",
+        "frame": {
+            "x": 182,
+            "y": 42,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/paragoomba/1",
+        "frame": {
+            "x": 202,
+            "y": 42,
+            "w": 16,
+            "h": 16
+        }
+      },
+      {
+        "name": "enemies/wing-0",
+        "frame": {
+            "x": 202,
+            "y": 2,
+            "w": 8,
+            "h": 13
+        }
+      },
+      {
+        "name": "enemies/wing-1",
+        "frame": {
+            "x": 202,
+            "y": 19,
+            "w": 8,
+            "h": 13
+        }
+      },
+      {
+        "name": "enemies/goomba/2",
+        "frame": {
+            "x": 214,
+            "y": 2,
+            "w": 16,
+            "h": 9
+        }
+      },
+      {
+        "name": "enemies/paragoomba/2",
+        "frame": {
+            "x": 214,
+            "y": 15,
+            "w": 16,
+            "h": 9
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/fire-ball-1",
+        "frame": {
+            "x": 214,
+            "y": 28,
+            "w": 8,
+            "h": 9
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/fire-ball-3",
+        "frame": {
+            "x": 222,
+            "y": 41,
+            "w": 8,
+            "h": 9
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/fire-ball-0",
+        "frame": {
+            "x": 226,
+            "y": 28,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "enemies/venus-fire-trap/fire-ball-2",
+        "frame": {
+            "x": 234,
+            "y": 40,
+            "w": 8,
+            "h": 8
+        }
+      }
+  ]
+}

@@ -1,0 +1,454 @@
+{
+  "sprites": [
+      {
+        "name": "hub-and-font/hub",
+        "frame": {
+            "x": 2,
+            "y": 2,
+            "w": 152,
+            "h": 28
+        }
+      },
+      {
+        "name": "hub-and-font/2000",
+        "frame": {
+            "x": 2,
+            "y": 34,
+            "w": 16,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/4000",
+        "frame": {
+            "x": 2,
+            "y": 46,
+            "w": 16,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/8000",
+        "frame": {
+            "x": 22,
+            "y": 34,
+            "w": 16,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/life-point",
+        "frame": {
+            "x": 22,
+            "y": 46,
+            "w": 16,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/1000",
+        "frame": {
+            "x": 42,
+            "y": 34,
+            "w": 15,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/200",
+        "frame": {
+            "x": 42,
+            "y": 46,
+            "w": 12,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/400",
+        "frame": {
+            "x": 58,
+            "y": 46,
+            "w": 12,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/800",
+        "frame": {
+            "x": 61,
+            "y": 34,
+            "w": 12,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/100",
+        "frame": {
+            "x": 74,
+            "y": 46,
+            "w": 11,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/a",
+        "frame": {
+            "x": 77,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/b",
+        "frame": {
+            "x": 89,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/c",
+        "frame": {
+            "x": 89,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/d",
+        "frame": {
+            "x": 101,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/e",
+        "frame": {
+            "x": 101,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/f",
+        "frame": {
+            "x": 113,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/g",
+        "frame": {
+            "x": 113,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/h",
+        "frame": {
+            "x": 125,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/j",
+        "frame": {
+            "x": 125,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/k",
+        "frame": {
+            "x": 137,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/l",
+        "frame": {
+            "x": 137,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/m",
+        "frame": {
+            "x": 149,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/empty",
+        "frame": {
+            "x": 158,
+            "y": 2,
+            "w": 24,
+            "h": 28
+        }
+      },
+      {
+        "name": "hub-and-font/flower",
+        "frame": {
+            "x": 186,
+            "y": 2,
+            "w": 24,
+            "h": 28
+        }
+      },
+      {
+        "name": "hub-and-font/n",
+        "frame": {
+            "x": 149,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/o",
+        "frame": {
+            "x": 161,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/p",
+        "frame": {
+            "x": 161,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/q",
+        "frame": {
+            "x": 173,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/r",
+        "frame": {
+            "x": 173,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/s",
+        "frame": {
+            "x": 185,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/t",
+        "frame": {
+            "x": 185,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/u",
+        "frame": {
+            "x": 197,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/v",
+        "frame": {
+            "x": 197,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/w",
+        "frame": {
+            "x": 209,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/mushroom",
+        "frame": {
+            "x": 214,
+            "y": 2,
+            "w": 24,
+            "h": 28
+        }
+      },
+      {
+        "name": "hub-and-font/star",
+        "frame": {
+            "x": 242,
+            "y": 2,
+            "w": 24,
+            "h": 28
+        }
+      },
+      {
+        "name": "hub-and-font/x",
+        "frame": {
+            "x": 209,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/y",
+        "frame": {
+            "x": 221,
+            "y": 34,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/z",
+        "frame": {
+            "x": 221,
+            "y": 46,
+            "w": 8,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/i",
+        "frame": {
+            "x": 233,
+            "y": 34,
+            "w": 4,
+            "h": 8
+        }
+      },
+      {
+        "name": "hub-and-font/0",
+        "frame": {
+            "x": 233,
+            "y": 46,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/2",
+        "frame": {
+            "x": 241,
+            "y": 34,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/3",
+        "frame": {
+            "x": 245,
+            "y": 45,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/4",
+        "frame": {
+            "x": 253,
+            "y": 34,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/5",
+        "frame": {
+            "x": 257,
+            "y": 45,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/6",
+        "frame": {
+            "x": 265,
+            "y": 34,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/7",
+        "frame": {
+            "x": 269,
+            "y": 45,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/8",
+        "frame": {
+            "x": 281,
+            "y": 34,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/9",
+        "frame": {
+            "x": 281,
+            "y": 45,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/1",
+        "frame": {
+            "x": 293,
+            "y": 45,
+            "w": 6,
+            "h": 7
+        }
+      }
+  ]
+}

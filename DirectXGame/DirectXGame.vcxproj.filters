@@ -35,6 +35,12 @@
     <None Include="Assets\Textures\small-mario.json">
       <Filter>Assets\Textures</Filter>
     </None>
+    <None Include="Assets\Animations\raccoon-mario.json">
+      <Filter>Assets\Animations</Filter>
+    </None>
+    <None Include="Assets\Animations\small-mario.json">
+      <Filter>Assets\Animations</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -204,6 +210,9 @@
     <ClInclude Include="Game\Mario\MarioHoldState.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Mario\MarioFallState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -292,6 +301,9 @@
       <Filter>Game\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Game\Mario\MarioHoldState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioFallState.cpp">
       <Filter>Game\Mario</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,9 +9,6 @@
         },
         {
           "sprite": "super-mario/1"
-        },
-        {
-          "sprite": "super-mario/2"
         }
       ]
     },
@@ -39,6 +36,15 @@
       "frames": [
         {
           "sprite": "super-mario/4"
+        }
+      ]
+    },
+    {
+      "name": "super mario fall",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "super-mario/2"
         }
       ]
     },

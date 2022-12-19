@@ -1,0 +1,73 @@
+{
+  "animations": [
+    {
+      "name": "small mario run",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/0"
+        },
+        {
+          "sprite": "small-mario/1"
+        }
+      ]
+    },
+    {
+      "name": "small mario idle",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/0"
+        }
+      ]
+    },
+    {
+      "name": "small mario jump",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/2"
+        }
+      ]
+    },
+    {
+      "name": "small mario fall",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/2"
+        }
+      ]
+    },
+    {
+      "name": "small mario hold",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "small-mario/8"
+        }
+      ]
+    },
+    {
+      "name": "small mario run and hold",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/8"
+        },
+        {
+          "sprite": "small-mario/9"
+        }
+      ]
+    },
+    {
+      "name": "small mario kick",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "small-mario/10"
+        }
+      ]
+    }
+  ]
+}
