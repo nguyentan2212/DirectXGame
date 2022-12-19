@@ -22,6 +22,7 @@ GameObject::~GameObject()
 
 void GameObject::Update(float deltaTime)
 {
+	this->_velocity += this->_acceleration * deltaTime / 1000;
 	if (this->_velocity != VECTOR2D(0.0f, 0.0f))
 	{
 		Translate(this->_velocity * deltaTime / 1000);
@@ -157,6 +158,7 @@ void GameObject::TransitionTo(ObjectState* state)
 		delete this->_state;
 	this->_state = state;
 	this->_state->context = this;
+	this->_state->OnTransition();
 }
 
 /// <summary>

@@ -46,6 +46,10 @@ public:
 	GET(velocity) { return this->_velocity; }
 	SET(velocity) { this->_velocity = value; }
 
+	PROPERTY(VECTOR2D, acceleration);
+	GET(acceleration) { return this->_acceleration; }
+	SET(acceleration) { this->_acceleration = value; }
+
 	R_PROPERTY(DIRECTION, direction);
 	GET(direction) { return this->_direction; }
 
@@ -69,6 +73,7 @@ protected:
 #pragma region Transform
 	VECTOR2D _position;
 	VECTOR2D _velocity; // units per second.
+	VECTOR2D _acceleration;
 	MATRIX _worldMatrix;
 	bool _isTransformChanged;
 	DIRECTION _direction;
