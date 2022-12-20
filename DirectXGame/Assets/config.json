@@ -1,8 +1,8 @@
 {
   "fps": 60,
   "window": {
-    "width": 600,
-    "height": 400
+    "width": 275,
+    "height": 240
   },
   "textures": [
     {
@@ -74,6 +74,16 @@
         "h": 60
       },
       "spritePath": "Assets/Textures/raccoon-mario.json"
+    },
+    {
+      "name": "hub-and-font",
+      "type": "spritesheet",
+      "image": "Assets/Textures/hub-and-font.png",
+      "size": {
+        "w": 301,
+        "h": 56
+      },
+      "spritePath": "Assets/Textures/hub-and-font.json"
     }
   ],
   "animations": [
