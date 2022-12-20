@@ -361,10 +361,46 @@
         }
       },
       {
-        "name": "hub-and-font/0",
+        "name": "hub-and-font/label-l",
         "frame": {
             "x": 233,
             "y": 46,
+            "w": 16,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/label-m",
+        "frame": {
+            "x": 241,
+            "y": 34,
+            "w": 16,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/label-f-black",
+        "frame": {
+            "x": 253,
+            "y": 45,
+            "w": 15,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/label-f-white",
+        "frame": {
+            "x": 261,
+            "y": 34,
+            "w": 15,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/0",
+        "frame": {
+            "x": 272,
+            "y": 45,
             "w": 8,
             "h": 7
         }
@@ -372,8 +408,8 @@
       {
         "name": "hub-and-font/2",
         "frame": {
-            "x": 241,
-            "y": 34,
+            "x": 270,
+            "y": 2,
             "w": 8,
             "h": 7
         }
@@ -381,8 +417,8 @@
       {
         "name": "hub-and-font/3",
         "frame": {
-            "x": 245,
-            "y": 45,
+            "x": 270,
+            "y": 13,
             "w": 8,
             "h": 7
         }
@@ -390,8 +426,8 @@
       {
         "name": "hub-and-font/4",
         "frame": {
-            "x": 253,
-            "y": 34,
+            "x": 280,
+            "y": 24,
             "w": 8,
             "h": 7
         }
@@ -399,8 +435,8 @@
       {
         "name": "hub-and-font/5",
         "frame": {
-            "x": 257,
-            "y": 45,
+            "x": 282,
+            "y": 2,
             "w": 8,
             "h": 7
         }
@@ -408,8 +444,8 @@
       {
         "name": "hub-and-font/6",
         "frame": {
-            "x": 265,
-            "y": 34,
+            "x": 282,
+            "y": 13,
             "w": 8,
             "h": 7
         }
@@ -417,8 +453,8 @@
       {
         "name": "hub-and-font/7",
         "frame": {
-            "x": 269,
-            "y": 45,
+            "x": 294,
+            "y": 13,
             "w": 8,
             "h": 7
         }
@@ -426,8 +462,8 @@
       {
         "name": "hub-and-font/8",
         "frame": {
-            "x": 281,
-            "y": 34,
+            "x": 294,
+            "y": 2,
             "w": 8,
             "h": 7
         }
@@ -435,8 +471,26 @@
       {
         "name": "hub-and-font/9",
         "frame": {
-            "x": 281,
-            "y": 45,
+            "x": 284,
+            "y": 35,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/arrow-black",
+        "frame": {
+            "x": 292,
+            "y": 24,
+            "w": 8,
+            "h": 7
+        }
+      },
+      {
+        "name": "hub-and-font/arrow-white",
+        "frame": {
+            "x": 284,
+            "y": 46,
             "w": 8,
             "h": 7
         }
@@ -444,8 +498,8 @@
       {
         "name": "hub-and-font/1",
         "frame": {
-            "x": 293,
-            "y": 45,
+            "x": 296,
+            "y": 46,
             "w": 6,
             "h": 7
         }
