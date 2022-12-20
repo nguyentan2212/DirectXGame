@@ -141,6 +141,7 @@
       <DeploymentContent>false</DeploymentContent>
     </None>
     <None Include="Assets\Textures\bounding-box.json" />
+    <None Include="Assets\Textures\hub-and-font.json" />
     <None Include="Assets\Textures\mics.json" />
     <None Include="Assets\Textures\raccoon-mario.json" />
     <None Include="Assets\Textures\small-mario.json" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Game\GUI.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioFallState.h" />
     <ClInclude Include="Game\Mario\MarioHoldState.h" />
@@ -195,6 +197,7 @@
     <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
+    <ClCompile Include="Game\GUI.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioFallState.cpp" />
     <ClCompile Include="Game\Mario\MarioHoldState.cpp" />
@@ -221,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png" />
+    <Image Include="Assets\Textures\hub-and-font.png" />
     <Image Include="Assets\Textures\mics.png" />
     <Image Include="Assets\Textures\raccoon-mario.png" />
     <Image Include="Assets\Textures\small-mario.png" />

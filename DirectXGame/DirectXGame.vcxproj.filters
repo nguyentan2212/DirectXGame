@@ -41,6 +41,9 @@
     <None Include="Assets\Animations\small-mario.json">
       <Filter>Assets\Animations</Filter>
     </None>
+    <None Include="Assets\Textures\hub-and-font.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -213,6 +216,9 @@
     <ClInclude Include="Game\Mario\MarioFallState.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
+    <ClInclude Include="Game\GUI.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -306,6 +312,9 @@
     <ClCompile Include="Game\Mario\MarioFallState.cpp">
       <Filter>Game\Mario</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GUI.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png">
@@ -327,6 +336,9 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="Assets\Textures\small-mario.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\hub-and-font.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
