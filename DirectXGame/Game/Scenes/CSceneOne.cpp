@@ -1,5 +1,6 @@
 #include "CSceneOne.h"
 #include "../Mario/Mario.h"
+#include "../GUI.h"
 #include "../../Core/KeyboardHandler.h"
 #include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
@@ -20,4 +21,6 @@ CSceneOne::CSceneOne(string configPath): Scene(configPath)
 	camera->Follow(mario);
 	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
 	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
+
+	this->_gameObjects.push_back(new GUI());
 }
