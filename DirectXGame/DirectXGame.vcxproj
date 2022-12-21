@@ -154,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Camera.h" />
-    <ClInclude Include="Core\EmptyObjectState.h" />
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\KeyboardHandler.h" />
@@ -190,7 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Camera.cpp" />
-    <ClCompile Include="Core\EmptyObjectState.cpp" />
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />

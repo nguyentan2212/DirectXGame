@@ -183,9 +183,6 @@
     <ClInclude Include="Game\Mario\MarioIdleState.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
-    <ClInclude Include="Core\EmptyObjectState.h">
-      <Filter>Core\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Physic\CollisionManager.h">
       <Filter>Physic\Header</Filter>
     </ClInclude>
@@ -278,9 +275,6 @@
     </ClCompile>
     <ClCompile Include="Game\Mario\MarioIdleState.cpp">
       <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\EmptyObjectState.cpp">
-      <Filter>Core\Source</Filter>
     </ClCompile>
     <ClCompile Include="Physic\CollisionManager.cpp">
       <Filter>Physic\Source</Filter>
