@@ -3,6 +3,7 @@
 #include "MarioJumpState.h"
 #include "MarioFallState.h"
 #include "../../Physic/CollisionManager.h"
+#include "../../Core/KeyboardHandler.h"
 
 Mario::Mario(): GameObject(new MarioIdleState())
 {
@@ -14,7 +15,7 @@ Mario::Mario(): GameObject(new MarioIdleState())
 void Mario::Update(float deltaTime)
 {
 	CollisionManager* collision = CollisionManager::GetInstance();
-	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 10);
+	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, this->_height / 2.0f + 5.0f);
 	for (GameObject* obj : results)
 	{
 		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
@@ -53,6 +54,33 @@ void Mario::Render()
 
 void Mario::OnKeyDown(int keyCode)
 {
+	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+	if (keyCode == DIK_X && keyboard->IsKeyDown(DIK_LCONTROL) && this->_name != "small mario")
+	{
+		this->_name = "small mario";
+		this->position = VECTOR2D(this->_position.x, this->_position.y - 8.0f);
+		this->_state->OnChangeFigure();
+	}
+	else if (keyCode == DIK_R && keyboard->IsKeyDown(DIK_LCONTROL))
+	{
+		if (this->_name == "small mario")
+		{
+			this->position = VECTOR2D(this->_position.x, this->_position.y + 8.0f);
+		}
+
+		this->_name = "raccoon mario";
+		this->_state->OnChangeFigure();
+	}
+	else if (keyCode == DIK_S && keyboard->IsKeyDown(DIK_LCONTROL))
+	{
+		if (this->_name == "small mario")
+		{
+			this->position = VECTOR2D(this->_position.x, this->_position.y + 8.0f);
+		}
+		this->_name = "super mario";
+		this->position = VECTOR2D(this->_position.x, this->_position.y - 8.0f);
+		this->_state->OnChangeFigure();
+	}
 	this->_state->OnKeyDown(keyCode);
 }
 
