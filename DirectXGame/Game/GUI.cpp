@@ -1,10 +1,9 @@
 #include "GUI.h"
-#include "../Core/EmptyObjectState.h"
 #include "../Core/Camera.h"
 #include "../Graphic/SpriteService.h"
 #include <string> 
 
-GUI::GUI(): GameObject(new EmptyObjectState(0, 0))
+GUI::GUI(): GameObject(new ObjectState())
 {
 }
 

@@ -1,7 +1,6 @@
 #include "Scene.h"
 #include <string>
 #include <fstream>
-#include "EmptyObjectState.h"
 #include "KeyboardHandler.h"
 #include "Camera.h"
 #include "../Physic/CollisionManager.h"
@@ -101,7 +100,9 @@ void Scene::InitObjects(json config)
 	CollisionManager* collision = CollisionManager::GetInstance();
 	for (json item : config)
 	{
-		GameObject* obj = new GameObject(new EmptyObjectState(item["width"], item["height"]));
+		GameObject* obj = new GameObject(new ObjectState());
+		obj->width = item["width"].get<float>();
+		obj->height = item["height"].get<float>();
 		obj->position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->name = item["name"].get<string>();
 		obj->showBoundingBox = true;

@@ -8,7 +8,6 @@
 #include "../Utils/Debug.h"
 #include "../Physic/CollisionManager.h"
 #include "../Game/Mario/Mario.h"
-#include "EmptyObjectState.h"
 #include "KeyboardHandler.h"
 #include "Camera.h"
 
