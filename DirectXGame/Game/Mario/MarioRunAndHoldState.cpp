@@ -15,16 +15,6 @@ MarioRunAndHoldState::MarioRunAndHoldState(int direction)
 
 void MarioRunAndHoldState::OnTransition()
 {
-	if (this->_context->name == "small mario")
-	{
-		this->_width = 15.0f;
-		this->_height = 16.0f;
-	}
-	else
-	{
-		this->_width = 16.0f;
-		this->_height = 32.0f;
-	}
 	if (direction == 0)// prev direction
 	{
 		direction = this->_context->velocity.x > 0 ? 1 : -1;
@@ -46,5 +36,24 @@ void MarioRunAndHoldState::OnKeyUp(int keyCode)
 	if (keyCode == DIK_LEFT || keyCode == DIK_RIGHT)
 	{
 		this->_context->TransitionTo(new MarioHoldState());
+	}
+}
+
+void MarioRunAndHoldState::OnChangeFigure()
+{
+	if (this->_context->name == "small mario")
+	{
+		this->_context->width = 15.0f;
+		this->_context->height = 16.0f;
+	}
+	else if (this->_context->name == "super mario")
+	{
+		this->_context->width = 16.0f;
+		this->_context->height = 32.0f;
+	}
+	else if (this->_context->name == "raccoon mario")
+	{
+		this->_context->width = 22.0f;
+		this->_context->height = 28.0f;
 	}
 }

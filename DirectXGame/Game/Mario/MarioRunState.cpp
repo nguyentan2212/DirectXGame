@@ -17,16 +17,6 @@ MarioRunState::MarioRunState(int direction): ObjectState()
 
 void MarioRunState::OnTransition()
 {
-	if (this->_context->name == "small mario")
-	{
-		this->_width = 15.0f;
-		this->_height = 16.0f;
-	}
-	else
-	{
-		this->_width = 16.0f;
-		this->_height = 32.0f;
-	}
 	if (direction == 0)// prev direction
 	{
 		direction = this->_context->velocity.x > 0 ? 1 : -1;
@@ -61,5 +51,40 @@ void MarioRunState::OnKeyUp(int keyCode)
 	{
 		this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 		this->_context->TransitionTo(new MarioIdleState());
+	}
+}
+
+void MarioRunState::OnChangeFigure()
+{
+	if (this->_context->name == "small mario")
+	{
+		this->_context->width = 15.0f;
+		this->_context->height = 16.0f;
+	}
+	else if (this->_context->name == "super mario")
+	{
+		this->_context->width = 16.0f;
+		this->_context->height = 32.0f;
+	}
+	else if (this->_context->name == "raccoon mario")
+	{
+		this->_context->width = 21.0f;
+		this->_context->height = 28.0f;
+	}
+	// fast run -> w: 24, h: 28
+}
+
+void MarioRunState::Update(float deltaTime)
+{
+	if (this->_context->name == "raccoon mario")
+	{
+		if (abs(this->_context->velocity.x) >= MARIO_RUN_MAX_SPEED_X)
+		{
+			this->_name = "fast run";
+		}
+		else
+		{
+			this->_name = "run";
+		}
 	}
 }

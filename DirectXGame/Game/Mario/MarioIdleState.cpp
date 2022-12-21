@@ -15,17 +15,6 @@ MarioIdleState::MarioIdleState()
 
 void MarioIdleState::OnTransition()
 {
-	if (this->_context->name == "small mario")
-	{
-		this->_width = 12.0f;
-		this->_height = 15.0f;
-	}
-	else 
-	{
-		this->_width = 16.0f;
-		this->_height = 32.0f;
-	}
-	
 	this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
 }
@@ -58,5 +47,24 @@ void MarioIdleState::OnKeyDown(int keyCode)
 		break;
 	default:
 		break;
+	}
+}
+
+void MarioIdleState::OnChangeFigure()
+{
+	if (this->_context->name == "small mario")
+	{
+		this->_context->width = 12.0f;
+		this->_context->height = 15.0f;
+	}
+	else if (this->_context->name == "super mario")
+	{
+		this->_context->width = 16.0f;
+		this->_context->height = 32.0f;
+	}
+	else if (this->_context->name == "raccoon mario")
+	{
+		this->_context->width = 21.0f;
+		this->_context->height = 28.0f;
 	}
 }

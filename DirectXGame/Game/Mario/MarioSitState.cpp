@@ -5,8 +5,6 @@
 
 MarioSitState::MarioSitState(): ObjectState()
 {
-	this->_width = 16.0f;
-	this->_height = 24.0f;
 	this->_name = "sit";
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Sit State \n");
 }
@@ -24,5 +22,19 @@ void MarioSitState::OnKeyUp(int keyCode)
 	{
 		this->_context->position = VECTOR2D(this->_context->position.x, this->_context->position.y + 4.0f);
 		this->_context->TransitionTo(new MarioIdleState());
+	}
+}
+
+void MarioSitState::OnChangeFigure()
+{
+	if (this->_context->name == "super mario")
+	{
+		this->_context->width = 16.0f;
+		this->_context->height = 24.0f;
+	}
+	else if (this->_context->name == "raccoon mario")
+	{
+		this->_context->width = 21.0f;
+		this->_context->height = 28.0f;
 	}
 }

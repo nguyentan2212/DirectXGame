@@ -14,22 +14,27 @@ MarioFallState::MarioFallState()
 
 void MarioFallState::OnTransition()
 {
-    if (this->_context->name == "small mario")
-    {
-        this->_width = 16.0f;
-        this->_height = 16.0f;
-    }
-    else
-    {
-        this->_width = 16.0f;
-        this->_height = 32.0f;
-    }
     this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0.0f);
     this->_context->acceleration = VECTOR2D(this->_context->acceleration.x, - MARIO_GRAVITY);
 }
 
 void MarioFallState::Update(float deltaTime)
 {
+    if (this->_context->name == "small mario")
+    {
+        this->_context->width = 16.0f;
+        this->_context->height = 16.0f;
+    }
+    else if (this->_context->name == "super mario")
+    {
+        this->_context->width = 16.0f;
+        this->_context->height = 32.0f;
+    }
+    else if (this->_context->name == "raccoon mario")
+    {
+        this->_context->width = 23.0f;
+        this->_context->height = 27.0f;
+    }
 }
 
 void MarioFallState::OnCollision(CollisionEvent colEvent)
@@ -53,4 +58,8 @@ void MarioFallState::OnCollision(CollisionEvent colEvent)
             this->_context->TransitionTo(new MarioIdleState());
         }
     }
+}
+
+void MarioFallState::OnChangeFigure()
+{
 }

@@ -8,6 +8,7 @@ public:
 	void OnTransition() override;
 	void OnKeyDown(int keyCode) override;
 	void OnKeyUp(int keyCode) override;
+	void OnChangeFigure() override;
 
 private:
 	int direction;
