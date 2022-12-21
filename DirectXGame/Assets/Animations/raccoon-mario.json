@@ -1,0 +1,118 @@
+{
+  "animations": [
+    {
+      "name": "raccoon mario run",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/0"
+        },
+        {
+          "sprite": "raccoon-mario/1"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario fast run",
+      "defaultTime": 50,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/7"
+        },
+        {
+          "sprite": "raccoon-mario/8"
+        },
+        {
+          "sprite": "raccoon-mario/9"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario sit",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/3"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario idle",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/0"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario jump",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/4"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario fall",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/5"
+        },
+        {
+          "sprite": "raccoon-mario/2"
+        },
+        {
+          "sprite": "raccoon-mario/6"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario hold",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/17"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario run and hold",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/18"
+        },
+        {
+          "sprite": "raccoon-mario/19"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario kick",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/20"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario fly",
+      "defaultTime": 70,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/10"
+        },
+        {
+          "sprite": "raccoon-mario/11"
+        },
+        {
+          "sprite": "raccoon-mario/12"
+        }
+      ]
+    }
+  ]
+}
