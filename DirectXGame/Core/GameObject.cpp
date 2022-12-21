@@ -159,6 +159,7 @@ void GameObject::TransitionTo(ObjectState* state)
 	this->_state = state;
 	this->_state->context = this;
 	this->_state->OnTransition();
+	this->_state->OnChangeFigure();
 }
 
 /// <summary>
@@ -167,11 +168,12 @@ void GameObject::TransitionTo(ObjectState* state)
 /// <returns></returns>
 Box GameObject::GetBoundingBox()
 {
-	if (this->_state != nullptr)
-	{
-		return this->_state->GetBoundingBox();
-	}
-	return Box();
+	Camera* camera = Camera::GetInstance();
+
+	VECTOR2D result = this->GetWorldPosition() - camera->position;
+	result -= VECTOR2D(this->_width, this->_height) / 2;
+
+	return Box(result.x, result.y, this->_width, this->_height);
 }
 
 /// <summary>

@@ -60,6 +60,14 @@ public:
 	PROPERTY(string, name);
 	GET(name) { return this->_name; }
 	SET(name) { this->_name = value; }
+
+	PROPERTY(float, width);
+	GET(width) { return this->_width; }
+	SET(width) { this->_width = value; }
+
+	PROPERTY(float, height);
+	GET(height) { return this->_height; }
+	SET(height) { this->_height = value; }
 #pragma endregion
 
 protected:
@@ -69,6 +77,8 @@ protected:
 	bool _showBoundingBox;
 	bool _isFlipped;
 	string _name;
+	float _width = 0.0f;
+	float _height = 0.0f;
 
 #pragma region Transform
 	VECTOR2D _position;
