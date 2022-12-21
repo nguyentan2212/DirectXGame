@@ -19,9 +19,8 @@ public:
 
 	virtual void OnKeyDown(int keyCode) {};
 	virtual void OnKeyUp(int keyCode) {};
-
-	virtual Box GetBoundingBox();
-	virtual void OnCollision(CollisionEvent colEvent);
+	virtual void OnCollision(CollisionEvent colEvent) {};
+	virtual void OnChangeFigure() {};
 
 	W_PROPERTY(GameObject*, context);
 	SET(context) { this->_context = value; }
@@ -31,8 +30,6 @@ public:
 
 protected:
 	GameObject* _context;
-	float _width = 0.0f;
-	float _height = 0.0f;
 	string _name;
 };
 
