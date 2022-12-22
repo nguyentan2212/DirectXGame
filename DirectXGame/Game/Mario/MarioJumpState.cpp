@@ -28,7 +28,14 @@ void MarioJumpState::Update(float deltaTime)
 
 void MarioJumpState::OnCollision(CollisionEvent colEvent)
 {
-    
+    string st = typeid(*colEvent.collisionObj).name();
+    if (st == "class Brick")
+    {
+        this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+        this->_context->velocity = VECTOR2D(0, 0);
+        this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
+        this->_context->TransitionTo(new MarioFallState());
+    }
 }
 
 void MarioJumpState::OnKeyDown(int keyCode)
