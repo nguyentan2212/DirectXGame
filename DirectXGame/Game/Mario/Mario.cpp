@@ -15,7 +15,7 @@ Mario::Mario(): GameObject(new MarioIdleState())
 void Mario::Update(float deltaTime)
 {
 	CollisionManager* collision = CollisionManager::GetInstance();
-	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, this->_height / 2.0f + 5.0f);
+	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, this->_height / 2.0f + 3.0f);
 	for (GameObject* obj : results)
 	{
 		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
@@ -78,7 +78,6 @@ void Mario::OnKeyDown(int keyCode)
 			this->position = VECTOR2D(this->_position.x, this->_position.y + 8.0f);
 		}
 		this->_name = "super mario";
-		this->position = VECTOR2D(this->_position.x, this->_position.y - 8.0f);
 		this->_state->OnChangeFigure();
 	}
 	this->_state->OnKeyDown(keyCode);

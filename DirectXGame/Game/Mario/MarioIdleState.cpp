@@ -60,7 +60,7 @@ void MarioIdleState::OnChangeFigure()
 	else if (this->_context->name == "super mario")
 	{
 		this->_context->width = 16.0f;
-		this->_context->height = 32.0f;
+		this->_context->height = 28.0f;
 	}
 	else if (this->_context->name == "raccoon mario")
 	{
