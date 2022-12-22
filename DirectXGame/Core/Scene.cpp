@@ -12,6 +12,7 @@ Scene::Scene(string configPath)
 	json config = json::parse(file);
 	this->_gameObjects = vector<GameObject*>(0);
 	InitTilemap(config);
+	InitObjects(config["objects"]);
 }
 
 void Scene::Update(float deltaTime)
@@ -92,7 +93,6 @@ void Scene::InitTilemap(json config)
 		}
 		count++;
 	}
-	InitObjects(config["objects"]);
 }
 
 void Scene::InitObjects(json config)
