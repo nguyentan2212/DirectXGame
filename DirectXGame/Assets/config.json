@@ -89,7 +89,8 @@
   "animations": [
     "Assets/Animations/super-mario.json",
     "Assets/Animations/small-mario.json",
-    "Assets/Animations/raccoon-mario.json"
+    "Assets/Animations/raccoon-mario.json",
+    "Assets/Animations/items.json"
   ],
   "scenes": [
     "Assets/Tilemaps/stage-1.json"

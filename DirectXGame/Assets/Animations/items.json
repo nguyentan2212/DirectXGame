@@ -1,0 +1,61 @@
+{
+  "animations": [
+    {
+      "name": "brick",
+      "defaultTime": 800,
+      "frames": [
+        {
+          "sprite": "mics55"
+        },
+        {
+          "sprite": "mics3"
+        },
+        {
+          "sprite": "mics0"
+        },
+        {
+          "sprite": "mics53"
+        }
+      ]
+    },
+    {
+      "name": "brick inactive",
+      "defaultTime": 800,
+      "frames": [
+        {
+          "sprite": "mics52"
+        }
+      ]
+    },
+    {
+      "name": "coin",
+      "defaultTime": 2000,
+      "frames": [
+        {
+          "sprite": "mics10"
+        },
+        {
+          "sprite": "mics63"
+        },
+        {
+          "sprite": "mics11"
+        },
+        {
+          "sprite": "mics105"
+        },
+        {
+          "sprite": "mics106"
+        },
+        {
+          "sprite": "mics105"
+        },
+        {
+          "sprite": "mics11"
+        },
+        {
+          "sprite": "mics63"
+        }
+      ]
+    }
+  ]
+}
