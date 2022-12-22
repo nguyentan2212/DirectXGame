@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Assets\Animations\items.json" />
     <None Include="Assets\Animations\raccoon-mario.json" />
     <None Include="Assets\Animations\small-mario.json" />
     <None Include="Assets\Animations\super-mario.json" />
@@ -161,6 +162,8 @@
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Game\GUI.h" />
+    <ClInclude Include="Game\Items\Brick.h" />
+    <ClInclude Include="Game\Items\Coin.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioFallState.h" />
     <ClInclude Include="Game\Mario\MarioHoldState.h" />
@@ -196,6 +199,8 @@
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\GUI.cpp" />
+    <ClCompile Include="Game\Items\Brick.cpp" />
+    <ClCompile Include="Game\Items\Coin.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioFallState.cpp" />
     <ClCompile Include="Game\Mario\MarioHoldState.cpp" />

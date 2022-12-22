@@ -44,6 +44,9 @@
     <None Include="Assets\Textures\hub-and-font.json">
       <Filter>Assets\Textures</Filter>
     </None>
+    <None Include="Assets\Animations\items.json">
+      <Filter>Assets\Animations</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -114,6 +117,9 @@
     </Filter>
     <Filter Include="Game\Scenes">
       <UniqueIdentifier>{71547433-44d7-4671-87f0-ab4498de6aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Items">
+      <UniqueIdentifier>{a250d508-c635-49b2-ba2f-5934ad79ac30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +222,12 @@
     <ClInclude Include="Game\GUI.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Items\Brick.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Items\Coin.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -308,6 +320,12 @@
     </ClCompile>
     <ClCompile Include="Game\GUI.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Items\Brick.cpp">
+      <Filter>Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Items\Coin.cpp">
+      <Filter>Game\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
