@@ -10,6 +10,7 @@ using json = nlohmann::json;
 class Scene
 {
 public:
+	Scene() {};
 	Scene(string configPath);
 
 	virtual void Update(float deltaTime);
