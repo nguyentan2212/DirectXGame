@@ -7,10 +7,10 @@ public:
 	Coin();
 
 	void Update(float deltaTime) override;
+	void Render() override;
 	void OnCollision(CollisionEvent colEvent) override;
 
 private:
-	bool _isActive = true;
 	Animation* GetAnimation() override;
 };
 
