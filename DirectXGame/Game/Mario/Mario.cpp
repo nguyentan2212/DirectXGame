@@ -23,7 +23,8 @@ void Mario::Update(float deltaTime)
 			this->_isGrounded = true;
 		}
 	}
-	if (this->_isGrounded == false && this->_state->name != "jump" && this->_state->name != "fall")
+	if (this->_isGrounded == false && this->_state->name != "jump" && 
+		this->_state->name != "fall" && this->_state->name != "fly")
 	{
 		//not on ground
 		TransitionTo(new MarioFallState());
