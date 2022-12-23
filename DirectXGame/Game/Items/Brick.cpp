@@ -8,7 +8,7 @@ Brick::Brick(): GameObject(new ObjectState())
 void Brick::Update(float deltaTime)
 {
 	GameObject::Update(deltaTime);
-	if (this->_isActive == false && this->_y > this->_position.y)
+	if (this->_isTouched == false && this->_y > this->_position.y)
 	{
 		this->_position.y = this->_y;
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
@@ -19,7 +19,7 @@ void Brick::Update(float deltaTime)
 Animation* Brick::GetAnimation()
 {
 	AnimationService* animations = AnimationService::GetInstance();
-	if (this->_isActive)
+	if (this->_isTouched)
 	{
 		return animations->GetAnimation("brick");
 	}
@@ -29,12 +29,11 @@ Animation* Brick::GetAnimation()
 
 void Brick::OnCollision(CollisionEvent colEvent)
 {
-	if (this->_isActive)
+	if (this->_isTouched)
 	{
 		string st = typeid(*colEvent.collisionObj).name();
 		if (st == "class Mario" && colEvent.direction == Direction::DOWN)
 		{
-			this->_isActive = false;
 			this->_y = this->_position.y;
 			this->_acceleration = VECTOR2D(this->_acceleration.x, -BRICK_GRAVITY);
 			this->_velocity = VECTOR2D(this->_velocity.x, BRICK_BOUND_SPEED);

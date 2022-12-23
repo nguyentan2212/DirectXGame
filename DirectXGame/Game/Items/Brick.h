@@ -12,7 +12,7 @@ public:
 	void OnCollision(CollisionEvent colEvent) override;
 
 private:
-	bool _isActive = true;
+	bool _isTouched = true;
 	float _y = 0.0f;
 	Animation* GetAnimation() override;
 };
