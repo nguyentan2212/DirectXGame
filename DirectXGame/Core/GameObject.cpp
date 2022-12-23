@@ -22,6 +22,11 @@ GameObject::~GameObject()
 
 void GameObject::Update(float deltaTime)
 {
+	if (this->_isActive == false)
+	{
+		return;
+	}
+
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 	if (this->_velocity != VECTOR2D(0.0f, 0.0f))
 	{
@@ -40,6 +45,11 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Render()
 {
+	if (this->_isActive == false)
+	{
+		return;
+	}
+
 	Camera* camera = Camera::GetInstance();
 	VECTOR2D cameraPosition = camera->position;
 
