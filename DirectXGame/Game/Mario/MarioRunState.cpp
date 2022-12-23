@@ -1,10 +1,10 @@
 #include "MarioRunState.h"
-#include "../../Core/GameObject.h"
 #include "MarioJumpState.h"
 #include "MarioIdleState.h"
 #include "MarioSitState.h"
 #include "MarioRunAndHoldState.h"
 #include "Mario.h"
+#include "MarioFlyState.h"
 #include <dinput.h>
 
 MarioRunState::MarioRunState(int direction): ObjectState()
@@ -33,7 +33,14 @@ void MarioRunState::OnKeyDown(int keyCode)
 {
 	if (keyCode == DIK_UP)
 	{
-		this->_context->TransitionTo(new MarioJumpState());
+		if (this->_context->name == "raccoon mario" && this->_name == "fast run")
+		{
+			this->_context->TransitionTo(new MarioFlyState());
+		}
+		else
+		{
+			this->_context->TransitionTo(new MarioJumpState());
+		}
 	}
 	else if (keyCode == DIK_DOWN)
 	{
