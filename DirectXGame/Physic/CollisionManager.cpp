@@ -191,8 +191,16 @@ void CollisionManager::Processing(float deltaTime)
 {
     for (GameObject* root : this->_listeners)
     {
+        if (root->isActive == false)
+        {
+            continue;
+        }
         for (GameObject* obj : this->_listeners)
         {
+            if (obj->isActive == false)
+            {
+                continue;
+            }
             if (root != obj)
             {
                 CollisionEvent colEvent = CalcAABB(root, obj, deltaTime);
