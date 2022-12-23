@@ -16,7 +16,7 @@ CSceneOne::CSceneOne(string configPath): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(30, 50);
+	mario->position = VECTOR2D(900, 70);
 	this->_gameObjects.push_back(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
