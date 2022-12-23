@@ -11,7 +11,7 @@ class GameObject;
 class ObjectState
 {
 public:
-	ObjectState() { this->_context = nullptr; this->_name = ""; }
+	ObjectState() { this->_context = nullptr; this->_name = "default"; }
 	~ObjectState();
 
 	virtual void OnTransition() {};
