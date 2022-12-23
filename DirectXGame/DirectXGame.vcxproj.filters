@@ -228,6 +228,9 @@
     <ClInclude Include="Game\Items\Coin.h">
       <Filter>Game\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Mario\MarioFlyState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -326,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="Game\Items\Coin.cpp">
       <Filter>Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioFlyState.cpp">
+      <Filter>Game\Mario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

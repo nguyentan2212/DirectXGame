@@ -166,6 +166,7 @@
     <ClInclude Include="Game\Items\Coin.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioFallState.h" />
+    <ClInclude Include="Game\Mario\MarioFlyState.h" />
     <ClInclude Include="Game\Mario\MarioHoldState.h" />
     <ClInclude Include="Game\Mario\MarioIdleState.h" />
     <ClInclude Include="Game\Mario\MarioJumpState.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="Game\Items\Coin.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioFallState.cpp" />
+    <ClCompile Include="Game\Mario\MarioFlyState.cpp" />
     <ClCompile Include="Game\Mario\MarioHoldState.cpp" />
     <ClCompile Include="Game\Mario\MarioIdleState.cpp" />
     <ClCompile Include="Game\Mario\MarioJumpState.cpp" />
