@@ -129,6 +129,18 @@ void GameObject::RemoveChildObject(GameObject* child)
 	}
 }
 
+GameObject* GameObject::GetChildWithName(string name)
+{
+	for (GameObject* child : this->_children)
+	{
+		if (child->name == name)
+		{
+			return child;
+		}
+	}
+	return nullptr;
+}
+
 string GameObject::GetStateName() const
 {
 	if (this->_state)

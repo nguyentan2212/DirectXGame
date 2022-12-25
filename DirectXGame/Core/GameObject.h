@@ -26,6 +26,7 @@ public:
 
 	void AddChildObject(GameObject* child);
 	void RemoveChildObject(GameObject* child);
+	GameObject* GetChildWithName(string name);
 
 	string GetStateName() const;
 
