@@ -21,6 +21,8 @@ public:
 	void OnKeyUp(int keyCode) override;
 	void OnCollision(CollisionEvent colEvent) override;
 
+	void IncreaseScore(int score);
+	void IncreaseCoin(int coin = 1);
 private:
 	bool _isGrounded = false;
 	Animation* GetAnimation() override;

@@ -100,6 +100,14 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
 }
 
+void Mario::IncreaseScore(int score)
+{
+}
+
+void Mario::IncreaseCoin(int coin)
+{
+}
+
 Animation* Mario::GetAnimation()
 {
 	string stateName = this->_name + " " + this->_state->name;
