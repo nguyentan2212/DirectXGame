@@ -2,6 +2,7 @@
 #include "MarioIdleState.h"
 #include "MarioJumpState.h"
 #include "MarioFallState.h"
+#include "../GUI.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
 
@@ -102,10 +103,28 @@ void Mario::OnCollision(CollisionEvent colEvent)
 
 void Mario::IncreaseScore(int score)
 {
+	GameObject* temp = GetChildWithName("gui");
+	if (temp != nullptr)
+	{
+		GUI* gui = dynamic_cast<GUI*>(temp);
+		if (gui != nullptr)
+		{
+			gui->IncreaseScore(score);
+		}
+	}
 }
 
 void Mario::IncreaseCoin(int coin)
 {
+	GameObject* temp = GetChildWithName("gui");
+	if (temp != nullptr)
+	{
+		GUI* gui = dynamic_cast<GUI*>(temp);
+		if (gui != nullptr)
+		{
+			gui->IncreaseCoin(coin);
+		}
+	}
 }
 
 Animation* Mario::GetAnimation()
