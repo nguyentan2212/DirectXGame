@@ -30,7 +30,7 @@ CSceneOne::CSceneOne(string configPath): Scene()
 	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
 	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
 
-	this->_gameObjects.push_back(new GUI());
+	mario->AddChildObject(new GUI);
 }
 
 void CSceneOne::InitObjects(json config)
