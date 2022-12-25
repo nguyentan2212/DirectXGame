@@ -5,26 +5,21 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
 
-Mario::Mario(): GameObject(new MarioIdleState())
+Mario::Mario(): GameObject(new MarioFallState())
 {
 	this->_showBoundingBox = true;
-	this->velocity = VECTOR2D(0.0f, -100.0f);
 	this->_name = "super mario";
 }
 
 void Mario::Update(float deltaTime)
 {
 	CollisionManager* collision = CollisionManager::GetInstance();
-	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, this->_height / 2.0f + 3.0f);
+	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 10.0f, deltaTime);
 	for (GameObject* obj : results)
 	{
 		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
 		{
 			this->_isGrounded = true;
-		}
-		if (obj->name == "panel")
-		{
-			DebugOut((wchar_t*)L"[INFO] Collisied with panel \n");
 		}
 	}
 	if (this->_isGrounded == false && this->_state->name != "jump" && 

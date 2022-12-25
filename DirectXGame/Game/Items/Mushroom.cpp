@@ -20,7 +20,7 @@ void Mushroom::Update(float deltaTime)
 
 	bool isGrounded = false;
 	CollisionManager* collision = CollisionManager::GetInstance();
-	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, this->_height / 2.0f + 3.0f);
+	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 5.0f, deltaTime);
 	for (GameObject* obj : results)
 	{
 		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
