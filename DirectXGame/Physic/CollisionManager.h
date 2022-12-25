@@ -11,11 +11,13 @@ class CollisionManager
 public:
 	static CollisionManager* GetInstance();
 	CollisionEvent CalcAABB(GameObject* objA, GameObject* objB, float deltaTime);
+	CollisionEvent CalcAABB(GameObject* objA, VECTOR2D vA, GameObject* objB, VECTOR2D vB, float deltaTime);
+
 	bool IsCollision(Box boxA, Box boxB);
 	void Processing(float deltaTime);
 
-	bool RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance);
-	list<GameObject*> RayCastWith(GameObject* objRoot, DIRECTION direction, float distance);
+	bool RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance, float deltaTime);
+	list<GameObject*> RayCastWith(GameObject* objRoot, DIRECTION direction, float distance, float deltaTime);
 
 	void AddListener(GameObject* listener);
 	void RemoveListener(GameObject* listener);
