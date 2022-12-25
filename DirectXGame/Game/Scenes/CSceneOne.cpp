@@ -16,7 +16,7 @@ CSceneOne::CSceneOne(string configPath): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(50, 70);
+	mario->position = VECTOR2D(900, 70);
 	this->_gameObjects.push_back(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -56,7 +56,7 @@ void CSceneOne::InitObjects(json config)
 		obj->width = item["width"].get<float>();
 		obj->height = item["height"].get<float>();
 		obj->position = position;
-		obj->name = item["name"].get<string>();
+		obj->name = obj->name.empty() ? item["name"].get<string>() : obj->name;
 		obj->showBoundingBox = true;
 
 		this->_gameObjects.push_back(obj);
