@@ -89,3 +89,13 @@ void GUI::Render()
 		sprite->Draw(pos.x, pos.y);
 	}
 }
+
+void GUI::IncreaseScore(int score)
+{
+	this->_score += score;
+}
+
+void GUI::IncreaseCoin(int coin)
+{
+	this->_money += coin;
+}
