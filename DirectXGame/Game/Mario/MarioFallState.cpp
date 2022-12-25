@@ -51,7 +51,7 @@ void MarioFallState::OnCollision(CollisionEvent colEvent)
         else if(keyboard->IsKeyDown(DIK_RIGHT)) // prev was running left
         {
             this->_context->velocity = VECTOR2D(abs(this->_context->velocity.x), 0.0f);
-            this->_context->TransitionTo(new MarioRunState(-1));
+            this->_context->TransitionTo(new MarioRunState(1));
         }
         else
         {
