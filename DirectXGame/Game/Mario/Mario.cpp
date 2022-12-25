@@ -22,6 +22,10 @@ void Mario::Update(float deltaTime)
 		{
 			this->_isGrounded = true;
 		}
+		if (obj->name == "panel")
+		{
+			DebugOut((wchar_t*)L"[INFO] Collisied with panel \n");
+		}
 	}
 	if (this->_isGrounded == false && this->_state->name != "jump" && 
 		this->_state->name != "fall" && this->_state->name != "fly")
