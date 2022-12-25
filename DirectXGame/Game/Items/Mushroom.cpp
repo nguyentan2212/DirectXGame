@@ -1,4 +1,5 @@
 #include "Mushroom.h"
+#include "../Mario/Mario.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
@@ -87,10 +88,11 @@ void Mushroom::OnCollision(CollisionEvent colEvent)
 		this->_velocity = VECTOR2D(this->_velocity.x, 0.0f);
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
 	}
-	string str = typeid(*colEvent.collisionObj).name();
-	if (str == "class Mario")
+	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+	if (mario != nullptr)
 	{
 		this->_renderIndex = 1;
+		mario->IncreaseScore(1000);
 	}
 	
 }

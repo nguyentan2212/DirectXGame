@@ -1,7 +1,9 @@
 #include "Coin.h"
+#include "../Mario/Mario.h"
 
 Coin::Coin(): GameObject(new ObjectState())
 {
+	this->_name = "coin";
 }
 
 void Coin::Update(float deltaTime)
@@ -16,9 +18,11 @@ void Coin::Render()
 
 void Coin::OnCollision(CollisionEvent colEvent)
 {
-	string st = typeid(*colEvent.collisionObj).name();
-	if (st == "class Mario")
+	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+
+	if (mario != nullptr)
 	{
+		mario->IncreaseCoin();
 		this->_isActive = false;
 	}
 }

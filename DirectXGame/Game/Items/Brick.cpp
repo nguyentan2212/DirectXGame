@@ -1,5 +1,6 @@
 #include "Brick.h"
 #include "Mushroom.h"
+#include "../Mario/Mario.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
@@ -108,8 +109,8 @@ void Brick::OnCollision(CollisionEvent colEvent)
 {
 	if (this->_isTouched == false)
 	{
-		string st = typeid(*colEvent.collisionObj).name();
-		if (st == "class Mario" && colEvent.direction == Direction::DOWN)
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+		if (mario != nullptr && colEvent.direction == Direction::DOWN)
 		{
 			this->_y = this->_position.y;
 			this->_acceleration = VECTOR2D(this->_acceleration.x, -BRICK_GRAVITY);
@@ -119,6 +120,10 @@ void Brick::OnCollision(CollisionEvent colEvent)
 			if (this->_name == "mushroom brick")
 			{
 				this->_renderIndex = 2;
+			}
+			else
+			{
+				mario->IncreaseScore(100);
 			}
 		}
 	}
