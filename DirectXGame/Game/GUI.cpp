@@ -5,6 +5,7 @@
 
 GUI::GUI(): GameObject(new ObjectState())
 {
+	this->_name = "gui";
 }
 
 void GUI::Update(float deltaTime)
