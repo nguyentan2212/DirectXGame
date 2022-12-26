@@ -76,3 +76,18 @@ void Camera::Follow(GameObject* obj, VECTOR2D vec)
 	this->_followedObj = obj;
 	this->_translateVector = vec;
 }
+
+Box Camera::GetBoundingBox()
+{
+	return Box(this->_position.x, this->_position.y, this->_width, this->_height);
+}
+
+bool Camera::IsDrawable(Box box)
+{
+	Box cameraBound = GetBoundingBox();
+	
+	return !(box.x + box.width < cameraBound.x ||
+		box.y + box.height < cameraBound.y ||
+		box.x > cameraBound.x + cameraBound.width ||
+		box.y > cameraBound.y + cameraBound.height);
+}

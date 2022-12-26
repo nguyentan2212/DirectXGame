@@ -12,6 +12,8 @@ public:
 	static Camera* GetInstance();
 	void Init(float width, float height);
 	void Follow(GameObject* obj, VECTOR2D vec = VECTOR2D(0.0f, 0.0f));
+	Box GetBoundingBox();
+	bool IsDrawable(Box box);
 
 	PROPERTY(VECTOR2D, position);
 	GET(position) { return this->_position; }
