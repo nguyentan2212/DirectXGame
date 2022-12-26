@@ -37,10 +37,6 @@ void GameObject::Update(float deltaTime)
 	{
 		ani->Update(deltaTime);
 	}
-	for (GameObject* obj : this->_children)
-	{
-		obj->Update(deltaTime);
-	}
 }
 
 void GameObject::Render()
@@ -58,10 +54,6 @@ void GameObject::Render()
 	if (animation != nullptr)
 	{
 		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
-	}
-	for (GameObject* obj : this->_children)
-	{
-		obj->Render();
 	}
 }
 
@@ -190,9 +182,7 @@ void GameObject::TransitionTo(ObjectState* state)
 /// <returns></returns>
 Box GameObject::GetBoundingBox()
 {
-	Camera* camera = Camera::GetInstance();
-
-	VECTOR2D result = this->GetWorldPosition() - camera->position;
+	VECTOR2D result = this->GetWorldPosition();
 	result -= VECTOR2D(this->_width, this->_height) / 2;
 
 	return Box(result.x, result.y, this->_width, this->_height);
@@ -203,8 +193,13 @@ Box GameObject::GetBoundingBox()
 /// </summary>
 void GameObject::DrawBoundingBox()
 {
+	Camera* camera = Camera::GetInstance();
+
 	Graphic* graphic = Graphic::GetInstance();
 	Box boundingBox = GetBoundingBox();
+	boundingBox.x -= camera->position.x;
+	boundingBox.y -= camera->position.y;
+
 	graphic->DrawBox(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
 
 	for (GameObject* obj : this->_children)

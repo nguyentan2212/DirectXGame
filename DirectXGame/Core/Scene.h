@@ -23,7 +23,6 @@ protected:
 	int _tileWidth;
 	int _tileHeight;
 
-	vector<GameObject*> _gameObjects;
 	vector<vector<Sprite*>> _tilemap;
 	vector<string> _tilesetNames;
 	vector<int> _tilesetFirstIds;

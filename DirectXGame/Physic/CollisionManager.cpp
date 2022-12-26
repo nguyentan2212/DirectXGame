@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include "../Core/ObjectPool.h"
 
 CollisionManager* CollisionManager::_instance = nullptr;
 
@@ -274,8 +275,11 @@ bool CollisionManager::RayCastBetween(GameObject* objA, GameObject* objB, DIRECT
 
 list<GameObject*> CollisionManager::RayCastWith(GameObject* objRoot, DIRECTION direction, float distance, float deltaTime)
 {
+    ObjectPool* pool = ObjectPool::GetInstance();
+    vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree(objRoot);
+
     list<GameObject*> results;
-    for (GameObject* obj : this->_listeners)
+    for (GameObject* obj : objs)
     {
         if (objRoot != obj)
         {
@@ -290,13 +294,18 @@ list<GameObject*> CollisionManager::RayCastWith(GameObject* objRoot, DIRECTION d
 
 void CollisionManager::Processing(float deltaTime)
 {
-    for (GameObject* root : this->_listeners)
+    ObjectPool* pool = ObjectPool::GetInstance();
+    vector<GameObject*> objs = pool->GetAllGameObject();
+
+    for (GameObject* root : objs)
     {
         if (root->isActive == false)
         {
             continue;
         }
-        for (GameObject* obj : this->_listeners)
+        vector<GameObject*> entities = pool->GetAllGameObjectWithQuadtree(root);
+
+        for (GameObject* obj : entities)
         {
             if (obj->isActive == false)
             {
@@ -312,14 +321,4 @@ void CollisionManager::Processing(float deltaTime)
             }
         }
     }
-}
-
-void CollisionManager::AddListener(GameObject* listener)
-{
-    this->_listeners.push_back(listener);
-}
-
-void CollisionManager::RemoveListener(GameObject* listener)
-{
-    this->_listeners.remove(listener);
 }

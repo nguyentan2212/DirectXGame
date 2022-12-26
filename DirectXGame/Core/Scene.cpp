@@ -3,6 +3,7 @@
 #include <fstream>
 #include "KeyboardHandler.h"
 #include "Camera.h"
+#include "ObjectPool.h"
 #include "../Physic/CollisionManager.h"
 #include "../Graphic/SpriteService.h"
 
@@ -10,31 +11,38 @@ Scene::Scene(string configPath)
 {
 	fstream file(configPath);
 	json config = json::parse(file);
-	this->_gameObjects = vector<GameObject*>(0);
 	InitTilemap(config);
 	InitObjects(config["objects"]);
 }
 
 void Scene::Update(float deltaTime)
 {
+	Camera* camera = Camera::GetInstance();
+	camera->Update(deltaTime);
+
+	ObjectPool* pool = ObjectPool::GetInstance();
+	pool->SetQuadtree(new Quadtree(5, camera->GetBoundingBox()));
+	vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree();
+
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	keyboard->Processing();
 
 	CollisionManager* collision = CollisionManager::GetInstance();
 	collision->Processing(deltaTime);
 
-	for (GameObject* obj : this->_gameObjects)
+
+	for (GameObject* obj : objs)
 	{
 		obj->Update(deltaTime);
 	}
-	Camera* camera = Camera::GetInstance();
-	camera->Update(deltaTime);
 }
 
 void Scene::Render()
 {
 	RenderTileMap();
-	for (GameObject* obj : this->_gameObjects)
+	ObjectPool* pool = ObjectPool::GetInstance();
+	vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree();
+	for (GameObject* obj : objs)
 	{
 		obj->Render();
 	}
@@ -42,7 +50,9 @@ void Scene::Render()
 
 void Scene::DrawBoundingBox()
 {
-	for (GameObject* obj : this->_gameObjects)
+	ObjectPool* pool = ObjectPool::GetInstance();
+	vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree();
+	for (GameObject* obj : objs)
 	{
 		obj->DrawBoundingBox();
 	}
@@ -97,7 +107,7 @@ void Scene::InitTilemap(json config)
 
 void Scene::InitObjects(json config)
 {
-	CollisionManager* collision = CollisionManager::GetInstance();
+	ObjectPool* pool = ObjectPool::GetInstance();
 	for (json item : config)
 	{
 		GameObject* obj = new GameObject(new ObjectState());
@@ -106,8 +116,7 @@ void Scene::InitObjects(json config)
 		obj->position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->name = item["name"].get<string>();
 		obj->showBoundingBox = true;
-		this->_gameObjects.push_back(obj);
-		collision->AddListener(obj);
+		pool->AddGameObject(obj);
 	}
 }
 
@@ -120,8 +129,9 @@ void Scene::RenderTileMap()
 	{
 		for (int j = 0; j < this->_height; j++)
 		{
-			if (this->_tilemap[j][i] != nullptr)
+			if (this->_tilemap[j][i] != nullptr && camera->IsDrawable(Box(i * this->_tileWidth, j * this->_tileHeight, this->_tileWidth, this->_tileHeight)))
 			{
+				
 				float tileCenterX = max(this->_tileWidth, this->_tilemap[j][i]->width) / 2.0f;
 				float tileCenterY = max(this->_tileHeight, this->_tilemap[j][i]->height) / 2.0f;
 

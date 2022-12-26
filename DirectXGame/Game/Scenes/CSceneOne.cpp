@@ -7,23 +7,24 @@
 #include "../../Physic/CollisionManager.h"
 #include "../Items/Brick.h"
 #include "../Items/Coin.h"
+#include "../../Utils/Quadtree.h"
+#include "../../Core/ObjectPool.h"
+
 CSceneOne::CSceneOne(string configPath): Scene()
 {
+	ObjectPool* pool = ObjectPool::GetInstance();
+
 	fstream file(configPath);
 	json config = json::parse(file);
-	this->_gameObjects = vector<GameObject*>(0);
 	InitTilemap(config);
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
 	mario->position = VECTOR2D(900, 70);
-	this->_gameObjects.push_back(mario);
+	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	keyboard->AddListener(mario);
-
-	CollisionManager* collision = CollisionManager::GetInstance();
-	collision->AddListener(mario);
 
 	Camera* camera = Camera::GetInstance();
 	camera->Follow(mario);
@@ -35,6 +36,7 @@ CSceneOne::CSceneOne(string configPath): Scene()
 
 void CSceneOne::InitObjects(json config)
 {
+	ObjectPool* pool = ObjectPool::GetInstance();
 	CollisionManager* collision = CollisionManager::GetInstance();
 	for (json item : config)
 	{
@@ -58,9 +60,7 @@ void CSceneOne::InitObjects(json config)
 		obj->position = position;
 		obj->name = obj->name.empty() ? item["name"].get<string>() : obj->name;
 		obj->showBoundingBox = true;
-
-		this->_gameObjects.push_back(obj);
-		collision->AddListener(obj);
+		pool->AddGameObject(obj);
 	}
 
 }

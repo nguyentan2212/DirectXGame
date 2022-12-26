@@ -19,11 +19,8 @@ public:
 	bool RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance, float deltaTime);
 	list<GameObject*> RayCastWith(GameObject* objRoot, DIRECTION direction, float distance, float deltaTime);
 
-	void AddListener(GameObject* listener);
-	void RemoveListener(GameObject* listener);
 private:
 	CollisionManager();
-	list<GameObject*> _listeners;
 
 	static CollisionManager* _instance;
 };
