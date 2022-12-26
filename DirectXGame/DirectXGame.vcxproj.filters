@@ -234,6 +234,12 @@
     <ClInclude Include="Game\Items\Mushroom.h">
       <Filter>Game\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Core\ObjectPool.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Quadtree.h">
+      <Filter>Utils\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -338,6 +344,12 @@
     </ClCompile>
     <ClCompile Include="Game\Items\Mushroom.cpp">
       <Filter>Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ObjectPool.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Quadtree.cpp">
+      <Filter>Utils\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

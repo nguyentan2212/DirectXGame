@@ -158,6 +158,7 @@
     <ClInclude Include="Core\GameEngine.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\KeyboardHandler.h" />
+    <ClInclude Include="Core\ObjectPool.h" />
     <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
@@ -191,12 +192,14 @@
     <ClInclude Include="Utils\Debug.h" />
     <ClInclude Include="Utils\json.hpp" />
     <ClInclude Include="Utils\Property.h" />
+    <ClInclude Include="Utils\Quadtree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\GameEngine.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />
+    <ClCompile Include="Core\ObjectPool.cpp" />
     <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
@@ -228,6 +231,7 @@
     <ClCompile Include="Physic\CollisionEvent.cpp" />
     <ClCompile Include="Physic\CollisionManager.cpp" />
     <ClCompile Include="Utils\Debug.cpp" />
+    <ClCompile Include="Utils\Quadtree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png" />
