@@ -176,10 +176,10 @@
       "y": 464
     },
     {
-      "class": "",
+      "class": "platform",
       "height": 32,
       "id": 63,
-      "name": "",
+      "name": "panel",
       "rotation": 0,
       "visible": true,
       "width": 80,
@@ -418,10 +418,10 @@
       "y": 144
     },
     {
-      "class": "",
+      "class": "coin",
       "height": 16,
       "id": 87,
-      "name": "coin",
+      "name": "",
       "rotation": 0,
       "visible": true,
       "width": 16,
@@ -429,10 +429,10 @@
       "y": 112
     },
     {
-      "class": "",
+      "class": "coin",
       "height": 16,
       "id": 88,
-      "name": "coin",
+      "name": "",
       "rotation": 0,
       "visible": true,
       "width": 16,

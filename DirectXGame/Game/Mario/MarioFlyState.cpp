@@ -29,7 +29,7 @@ void MarioFlyState::Update(float deltaTime)
 void MarioFlyState::OnCollision(CollisionEvent colEvent)
 {
 	string n = colEvent.collisionObj->name;
-	if ((n == "ground" || n == "panel") && colEvent.direction == Direction::DOWN)
+	if ((n == "ground" || n == "panel" || n == "cloud") && colEvent.direction == Direction::DOWN)
 	{
 		this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
 		this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0);
