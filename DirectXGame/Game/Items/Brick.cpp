@@ -4,6 +4,7 @@
 #include "../../Graphic/SpriteService.h"
 #include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
+#include "../../Core/ObjectPool.h"
 
 Brick::Brick(): GameObject(new ObjectState())
 {
@@ -20,10 +21,9 @@ void Brick::Update(float deltaTime)
 
 		if (this->_name == "mushroom brick")
 		{
-			CollisionManager* collision = CollisionManager::GetInstance();
+			ObjectPool* pool = ObjectPool::GetInstance();
 			Mushroom* m = new Mushroom(this->_position + VECTOR2D(0, 16.0f));
-			collision->AddListener(m);
-			this->_children.push_back(m);
+			pool->AddGameObject(m);
 			this->_renderIndex = 2;
 		}
 	}
