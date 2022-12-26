@@ -20,7 +20,7 @@ CSceneOne::CSceneOne(string configPath): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(900, 70);
+	mario->position = VECTOR2D(1550, 500);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -31,13 +31,16 @@ CSceneOne::CSceneOne(string configPath): Scene()
 	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
 	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
 
-	mario->AddChildObject(new GUI);
+	GUI* gui = new GUI();
+	mario->AddChildObject(gui);
+	pool->AddGameObject(gui);
 }
 
 void CSceneOne::InitObjects(json config)
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
 	CollisionManager* collision = CollisionManager::GetInstance();
+	int c = 0;
 	for (json item : config)
 	{
 		GameObject* obj = nullptr;
@@ -48,12 +51,13 @@ void CSceneOne::InitObjects(json config)
 		else if (item["class"].get<string>() == "coin")
 		{
 			obj = new Coin();
+			c++;
 		}
 		else
 		{
 			obj = new GameObject(new ObjectState());
 		}
-
+		
 		VECTOR2D position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->width = item["width"].get<float>();
 		obj->height = item["height"].get<float>();
@@ -62,5 +66,5 @@ void CSceneOne::InitObjects(json config)
 		obj->showBoundingBox = true;
 		pool->AddGameObject(obj);
 	}
-
+	DebugOut((wchar_t*)L"[INFO] Coin objs: %d \n", c);
 }
