@@ -44,6 +44,10 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, GameObject* objB, fl
         return CollisionEvent::NoCollision();
     }
 
+    /*if (objB->name == "pine" && objA->name == "small mario")
+    {
+        DebugOut((wchar_t*)L"[INFO] Mario and pine\n");
+    }*/
     float dxEntry, dxExit;
     float dyEntry, dyExit;
 
@@ -65,7 +69,7 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, GameObject* objB, fl
     else
     {
         dyEntry = (boxB.y + boxB.height) - boxA.y;
-        dyExit = (boxB.y + boxB.height) - boxA.y;
+        dyExit = boxB.y - (boxB.height + boxA.y);
     }
 
     float txEntry, txExit;
@@ -304,12 +308,19 @@ void CollisionManager::Processing(float deltaTime)
             continue;
         }
         vector<GameObject*> entities = pool->GetAllGameObjectWithQuadtree(root);
-
+        /*if (root->name == "small mario")
+        {
+            DebugOut((wchar_t*)L"[INFO] Mario region has: %d objects\n", entities.size());
+        }*/
         for (GameObject* obj : entities)
         {
             if (obj->isActive == false)
             {
                 continue;
+            }
+           if (obj->name == "pine" && root->name == "small mario")
+            {
+                DebugOut((wchar_t*)L"[INFO] Mario region has pine\n");
             }
             if (root != obj)
             {
