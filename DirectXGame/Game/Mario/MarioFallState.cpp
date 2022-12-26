@@ -40,7 +40,7 @@ void MarioFallState::Update(float deltaTime)
 void MarioFallState::OnCollision(CollisionEvent colEvent)
 {
     string objName = colEvent.collisionObj->name;
-    if (colEvent.direction == DIRECTION::DOWN && objName == "pine" || objName == "ground" || objName == "panel")
+    if (colEvent.direction == DIRECTION::DOWN && (objName == "pine" || objName == "ground" || objName == "panel" || objName == "cloud"))
     {
         KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
         if (keyboard->IsKeyDown(DIK_LEFT)) // prev was running left

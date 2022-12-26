@@ -9,7 +9,7 @@
 Mario::Mario(): GameObject(new MarioFallState())
 {
 	this->_showBoundingBox = true;
-	this->_name = "super mario";
+	this->_name = "small mario";
 }
 
 void Mario::Update(float deltaTime)
@@ -18,7 +18,7 @@ void Mario::Update(float deltaTime)
 	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 10.0f, deltaTime);
 	for (GameObject* obj : results)
 	{
-		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine")
+		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine" || obj->name == "cloud")
 		{
 			this->_isGrounded = true;
 		}
@@ -92,11 +92,12 @@ void Mario::OnKeyUp(int keyCode)
 void Mario::OnCollision(CollisionEvent colEvent)
 {
 	this->_state->OnCollision(colEvent);
-	if (colEvent.collisionObj->name == "pine" && colEvent.direction != Direction::DOWN)
+	if (colEvent.collisionObj->name == "pine")
 	{
 		this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
 		this->_velocity = VECTOR2D(0, 0);
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
+		TransitionTo(new MarioFallState());
 	}
 	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
 }
