@@ -52,8 +52,9 @@ public:
 	GET(acceleration) { return this->_acceleration; }
 	SET(acceleration) { this->_acceleration = value; }
 
-	R_PROPERTY(DIRECTION, direction);
+	PROPERTY(DIRECTION, direction);
 	GET(direction) { return this->_direction; }
+	SET(direction) { this->_direction = value; }
 
 	PROPERTY(bool, showBoundingBox);
 	GET(showBoundingBox) { return this->_showBoundingBox; }
