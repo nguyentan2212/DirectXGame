@@ -21,7 +21,7 @@ void GUI::Render()
 	// render hub
 	Sprite* sprite = sprites->GetSprite("hub-and-font/hub");
 	VECTOR2D pos = VECTOR2D(sprite->width / 2 + 5.0f, sprite->height / 2);
-	sprite->Draw(pos.x + 5.0f, pos.y);
+	sprite->Draw(pos.x + 5.0f, pos.y, false, 0.1f);
 
 	// render world index
 	sprite = sprites->GetSprite("hub-and-font/1");

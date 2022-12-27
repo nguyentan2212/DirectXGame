@@ -240,6 +240,12 @@
     <ClInclude Include="Utils\Quadtree.h">
       <Filter>Utils\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Mario\MarioChangeFigureState.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Items\Leaf.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -350,6 +356,12 @@
     </ClCompile>
     <ClCompile Include="Utils\Quadtree.cpp">
       <Filter>Utils\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Items\Leaf.cpp">
+      <Filter>Game\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

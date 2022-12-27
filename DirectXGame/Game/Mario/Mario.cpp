@@ -51,7 +51,7 @@ void Mario::Update(float deltaTime)
 void Mario::Render()
 {
 	_isFlipped = this->_direction == DIRECTION::LEFT ? false : true;
-	GameObject::Render();
+	GameObject::Render(-0.1);
 }
 
 void Mario::OnKeyDown(int keyCode)
