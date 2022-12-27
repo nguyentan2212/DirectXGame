@@ -299,6 +299,7 @@ list<GameObject*> CollisionManager::RayCastWith(GameObject* objRoot, DIRECTION d
 void CollisionManager::Processing(float deltaTime)
 {
     ObjectPool* pool = ObjectPool::GetInstance();
+
     vector<GameObject*> objs = pool->GetAllGameObject();
 
     for (GameObject* root : objs)
@@ -307,20 +308,21 @@ void CollisionManager::Processing(float deltaTime)
         {
             continue;
         }
+        if (root->name == "small mario")
+        {
+            DebugOut((wchar_t*)L"[INFO] Mario region\n");
+        }
+
         vector<GameObject*> entities = pool->GetAllGameObjectWithQuadtree(root);
-        /*if (root->name == "small mario")
+        if (root->name == "small mario")
         {
             DebugOut((wchar_t*)L"[INFO] Mario region has: %d objects\n", entities.size());
-        }*/
+        }
         for (GameObject* obj : entities)
         {
             if (obj->isActive == false)
             {
                 continue;
-            }
-           if (obj->name == "pine" && root->name == "small mario")
-            {
-                DebugOut((wchar_t*)L"[INFO] Mario region has pine\n");
             }
             if (root != obj)
             {

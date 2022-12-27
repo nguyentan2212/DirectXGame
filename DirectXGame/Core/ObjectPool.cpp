@@ -35,20 +35,22 @@ vector<GameObject*> ObjectPool::GetAllGameObject()
 
 vector<GameObject*> ObjectPool::GetAllGameObjectWithQuadtree(GameObject* obj)
 {
-    if (this->_quadtree == nullptr)
+    /*if (this->_quadtree == nullptr)
     {
         return vector<GameObject*>();
     }
-    return this->_quadtree->Retrieve(obj);
+    return this->_quadtree->Retrieve(obj);*/
+    return GetAllGameObject();
 }
 
 vector<GameObject*> ObjectPool::GetAllGameObjectWithQuadtree()
 {
-    if (this->_quadtree == nullptr)
+    /*if (this->_quadtree == nullptr)
     {
         return vector<GameObject*>();
     }
-    return this->_quadtree->GetAllGameObject();
+    return this->_quadtree->GetAllGameObject();*/
+    return GetAllGameObject();
 }
 
 void ObjectPool::AddGameObject(GameObject* obj)
