@@ -165,8 +165,10 @@
     <ClInclude Include="Game\GUI.h" />
     <ClInclude Include="Game\Items\Brick.h" />
     <ClInclude Include="Game\Items\Coin.h" />
+    <ClInclude Include="Game\Items\Leaf.h" />
     <ClInclude Include="Game\Items\Mushroom.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
+    <ClInclude Include="Game\Mario\MarioChangeFigureState.h" />
     <ClInclude Include="Game\Mario\MarioFallState.h" />
     <ClInclude Include="Game\Mario\MarioFlyState.h" />
     <ClInclude Include="Game\Mario\MarioHoldState.h" />
@@ -206,8 +208,10 @@
     <ClCompile Include="Game\GUI.cpp" />
     <ClCompile Include="Game\Items\Brick.cpp" />
     <ClCompile Include="Game\Items\Coin.cpp" />
+    <ClCompile Include="Game\Items\Leaf.cpp" />
     <ClCompile Include="Game\Items\Mushroom.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
+    <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp" />
     <ClCompile Include="Game\Mario\MarioFallState.cpp" />
     <ClCompile Include="Game\Mario\MarioFlyState.cpp" />
     <ClCompile Include="Game\Mario\MarioHoldState.cpp" />
