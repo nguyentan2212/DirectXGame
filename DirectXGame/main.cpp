@@ -13,7 +13,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 	// Register the window class.
 	GameEngine* app = GameEngine::GetInstance();
 	app->Init(hInstance, nCmdShow);
-	app->TransitionTo(new CSceneWorldMap());
+	app->TransitionTo(new CSceneOne());
 	app->Run();
 
 	return 0;
