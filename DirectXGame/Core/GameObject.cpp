@@ -41,6 +41,11 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Render()
 {
+	Render(0.0f);
+}
+
+void GameObject::Render(float zIndex)
+{
 	if (this->_isActive == false)
 	{
 		return;
@@ -53,7 +58,7 @@ void GameObject::Render()
 	Animation* animation = GetAnimation();
 	if (animation != nullptr)
 	{
-		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped);
+		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped, zIndex);
 	}
 }
 

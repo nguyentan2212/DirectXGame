@@ -17,6 +17,7 @@ public:
 
 	virtual void Update(float deltaTime);
 	virtual void Render();
+	virtual void Render(float zIndex);
 
 	virtual void Translate(float x, float y);
 	virtual void Translate(VECTOR2D vec);
