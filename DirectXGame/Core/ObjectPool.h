@@ -9,6 +9,7 @@ class ObjectPool
 public:
 	static ObjectPool* GetInstance();
 	GameObject* GetGameObjectWithName(string name);
+	GameObject* GetGameObjectWithClass(string className);
 	vector<GameObject*> GetAllGameObject();
 	vector<GameObject*> GetAllGameObjectWithQuadtree(GameObject* obj);
 	vector<GameObject*> GetAllGameObjectWithQuadtree();

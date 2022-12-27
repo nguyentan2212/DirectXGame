@@ -28,6 +28,18 @@ GameObject* ObjectPool::GetGameObjectWithName(string name)
     return nullptr;
 }
 
+GameObject* ObjectPool::GetGameObjectWithClass(string className)
+{
+    for (GameObject* obj : this->_objs)
+    {
+        if (typeid(*obj).name() == "class " + className)
+        {
+            return obj;
+        }
+    }
+    return nullptr;
+}
+
 vector<GameObject*> ObjectPool::GetAllGameObject()
 {
     return this->_objs;
