@@ -1,0 +1,31 @@
+{
+  "animations": [
+    {
+      "name": "venus fire trap attack",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "enemies/venus-fire-trap/0"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/1"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/2"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/3"
+        }
+      ]
+    },
+    {
+      "name": "venus fire trap sleep",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "enemies/venus-fire-trap/0"
+        }
+      ]
+    }
+  ]
+}

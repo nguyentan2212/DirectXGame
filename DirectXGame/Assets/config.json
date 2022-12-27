@@ -84,13 +84,24 @@
         "h": 56
       },
       "spritePath": "Assets/Textures/hub-and-font.json"
+    },
+    {
+      "name": "enemies",
+      "type": "spritesheet",
+      "image": "Assets/Textures/enemies.png",
+      "size": {
+        "w": 244,
+        "h": 60
+      },
+      "spritePath": "Assets/Textures/enemies.json"
     }
   ],
   "animations": [
     "Assets/Animations/super-mario.json",
     "Assets/Animations/small-mario.json",
     "Assets/Animations/raccoon-mario.json",
-    "Assets/Animations/items.json"
+    "Assets/Animations/items.json",
+    "Assets/Animations/enemies.json"
   ],
   "scenes": [
     "Assets/Tilemaps/stage-1.json"
