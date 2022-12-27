@@ -1,5 +1,6 @@
 #include "Brick.h"
 #include "Mushroom.h"
+#include "Leaf.h"
 #include "../Mario/Mario.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Core/Camera.h"
@@ -26,40 +27,47 @@ void Brick::Update(float deltaTime)
 			pool->AddGameObject(m);
 			this->_renderIndex = 2;
 		}
+		else if (this->_name == "leaf brick")
+		{
+			ObjectPool* pool = ObjectPool::GetInstance();
+			Leaf* m = new Leaf(this->_position + VECTOR2D(0, 16.0f));
+			pool->AddGameObject(m);
+			this->_renderIndex = 2;
+		}
 	}
 
-	if (this->_isTouched && this->_name != "mushroom brick")
+if (this->_isTouched && this->_name != "mushroom brick" && this->_name != "leaf brick")
+{
+	// update coin ani
+	if (this->_renderIndex == 0)
 	{
-		// update coin ani
-		if (this->_renderIndex == 0)
+		if (this->_tempY > 20.0f)
 		{
-			if (this->_tempY > 20.0f)
-			{
-				this->_tempVY += -BRICK_GRAVITY * deltaTime / 1000;
-				this->_tempY += this->_tempVY * deltaTime / 1000;
-				DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
-			}
-			else
-			{
-				this->_tempY = 21.0f;
-				this->_tempVY = 150.0f;
-				this->_renderIndex = 1;
-			}
+			this->_tempVY += -BRICK_GRAVITY * deltaTime / 1000;
+			this->_tempY += this->_tempVY * deltaTime / 1000;
+			DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
 		}
-		else if (this->_renderIndex == 1) // update score ani
+		else
 		{
-			if (this->_tempY > 20.0f)
-			{
-				this->_tempVY += -BRICK_GRAVITY * deltaTime / 1000;
-				this->_tempY += this->_tempVY * deltaTime / 1000;
-				DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
-			}
-			else
-			{
-				this->_renderIndex = 2;
-			}
+			this->_tempY = 21.0f;
+			this->_tempVY = 150.0f;
+			this->_renderIndex = 1;
 		}
 	}
+	else if (this->_renderIndex == 1) // update score ani
+	{
+		if (this->_tempY > 20.0f)
+		{
+			this->_tempVY += -BRICK_GRAVITY * deltaTime / 1000;
+			this->_tempY += this->_tempVY * deltaTime / 1000;
+			DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
+		}
+		else
+		{
+			this->_renderIndex = 2;
+		}
+	}
+}
 }
 
 void Brick::Render()
@@ -125,6 +133,13 @@ void Brick::OnCollision(CollisionEvent colEvent)
 			{
 				mario->IncreaseScore(100);
 			}
+		}
+
+		if (mario != nullptr && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT) && this->_name == "leaf brick")
+		{
+			this->_y = this->_position.y + 1;
+			this->_isTouched = true;
+			this->_renderIndex = 2;
 		}
 	}
 }
