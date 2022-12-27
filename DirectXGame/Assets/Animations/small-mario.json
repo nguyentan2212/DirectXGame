@@ -68,6 +68,60 @@
           "sprite": "small-mario/10"
         }
       ]
+    },
+    {
+      "name": "small mario change figure super mario",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/0"
+        },
+        {
+          "sprite": "super-mario/0"
+        },
+        {
+          "sprite": "small-mario/0"
+        },
+        {
+          "sprite": "super-mario/0"
+        },
+        {
+          "sprite": "small-mario/0"
+        },
+        {
+          "sprite": "super-mario/0"
+        },
+        {
+          "sprite": "super-mario/30"
+        },
+        {
+          "sprite": "super-mario/0"
+        },
+        {
+          "sprite": "super-mario/30"
+        }
+      ]
+    },
+    {
+      "name": "small mario change figure raccoon mario",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "mics110"
+        },
+        {
+          "sprite": "mics108"
+        },
+        {
+          "sprite": "mics109"
+        },
+        {
+          "sprite": "mics110"
+        },
+        {
+          "sprite": "mics111"
+        }
+      ]
     }
   ]
 }
