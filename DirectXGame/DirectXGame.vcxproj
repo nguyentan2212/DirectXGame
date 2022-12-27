@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Assets\Animations\enemies.json" />
     <None Include="Assets\Animations\items.json" />
     <None Include="Assets\Animations\raccoon-mario.json" />
     <None Include="Assets\Animations\small-mario.json" />
@@ -142,6 +143,7 @@
       <DeploymentContent>false</DeploymentContent>
     </None>
     <None Include="Assets\Textures\bounding-box.json" />
+    <None Include="Assets\Textures\enemies.json" />
     <None Include="Assets\Textures\hub-and-font.json" />
     <None Include="Assets\Textures\mics.json" />
     <None Include="Assets\Textures\raccoon-mario.json" />
@@ -162,6 +164,9 @@
     <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Game\Enemies\VenusFireTrap.h" />
+    <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h" />
+    <ClInclude Include="Game\Enemies\VenusFireTrapSleepState.h" />
     <ClInclude Include="Game\GUI.h" />
     <ClInclude Include="Game\Items\Brick.h" />
     <ClInclude Include="Game\Items\Coin.h" />
@@ -205,6 +210,9 @@
     <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
+    <ClCompile Include="Game\Enemies\VenusFireTrap.cpp" />
+    <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp" />
+    <ClCompile Include="Game\Enemies\VenusFireTrapSleepState.cpp" />
     <ClCompile Include="Game\GUI.cpp" />
     <ClCompile Include="Game\Items\Brick.cpp" />
     <ClCompile Include="Game\Items\Coin.cpp" />
@@ -239,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png" />
+    <Image Include="Assets\Textures\enemies.png" />
     <Image Include="Assets\Textures\hub-and-font.png" />
     <Image Include="Assets\Textures\mics.png" />
     <Image Include="Assets\Textures\raccoon-mario.png" />
