@@ -11,8 +11,8 @@ public:
     Sprite(float x, float y, float width, float height, Texture* texture);
     ~Sprite();
 
-    void Draw(float x, float y, bool isFlipped = false);
-    void Draw(VECTOR2D position, bool isFlipped = false);
+    void Draw(float x, float y, bool isFlipped = false, float zIndex = 0.0f);
+    void Draw(VECTOR2D position, bool isFlipped = false, float zIndex = 0.0f);
 
 #pragma region Properties
     R_PROPERTY(float, width);
