@@ -20,7 +20,7 @@ CSceneOne::CSceneOne(string configPath): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(1550, 500);
+	mario->position = VECTOR2D(800, 70);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
