@@ -44,7 +44,7 @@ void Sprite::Draw(float x, float y, bool isFlipped, float zIndex)
 
     Graphic* graphic = Graphic::GetInstance();
     D3DXMatrixTranslation(&matTranslation, x, y, zIndex + 0.5f);
-
+    
     MATRIX matScaling = this->_matScaling;
     if (isFlipped)
     {

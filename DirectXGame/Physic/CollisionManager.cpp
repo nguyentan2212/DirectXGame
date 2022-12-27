@@ -308,16 +308,16 @@ void CollisionManager::Processing(float deltaTime)
         {
             continue;
         }
-        if (root->name == "small mario")
+        /*if (root->name == "small mario")
         {
             DebugOut((wchar_t*)L"[INFO] Mario region\n");
-        }
+        }*/
 
         vector<GameObject*> entities = pool->GetAllGameObjectWithQuadtree(root);
-        if (root->name == "small mario")
+        /*if (root->name == "small mario")
         {
             DebugOut((wchar_t*)L"[INFO] Mario region has: %d objects\n", entities.size());
-        }
+        }*/
         for (GameObject* obj : entities)
         {
             if (obj->isActive == false)
