@@ -26,6 +26,21 @@ void Leaf::Update(float deltaTime)
 		this->_isActive = false;
 		return;
 	}
+
+	if (this->_renderIndex == 1)
+	{
+		if (this->_tempY <= 100.0f)
+		{
+			this->_tempY += LEAF_Y_SPEED / 3 * deltaTime / 1000;
+			DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
+		}
+		else
+		{
+			this->_renderIndex = 2;
+			this->_isActive = false;
+		}
+	}
+
 	GameObject::Update(deltaTime);
 	DebugOut((wchar_t*)L"[INFO] Leaf world y = %f \n", this->GetWorldPosition().y);
 }
