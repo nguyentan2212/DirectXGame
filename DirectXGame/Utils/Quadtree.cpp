@@ -117,7 +117,7 @@ void Quadtree::Insert(GameObject* obj)
 vector<GameObject*> Quadtree::Retrieve(GameObject* obj)
 {
 	vector<GameObject*> result;
-	if (this->_topLeft)
+	if (this->_topLeft != nullptr)
 	{
 		vector<GameObject*> temp;
 		if (this->_topLeft->IsContain(obj))
