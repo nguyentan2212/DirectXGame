@@ -10,6 +10,7 @@
 #include "../Game/Mario/Mario.h"
 #include "KeyboardHandler.h"
 #include "Camera.h"
+#include "Scene.h"
 
 using json = nlohmann::json;
 
@@ -100,13 +101,18 @@ void GameEngine::Run()
     }
 }
 
-void GameEngine::AddScene(Scene* scene)
+void GameEngine::TransitionTo(Scene* scene)
 {
-    this->_scenes.push_back(scene);
-    if (this->_currentScene == nullptr)
+    if (scene == nullptr)
     {
-        this->_currentScene = scene;
+        DebugOut((wchar_t*)L"[ERROR] Scene transition to NULL");
+        return;
     }
+
+    if (this->_currentScene != nullptr)
+        delete this->_currentScene;
+    this->_currentScene = scene;
+    this->_currentScene->context = this;
 }
 
 void GameEngine::Update(float deltaTime)

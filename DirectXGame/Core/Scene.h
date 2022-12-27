@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "GameObject.h"
+#include "GameEngine.h"
 #include "../Graphic/Sprite.h"
 #include "../Utils/json.hpp"
 
@@ -12,12 +13,18 @@ class Scene
 public:
 	Scene() {};
 	Scene(string configPath);
+	~Scene();
 
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual void DrawBoundingBox();
 
+	W_PROPERTY(GameEngine*, context);
+	SET(context) { this->_context = value; }
+
 protected:
+	GameEngine* _context;
+
 	int _width;
 	int _height;
 	int _tileWidth;

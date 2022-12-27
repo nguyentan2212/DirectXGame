@@ -15,6 +15,11 @@ Scene::Scene(string configPath)
 	InitObjects(config["objects"]);
 }
 
+Scene::~Scene()
+{
+	
+}
+
 void Scene::Update(float deltaTime)
 {
 	Camera* camera = Camera::GetInstance();
