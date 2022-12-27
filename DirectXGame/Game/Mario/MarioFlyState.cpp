@@ -82,7 +82,3 @@ void MarioFlyState::OnKeyUp(int keyCode)
 		this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
 	}
 }
-
-void MarioFlyState::OnChangeFigure()
-{
-}

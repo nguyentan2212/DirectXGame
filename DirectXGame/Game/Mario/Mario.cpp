@@ -2,6 +2,7 @@
 #include "MarioIdleState.h"
 #include "MarioJumpState.h"
 #include "MarioFallState.h"
+#include "MarioChangeFigureState.h"
 #include "../GUI.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
@@ -58,28 +59,15 @@ void Mario::OnKeyDown(int keyCode)
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	if (keyCode == DIK_X && keyboard->IsKeyDown(DIK_LCONTROL) && this->_name != "small mario")
 	{
-		this->_name = "small mario";
-		this->position = VECTOR2D(this->_position.x, this->_position.y - 8.0f);
-		this->_state->OnChangeFigure();
+		TransitionTo(new MarioChangeFigureState("small mario"));
 	}
 	else if (keyCode == DIK_R && keyboard->IsKeyDown(DIK_LCONTROL))
 	{
-		if (this->_name == "small mario")
-		{
-			this->position = VECTOR2D(this->_position.x, this->_position.y + 8.0f);
-		}
-
-		this->_name = "raccoon mario";
-		this->_state->OnChangeFigure();
+		TransitionTo(new MarioChangeFigureState("raccoon mario"));
 	}
 	else if (keyCode == DIK_S && keyboard->IsKeyDown(DIK_LCONTROL))
 	{
-		if (this->_name == "small mario")
-		{
-			this->position = VECTOR2D(this->_position.x, this->_position.y + 8.0f);
-		}
-		this->_name = "super mario";
-		this->_state->OnChangeFigure();
+		TransitionTo(new MarioChangeFigureState("super mario"));
 	}
 	this->_state->OnKeyDown(keyCode);
 }
@@ -97,7 +85,10 @@ void Mario::OnCollision(CollisionEvent colEvent)
 		this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
 		this->_velocity = VECTOR2D(0, 0);
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
-		TransitionTo(new MarioFallState());
+		if (colEvent.direction != Direction::DOWN)
+		{
+			TransitionTo(new MarioFallState());
+		}
 	}
 	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
 }

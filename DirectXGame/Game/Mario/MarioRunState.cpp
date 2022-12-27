@@ -61,26 +61,6 @@ void MarioRunState::OnKeyUp(int keyCode)
 	}
 }
 
-void MarioRunState::OnChangeFigure()
-{
-	if (this->_context->name == "small mario")
-	{
-		this->_context->width = 15.0f;
-		this->_context->height = 16.0f;
-	}
-	else if (this->_context->name == "super mario")
-	{
-		this->_context->width = 16.0f;
-		this->_context->height = 28.0f;
-	}
-	else if (this->_context->name == "raccoon mario")
-	{
-		this->_context->width = 21.0f;
-		this->_context->height = 28.0f;
-	}
-	// fast run -> w: 24, h: 28
-}
-
 void MarioRunState::Update(float deltaTime)
 {
 	if (this->_context->name == "raccoon mario")

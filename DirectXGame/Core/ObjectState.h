@@ -20,7 +20,6 @@ public:
 	virtual void OnKeyDown(int keyCode) {};
 	virtual void OnKeyUp(int keyCode) {};
 	virtual void OnCollision(CollisionEvent colEvent) {};
-	virtual void OnChangeFigure() {};
 
 	W_PROPERTY(GameObject*, context);
 	SET(context) { this->_context = value; }

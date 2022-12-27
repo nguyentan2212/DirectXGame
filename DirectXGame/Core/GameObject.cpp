@@ -173,7 +173,6 @@ void GameObject::TransitionTo(ObjectState* state)
 	this->_state = state;
 	this->_state->context = this;
 	this->_state->OnTransition();
-	this->_state->OnChangeFigure();
 }
 
 /// <summary>

@@ -42,22 +42,3 @@ void MarioKickState::OnKeyUp(int keyCode)
 		this->_context->TransitionTo(new MarioIdleState());
 	}
 }
-
-void MarioKickState::OnChangeFigure()
-{
-	if (this->_context->name == "small mario")
-	{
-		this->_context->width = 16.0f;
-		this->_context->height = 16.0f;
-	}
-	else if (this->_context->name == "small mario")
-	{
-		this->_context->width = 24.0f;
-		this->_context->height = 32.0f;
-	}
-	else if (this->_context->name == "raccoon mario")
-	{
-		this->_context->width = 22.0f;
-		this->_context->height = 28.0f;
-	}
-}
