@@ -57,7 +57,7 @@ Animation* AnimationService::GetAnimation(string name)
     Animation* animation = this->_animations[name];
     if (animation == nullptr)
     {
-        DebugOut(L"[ERROR] Sprite name: '%s' not found !\n", name);
+        DebugOut(L"[ERROR] Animation name: '%s' not found !\n", name);
     }
     return animation;
 }
