@@ -10,6 +10,7 @@
 #include "../Items/Coin.h"
 #include "../../Utils/Quadtree.h"
 #include "../../Core/ObjectPool.h"
+#include "../Enemies/VenusFireTrap.h"
 
 CSceneOne::CSceneOne(): Scene()
 {
@@ -23,7 +24,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(800, 70);
+	mario->position = VECTOR2D(280, 70);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -37,6 +38,10 @@ CSceneOne::CSceneOne(): Scene()
 	GUI* gui = new GUI();
 	mario->AddChildObject(gui);
 	pool->AddGameObject(gui);
+
+	VenusFireTrap* trap = new VenusFireTrap();
+	trap->position = VECTOR2D(367, 45);
+	pool->AddGameObject(trap);
 }
 
 void CSceneOne::InitObjects(json config)
