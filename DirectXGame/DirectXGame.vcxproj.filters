@@ -47,6 +47,12 @@
     <None Include="Assets\Animations\items.json">
       <Filter>Assets\Animations</Filter>
     </None>
+    <None Include="Assets\Textures\enemies.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="Assets\Animations\enemies.json">
+      <Filter>Assets\Animations</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -120,6 +126,9 @@
     </Filter>
     <Filter Include="Game\Items">
       <UniqueIdentifier>{a250d508-c635-49b2-ba2f-5934ad79ac30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Enemies">
+      <UniqueIdentifier>{90dacbdc-a8ce-4ecd-a8cb-3552ed133022}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +255,15 @@
     <ClInclude Include="Game\Items\Leaf.h">
       <Filter>Game\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Enemies\VenusFireTrap.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\VenusFireTrapSleepState.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -363,6 +381,15 @@
     <ClCompile Include="Game\Items\Leaf.cpp">
       <Filter>Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Enemies\VenusFireTrap.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\VenusFireTrapSleepState.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png">
@@ -387,6 +414,9 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="Assets\Textures\hub-and-font.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\enemies.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
