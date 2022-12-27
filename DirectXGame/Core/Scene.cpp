@@ -21,9 +21,8 @@ void Scene::Update(float deltaTime)
 	camera->Update(deltaTime);
 
 	ObjectPool* pool = ObjectPool::GetInstance();
-	pool->SetQuadtree(new Quadtree(5, camera->GetBoundingBox()));
-	vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree();
-
+	vector<GameObject*> objs = pool->GetAllGameObject();
+	pool->SetQuadtree(new Quadtree(0, Box(0,0, (float)_tileWidth * _width, (float) _tileHeight * _height)));
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	keyboard->Processing();
 
@@ -42,6 +41,7 @@ void Scene::Render()
 	RenderTileMap();
 	ObjectPool* pool = ObjectPool::GetInstance();
 	vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree();
+	
 	for (GameObject* obj : objs)
 	{
 		obj->Render();
