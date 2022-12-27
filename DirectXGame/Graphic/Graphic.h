@@ -65,6 +65,9 @@ private:
 	ID3D10Effect* _pBasicEffect;
 	ID3D10EffectTechnique* _pBasicTechnique;
 
+	ID3D10DepthStencilView* _pDepthStencilView;
+	ID3D10Texture2D* _pDepthStencilBuffer;
+	
 	//technique desc
 	D3D10_TECHNIQUE_DESC _techDesc;
 

@@ -67,8 +67,26 @@ void Graphic::CreateRenderTarget()
 		return;
 	}
 
+	D3D10_TEXTURE2D_DESC depthStencilDesc;
+
+	depthStencilDesc.Width = this->_backBufferWidth;
+	depthStencilDesc.Height = this->_backBufferHeight;
+	depthStencilDesc.MipLevels = 1;
+	depthStencilDesc.ArraySize = 1;
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthStencilDesc.SampleDesc.Count = 1;
+	depthStencilDesc.SampleDesc.Quality = 0;
+	depthStencilDesc.Usage = D3D10_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D10_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+
+	//Create the Depth/Stencil View
+	this->_pD3DDevice->CreateTexture2D(&depthStencilDesc, NULL, &this->_pDepthStencilBuffer);
+	this->_pD3DDevice->CreateDepthStencilView(this->_pDepthStencilBuffer, NULL, &this->_pDepthStencilView);
+
 	// set the render target
-	this->_pD3DDevice->OMSetRenderTargets(1, &this->_pRenderTargetView, NULL);
+	this->_pD3DDevice->OMSetRenderTargets(1, &this->_pRenderTargetView, this->_pDepthStencilView);
 }
 
 void Graphic::CreateViewPortAndSpriteObject()
@@ -333,6 +351,7 @@ Texture* Graphic::CreateTexture(LPCWSTR texturePath)
 void Graphic::Begin()
 {
 	this->_pD3DDevice->ClearRenderTargetView(this->_pRenderTargetView, BACKGROUND_COLOR);
+	this->_pD3DDevice->ClearDepthStencilView(this->_pDepthStencilView, D3D10_CLEAR_DEPTH | D3D10_CLEAR_STENCIL, 1.0f, 0);
 	FLOAT NewBlendFactor[4] = { 0,0,0,0 };
 	this->_pD3DDevice->OMSetBlendState(this->_pBlendStateAlpha, NewBlendFactor, 0xffffffff);
 }
@@ -412,4 +431,6 @@ Graphic::~Graphic()
 	if (this->_pIndexBuffer) this->_pIndexBuffer->Release();
 	if (this->_pRS) this->_pRS->Release();
 	if (this->_pBasicEffect) this->_pBasicEffect->Release();
+	if (this->_pDepthStencilBuffer) this->_pDepthStencilBuffer->Release();
+	if (this->_pDepthStencilView) this->_pDepthStencilView->Release();
 }
