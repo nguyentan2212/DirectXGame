@@ -1,5 +1,6 @@
 #include "CSceneOne.h"
 #include <fstream>
+#include "CSceneWorldMap.h"
 #include "../Mario/Mario.h"
 #include "../GUI.h"
 #include "../../Core/KeyboardHandler.h"
@@ -10,10 +11,12 @@
 #include "../../Utils/Quadtree.h"
 #include "../../Core/ObjectPool.h"
 
-CSceneOne::CSceneOne(string configPath): Scene()
+CSceneOne::CSceneOne(): Scene()
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
+	pool->Clear();
 
+	string configPath = SCENE_ONE;
 	fstream file(configPath);
 	json config = json::parse(file);
 	InitTilemap(config);
@@ -67,4 +70,14 @@ void CSceneOne::InitObjects(json config)
 		pool->AddGameObject(obj);
 	}
 	DebugOut((wchar_t*)L"[INFO] Coin objs: %d \n", c);
+}
+
+void CSceneOne::Update(float deltaTime)
+{
+	Scene::Update(deltaTime);
+	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+	if (keyboard->IsKeyDown(DIK_LCONTROL) && keyboard->IsKeyDown(DIK_0))
+	{
+		this->_context->TransitionTo(new CSceneWorldMap());
+	}
 }
