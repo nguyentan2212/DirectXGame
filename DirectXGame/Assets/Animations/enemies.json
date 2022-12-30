@@ -26,6 +26,24 @@
           "sprite": "enemies/venus-fire-trap/0"
         }
       ]
+    },
+    {
+      "name": "fire ball",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "enemies/venus-fire-trap/fire-ball-0"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/fire-ball-1"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/fire-ball-2"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/fire-ball-3"
+        }
+      ]
     }
   ]
 }
