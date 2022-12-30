@@ -15,7 +15,7 @@ MarioJumpState::MarioJumpState()
 void MarioJumpState::OnTransition()
 {
     this->_context->velocity = VECTOR2D(this->_context->velocity.x, MARIO_JUMP_SPEED_Y);
-    this->_context->acceleration = VECTOR2D(this->_context->acceleration.x, -MARIO_GRAVITY);
+    this->_context->acceleration = VECTOR2D(0.0f, -MARIO_GRAVITY);
 }
 
 void MarioJumpState::Update(float deltaTime)
@@ -40,6 +40,12 @@ void MarioJumpState::OnCollision(CollisionEvent colEvent)
 
 void MarioJumpState::OnKeyDown(int keyCode)
 {
+    if ((keyCode == DIK_LEFT && this->_context->velocity.x >= 0)
+        || (keyCode == DIK_RIGHT && this->_context->velocity.x <= 0))
+    {
+        int direction = (keyCode - DIK_LEFT) - 1;
+        this->_context->velocity = VECTOR2D(direction * MARIO_RUN_MAX_SPEED_X / 4.0f, this->_context->velocity.y);
+    }
 }
 
 void MarioJumpState::OnKeyUp(int keyCode)

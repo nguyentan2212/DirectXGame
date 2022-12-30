@@ -16,10 +16,6 @@ void MarioFallState::OnTransition()
 {
     this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0.0f);
     this->_context->acceleration = VECTOR2D(this->_context->acceleration.x, - MARIO_GRAVITY);
-}
-
-void MarioFallState::Update(float deltaTime)
-{
     if (this->_context->name == "small mario")
     {
         this->_context->width = 16.0f;
@@ -37,10 +33,17 @@ void MarioFallState::Update(float deltaTime)
     }
 }
 
+void MarioFallState::Update(float deltaTime)
+{
+}
+
 void MarioFallState::OnCollision(CollisionEvent colEvent)
 {
     string objName = colEvent.collisionObj->name;
-    if (colEvent.direction == DIRECTION::DOWN && (objName == "pine" || objName == "ground" || objName == "panel" || objName == "cloud"))
+    string typeName = typeid(*colEvent.collisionObj).name();
+    if (colEvent.direction == DIRECTION::DOWN 
+        && (objName == "pine" || objName == "ground" || objName == "panel" || objName == "cloud" 
+            || typeName == "class Brick"))
     {
         KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
         if (keyboard->IsKeyDown(DIK_LEFT)) // prev was running left
@@ -57,5 +60,15 @@ void MarioFallState::OnCollision(CollisionEvent colEvent)
         {
             this->_context->TransitionTo(new MarioIdleState());
         }
+    }
+}
+
+void MarioFallState::OnKeyDown(int keyCode)
+{
+    if ((keyCode == DIK_LEFT && this->_context->velocity.x >= 0)
+        || (keyCode == DIK_RIGHT && this->_context->velocity.x <= 0))
+    {
+        int direction = (keyCode - DIK_LEFT) - 1;
+        this->_context->velocity = VECTOR2D(direction * MARIO_RUN_MAX_SPEED_X / 4.0f, this->_context->velocity.y);
     }
 }

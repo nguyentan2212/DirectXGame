@@ -8,5 +8,6 @@ public:
 	void OnTransition() override;
 	void Update(float deltaTime) override;
 	void OnCollision(CollisionEvent colEvent) override;
+	void OnKeyDown(int keyCode) override;
 };
 
