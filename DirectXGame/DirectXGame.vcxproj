@@ -164,6 +164,7 @@
     <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Game\Enemies\FireBall.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrap.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrapSleepState.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
+    <ClCompile Include="Game\Enemies\FireBall.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrap.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrapSleepState.cpp" />

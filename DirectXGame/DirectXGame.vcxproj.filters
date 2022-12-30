@@ -264,6 +264,9 @@
     <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Enemies\FireBall.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -389,6 +392,9 @@
     </ClCompile>
     <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp">
       <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\FireBall.cpp">
+      <Filter>Core\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
