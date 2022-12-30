@@ -18,12 +18,12 @@ void MarioSitState::OnTransition()
 	if (this->_context->name == "super mario")
 	{
 		this->_context->width = 16.0f;
-		this->_context->height = 24.0f;
+		this->_context->height = 20.0f;
 	}
 	else if (this->_context->name == "raccoon mario")
 	{
 		this->_context->width = 21.0f;
-		this->_context->height = 28.0f;
+		this->_context->height = 20.0f;
 	}
 }
 
