@@ -31,7 +31,7 @@ void VenusFireTrapSleepState::Update(float deltaTime)
 	if (mario != nullptr)
 	{
 		VECTOR2D temp = this->_context->GetWorldPosition() - mario->GetWorldPosition();
-		if (abs(temp.x) <= FIRE_TRAP_X_DISTANCE_DETECH)
+		if (abs(temp.x) <= FIRE_TRAP_X_DISTANCE_DETECT)
 		{
 			Direction direction = temp.x < 0 ? Direction::RIGHT : Direction::LEFT;
 			this->_context->TransitionTo(new VenusFireTrapAttackState(direction));

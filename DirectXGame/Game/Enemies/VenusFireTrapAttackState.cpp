@@ -50,7 +50,7 @@ void VenusFireTrapAttackState::Update(float deltaTime)
 			this->_context->direction = direction;
 		}
 
-		if (abs(temp.x) > FIRE_TRAP_X_DISTANCE_DETECH)
+		if (abs(temp.x) > FIRE_TRAP_X_DISTANCE_DETECT)
 		{
 			this->_context->velocity = VECTOR2D(0.0f, -FIRE_TRAP_Y_SPEED);
 			this->_context->TransitionTo(new VenusFireTrapSleepState());
