@@ -7,10 +7,10 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
 
-Mario::Mario(): GameObject(new MarioFallState())
+Mario::Mario(): GameObject(new MarioIdleState())
 {
 	this->_showBoundingBox = true;
-	this->_name = "small mario";
+	this->_name = "super mario";
 }
 
 void Mario::Update(float deltaTime)
@@ -19,7 +19,9 @@ void Mario::Update(float deltaTime)
 	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 10.0f, deltaTime);
 	for (GameObject* obj : results)
 	{
-		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine" || obj->name == "cloud")
+		string typeName = typeid(*obj).name();
+		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine" || obj->name == "cloud"
+			|| typeName == "class Brick")
 		{
 			this->_isGrounded = true;
 		}
@@ -80,7 +82,7 @@ void Mario::OnKeyUp(int keyCode)
 void Mario::OnCollision(CollisionEvent colEvent)
 {
 	this->_state->OnCollision(colEvent);
-	if (colEvent.collisionObj->name == "pine")
+	if (colEvent.collisionObj->name == "pine" || colEvent.collisionObj->name == "ground")
 	{
 		this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
 		this->_velocity = VECTOR2D(0, 0);
