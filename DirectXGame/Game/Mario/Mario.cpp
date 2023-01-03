@@ -6,40 +6,50 @@
 #include "../GUI.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
+#include "MarioDeathState.h"
 
 Mario::Mario(): GameObject(new MarioIdleState())
 {
 	this->_showBoundingBox = true;
-	this->_name = "super mario";
+	this->_name = "small mario";
 }
 
 void Mario::Update(float deltaTime)
 {
-	CollisionManager* collision = CollisionManager::GetInstance();
-	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 10.0f, deltaTime);
-	for (GameObject* obj : results)
+	if (this->_isActive == false)
 	{
-		string typeName = typeid(*obj).name();
-		if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine" || obj->name == "cloud"
-			|| typeName == "class Brick")
+		return;
+	}
+	string className = typeid(*this->_state).name();
+	if (this->_state->name != "death")
+	{
+		CollisionManager* collision = CollisionManager::GetInstance();
+		list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 5.0f, deltaTime);
+		for (GameObject* obj : results)
 		{
-			this->_isGrounded = true;
+			string typeName = typeid(*obj).name();
+			if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine" || obj->name == "cloud"
+				|| typeName == "class Brick")
+			{
+				this->_isGrounded = true;
+			}
+		}
+		if (this->_isGrounded == false && this->_state->name != "jump" &&
+			this->_state->name != "fall" && this->_state->name != "fly" && className != "class MarioChangeFigureState")
+		{
+			//not on ground
+			TransitionTo(new MarioFallState());
+		}
+		if (this->_velocity.x < 0)
+		{
+			this->_direction = DIRECTION::LEFT;
+		}
+		else if (this->_velocity.x > 0)
+		{
+			this->_direction = DIRECTION::RIGHT;
 		}
 	}
-	if (this->_isGrounded == false && this->_state->name != "jump" && 
-		this->_state->name != "fall" && this->_state->name != "fly")
-	{
-		//not on ground
-		TransitionTo(new MarioFallState());
-	}
-	if (this->_velocity.x < 0)
-	{
-		this->_direction = DIRECTION::LEFT;
-	}
-	else if (this->_velocity.x > 0)
-	{
-		this->_direction = DIRECTION::RIGHT;
-	}
+
 	this->_state->Update(deltaTime);
 	GameObject::Update(deltaTime);
 	if (abs(this->_velocity.x) > MARIO_RUN_MAX_SPEED_X)
@@ -82,6 +92,12 @@ void Mario::OnKeyUp(int keyCode)
 void Mario::OnCollision(CollisionEvent colEvent)
 {
 	this->_state->OnCollision(colEvent);
+	if (this->_state->name == "death")
+	{
+		return;
+	}
+	string className = typeid(*colEvent.collisionObj).name();
+
 	if (colEvent.collisionObj->name == "pine" || colEvent.collisionObj->name == "ground")
 	{
 		this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
