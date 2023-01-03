@@ -11,6 +11,8 @@
 #include "../../Utils/Quadtree.h"
 #include "../../Core/ObjectPool.h"
 #include "../Enemies/VenusFireTrap.h"
+#include "../Enemies/Goomba.h"
+#include "../Enemies/KoopaParaTroopa.h"
 
 CSceneOne::CSceneOne(): Scene()
 {
@@ -24,7 +26,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(500, 70);
+	mario->position = VECTOR2D(600, 100);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -48,7 +50,6 @@ void CSceneOne::InitObjects(json config)
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
 	CollisionManager* collision = CollisionManager::GetInstance();
-	int c = 0;
 	for (json item : config)
 	{
 		GameObject* obj = nullptr;
@@ -59,7 +60,14 @@ void CSceneOne::InitObjects(json config)
 		else if (item["class"].get<string>() == "coin")
 		{
 			obj = new Coin();
-			c++;
+		}
+		else if (item["class"].get<string>() == "goomba")
+		{
+			obj = new Goomba();
+		}
+		else if (item["class"].get<string>() == "koopaparatroopa")
+		{
+			obj = new KoopaParaTroopa();
 		}
 		else
 		{
@@ -74,7 +82,6 @@ void CSceneOne::InitObjects(json config)
 		obj->showBoundingBox = true;
 		pool->AddGameObject(obj);
 	}
-	DebugOut((wchar_t*)L"[INFO] Coin objs: %d \n", c);
 }
 
 void CSceneOne::Update(float deltaTime)
