@@ -32,7 +32,7 @@ void Leaf::Update(float deltaTime)
 		if (this->_tempY <= 100.0f)
 		{
 			this->_tempY += LEAF_Y_SPEED / 3 * deltaTime / 1000;
-			DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
+			//DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
 		}
 		else
 		{
@@ -42,7 +42,7 @@ void Leaf::Update(float deltaTime)
 	}
 
 	GameObject::Update(deltaTime);
-	DebugOut((wchar_t*)L"[INFO] Leaf world y = %f \n", this->GetWorldPosition().y);
+	//DebugOut((wchar_t*)L"[INFO] Leaf world y = %f \n", this->GetWorldPosition().y);
 }
 
 void Leaf::Render()
