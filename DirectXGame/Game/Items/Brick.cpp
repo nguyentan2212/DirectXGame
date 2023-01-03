@@ -2,6 +2,7 @@
 #include "Mushroom.h"
 #include "Leaf.h"
 #include "../Mario/Mario.h"
+#include "../Enemies/KoopaParaTroopa.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
@@ -135,7 +136,10 @@ void Brick::OnCollision(CollisionEvent colEvent)
 			}
 		}
 
-		if (mario != nullptr && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT) && this->_name == "leaf brick")
+		KoopaParaTroopa* koopa = dynamic_cast<KoopaParaTroopa*>(colEvent.collisionObj);
+		if (koopa != nullptr && koopa->GetStateName() == "run"
+			&& (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT) 
+			&& this->_name == "leaf brick")
 		{
 			this->_y = this->_position.y + 1;
 			this->_isTouched = true;
