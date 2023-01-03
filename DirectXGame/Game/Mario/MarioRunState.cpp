@@ -5,6 +5,7 @@
 #include "MarioRunAndHoldState.h"
 #include "Mario.h"
 #include "MarioFlyState.h"
+#include "MarioKickState.h"
 #include <dinput.h>
 
 MarioRunState::MarioRunState(int direction): ObjectState()
@@ -58,6 +59,10 @@ void MarioRunState::OnKeyUp(int keyCode)
 	{
 		this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 		this->_context->TransitionTo(new MarioIdleState());
+	}
+	else if (keyCode == DIK_K)
+	{
+		this->_context->TransitionTo(new MarioKickState());
 	}
 }
 
