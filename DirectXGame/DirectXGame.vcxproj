@@ -165,6 +165,11 @@
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Game\Enemies\FireBall.h" />
+    <ClInclude Include="Game\Enemies\Goomba.h" />
+    <ClInclude Include="Game\Enemies\KoopaParaTroopa.h" />
+    <ClInclude Include="Game\Enemies\KoopaParaTroopaRunState.h" />
+    <ClInclude Include="Game\Enemies\KoopaParaTroopaStandState.h" />
+    <ClInclude Include="Game\Enemies\KoopaParaTroopaWalkState.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrap.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrapSleepState.h" />
@@ -175,6 +180,7 @@
     <ClInclude Include="Game\Items\Mushroom.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioChangeFigureState.h" />
+    <ClInclude Include="Game\Mario\MarioDeathState.h" />
     <ClInclude Include="Game\Mario\MarioFallState.h" />
     <ClInclude Include="Game\Mario\MarioFlyState.h" />
     <ClInclude Include="Game\Mario\MarioHoldState.h" />
@@ -212,6 +218,11 @@
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\Enemies\FireBall.cpp" />
+    <ClCompile Include="Game\Enemies\Goomba.cpp" />
+    <ClCompile Include="Game\Enemies\KoopaParaTroopa.cpp" />
+    <ClCompile Include="Game\Enemies\KoopaParaTroopaRunState.cpp" />
+    <ClCompile Include="Game\Enemies\KoopaParaTroopaStandState.cpp" />
+    <ClCompile Include="Game\Enemies\KoopaParaTroopaWalkState.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrap.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrapSleepState.cpp" />
@@ -222,6 +233,7 @@
     <ClCompile Include="Game\Items\Mushroom.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp" />
+    <ClCompile Include="Game\Mario\MarioDeathState.cpp" />
     <ClCompile Include="Game\Mario\MarioFallState.cpp" />
     <ClCompile Include="Game\Mario\MarioFlyState.cpp" />
     <ClCompile Include="Game\Mario\MarioHoldState.cpp" />

@@ -249,9 +249,6 @@
     <ClInclude Include="Utils\Quadtree.h">
       <Filter>Utils\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Mario\MarioChangeFigureState.h">
-      <Filter>Core\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Items\Leaf.h">
       <Filter>Game\Items</Filter>
     </ClInclude>
@@ -264,8 +261,29 @@
     <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Enemies\Goomba.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioDeathState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioChangeFigureState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\KoopaParaTroopa.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
     <ClInclude Include="Game\Enemies\FireBall.h">
-      <Filter>Core\Header</Filter>
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\KoopaParaTroopaWalkState.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\KoopaParaTroopaStandState.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\KoopaParaTroopaRunState.h">
+      <Filter>Game\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -378,9 +396,6 @@
     <ClCompile Include="Utils\Quadtree.cpp">
       <Filter>Utils\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp">
-      <Filter>Core\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Items\Leaf.cpp">
       <Filter>Game\Items</Filter>
     </ClCompile>
@@ -393,8 +408,29 @@
     <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Enemies\Goomba.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioDeathState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp">
+      <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\KoopaParaTroopa.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
     <ClCompile Include="Game\Enemies\FireBall.cpp">
-      <Filter>Core\Source</Filter>
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\KoopaParaTroopaWalkState.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\KoopaParaTroopaStandState.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\KoopaParaTroopaRunState.cpp">
+      <Filter>Game\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
