@@ -122,6 +122,15 @@
           "sprite": "mics111"
         }
       ]
+    },
+    {
+      "name": "small mario death",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "small-mario/17"
+        }
+      ]
     }
   ]
 }

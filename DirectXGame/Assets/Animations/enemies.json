@@ -44,6 +44,54 @@
           "sprite": "enemies/venus-fire-trap/fire-ball-3"
         }
       ]
+    },
+    {
+      "name": "goomba walk",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "enemies/goomba/0"
+        },
+        {
+          "sprite": "enemies/goomba/1"
+        }
+      ]
+    },
+    {
+      "name": "koopa paratroopa walk",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "enemies/koopa-paratroopa/0"
+        },
+        {
+          "sprite": "enemies/koopa-paratroopa/1"
+        }
+      ]
+    },
+    {
+      "name": "koopa paratroopa run",
+      "defaultTime": 600,
+      "frames": [
+        {
+          "sprite": "enemies/koopa-paratroopa/4"
+        },
+        {
+          "sprite": "enemies/koopa-paratroopa/5"
+        },
+        {
+          "sprite": "enemies/koopa-paratroopa/6"
+        }
+      ]
+    },
+    {
+      "name": "koopa paratroopa stand",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "enemies/koopa-paratroopa/2"
+        }
+      ]
     }
   ]
 }
