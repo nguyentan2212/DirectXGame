@@ -44,7 +44,7 @@ void MarioJumpState::OnKeyDown(int keyCode)
         || (keyCode == DIK_RIGHT && this->_context->velocity.x <= 0))
     {
         int direction = (keyCode - DIK_LEFT) - 1;
-        this->_context->velocity = VECTOR2D(direction * MARIO_RUN_MAX_SPEED_X / 4.0f, this->_context->velocity.y);
+        this->_context->velocity = VECTOR2D(direction * MARIO_RUN_MAX_SPEED_X / 2.0f, this->_context->velocity.y);
     }
 }
 
