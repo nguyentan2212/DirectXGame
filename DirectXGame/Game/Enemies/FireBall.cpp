@@ -1,6 +1,8 @@
 #include "FireBall.h"
 #include "../Mario/Mario.h"
 #include "../../Core/ObjectState.h"
+#include "../Mario/MarioChangeFigureState.h"
+#include "../Mario/MarioDeathState.h"
 
 FireBall::FireBall(VECTOR2D begin, float maxLength): GameObject(new ObjectState())
 {
@@ -38,10 +40,21 @@ void FireBall::Render()
 void FireBall::OnCollision(CollisionEvent colEvent)
 {
 	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+
 	if (mario != nullptr)
 	{
 		this->_isActive = false;
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
+
+		string stateName = mario->GetStateName();
+		if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
+		{
+			mario->TransitionTo(new MarioChangeFigureState("small mario"));
+		}
+		else if (stateName.find("change figure") == string::npos)
+		{
+			mario->TransitionTo(new MarioDeathState());
+		}
 	}
 }
 
