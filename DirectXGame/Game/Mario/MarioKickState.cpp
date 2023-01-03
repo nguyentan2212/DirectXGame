@@ -4,6 +4,7 @@
 #include "MarioSitState.h"
 #include "MarioIdleState.h"
 #include "../../Core/GameObject.h"
+#include "../../Core/KeyboardHandler.h"
 #include <dinput.h>
 
 MarioKickState::MarioKickState()
@@ -12,10 +13,28 @@ MarioKickState::MarioKickState()
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Kick State \n");
 }
 
+void MarioKickState::Update(float deltaTime)
+{
+	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+	this->_cooldown -= deltaTime;
+	if (this->_cooldown <= 0)
+	{
+		this->_cooldown = KICK_COOLDOWN;
+		if (keyboard->IsKeyDown(DIK_LEFT))
+		{
+			this->_context->TransitionTo(new MarioRunState(-1));
+		}
+		else if (keyboard->IsKeyDown(DIK_RIGHT))
+		{
+			this->_context->TransitionTo(new MarioRunState(1));
+		}
+	}
+}
+
 void MarioKickState::OnTransition()
 {
-	this->_context->velocity = VECTOR2D(0.0f, 0.0f);
-	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
+	/*this->_context->velocity = VECTOR2D(0.0f, 0.0f);
+	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);*/
 }
 
 void MarioKickState::OnKeyDown(int keyCode)
