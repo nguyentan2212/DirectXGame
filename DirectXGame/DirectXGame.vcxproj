@@ -170,6 +170,9 @@
     <ClInclude Include="Game\Enemies\KoopaParaTroopaRunState.h" />
     <ClInclude Include="Game\Enemies\KoopaParaTroopaStandState.h" />
     <ClInclude Include="Game\Enemies\KoopaParaTroopaWalkState.h" />
+    <ClInclude Include="Game\Enemies\ParaGoomba.h" />
+    <ClInclude Include="Game\Enemies\ParaGoombaJumpState.h" />
+    <ClInclude Include="Game\Enemies\ParaGoombaNormalState.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrap.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrapSleepState.h" />
@@ -223,6 +226,9 @@
     <ClCompile Include="Game\Enemies\KoopaParaTroopaRunState.cpp" />
     <ClCompile Include="Game\Enemies\KoopaParaTroopaStandState.cpp" />
     <ClCompile Include="Game\Enemies\KoopaParaTroopaWalkState.cpp" />
+    <ClCompile Include="Game\Enemies\ParaGoomba.cpp" />
+    <ClCompile Include="Game\Enemies\ParaGoombaJumpState.cpp" />
+    <ClCompile Include="Game\Enemies\ParaGoombaNormalState.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrap.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrapSleepState.cpp" />

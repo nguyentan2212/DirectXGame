@@ -285,6 +285,15 @@
     <ClInclude Include="Game\Enemies\KoopaParaTroopaRunState.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Enemies\ParaGoomba.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\ParaGoombaNormalState.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\ParaGoombaJumpState.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -430,6 +439,15 @@
       <Filter>Game\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Game\Enemies\KoopaParaTroopaRunState.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\ParaGoomba.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\ParaGoombaNormalState.cpp">
+      <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\ParaGoombaJumpState.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
