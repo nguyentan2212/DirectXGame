@@ -92,6 +92,30 @@
           "sprite": "enemies/koopa-paratroopa/2"
         }
       ]
+    },
+    {
+      "name": "paragoomba walk",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "enemies/paragoomba/0"
+        },
+        {
+          "sprite": "enemies/paragoomba/1"
+        }
+      ]
+    },
+    {
+      "name": "wing",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "enemies/wing-0"
+        },
+        {
+          "sprite": "enemies/wing-1"
+        }
+      ]
     }
   ]
 }

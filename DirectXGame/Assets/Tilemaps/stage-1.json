@@ -570,6 +570,17 @@
       "width": 4,
       "x": 608,
       "y": 416
+    },
+    {
+      "class": "paragoomba",
+      "height": 16,
+      "id": 102,
+      "name": "",
+      "rotation": 0,
+      "visible": true,
+      "width": 16,
+      "x": 944,
+      "y": 432
     }
   ],
   "data": [
