@@ -13,6 +13,7 @@
 #include "../Enemies/VenusFireTrap.h"
 #include "../Enemies/Goomba.h"
 #include "../Enemies/KoopaParaTroopa.h"
+#include "../Enemies/ParaGoomba.h"
 
 CSceneOne::CSceneOne(): Scene()
 {
@@ -26,7 +27,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(600, 100);
+	mario->position = VECTOR2D(650, 100);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -68,6 +69,10 @@ void CSceneOne::InitObjects(json config)
 		else if (item["class"].get<string>() == "koopaparatroopa")
 		{
 			obj = new KoopaParaTroopa();
+		}
+		else if (item["class"].get<string>() == "paragoomba")
+		{
+			obj = new ParaGoomba();
 		}
 		else
 		{
