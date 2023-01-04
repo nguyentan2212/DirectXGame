@@ -51,12 +51,11 @@ void Goomba::Update(float deltaTime)
 	{
 		if (this->_tempY <= 80.0f)
 		{
-			this->_tempY += GOOMBA_SPEED * 1.5 * deltaTime / 1000;
+			this->_tempY += GOOMBA_SPEED * 1.5f * deltaTime / 1000;
 			DebugOut((wchar_t*)L"[INFO] Goomba tempY = %f \n", _tempY);
 		}
 		else
 		{
-			this->_isDeath = true;
 			this->_isActive = false;
 		}
 	}
@@ -92,7 +91,10 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 		if (mario != nullptr)
 		{
 			string stateName = mario->GetStateName();
-
+			if (stateName == "death")
+			{
+				return;
+			}
 			if (colEvent.direction == Direction::UP)
 			{
 				this->_isDeath = true;

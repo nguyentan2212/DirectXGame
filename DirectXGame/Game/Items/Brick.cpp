@@ -121,6 +121,11 @@ void Brick::OnCollision(CollisionEvent colEvent)
 		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
 		if (mario != nullptr && colEvent.direction == Direction::DOWN)
 		{
+			if (mario->GetStateName() == "death")
+			{
+				return;
+			}
+
 			this->_y = this->_position.y;
 			this->_acceleration = VECTOR2D(this->_acceleration.x, -BRICK_GRAVITY);
 			this->_velocity = VECTOR2D(this->_velocity.x, BRICK_BOUND_SPEED);
