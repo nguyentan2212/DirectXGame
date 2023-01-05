@@ -113,6 +113,27 @@
           "sprite": "raccoon-mario/12"
         }
       ]
+    },
+    {
+      "name": "raccoon mario change figure small mario",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "mics110"
+        },
+        {
+          "sprite": "mics108"
+        },
+        {
+          "sprite": "mics109"
+        },
+        {
+          "sprite": "mics110"
+        },
+        {
+          "sprite": "mics111"
+        }
+      ]
     }
   ]
 }
