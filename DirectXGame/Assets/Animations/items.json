@@ -56,6 +56,18 @@
           "sprite": "mics63"
         }
       ]
+    },
+    {
+      "name": "mario max speed",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "hub-and-font/label-f-black"
+        },
+        {
+          "sprite": "hub-and-font/label-f-white"
+        }
+      ]
     }
   ]
 }

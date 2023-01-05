@@ -2,6 +2,7 @@
 #include "../Core/Camera.h"
 #include "../Graphic/SpriteService.h"
 #include <string> 
+#include "Mario/Mario.h"
 
 GUI::GUI(): GameObject(new ObjectState())
 {
@@ -12,6 +13,9 @@ void GUI::Update(float deltaTime)
 {
 	this->_totalTime += deltaTime / 1000;
 	this->_time = floor(this->_totalTime);
+	AnimationService* anis = AnimationService::GetInstance();
+	Animation* ani = anis->GetAnimation("mario max speed");
+	ani->Update(deltaTime);
 }
 
 void GUI::Render()
@@ -49,14 +53,31 @@ void GUI::Render()
 	}
 
 	// render acce bar
+	int whiteAcc = this->_speed != 0 ? (int)floor(this->_speed / MARIO_RUN_MAX_SPEED_X * 6.0f) : 0;
+
 	sprite = sprites->GetSprite("hub-and-font/arrow-white");
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < whiteAcc; i++)
 	{
 		sprite->Draw(pos.x + i * sprite->width - 15.0f, pos.y + 2.0f);
 	}
-	sprite = sprites->GetSprite("hub-and-font/label-f-white");
-	sprite->Draw(pos.x + 38.0f, pos.y + 2.0f);
+	sprite = sprites->GetSprite("hub-and-font/arrow-black");
+	for (int i = whiteAcc; i < 6; i++)
+	{
+		sprite->Draw(pos.x + i * sprite->width - 15.0f, pos.y + 2.0f);
+	}
 
+	if (whiteAcc == 6)
+	{
+		AnimationService* anis = AnimationService::GetInstance();
+		Animation* ani = anis->GetAnimation("mario max speed");
+		ani->Render(pos.x + 38.0f, pos.y + 2.0f);
+	}
+	else
+	{
+		sprite = sprites->GetSprite("hub-and-font/label-f-black");
+		sprite->Draw(pos.x + 38.0f, pos.y + 2.0f);
+	}
+	
 	// render money
 	if (this->_money > 10)
 	{
@@ -98,4 +119,9 @@ void GUI::IncreaseScore(int score)
 void GUI::IncreaseCoin(int coin)
 {
 	this->_money += coin;
+}
+
+void GUI::UpdateRunSpeed(float speed)
+{
+	this->_speed = speed;
 }
