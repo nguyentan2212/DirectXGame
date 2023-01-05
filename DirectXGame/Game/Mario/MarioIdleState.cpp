@@ -5,6 +5,7 @@
 #include "MarioSitState.h"
 #include "MarioKickState.h"
 #include "MarioHoldState.h"
+#include "MarioAttackState.h"
 #include "Mario.h"
 #include <dinput.h>
 
@@ -61,6 +62,12 @@ void MarioIdleState::OnKeyDown(int keyCode)
 		break;
 	case DIK_H:
 		this->_context->TransitionTo(new MarioHoldState());
+		break;
+	case DIK_A:
+		if (this->_context->name == "raccoon mario")
+		{
+			this->_context->TransitionTo(new MarioAttackState());
+		}
 		break;
 	default:
 		break;

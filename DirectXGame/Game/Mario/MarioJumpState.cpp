@@ -3,6 +3,7 @@
 #include "MarioRunState.h"
 #include "MarioIdleState.h"
 #include "MarioFallState.h"
+#include "MarioAttackState.h"
 #include "Mario.h"
 #include <dinput.h>
 
@@ -46,6 +47,10 @@ void MarioJumpState::OnKeyDown(int keyCode)
     {
         int direction = (keyCode - DIK_LEFT) - 1;
         this->_context->velocity = VECTOR2D(direction * MARIO_RUN_MAX_SPEED_X / 2.0f, this->_context->velocity.y);
+    }
+    else if (keyCode == DIK_A && this->_context->name == "raccoon mario")
+    {
+        this->_context->TransitionTo(new MarioAttackState());
     }
 }
 

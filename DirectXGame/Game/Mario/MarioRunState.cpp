@@ -6,6 +6,7 @@
 #include "Mario.h"
 #include "MarioFlyState.h"
 #include "MarioKickState.h"
+#include "MarioAttackState.h"
 #include <dinput.h>
 
 MarioRunState::MarioRunState(int direction): ObjectState()
@@ -53,6 +54,12 @@ void MarioRunState::OnKeyDown(int keyCode)
 	else if (keyCode == DIK_H)
 	{
 		this->_context->TransitionTo(new MarioRunAndHoldState(0));
+	}
+	else if (keyCode == DIK_A && this->_context->name == "raccoon mario")
+	{
+		Mario* mario = dynamic_cast<Mario*>(this->_context);
+		mario->UpdateRunSpeed(0.0f);
+		this->_context->TransitionTo(new MarioAttackState());
 	}
 }
 
