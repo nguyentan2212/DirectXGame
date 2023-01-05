@@ -294,6 +294,9 @@
     <ClInclude Include="Game\Enemies\ParaGoombaJumpState.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Mario\MarioAttackState.h">
+      <Filter>Game\Mario</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -449,6 +452,9 @@
     </ClCompile>
     <ClCompile Include="Game\Enemies\ParaGoombaJumpState.cpp">
       <Filter>Game\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Mario\MarioAttackState.cpp">
+      <Filter>Game\Mario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

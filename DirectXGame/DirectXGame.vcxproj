@@ -182,6 +182,7 @@
     <ClInclude Include="Game\Items\Leaf.h" />
     <ClInclude Include="Game\Items\Mushroom.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
+    <ClInclude Include="Game\Mario\MarioAttackState.h" />
     <ClInclude Include="Game\Mario\MarioChangeFigureState.h" />
     <ClInclude Include="Game\Mario\MarioDeathState.h" />
     <ClInclude Include="Game\Mario\MarioFallState.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Game\Items\Leaf.cpp" />
     <ClCompile Include="Game\Items\Mushroom.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
+    <ClCompile Include="Game\Mario\MarioAttackState.cpp" />
     <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp" />
     <ClCompile Include="Game\Mario\MarioDeathState.cpp" />
     <ClCompile Include="Game\Mario\MarioFallState.cpp" />
