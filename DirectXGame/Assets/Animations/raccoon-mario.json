@@ -134,6 +134,21 @@
           "sprite": "mics111"
         }
       ]
+    },
+    {
+      "name": "raccoon mario attack",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "raccoon-mario/14"
+        },
+        {
+          "sprite": "raccoon-mario/15"
+        },
+        {
+          "sprite": "raccoon-mario/16"
+        }
+      ]
     }
   ]
 }
