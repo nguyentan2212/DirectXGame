@@ -6,15 +6,16 @@
 #include "Mario.h"
 #include <dinput.h>
 
-MarioJumpState::MarioJumpState()
+MarioJumpState::MarioJumpState(float speedFactor)
 {
     this->_name = "jump";
+    this->_speedFactor = speedFactor;
     DebugOut((wchar_t*)L"[INFO] Mario transition to Jump State \n");
 }
 
 void MarioJumpState::OnTransition()
 {
-    this->_context->velocity = VECTOR2D(this->_context->velocity.x, MARIO_JUMP_SPEED_Y);
+    this->_context->velocity = VECTOR2D(this->_context->velocity.x, MARIO_JUMP_SPEED_Y * this->_speedFactor);
     this->_context->acceleration = VECTOR2D(0.0f, -MARIO_GRAVITY);
 }
 

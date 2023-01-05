@@ -36,7 +36,7 @@ void KoopaParaTroopaWalkState::OnCollision(CollisionEvent colEvent)
 			if (colEvent.direction == Direction::UP)
 			{
 				this->_context->TransitionTo(new KoopaParaTroopaStandState());
-				mario->TransitionTo(new MarioJumpState());
+				mario->TransitionTo(new MarioJumpState(0.5f));
 			}
 			else
 			{

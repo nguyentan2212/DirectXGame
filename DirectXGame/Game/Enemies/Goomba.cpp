@@ -104,7 +104,7 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 				this->position = pos;
 				this->_height = 9.0f;
 
-				mario->TransitionTo(new MarioJumpState());
+				mario->TransitionTo(new MarioJumpState(0.5f));
 			}
 			else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 			{

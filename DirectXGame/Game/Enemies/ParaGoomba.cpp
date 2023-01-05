@@ -144,7 +144,7 @@ void ParaGoomba::OnCollision(CollisionEvent colEvent)
 			{
 				this->isLostWings = true;
 			}
-			mario->TransitionTo(new MarioJumpState());
+			mario->TransitionTo(new MarioJumpState(0.5f));
 		}
 		else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 		{
