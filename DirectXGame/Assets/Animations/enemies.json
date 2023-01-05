@@ -47,7 +47,7 @@
     },
     {
       "name": "goomba walk",
-      "defaultTime": 200,
+      "defaultTime": 400,
       "frames": [
         {
           "sprite": "enemies/goomba/0"
