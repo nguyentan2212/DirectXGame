@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Core/ObjectState.h"
 
-constexpr float KICK_COOLDOWN = 1000.0f;
+constexpr float KICK_COOLDOWN = 200.0f;
 class MarioKickState: public ObjectState
 {
 public:
