@@ -93,7 +93,7 @@ void ParaGoomba::Update(float deltaTime)
 		if (this->_tempY <= 80.0f && this->_lostWingScore != nullptr)
 		{
 			this->_tempY += 45.0f * deltaTime / 1000;
-			DebugOut((wchar_t*)L"[INFO] Para Goomba tempY = %f \n", _tempY);
+			//DebugOut((wchar_t*)L"[INFO] Para Goomba tempY = %f \n", _tempY);
 		}
 		else
 		{
