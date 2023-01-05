@@ -1,8 +1,8 @@
 #pragma once
 #include "../../Core/GameObject.h"
 
-constexpr float MUSHROOM_GRAVITY = 400;
-constexpr float MUSHROOM_X_SPEED = 60;
+constexpr float MUSHROOM_GRAVITY = 300;
+constexpr float MUSHROOM_X_SPEED = 40;
 
 class Mushroom: public GameObject
 {
