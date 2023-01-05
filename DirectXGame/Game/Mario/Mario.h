@@ -6,7 +6,8 @@ constexpr float MARIO_GRAVITY = 120;
 
 constexpr float MARIO_X_ACCE = 80;
 constexpr float MARIO_RUN_MAX_SPEED_X = 120;
-constexpr float MARIO_JUMP_SPEED_Y = 120;
+constexpr float MARIO_JUMP_SPEED_Y = 90;
+constexpr float MARIO_RUN_JUMP_SPEED_FACTOR_Y = 1.35f;
 constexpr float MARIO_JUMP_DEFLECT_SPEED = 400;
 
 class Mario: public GameObject
@@ -23,6 +24,8 @@ public:
 
 	void IncreaseScore(int score);
 	void IncreaseCoin(int coin = 1);
+	void UpdateRunSpeed(float speed);
+
 private:
 	bool _isGrounded = false;
 	Animation* GetAnimation() override;

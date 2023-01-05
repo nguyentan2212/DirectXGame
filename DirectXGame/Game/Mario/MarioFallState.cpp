@@ -46,6 +46,9 @@ void MarioFallState::OnCollision(CollisionEvent colEvent)
         if (objName == "pine" || objName == "ground" || objName == "panel" || objName == "cloud"
             || typeName == "class Brick")
         {
+            Mario* mario = dynamic_cast<Mario*>(this->_context);
+            mario->UpdateRunSpeed(0.0f);
+
             KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
             if (keyboard->IsKeyDown(DIK_LEFT)) // prev was running left
             {

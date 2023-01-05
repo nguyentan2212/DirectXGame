@@ -137,6 +137,19 @@ void Mario::IncreaseCoin(int coin)
 	}
 }
 
+void Mario::UpdateRunSpeed(float speed)
+{
+	GameObject* temp = GetChildWithName("gui");
+	if (temp != nullptr)
+	{
+		GUI* gui = dynamic_cast<GUI*>(temp);
+		if (gui != nullptr)
+		{
+			gui->UpdateRunSpeed(abs(speed));
+		}
+	}
+}
+
 Animation* Mario::GetAnimation()
 {
 	string stateName = this->_name + " " + this->_state->name;

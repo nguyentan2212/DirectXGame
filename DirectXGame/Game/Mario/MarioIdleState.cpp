@@ -5,6 +5,7 @@
 #include "MarioSitState.h"
 #include "MarioKickState.h"
 #include "MarioHoldState.h"
+#include "Mario.h"
 #include <dinput.h>
 
 MarioIdleState::MarioIdleState()

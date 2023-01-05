@@ -40,7 +40,10 @@ void MarioRunState::OnKeyDown(int keyCode)
 		}
 		else
 		{
-			this->_context->TransitionTo(new MarioJumpState());
+			float direction = this->_context->velocity.x < 0 ? -1.0f : 1.0f;
+			float v = max(MARIO_RUN_MAX_SPEED_X / 2.0f, abs(this->_context->velocity.x));
+			this->_context->velocity = VECTOR2D(v * direction, this->_context->velocity.y);
+			this->_context->TransitionTo(new MarioJumpState(MARIO_RUN_JUMP_SPEED_FACTOR_Y));
 		}
 	}
 	else if (keyCode == DIK_DOWN)
@@ -57,6 +60,8 @@ void MarioRunState::OnKeyUp(int keyCode)
 {
 	if (keyCode == DIK_LEFT || keyCode == DIK_RIGHT)
 	{
+		Mario* mario = dynamic_cast<Mario*>(this->_context);
+		mario->UpdateRunSpeed(0.0f);
 		this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 		this->_context->TransitionTo(new MarioIdleState());
 	}
@@ -70,6 +75,9 @@ void MarioRunState::Update(float deltaTime)
 {
 	if (this->_context->name == "raccoon mario")
 	{
+		Mario* mario = dynamic_cast<Mario*>(this->_context);
+		mario->UpdateRunSpeed(this->_context->velocity.x);
+
 		if (abs(this->_context->velocity.x) >= MARIO_RUN_MAX_SPEED_X)
 		{
 			this->_name = "fast run";
