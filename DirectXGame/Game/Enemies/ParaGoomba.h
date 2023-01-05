@@ -17,5 +17,7 @@ private:
 	float _tempY;
 	Sprite* _lostWingScore = nullptr;
 	Sprite* _deathScore = nullptr;
+
+	void IsAttacked();
 };
 

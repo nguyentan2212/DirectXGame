@@ -97,14 +97,12 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 			}
 			if (colEvent.direction == Direction::UP)
 			{
-				this->_isDeath = true;
-				this->_velocity = VECTOR2D(0.0f, 0.0f);
-				VECTOR2D pos = GetWorldPosition();
-				pos.y -= 6.0f;
-				this->position = pos;
-				this->_height = 9.0f;
-
+				Death();
 				mario->TransitionTo(new MarioJumpState(0.5f));
+			}
+			else if (mario->GetStateName() == "attack")
+			{
+				Death();
 			}
 			else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 			{
@@ -122,4 +120,14 @@ Animation* Goomba::GetAnimation()
 {
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("goomba walk");
+}
+
+void Goomba::Death()
+{
+	this->_isDeath = true;
+	this->_velocity = VECTOR2D(0.0f, 0.0f);
+	VECTOR2D pos = GetWorldPosition();
+	pos.y -= 4.0f;
+	this->position = pos;
+	this->_height = 9.0f;
 }

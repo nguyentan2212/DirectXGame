@@ -106,7 +106,7 @@ void ParaGoomba::Update(float deltaTime)
 		if (this->_tempY <= 80.0f && this->_deathScore != nullptr)
 		{
 			this->_tempY += 45.0f * deltaTime / 1000;
-			DebugOut((wchar_t*)L"[INFO] Para Goomba tempY = %f \n", _tempY);
+			//DebugOut((wchar_t*)L"[INFO] Para Goomba tempY = %f \n", _tempY);
 		}
 		else
 		{
@@ -131,20 +131,12 @@ void ParaGoomba::OnCollision(CollisionEvent colEvent)
 		}
 		if (colEvent.direction == Direction::UP)
 		{
-			if (this->isLostWings)
-			{
-				this->isDeath = true;
-				this->_velocity = VECTOR2D(0.0f, 0.0f);
-				VECTOR2D pos = GetWorldPosition();
-				//pos.y -= 6.0f;
-				this->position = pos;
-				this->_height = 9.0f;
-			}
-			else
-			{
-				this->isLostWings = true;
-			}
+			IsAttacked();
 			mario->TransitionTo(new MarioJumpState(0.5f));
+		}
+		else if (mario->GetStateName() == "attack")
+		{
+			IsAttacked();
 		}
 		else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 		{
@@ -161,4 +153,20 @@ Animation* ParaGoomba::GetAnimation()
 {
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("paragoomba walk");
+}
+
+void ParaGoomba::IsAttacked()
+{
+	if (this->isLostWings)
+	{
+		this->isDeath = true;
+		this->_velocity = VECTOR2D(0.0f, 0.0f);
+		VECTOR2D pos = GetWorldPosition();
+		this->position = pos;
+		this->_height = 9.0f;
+	}
+	else
+	{
+		this->isLostWings = true;
+	}
 }

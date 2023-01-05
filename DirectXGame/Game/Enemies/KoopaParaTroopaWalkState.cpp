@@ -38,6 +38,10 @@ void KoopaParaTroopaWalkState::OnCollision(CollisionEvent colEvent)
 				this->_context->TransitionTo(new KoopaParaTroopaStandState());
 				mario->TransitionTo(new MarioJumpState(0.5f));
 			}
+			else if (mario->GetStateName() == "attack")
+			{
+				this->_context->TransitionTo(new KoopaParaTroopaStandState());
+			}
 			else
 			{
 				string stateName = mario->GetStateName();
