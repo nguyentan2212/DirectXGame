@@ -28,6 +28,10 @@ void MarioKickState::Update(float deltaTime)
 		{
 			this->_context->TransitionTo(new MarioRunState(1));
 		}
+		else
+		{
+			this->_context->TransitionTo(new MarioIdleState());
+		}
 	}
 }
 
