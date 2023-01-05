@@ -11,7 +11,7 @@ public:
 	void OnCollision(CollisionEvent colEvent) override;
 
 private:
-	float _tempY;
+	float _tempY = 0.0f;
 	Animation* GetAnimation() override;
 };
 
