@@ -43,7 +43,7 @@ void ParaGoomba::Render()
 		sprite->Draw(pos, false, -0.1f);
 
 		// draw score
-		sprite = sprites->GetSprite("hub-and-font/400");
+		sprite = sprites->GetSprite("hub-and-font/800");
 		sprite->Draw(pos + VECTOR2D(0.0f, this->_tempY));
 		return;
 	}
@@ -132,10 +132,26 @@ void ParaGoomba::OnCollision(CollisionEvent colEvent)
 		if (colEvent.direction == Direction::UP)
 		{
 			IsAttacked();
+			if (this->isLostWings)
+			{
+				mario->IncreaseScore(800);
+			}
+			else
+			{
+				mario->IncreaseScore(400);
+			}
 			mario->TransitionTo(new MarioJumpState(0.5f));
 		}
 		else if (mario->GetStateName() == "attack")
 		{
+			if (this->isLostWings)
+			{
+				mario->IncreaseScore(800);
+			}
+			else
+			{
+				mario->IncreaseScore(400);
+			}
 			IsAttacked();
 		}
 		else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)

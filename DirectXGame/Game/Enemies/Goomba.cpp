@@ -98,10 +98,12 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 			if (colEvent.direction == Direction::UP)
 			{
 				Death();
+				mario->IncreaseScore(100);
 				mario->TransitionTo(new MarioJumpState(0.5f));
 			}
 			else if (mario->GetStateName() == "attack")
 			{
+				mario->IncreaseScore(100);
 				Death();
 			}
 			else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
