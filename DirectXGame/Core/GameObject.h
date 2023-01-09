@@ -75,6 +75,10 @@ public:
 	PROPERTY(bool, isActive);
 	GET(isActive) { return this->_isActive; }
 	SET(isActive) { this->_isActive = value; }
+
+	PROPERTY(bool, isGrounded);
+	GET(isGrounded) { return this->_isGrounded; }
+	SET(isGrounded) { this->_isGrounded = value; }
 #pragma endregion
 
 protected:
@@ -87,6 +91,7 @@ protected:
 	float _width = 0.0f;
 	float _height = 0.0f;
 	bool _isActive = true;
+	bool _isGrounded = false;
 
 #pragma region Transform
 	VECTOR2D _position;
