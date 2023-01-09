@@ -9,7 +9,7 @@ public:
 	static ObjectPool* GetInstance();
 	GameObject* GetGameObjectWithName(string name);
 	GameObject* GetGameObjectWithClass(string className);
-	vector<GameObject*> GetAllGameObject();
+	vector<GameObject*> GetAllGameObject(bool excludeInactive = true);
 	void AddGameObject(GameObject* obj);
 	void Clear();
 private:

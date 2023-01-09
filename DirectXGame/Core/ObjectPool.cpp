@@ -40,9 +40,22 @@ GameObject* ObjectPool::GetGameObjectWithClass(string className)
     return nullptr;
 }
 
-vector<GameObject*> ObjectPool::GetAllGameObject()
+vector<GameObject*> ObjectPool::GetAllGameObject(bool excludeInactive)
 {
-    return this->_objs;
+    if (excludeInactive == false)
+    {
+        return this->_objs;
+    }
+
+    vector<GameObject*> result;
+    for (GameObject* obj : this->_objs)
+    {
+        if (obj->isActive)
+        {
+            result.push_back(obj);
+        }
+    }
+    return result;
 }
 
 void ObjectPool::AddGameObject(GameObject* obj)
