@@ -44,10 +44,6 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, GameObject* objB, fl
         return CollisionEvent::NoCollision();
     }
 
-    /*if (objB->name == "pine" && objA->name == "small mario")
-    {
-        DebugOut((wchar_t*)L"[INFO] Mario and pine\n");
-    }*/
     float dxEntry, dxExit;
     float dyEntry, dyExit;
 
@@ -280,7 +276,7 @@ bool CollisionManager::RayCastBetween(GameObject* objA, GameObject* objB, DIRECT
 list<GameObject*> CollisionManager::RayCastWith(GameObject* objRoot, DIRECTION direction, float distance, float deltaTime)
 {
     ObjectPool* pool = ObjectPool::GetInstance();
-    vector<GameObject*> objs = pool->GetAllGameObjectWithQuadtree(objRoot);
+    vector<GameObject*> objs = pool->GetAllGameObject();
 
     list<GameObject*> results;
     for (GameObject* obj : objs)
@@ -308,16 +304,8 @@ void CollisionManager::Processing(float deltaTime)
         {
             continue;
         }
-        /*if (root->name == "small mario")
-        {
-            DebugOut((wchar_t*)L"[INFO] Mario region\n");
-        }*/
 
-        vector<GameObject*> entities = pool->GetAllGameObjectWithQuadtree(root);
-        /*if (root->name == "small mario")
-        {
-            DebugOut((wchar_t*)L"[INFO] Mario region has: %d objects\n", entities.size());
-        }*/
+        vector<GameObject*> entities = pool->GetAllGameObject();
         for (GameObject* obj : entities)
         {
             if (obj->isActive == false)

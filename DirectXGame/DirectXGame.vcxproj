@@ -210,7 +210,6 @@
     <ClInclude Include="Utils\Debug.h" />
     <ClInclude Include="Utils\json.hpp" />
     <ClInclude Include="Utils\Property.h" />
-    <ClInclude Include="Utils\Quadtree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Camera.cpp" />
@@ -265,7 +264,6 @@
     <ClCompile Include="Physic\CollisionEvent.cpp" />
     <ClCompile Include="Physic\CollisionManager.cpp" />
     <ClCompile Include="Utils\Debug.cpp" />
-    <ClCompile Include="Utils\Quadtree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png" />

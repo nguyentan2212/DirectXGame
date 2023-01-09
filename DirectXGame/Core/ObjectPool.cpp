@@ -45,26 +45,6 @@ vector<GameObject*> ObjectPool::GetAllGameObject()
     return this->_objs;
 }
 
-vector<GameObject*> ObjectPool::GetAllGameObjectWithQuadtree(GameObject* obj)
-{
-    /*if (this->_quadtree == nullptr)
-    {
-        return vector<GameObject*>();
-    }
-    return this->_quadtree->Retrieve(obj);*/
-    return GetAllGameObject();
-}
-
-vector<GameObject*> ObjectPool::GetAllGameObjectWithQuadtree()
-{
-    /*if (this->_quadtree == nullptr)
-    {
-        return vector<GameObject*>();
-    }
-    return this->_quadtree->GetAllGameObject();*/
-    return GetAllGameObject();
-}
-
 void ObjectPool::AddGameObject(GameObject* obj)
 {
     this->_objs.push_back(obj);
@@ -73,15 +53,6 @@ void ObjectPool::AddGameObject(GameObject* obj)
 void ObjectPool::Clear()
 {
     this->_objs.clear();
-}
-
-void ObjectPool::SetQuadtree(Quadtree* quadtree)
-{
-    this->_quadtree = quadtree;
-    for (GameObject* obj : this->_objs)
-    {
-        this->_quadtree->Insert(obj);
-    }
 }
 
 ObjectPool::~ObjectPool()

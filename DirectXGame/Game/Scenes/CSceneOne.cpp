@@ -8,7 +8,6 @@
 #include "../../Physic/CollisionManager.h"
 #include "../Items/Brick.h"
 #include "../Items/Coin.h"
-#include "../../Utils/Quadtree.h"
 #include "../../Core/ObjectPool.h"
 #include "../Enemies/VenusFireTrap.h"
 #include "../Enemies/Goomba.h"
@@ -27,7 +26,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(650, 50);
+	mario->position = VECTOR2D(50, 50);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();

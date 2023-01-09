@@ -246,9 +246,6 @@
     <ClInclude Include="Core\ObjectPool.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Quadtree.h">
-      <Filter>Utils\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Items\Leaf.h">
       <Filter>Game\Items</Filter>
     </ClInclude>
@@ -404,9 +401,6 @@
     </ClCompile>
     <ClCompile Include="Core\ObjectPool.cpp">
       <Filter>Core\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\Quadtree.cpp">
-      <Filter>Utils\Source</Filter>
     </ClCompile>
     <ClCompile Include="Game\Items\Leaf.cpp">
       <Filter>Game\Items</Filter>
