@@ -21,7 +21,7 @@ void Mushroom::Update(float deltaTime)
 	}
 
 	bool isGrounded = false;
-	CollisionManager* collision = CollisionManager::GetInstance();
+	/*CollisionManager* collision = CollisionManager::GetInstance();
 	list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 5.0f, deltaTime);
 	for (GameObject* obj : results)
 	{
@@ -29,7 +29,7 @@ void Mushroom::Update(float deltaTime)
 		{
 			isGrounded = true;
 		}
-	}
+	}*/
 	if (isGrounded == false)
 	{
 		this->_acceleration = VECTOR2D(0.0f, -MUSHROOM_GRAVITY);
@@ -83,7 +83,7 @@ void Mushroom::OnCollision(CollisionEvent colEvent)
 	string n = colEvent.collisionObj->name;
 	if ((n == "pine" || n == "ground" || n == "panel"))
 	{
-		this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+		this->_position += this->_velocity * colEvent.entryTime;
 		if (colEvent.direction == Direction::DOWN)
 		{
 			this->_velocity = VECTOR2D(this->_velocity.x, 0.0f);

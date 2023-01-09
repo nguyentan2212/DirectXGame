@@ -16,7 +16,6 @@ MarioFallState::MarioFallState()
 void MarioFallState::OnTransition()
 {
     this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0.0f);
-    this->_context->acceleration = VECTOR2D(this->_context->acceleration.x, - MARIO_GRAVITY);
     if (this->_context->name == "small mario")
     {
         this->_context->width = 16.0f;
@@ -40,34 +39,25 @@ void MarioFallState::Update(float deltaTime)
 
 void MarioFallState::OnCollision(CollisionEvent colEvent)
 {
-    string objName = colEvent.collisionObj->name;
-    string typeName = typeid(*colEvent.collisionObj).name();
-    if (colEvent.direction == DIRECTION::DOWN)
+    Mario* mario = dynamic_cast<Mario*>(this->_context);
+    if (mario != nullptr && mario->isGrounded)
     {
-        if (objName == "pine" || objName == "ground" || objName == "panel" || objName == "cloud"
-            || typeName == "class Brick")
+        KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+        if (keyboard->IsKeyDown(DIK_LEFT)) // prev was running left
         {
-            Mario* mario = dynamic_cast<Mario*>(this->_context);
-            mario->UpdateRunSpeed(0.0f);
-
-            KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
-            if (keyboard->IsKeyDown(DIK_LEFT)) // prev was running left
-            {
-                this->_context->velocity = VECTOR2D(-abs(this->_context->velocity.x), 0.0f);
-                this->_context->TransitionTo(new MarioRunState(-1));
-            }
-            else if (keyboard->IsKeyDown(DIK_RIGHT)) // prev was running left
-            {
-                this->_context->velocity = VECTOR2D(abs(this->_context->velocity.x), 0.0f);
-                this->_context->TransitionTo(new MarioRunState(1));
-            }
-            else
-            {
-                this->_context->TransitionTo(new MarioIdleState());
-            }
+            mario->velocity = VECTOR2D(-abs(mario->velocity.x), 0.0f);
+            mario->TransitionTo(new MarioRunState(-1));
+        }
+        else if (keyboard->IsKeyDown(DIK_RIGHT)) // prev was running left
+        {
+            mario->velocity = VECTOR2D(abs(mario->velocity.x), 0.0f);
+            mario->TransitionTo(new MarioRunState(1));
+        }
+        else
+        {
+            mario->TransitionTo(new MarioIdleState());
         }
     }
-    
 }
 
 void MarioFallState::OnKeyDown(int keyCode)

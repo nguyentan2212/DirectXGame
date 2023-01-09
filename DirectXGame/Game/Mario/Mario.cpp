@@ -20,44 +20,30 @@ void Mario::Update(float deltaTime)
 	{
 		return;
 	}
-	string className = typeid(*this->_state).name();
-	if (this->_state->name != "death")
+
+	GameObject::Update(deltaTime);
+
+	if (this->_velocity.x < 0)
 	{
-		CollisionManager* collision = CollisionManager::GetInstance();
-		list<GameObject*> results = collision->RayCastWith(this, DIRECTION::DOWN, 5.0f, deltaTime);
-		for (GameObject* obj : results)
-		{
-			string typeName = typeid(*obj).name();
-			if (obj->name == "ground" || obj->name == "panel" || obj->name == "pine" || obj->name == "cloud"
-				|| typeName == "class Brick")
-			{
-				this->_isGrounded = true;
-			}
-		}
-		if (this->_isGrounded == false && this->_state->name != "jump" && this->_state->name != "attack" &&
-			this->_state->name != "fall" && this->_state->name != "fly" && className != "class MarioChangeFigureState")
-		{
-			//not on ground
-			TransitionTo(new MarioFallState());
-		}
-		if (this->_velocity.x < 0)
-		{
-			this->_direction = DIRECTION::LEFT;
-		}
-		else if (this->_velocity.x > 0)
-		{
-			this->_direction = DIRECTION::RIGHT;
-		}
+		this->_direction = DIRECTION::LEFT;
+	}
+	else if (this->_velocity.x > 0)
+	{
+		this->_direction = DIRECTION::RIGHT;
 	}
 
-	this->_state->Update(deltaTime);
-	GameObject::Update(deltaTime);
+	this->_acceleration = VECTOR2D(this->_acceleration.x, -MARIO_GRAVITY);
+	this->_velocity += this->_acceleration * deltaTime / 1000;
 	if (abs(this->_velocity.x) > MARIO_RUN_MAX_SPEED_X)
 	{
 		this->_velocity.x = this->_velocity.x > 0 ? MARIO_RUN_MAX_SPEED_X : -MARIO_RUN_MAX_SPEED_X;
 	}
+
 	this->_isGrounded = false;
-	//DebugOut((wchar_t*)L"[INFO] Mario vel.x = %f, vel.y = %f, acc.x = %f, acc.y = %f \n", _velocity.x, _velocity.y, _acceleration.x, _acceleration.y);
+	CollisionManager::Processing(this, deltaTime);
+	this->_state->Update(deltaTime);
+
+	Translate(this->_velocity * deltaTime / 1000);
 }
 
 void Mario::Render()
@@ -91,24 +77,18 @@ void Mario::OnKeyUp(int keyCode)
 
 void Mario::OnCollision(CollisionEvent colEvent)
 {
-	this->_state->OnCollision(colEvent);
-	if (this->_state->name == "death")
+	string objName = colEvent.collisionObj->name;
+	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "mushroom brick" || objName == "leaf brick")
 	{
-		return;
-	}
-	string className = typeid(*colEvent.collisionObj).name();
-
-	if (colEvent.collisionObj->name == "pine" || colEvent.collisionObj->name == "ground")
-	{
-		this->_position += this->_velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
-		this->_velocity = VECTOR2D(0, 0);
-		this->_acceleration = VECTOR2D(0.0f, 0.0f);
-		if (colEvent.direction != Direction::DOWN)
+		if (colEvent.direction == Direction::DOWN)
 		{
-			TransitionTo(new MarioFallState());
+			this->_isGrounded = true;
+			this->_position += this->_velocity * colEvent.entryTime;
+			this->_velocity = VECTOR2D(this->_velocity.x, 0);
+			this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
 		}
 	}
-	DebugOut((wchar_t*)L"[INFO] Collision entry time: %f, delta time: %f \n", colEvent.entryTimePercent, colEvent.deltaTime);
+	this->_state->OnCollision(colEvent);
 }
 
 void Mario::IncreaseScore(int score)

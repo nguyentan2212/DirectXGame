@@ -25,14 +25,11 @@ void Scene::Update(float deltaTime)
 	Camera* camera = Camera::GetInstance();
 	camera->Update(deltaTime);
 
-	ObjectPool* pool = ObjectPool::GetInstance();
-	vector<GameObject*> objs = pool->GetAllGameObject();
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	keyboard->Processing();
 
-	CollisionManager* collision = CollisionManager::GetInstance();
-	collision->Processing(deltaTime);
-
+	ObjectPool* pool = ObjectPool::GetInstance();
+	vector<GameObject*> objs = pool->GetAllGameObject();
 
 	for (GameObject* obj : objs)
 	{

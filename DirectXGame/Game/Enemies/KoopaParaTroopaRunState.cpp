@@ -23,7 +23,7 @@ void KoopaParaTroopaRunState::OnTransition()
 
 void KoopaParaTroopaRunState::Update(float deltaTime)
 {
-	CollisionManager* collision = CollisionManager::GetInstance();
+	/*CollisionManager* collision = CollisionManager::GetInstance();
 	list<GameObject*> results = collision->RayCastWith(this->_context, DIRECTION::DOWN, 5.0f, deltaTime);
 	for (GameObject* obj : results)
 	{
@@ -31,7 +31,7 @@ void KoopaParaTroopaRunState::Update(float deltaTime)
 		{
 			this->_isGrounded = true;
 		}
-	}
+	}*/
 	if (this->_isGrounded)
 	{
 		this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
@@ -57,7 +57,7 @@ void KoopaParaTroopaRunState::OnCollision(CollisionEvent colEvent)
 		}
 		else if (colEvent.direction == Direction::DOWN)
 		{
-			this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+			this->_context->position += this->_context->velocity * colEvent.entryTime;
 			VECTOR2D v = this->_context->velocity;
 			v.y = 0.0f;
 			this->_context->velocity = v;

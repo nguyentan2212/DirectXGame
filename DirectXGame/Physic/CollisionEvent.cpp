@@ -1,11 +1,11 @@
 #include "CollisionEvent.h"
 #include "../Core/GameObject.h"
 
-CollisionEvent::CollisionEvent(GameObject* obj, DIRECTION direction, float entryTimePercent, float deltaTime)
+CollisionEvent::CollisionEvent(GameObject* obj, DIRECTION direction, float entryTime, float deltaTime)
 {
 	this->collisionObj = obj;
 	this->direction = direction;
-	this->entryTimePercent = entryTimePercent;
+	this->entryTime = entryTime;
 	this->deltaTime = deltaTime;
 }
 

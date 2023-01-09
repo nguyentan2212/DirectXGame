@@ -37,8 +37,6 @@ void MarioKickState::Update(float deltaTime)
 
 void MarioKickState::OnTransition()
 {
-	/*this->_context->velocity = VECTOR2D(0.0f, 0.0f);
-	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);*/
 }
 
 void MarioKickState::OnKeyDown(int keyCode)

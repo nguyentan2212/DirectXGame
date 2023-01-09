@@ -32,7 +32,7 @@ void MarioFlyState::OnCollision(CollisionEvent colEvent)
 	string typeName = typeid(*colEvent.collisionObj).name();
 	if ((n == "ground" || n == "panel" || n == "cloud" || typeName == "class Brick") && colEvent.direction == Direction::DOWN)
 	{
-		this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+		this->_context->position += this->_context->velocity * colEvent.entryTime;
 		this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0);
 
 		KeyboardHandler* keyboard = KeyboardHandler::GetInstance();

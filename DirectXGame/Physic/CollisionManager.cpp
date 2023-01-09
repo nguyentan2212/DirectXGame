@@ -1,19 +1,8 @@
 #include "CollisionManager.h"
 #include "../Core/ObjectPool.h"
 
-CollisionManager* CollisionManager::_instance = nullptr;
-
 CollisionManager::CollisionManager()
 {
-}
-
-CollisionManager* CollisionManager::GetInstance()
-{
-    if (_instance == nullptr)
-    {
-        _instance = new CollisionManager();
-    }
-    return _instance;
 }
 
 CollisionEvent CollisionManager::CalcAABB(GameObject* objA, GameObject* objB, float deltaTime)
@@ -231,6 +220,29 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, VECTOR2D vA, GameObj
     return CollisionEvent(objB, direction, entryTime, deltaTime);
 }
 
+void CollisionManager::Processing(GameObject* obj, float deltaTime)
+{
+    ObjectPool* pool = ObjectPool::GetInstance();
+    vector<GameObject*> objs = pool->GetAllGameObject();
+    vector<CollisionEvent> result;
+    for (GameObject* colObj : objs)
+    {
+        if (obj == colObj)
+        {
+            continue;
+        }
+        CollisionEvent e = CalcAABB(obj, colObj, deltaTime);
+        if (e.direction != Direction::NONE)
+        {
+            result.push_back(e);
+        }
+    }
+    for (CollisionEvent e : result)
+    {
+        obj->OnCollision(e);
+    }
+}
+
 bool CollisionManager::IsCollision(Box boxA, Box boxB)
 {
     float d1x = boxB.x - (boxA.x + boxA.width);
@@ -243,83 +255,4 @@ bool CollisionManager::IsCollision(Box boxA, Box boxB)
         return false;
     }
     return true;
-}
-
-bool CollisionManager::RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance, float deltaTime)
-{
-    VECTOR2D vA;
-    switch (direction)
-    {
-    case UP:
-        vA = VECTOR2D(0, distance);
-        break;
-    case DOWN:
-        vA = VECTOR2D(0, -distance);
-        break;
-    case LEFT:
-        vA = VECTOR2D(-distance, 0);
-        break;
-    case RIGHT:
-        vA = VECTOR2D(distance, 0);
-        break;
-    default:
-        break;
-    }
-    vA = vA / (deltaTime / 1000) + objA->velocity;
-    VECTOR2D vB = objB->velocity;
-
-    CollisionEvent e = CalcAABB(objA, vA, objB, vB, deltaTime);
-
-    return e.direction == direction;
-}
-
-list<GameObject*> CollisionManager::RayCastWith(GameObject* objRoot, DIRECTION direction, float distance, float deltaTime)
-{
-    ObjectPool* pool = ObjectPool::GetInstance();
-    vector<GameObject*> objs = pool->GetAllGameObject();
-
-    list<GameObject*> results;
-    for (GameObject* obj : objs)
-    {
-        if (objRoot != obj)
-        {
-            if (RayCastBetween(objRoot, obj, direction, distance, deltaTime))
-            {
-                results.push_back(obj);
-            }
-        }
-    }
-    return results;
-}
-
-void CollisionManager::Processing(float deltaTime)
-{
-    ObjectPool* pool = ObjectPool::GetInstance();
-
-    vector<GameObject*> objs = pool->GetAllGameObject();
-
-    for (GameObject* root : objs)
-    {
-        if (root->isActive == false)
-        {
-            continue;
-        }
-
-        vector<GameObject*> entities = pool->GetAllGameObject();
-        for (GameObject* obj : entities)
-        {
-            if (obj->isActive == false)
-            {
-                continue;
-            }
-            if (root != obj)
-            {
-                CollisionEvent colEvent = CalcAABB(root, obj, deltaTime);
-                if (colEvent.direction != DIRECTION::NONE)
-                {
-                    root->OnCollision(colEvent);
-                }
-            }
-        }
-    }
 }

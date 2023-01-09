@@ -6,19 +6,30 @@
 #include "MarioKickState.h"
 #include "MarioHoldState.h"
 #include "MarioAttackState.h"
+#include "MarioFallState.h"
 #include "Mario.h"
 #include <dinput.h>
 
+int MarioIdleState::count = 0;
 MarioIdleState::MarioIdleState()
 {
 	this->_name = "idle";
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Idle State \n");
 }
 
+void MarioIdleState::Update(float deltaTime)
+{
+	Mario* mario = dynamic_cast<Mario*>(this->_context);
+	if (mario != nullptr && mario->isGrounded == false)
+	{
+		mario->TransitionTo(new MarioFallState());
+	}
+}
+
 void MarioIdleState::OnTransition()
 {
+	count++;
 	this->_context->velocity = VECTOR2D(0.0f, 0.0f);
-	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
 
 	if (this->_context->name == "small mario")
 	{

@@ -59,7 +59,7 @@ void ParaGoombaJumpState::OnCollision(CollisionEvent colEvent)
 		}
 		else if (colEvent.direction == Direction::UP)
 		{
-			this->_context->position += this->_context->velocity * colEvent.entryTimePercent * colEvent.deltaTime / 1000;
+			this->_context->position += this->_context->velocity * colEvent.entryTime;
 			this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0.0f);
 		}
 	}

@@ -9,19 +9,12 @@ using namespace::std;
 class CollisionManager
 {
 public:
-	static CollisionManager* GetInstance();
-	CollisionEvent CalcAABB(GameObject* objA, GameObject* objB, float deltaTime);
-	CollisionEvent CalcAABB(GameObject* objA, VECTOR2D vA, GameObject* objB, VECTOR2D vB, float deltaTime);
-
-	bool IsCollision(Box boxA, Box boxB);
-	void Processing(float deltaTime);
-
-	bool RayCastBetween(GameObject* objA, GameObject* objB, DIRECTION direction, float distance, float deltaTime);
-	list<GameObject*> RayCastWith(GameObject* objRoot, DIRECTION direction, float distance, float deltaTime);
-
-private:
 	CollisionManager();
 
-	static CollisionManager* _instance;
+	static CollisionEvent CalcAABB(GameObject* objA, GameObject* objB, float deltaTime);
+	static CollisionEvent CalcAABB(GameObject* objA, VECTOR2D vA, GameObject* objB, VECTOR2D vB, float deltaTime);
+	static void Processing(GameObject* obj, float deltaTime);
+
+	 static bool IsCollision(Box boxA, Box boxB);
 };
 
