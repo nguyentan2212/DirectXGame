@@ -1,20 +1,23 @@
 #pragma once
 #include "../../Core/GameObject.h"
 
-constexpr float MUSHROOM_GRAVITY = 300;
-constexpr float MUSHROOM_X_SPEED = 40;
+constexpr float MUSHROOM_GRAVITY = 100;
+constexpr float MUSHROOM_X_SPEED = 30;
+constexpr float MUSHROOM_Y_SPEED = 10;
+constexpr float MUSHROOM_SIZE = 16;
 
 class Mushroom: public GameObject
 {
 public:
-	Mushroom(VECTOR2D pos);
+	Mushroom(VECTOR2D position);
 
 	void Update(float deltaTime) override;
-	void Render() override;
 	void OnCollision(CollisionEvent colEvent) override;
+	void Render() override;
 
 private:
-	float _tempY = 20.0f;
-	int _renderIndex = 0;
+	Renderable* GetRenderable() override;
+	float _beginY;
+	bool _isReady;
 };
 

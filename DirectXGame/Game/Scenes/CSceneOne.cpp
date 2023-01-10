@@ -14,6 +14,7 @@
 #include "../Enemies/Goomba.h"
 #include "../Enemies/KoopaParaTroopa.h"
 #include "../Enemies/ParaGoomba.h"
+#include "../Items/Mushroom.h"
 
 CSceneOne::CSceneOne(): Scene()
 {
@@ -58,6 +59,10 @@ void CSceneOne::InitObjects(json config)
 		if (item["class"].get<string>() == "brick")
 		{
 			obj = new Brick(Coin::ScoreCoin(position), position);
+			if (item["name"].get<string>() == "mushroom brick")
+			{
+				obj = new Brick(new Mushroom(position), position);
+			}
 		}
 		/*else if (item["class"].get<string>() == "coin")
 		{

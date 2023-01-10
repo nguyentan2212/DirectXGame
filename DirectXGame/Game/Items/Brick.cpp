@@ -32,6 +32,10 @@ void Brick::Update(float deltaTime)
 		this->_position = VECTOR2D(this->_position.x, this->_beginY);
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
+		if (this->_content->name == "mushroom")
+		{
+			this->_content->isActive = true;
+		}
 	}
 }
 
@@ -54,6 +58,9 @@ void Brick::OnCollision(CollisionEvent colEvent)
 		this->_velocity = VECTOR2D(0.0f, BRICK_BOUND_SPEED);
 		this->_acceleration = VECTOR2D(0.0f, -BRICK_GRAVITY);
 		this->_isTouched = true;
-		this->_content->isActive = true;
+		if (this->_content->name == "coin")
+		{
+			this->_content->isActive = true;
+		}
 	}
 }
