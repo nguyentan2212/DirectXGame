@@ -111,7 +111,7 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, GameObject* objB, fl
             direction = DIRECTION::DOWN;
         }
     }
-    return CollisionEvent(objB, direction, entryTime, deltaTime);
+    return CollisionEvent(objB, direction, entryTime);
 }
 
 CollisionEvent CollisionManager::CalcAABB(GameObject* objA, VECTOR2D vA, GameObject* objB, VECTOR2D vB, float deltaTime)
@@ -217,7 +217,7 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, VECTOR2D vA, GameObj
             direction = DIRECTION::DOWN;
         }
     }
-    return CollisionEvent(objB, direction, entryTime, deltaTime);
+    return CollisionEvent(objB, direction, entryTime);
 }
 
 void CollisionManager::Processing(GameObject* obj, float deltaTime)

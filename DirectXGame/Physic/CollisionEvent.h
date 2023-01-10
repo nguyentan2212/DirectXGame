@@ -5,7 +5,7 @@ class GameObject;
 class CollisionEvent
 {
 public:
-	CollisionEvent(GameObject* obj, DIRECTION direction, float entryTime, float deltatime);
+	CollisionEvent(GameObject* obj, DIRECTION direction, float entryTime);
 	~CollisionEvent();
 
 	static CollisionEvent NoCollision();
@@ -13,6 +13,5 @@ public:
 	GameObject* collisionObj;
 	DIRECTION direction;
 	float entryTime;
-	float deltaTime;
 };
 
