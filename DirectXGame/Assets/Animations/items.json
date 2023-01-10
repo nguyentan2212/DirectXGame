@@ -29,7 +29,7 @@
     },
     {
       "name": "coin",
-      "defaultTime": 2000,
+      "defaultTime": 800,
       "frames": [
         {
           "sprite": "mics10"

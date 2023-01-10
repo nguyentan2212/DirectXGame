@@ -52,10 +52,12 @@ void CSceneOne::InitObjects(json config)
 	ObjectPool* pool = ObjectPool::GetInstance();
 	for (json item : config)
 	{
+		VECTOR2D position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
+
 		GameObject* obj = nullptr;
 		if (item["class"].get<string>() == "brick")
 		{
-			obj = new Brick();
+			obj = new Brick(Coin::ScoreCoin(position), position);
 		}
 		/*else if (item["class"].get<string>() == "coin")
 		{
@@ -77,7 +79,6 @@ void CSceneOne::InitObjects(json config)
 		{
 			obj = new GameObject(new ObjectState());
 		}
-		VECTOR2D position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->width = item["width"].get<float>();
 		obj->height = item["height"].get<float>();
 		obj->position = position;
