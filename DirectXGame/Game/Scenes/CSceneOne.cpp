@@ -2,6 +2,7 @@
 #include <fstream>
 #include "CSceneWorldMap.h"
 #include "../Mario/Mario.h"
+#include "../Mario/MarioIdleState.h"
 #include "../GUI.h"
 #include "../../Core/KeyboardHandler.h"
 #include "../../Core/Camera.h"
@@ -25,7 +26,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitTilemap(config);
 	InitObjects(config["objects"]);
 
-	Mario* mario = new Mario();
+	Mario* mario = new Mario(new MarioIdleState());
 	mario->position = VECTOR2D(50, 50);
 	pool->AddGameObject(mario);
 

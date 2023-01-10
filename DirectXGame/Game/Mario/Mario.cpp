@@ -1,17 +1,13 @@
 #include "Mario.h"
-#include "MarioIdleState.h"
-#include "MarioJumpState.h"
-#include "MarioFallState.h"
-#include "MarioChangeFigureState.h"
 #include "../GUI.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
-#include "MarioDeathState.h"
 
-Mario::Mario(): GameObject(new MarioIdleState())
+Mario::Mario(ObjectState* state): GameObject(state)
 {
 	this->_showBoundingBox = true;
-	this->_name = "small mario";
+	this->_name = "mario";
+	ChangeFigure(MARIO_SMALL);
 }
 
 void Mario::Update(float deltaTime)
@@ -55,17 +51,17 @@ void Mario::Render()
 void Mario::OnKeyDown(int keyCode)
 {
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
-	if (keyCode == DIK_X && keyboard->IsKeyDown(DIK_LCONTROL) && this->_name != "small mario")
+	if (keyCode == DIK_X && keyboard->IsKeyDown(DIK_LCONTROL))
 	{
-		TransitionTo(new MarioChangeFigureState("small mario"));
+		ChangeFigure(MARIO_SMALL);
 	}
 	else if (keyCode == DIK_R && keyboard->IsKeyDown(DIK_LCONTROL))
 	{
-		TransitionTo(new MarioChangeFigureState("raccoon mario"));
+		ChangeFigure(MARIO_RACCOON);
 	}
 	else if (keyCode == DIK_S && keyboard->IsKeyDown(DIK_LCONTROL))
 	{
-		TransitionTo(new MarioChangeFigureState("super mario"));
+		ChangeFigure(MARIO_SUPER);
 	}
 	this->_state->OnKeyDown(keyCode);
 }
@@ -132,8 +128,67 @@ void Mario::UpdateRunSpeed(float speed)
 
 Animation* Mario::GetAnimation()
 {
-	string stateName = this->_name + " " + this->_state->name;
+	string aniName;
+	switch (this->_figure)
+	{
+	case MARIO_SMALL:
+	{
+		aniName = "small mario";
+		break;
+	}
+	case MARIO_SUPER:
+	{
+		aniName = "super mario";
+		break;
+	}
+	default:
+	{
+		aniName = "raccoon mario";
+		break;
+	}
+	}
+	aniName = aniName + " " + this->_state->name;
 
 	AnimationService* animations = AnimationService::GetInstance();
-	return animations->GetAnimation(stateName);
+	return animations->GetAnimation(aniName);
+}
+
+void Mario::ChangeFigure(UINT figure)
+{
+	switch (figure)
+	{
+	case MARIO_SMALL:
+	{
+		this->_height = MARIO_SMALL_HEIGHT;
+		this->_width = MARIO_SMALL_WIDTH;
+		if (this->_figure != MARIO_SMALL)
+		{
+			this->_position = this->_position + VECTOR2D(0.0f, (MARIO_SMALL_HEIGHT - MARIO_SUPER_HEIGHT) / 2.0f);
+		}
+		break;
+	}
+	case MARIO_SUPER:
+	{
+		this->_height = MARIO_SUPER_HEIGHT;
+		this->_width = MARIO_SUPER_WIDTH;
+		if (this->_figure == MARIO_SMALL)
+		{
+			this->_position = this->_position + VECTOR2D(0.0f, (MARIO_SUPER_HEIGHT - MARIO_SMALL_HEIGHT) / 2.0f);
+		}
+		break;
+	}
+	case MARIO_RACCOON:
+	{
+		this->_height = MARIO_RACCOON_HEIGHT;
+		this->_width = MARIO_RACCOON_WIDTH;
+		if (this->_figure == MARIO_SMALL)
+		{
+			this->_position = this->_position + VECTOR2D(0.0f, (MARIO_SUPER_HEIGHT - MARIO_SMALL_HEIGHT) / 2.0f);
+		}
+		break;
+	}
+	default:
+		break;
+	}
+	this->_figure = figure;
 }

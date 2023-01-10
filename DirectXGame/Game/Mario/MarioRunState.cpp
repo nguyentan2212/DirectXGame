@@ -23,7 +23,6 @@ void MarioRunState::OnTransition()
 	{
 		direction = this->_context->velocity.x > 0 ? 1 : -1;
 	}
-
 	this->_context->acceleration = VECTOR2D(direction * MARIO_X_ACCE, 0.0f);
 }
 

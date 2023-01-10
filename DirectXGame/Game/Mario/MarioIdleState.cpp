@@ -10,7 +10,6 @@
 #include "Mario.h"
 #include <dinput.h>
 
-int MarioIdleState::count = 0;
 MarioIdleState::MarioIdleState()
 {
 	this->_name = "idle";
@@ -28,24 +27,8 @@ void MarioIdleState::Update(float deltaTime)
 
 void MarioIdleState::OnTransition()
 {
-	count++;
 	this->_context->velocity = VECTOR2D(0.0f, 0.0f);
-
-	if (this->_context->name == "small mario")
-	{
-		this->_context->width = 16.0f;
-		this->_context->height = 16.0f;
-	}
-	else if (this->_context->name == "super mario")
-	{
-		this->_context->width = 16.0f;
-		this->_context->height = 28.0f;
-	}
-	else if (this->_context->name == "raccoon mario")
-	{
-		this->_context->width = 23.0f;
-		this->_context->height = 27.0f;
-	}
+	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
 }
 
 void MarioIdleState::OnKeyDown(int keyCode)

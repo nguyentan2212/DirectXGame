@@ -16,21 +16,6 @@ MarioFallState::MarioFallState()
 void MarioFallState::OnTransition()
 {
     this->_context->velocity = VECTOR2D(this->_context->velocity.x, 0.0f);
-    if (this->_context->name == "small mario")
-    {
-        this->_context->width = 16.0f;
-        this->_context->height = 16.0f;
-    }
-    else if (this->_context->name == "super mario")
-    {
-        this->_context->width = 16.0f;
-        this->_context->height = 28.0f;
-    }
-    else if (this->_context->name == "raccoon mario")
-    {
-        this->_context->width = 23.0f;
-        this->_context->height = 27.0f;
-    }
 }
 
 void MarioFallState::Update(float deltaTime)
