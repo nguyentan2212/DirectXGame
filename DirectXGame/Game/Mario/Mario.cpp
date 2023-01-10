@@ -17,8 +17,6 @@ void Mario::Update(float deltaTime)
 		return;
 	}
 
-	GameObject::Update(deltaTime);
-
 	if (this->_velocity.x < 0)
 	{
 		this->_direction = DIRECTION::LEFT;
@@ -38,7 +36,6 @@ void Mario::Update(float deltaTime)
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
 	this->_state->Update(deltaTime);
-
 	Translate(this->_velocity * deltaTime / 1000);
 }
 
@@ -74,7 +71,8 @@ void Mario::OnKeyUp(int keyCode)
 void Mario::OnCollision(CollisionEvent colEvent)
 {
 	string objName = colEvent.collisionObj->name;
-	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "mushroom brick" || objName == "leaf brick")
+	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "mushroom brick" 
+		|| objName == "leaf brick" || objName == "panel")
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{

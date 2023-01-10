@@ -13,6 +13,7 @@ class GameObject
 {
 public: 
 	GameObject(ObjectState* state);
+	GameObject(Renderable* renderable, ObjectState* state = new ObjectState());
 	virtual ~GameObject();
 
 	virtual void Update(float deltaTime);
@@ -100,6 +101,7 @@ protected:
 	MATRIX _worldMatrix;
 	bool _isTransformChanged;
 	DIRECTION _direction;
+	Renderable* _renderable;
 
 	virtual void OnTransformChanged();
 	void CalculateWorldMatrix();

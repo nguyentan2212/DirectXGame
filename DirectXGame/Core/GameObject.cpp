@@ -11,6 +11,20 @@ GameObject::GameObject(ObjectState* state)
 	this->_children = vector<GameObject*>(0);
 	this->_showBoundingBox = true;
 	this->_isFlipped = false;
+	this->_renderable = nullptr;
+	TransitionTo(state);
+}
+
+GameObject::GameObject(Renderable* renderable, ObjectState* state)
+{
+	this->_position = VECTOR2D(0.0f, 0.0f);
+	this->_isTransformChanged = false;
+	this->_direction = DIRECTION::LEFT;
+	this->_parent = nullptr;
+	this->_children = vector<GameObject*>(0);
+	this->_showBoundingBox = true;
+	this->_isFlipped = false;
+	this->_renderable = renderable;
 	TransitionTo(state);
 }
 
@@ -26,6 +40,15 @@ void GameObject::Update(float deltaTime)
 	{
 		return;
 	}
+
+	if (this->_state != nullptr)
+	{
+		this->_state->Update(deltaTime);
+	}
+
+	this->_velocity += this->_acceleration * deltaTime / 1000;
+	Translate(this->_velocity * deltaTime / 1000);
+
 	Renderable* r = GetRenderable();
 	if (r)
 	{
@@ -237,7 +260,7 @@ void GameObject::CalculateWorldMatrix()
 
 Renderable* GameObject::GetRenderable()
 {
-	return nullptr;
+	return this->_renderable;
 }
 
 /// <summary>
