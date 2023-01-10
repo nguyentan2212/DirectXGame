@@ -181,6 +181,7 @@
     <ClInclude Include="Game\Items\Coin.h" />
     <ClInclude Include="Game\Items\Leaf.h" />
     <ClInclude Include="Game\Items\Mushroom.h" />
+    <ClInclude Include="Game\Items\Text.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioAttackState.h" />
     <ClInclude Include="Game\Mario\MarioChangeFigureState.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Graphic\AnimationFrame.h" />
     <ClInclude Include="Graphic\AnimationService.h" />
     <ClInclude Include="Graphic\Graphic.h" />
+    <ClInclude Include="Graphic\Renderable.h" />
     <ClInclude Include="Graphic\Sprite.h" />
     <ClInclude Include="Graphic\SpriteService.h" />
     <ClInclude Include="Graphic\Texture.h" />
@@ -237,6 +239,7 @@
     <ClCompile Include="Game\Items\Coin.cpp" />
     <ClCompile Include="Game\Items\Leaf.cpp" />
     <ClCompile Include="Game\Items\Mushroom.cpp" />
+    <ClCompile Include="Game\Items\Text.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Mario\MarioAttackState.cpp" />
     <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp" />

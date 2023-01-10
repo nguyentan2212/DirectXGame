@@ -58,7 +58,7 @@ void FireBall::OnCollision(CollisionEvent colEvent)
 	}
 }
 
-Animation* FireBall::GetAnimation()
+Renderable* FireBall::GetRenderable()
 {
 	AnimationService* animations = AnimationService::GetInstance();
 	return animations->GetAnimation("fire ball");

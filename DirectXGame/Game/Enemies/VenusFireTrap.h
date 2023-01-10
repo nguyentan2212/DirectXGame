@@ -10,6 +10,6 @@ public:
 	void OnCollision(CollisionEvent colEvent) override;
 
 private:
-	Animation* GetAnimation() override;
+	Renderable* GetRenderable() override;
 };
 

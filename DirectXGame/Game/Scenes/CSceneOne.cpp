@@ -53,11 +53,11 @@ void CSceneOne::InitObjects(json config)
 	for (json item : config)
 	{
 		GameObject* obj = nullptr;
-		/*if (item["class"].get<string>() == "brick")
+		if (item["class"].get<string>() == "brick")
 		{
 			obj = new Brick();
 		}
-		else if (item["class"].get<string>() == "coin")
+		/*else if (item["class"].get<string>() == "coin")
 		{
 			obj = new Coin();
 		}
@@ -72,12 +72,11 @@ void CSceneOne::InitObjects(json config)
 		else if (item["class"].get<string>() == "paragoomba")
 		{
 			obj = new ParaGoomba();
-		}
+		}*/
 		else
 		{
 			obj = new GameObject(new ObjectState());
-		}*/
-		obj = new GameObject(new ObjectState());
+		}
 		VECTOR2D position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->width = item["width"].get<float>();
 		obj->height = item["height"].get<float>();

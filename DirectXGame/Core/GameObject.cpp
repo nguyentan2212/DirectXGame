@@ -26,10 +26,10 @@ void GameObject::Update(float deltaTime)
 	{
 		return;
 	}
-	Animation* ani = GetAnimation();
-	if (ani)
+	Renderable* r = GetRenderable();
+	if (r)
 	{
-		ani->Update(deltaTime);
+		r->Update(deltaTime);
 	}
 }
 
@@ -49,10 +49,10 @@ void GameObject::Render(float zIndex)
 	VECTOR2D cameraPosition = camera->position;
 
 	VECTOR2D worldPosition = GetWorldPosition() - cameraPosition;
-	Animation* animation = GetAnimation();
-	if (animation != nullptr)
+	Renderable* r = GetRenderable();
+	if (r != nullptr)
 	{
-		animation->Render(worldPosition.x, worldPosition.y, this->_isFlipped, zIndex);
+		r->Render(worldPosition.x, worldPosition.y, this->_isFlipped, zIndex);
 	}
 }
 
@@ -235,7 +235,7 @@ void GameObject::CalculateWorldMatrix()
 	}
 }
 
-Animation* GameObject::GetAnimation()
+Renderable* GameObject::GetRenderable()
 {
 	return nullptr;
 }

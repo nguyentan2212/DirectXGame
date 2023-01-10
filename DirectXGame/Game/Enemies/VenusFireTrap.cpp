@@ -28,7 +28,7 @@ void VenusFireTrap::OnCollision(CollisionEvent colEvent)
 {
 }
 
-Animation* VenusFireTrap::GetAnimation()
+Renderable* VenusFireTrap::GetRenderable()
 {
 	string stateName = this->_name + " " +  this->_state->name;
 

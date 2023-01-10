@@ -13,7 +13,7 @@ public:
 	bool isLostWings = false;
 	bool isDeath = false;
 private:
-	Animation* GetAnimation() override;
+	Renderable* GetRenderable() override;
 	float _tempY;
 	Sprite* _lostWingScore = nullptr;
 	Sprite* _deathScore = nullptr;

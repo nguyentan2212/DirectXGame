@@ -12,6 +12,6 @@ public:
 
 private:
 	float _tempY = 0.0f;
-	Animation* GetAnimation() override;
+	Renderable* GetRenderable() override;
 };
 

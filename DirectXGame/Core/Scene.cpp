@@ -138,7 +138,7 @@ void Scene::RenderTileMap()
 
 				float x = i * this->_tileWidth + tileCenterX;
 				float y = j * this->_tileHeight + tileCenterY;
-				this->_tilemap[j][i]->Draw(VECTOR2D(x, y) - cameraPosition, false, 0.3);
+				this->_tilemap[j][i]->Render(VECTOR2D(x, y) - cameraPosition, false, 0.3);
 			}
 		}
 	}

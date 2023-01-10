@@ -35,7 +35,7 @@ Sprite::~Sprite()
     }
 }
 
-void Sprite::Draw(float x, float y, bool isFlipped, float zIndex)
+void Sprite::Render(float x, float y, bool isFlipped, float zIndex)
 {
     MATRIX matTranslation;
 
@@ -55,7 +55,7 @@ void Sprite::Draw(float x, float y, bool isFlipped, float zIndex)
     graphic->spriteHandler->DrawSpritesImmediate(&this->_sprite, 1, 0, 0);
 }
 
-void Sprite::Draw(VECTOR2D position, bool isFlipped, float zIndex)
+void Sprite::Render(VECTOR2D position, bool isFlipped, float zIndex)
 {
-    Draw(position.x, position.y, isFlipped, zIndex);
+    Render(position.x, position.y, isFlipped, zIndex);
 }

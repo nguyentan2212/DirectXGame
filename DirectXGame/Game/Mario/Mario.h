@@ -40,7 +40,7 @@ public:
 	void UpdateRunSpeed(float speed);
 
 private:
-	Animation* GetAnimation() override;
+	Renderable* GetRenderable() override;
 
 	void ChangeFigure(UINT figure);
 	UINT _figure;

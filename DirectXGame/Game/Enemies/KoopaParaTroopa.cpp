@@ -41,7 +41,7 @@ void KoopaParaTroopa::Render()
 
 		SpriteService* sprites = SpriteService::GetInstance();
 		Sprite* sprite = sprites->GetSprite("hub-and-font/100");
-		sprite->Draw(pos + VECTOR2D(0.0f, this->_tempY));
+		sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
 	}
 }
 
@@ -50,7 +50,7 @@ void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 	this->_state->OnCollision(colEvent);
 }
 
-Animation* KoopaParaTroopa::GetAnimation()
+Renderable* KoopaParaTroopa::GetRenderable()
 {
 	AnimationService* anis = AnimationService::GetInstance();
 	string stateName = this->_state->name;

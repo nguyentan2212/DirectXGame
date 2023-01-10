@@ -44,5 +44,5 @@ void Animation::Render(VECTOR2D position, bool isFlipped, float zIndex)
 
 void Animation::Render(float x, float y, bool isFlipped, float zIndex)
 {
-	this->_frames[this->_currentFrame]->sprite->Draw(x, y, isFlipped, zIndex);
+	this->_frames[this->_currentFrame]->sprite->Render(x, y, isFlipped, zIndex);
 }

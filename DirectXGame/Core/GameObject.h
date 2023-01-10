@@ -103,7 +103,7 @@ protected:
 
 	virtual void OnTransformChanged();
 	void CalculateWorldMatrix();
-	virtual Animation* GetAnimation();
+	virtual Renderable* GetRenderable();
 #pragma endregion
 };
 

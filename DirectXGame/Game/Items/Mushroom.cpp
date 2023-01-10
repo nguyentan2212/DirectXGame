@@ -75,7 +75,7 @@ void Mushroom::Render()
 		sprite = sprites->GetSprite("hub-and-font/1000");
 		worldPosition = worldPosition + VECTOR2D(0.0f, this->_tempY);
 	}
-	sprite->Draw(worldPosition, this->_isFlipped);
+	sprite->Render(worldPosition, this->_isFlipped);
 }
 
 void Mushroom::OnCollision(CollisionEvent colEvent)

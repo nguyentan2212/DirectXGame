@@ -33,11 +33,11 @@ void Goomba::Render()
 
 	Camera* camera = Camera::GetInstance();
 	VECTOR2D pos = GetWorldPosition() - camera->position;
-	sprite->Draw(pos, false, -0.1f);
+	sprite->Render(pos, false, -0.1f);
 
 	// draw score
 	sprite = sprites->GetSprite("hub-and-font/100");
-	sprite->Draw(pos + VECTOR2D(0.0f, this->_tempY));
+	sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
 }
 
 void Goomba::Update(float deltaTime)
@@ -118,7 +118,7 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 	}
 }
 
-Animation* Goomba::GetAnimation()
+Renderable* Goomba::GetRenderable()
 {
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("goomba walk");

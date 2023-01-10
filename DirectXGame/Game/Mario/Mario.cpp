@@ -126,7 +126,7 @@ void Mario::UpdateRunSpeed(float speed)
 	}
 }
 
-Animation* Mario::GetAnimation()
+Renderable* Mario::GetRenderable()
 {
 	string aniName;
 	switch (this->_figure)

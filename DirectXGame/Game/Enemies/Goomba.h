@@ -15,7 +15,7 @@ public:
 private:
 	bool _isDeath;
 	float _tempY;
-	Animation* GetAnimation() override;
+	Renderable* GetRenderable() override;
 
 	void Death();
 };

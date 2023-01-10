@@ -11,11 +11,6 @@ void Coin::Update(float deltaTime)
 	GameObject::Update(deltaTime);
 }
 
-void Coin::Render()
-{
-	GameObject::Render();
-}
-
 void Coin::OnCollision(CollisionEvent colEvent)
 {
 	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
@@ -27,7 +22,7 @@ void Coin::OnCollision(CollisionEvent colEvent)
 	}
 }
 
-Animation* Coin::GetAnimation()
+Renderable* Coin::GetRenderable()
 {
 	AnimationService* animations = AnimationService::GetInstance();
 	return animations->GetAnimation("coin");

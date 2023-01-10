@@ -34,17 +34,17 @@ void ParaGoomba::Render()
 	if (this->isLostWings && !this->isDeath && this->_lostWingScore != nullptr)
 	{
 		// draw score
-		sprite->Draw(pos + VECTOR2D(0.0f, this->_tempY));
+		sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
 		return;
 	}
 	else if (this->isDeath && this->_deathScore != nullptr)
 	{
 		sprite = sprites->GetSprite("enemies/paragoomba/2");
-		sprite->Draw(pos, false, -0.1f);
+		sprite->Render(pos, false, -0.1f);
 
 		// draw score
 		sprite = sprites->GetSprite("hub-and-font/800");
-		sprite->Draw(pos + VECTOR2D(0.0f, this->_tempY));
+		sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
 		return;
 	}
 
@@ -56,8 +56,8 @@ void ParaGoomba::Render()
 	if (this->_state->name == "normal")
 	{
 		sprite = sprites->GetSprite("enemies/wing-1");
-		sprite->Draw(pos + VECTOR2D(8.0f, 8.0f), false, -0.1f);
-		sprite->Draw(pos + VECTOR2D(-8.0f, 8.0f), true, -0.1f);
+		sprite->Render(pos + VECTOR2D(8.0f, 8.0f), false, -0.1f);
+		sprite->Render(pos + VECTOR2D(-8.0f, 8.0f), true, -0.1f);
 		return;
 	}
 
@@ -165,7 +165,7 @@ void ParaGoomba::OnCollision(CollisionEvent colEvent)
 	}
 }
 
-Animation* ParaGoomba::GetAnimation()
+Renderable* ParaGoomba::GetRenderable()
 {
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("paragoomba walk");

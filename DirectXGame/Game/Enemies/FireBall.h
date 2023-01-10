@@ -13,6 +13,6 @@ private:
 	VECTOR2D _begin;
 	float _maxLength;
 
-	Animation* GetAnimation() override;
+	Renderable* GetRenderable() override;
 };
 
