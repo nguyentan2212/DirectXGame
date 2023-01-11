@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Core/ObjectState.h"
+#include "../../Core/State.h"
 
-class VenusFireTrapSleepState: public ObjectState
+class VenusFireTrapSleepState: public State
 {
 public:
 	VenusFireTrapSleepState();

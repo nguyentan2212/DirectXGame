@@ -161,8 +161,8 @@
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\KeyboardHandler.h" />
     <ClInclude Include="Core\ObjectPool.h" />
-    <ClInclude Include="Core\ObjectState.h" />
     <ClInclude Include="Core\Scene.h" />
+    <ClInclude Include="Core\State.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Game\Enemies\FireBall.h" />
     <ClInclude Include="Game\Enemies\Goomba.h" />
@@ -218,7 +218,6 @@
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\KeyboardHandler.cpp" />
     <ClCompile Include="Core\ObjectPool.cpp" />
-    <ClCompile Include="Core\ObjectState.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="Game\Enemies\FireBall.cpp" />

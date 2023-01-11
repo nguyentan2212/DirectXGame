@@ -4,7 +4,7 @@
 #include <string> 
 #include "Mario/Mario.h"
 
-GUI::GUI(): GameObject(new ObjectState())
+GUI::GUI(): GameObject()
 {
 	this->_name = "gui";
 }

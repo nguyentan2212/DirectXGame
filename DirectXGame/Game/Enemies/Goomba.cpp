@@ -3,7 +3,7 @@
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
 
-Goomba::Goomba(): GameObject(new ObjectState())
+Goomba::Goomba(): GameObject()
 {
 	this->_name = "goomba";
 	this->_width = GOOMBA_SIZE;

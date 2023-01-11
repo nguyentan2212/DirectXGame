@@ -1,6 +1,6 @@
 #pragma once
-#include "../../Core/ObjectState.h"
-class MarioChangeFigureState: public ObjectState
+#include "../../Core/State.h"
+class MarioChangeFigureState: public State
 {
 public:
 	MarioChangeFigureState(string newFigure);

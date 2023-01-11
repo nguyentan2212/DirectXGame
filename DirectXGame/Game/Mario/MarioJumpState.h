@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Core/ObjectState.h"
+#include "../../Core/State.h"
 
-class MarioJumpState: public ObjectState
+class MarioJumpState: public State
 {
 public:
 	MarioJumpState(float speedFactor = 1.0f);

@@ -1,8 +1,8 @@
 #pragma once
-#include "../../Core/ObjectState.h"
+#include "../../Core/State.h"
 
 constexpr float KICK_COOLDOWN = 200.0f;
-class MarioKickState: public ObjectState
+class MarioKickState: public State
 {
 public:
 	MarioKickState();

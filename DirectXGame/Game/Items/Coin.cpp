@@ -4,7 +4,7 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
 
-Coin::Coin(VECTOR2D position): GameObject(new ObjectState())
+Coin::Coin(VECTOR2D position): GameObject()
 {
 	this->_name = "coin";
 	this->_position = position;

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Core/ObjectState.h"
+#include "../../Core/State.h"
 
-class MarioSitState: public ObjectState
+class MarioSitState: public State
 {
 public:
 	MarioSitState();

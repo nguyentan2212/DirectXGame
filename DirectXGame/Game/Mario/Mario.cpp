@@ -3,7 +3,7 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
 
-Mario::Mario(ObjectState* state): GameObject(state)
+Mario::Mario(State* state): GameObject(state)
 {
 	this->_showBoundingBox = true;
 	this->_name = "mario";

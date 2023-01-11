@@ -3,7 +3,7 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
 
-Leaf::Leaf(VECTOR2D pos): GameObject(new ObjectState())
+Leaf::Leaf(VECTOR2D pos): GameObject()
 {
 	this->position = pos;
 	this->_height = LEAF_SIZE;

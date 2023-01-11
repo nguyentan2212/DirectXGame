@@ -26,7 +26,7 @@ constexpr float MARIO_RACCOON_WIDTH = 23.0f;
 class Mario: public GameObject
 {
 public:
-	Mario(ObjectState* state);
+	Mario(State* state);
 
 	void Update(float deltaTime) override;
 	void Render() override;

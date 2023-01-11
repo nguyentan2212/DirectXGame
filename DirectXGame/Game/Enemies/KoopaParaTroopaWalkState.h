@@ -1,9 +1,9 @@
 #pragma once
-#include "../../Core/ObjectState.h"
+#include "../../Core/State.h"
 
 constexpr float KOOPA_PARATROOPA_WALK_SPEED_X = 40;
 
-class KoopaParaTroopaWalkState: public ObjectState
+class KoopaParaTroopaWalkState: public State
 {
 public:
 	KoopaParaTroopaWalkState();

@@ -3,7 +3,7 @@
 #include "MarioIdleState.h"
 #include <dinput.h>
 
-MarioSitState::MarioSitState(): ObjectState()
+MarioSitState::MarioSitState(): State()
 {
 	this->_name = "sit";
 	DebugOut((wchar_t*)L"[INFO] Mario transition to Sit State \n");

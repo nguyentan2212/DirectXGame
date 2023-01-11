@@ -3,7 +3,7 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
 
-Mushroom::Mushroom(VECTOR2D position): GameObject(new ObjectState())
+Mushroom::Mushroom(VECTOR2D position): GameObject()
 {
 	this->position = position;
 	this->_beginY = position.y;

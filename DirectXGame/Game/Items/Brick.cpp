@@ -7,7 +7,7 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
 
-Brick::Brick(GameObject* content, VECTOR2D position): GameObject(new ObjectState())
+Brick::Brick(GameObject* content, VECTOR2D position): GameObject()
 {
 	this->_position = position;
 	this->_beginY = position.y;

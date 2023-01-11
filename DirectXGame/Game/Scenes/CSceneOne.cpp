@@ -89,7 +89,7 @@ void CSceneOne::InitObjects(json config)
 		}*/
 		else
 		{
-			obj = new GameObject(new ObjectState());
+			obj = new GameObject();
 			obj->width = item["width"].get<float>();
 			obj->height = item["height"].get<float>();
 			obj->name = item["name"].get<string>();

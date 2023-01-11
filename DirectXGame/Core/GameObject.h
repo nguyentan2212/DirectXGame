@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "ObjectState.h"
+#include "State.h"
 #include "../Graphic/Graphic.h"
 #include "../Graphic/AnimationService.h"
 #include "../Utils/Property.h"
@@ -12,8 +12,9 @@ using namespace::std;
 class GameObject
 {
 public: 
-	GameObject(ObjectState* state);
-	GameObject(Renderable* renderable, ObjectState* state = new ObjectState());
+	GameObject();
+	GameObject(State* state);
+	GameObject(Renderable* renderable, State* state = nullptr);
 	virtual ~GameObject();
 
 	virtual void Update(float deltaTime);
@@ -33,7 +34,7 @@ public:
 	string GetStateName() const;
 
 	VECTOR2D GetWorldPosition();
-	void TransitionTo(ObjectState* state);
+	void TransitionTo(State* state);
 
 	virtual Box GetBoundingBox();
 	void DrawBoundingBox();
@@ -85,7 +86,7 @@ public:
 protected:
 	GameObject* _parent;
 	vector<GameObject*> _children;
-	ObjectState* _state;
+	State* _state;
 	bool _showBoundingBox;
 	bool _isFlipped;
 	string _name;

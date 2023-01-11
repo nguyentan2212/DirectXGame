@@ -9,7 +9,7 @@
 #include "MarioAttackState.h"
 #include <dinput.h>
 
-MarioRunState::MarioRunState(int direction): ObjectState()
+MarioRunState::MarioRunState(int direction): State()
 {
 	this->_name = "run";
     DebugOut((wchar_t*)L"[INFO] Mario transition to Run State \n");

@@ -7,7 +7,6 @@
 #include "MarioHoldState.h"
 #include "MarioAttackState.h"
 #include "MarioFallState.h"
-#include "Mario.h"
 #include <dinput.h>
 
 MarioIdleState::MarioIdleState()
@@ -18,10 +17,9 @@ MarioIdleState::MarioIdleState()
 
 void MarioIdleState::Update(float deltaTime)
 {
-	Mario* mario = dynamic_cast<Mario*>(this->_context);
-	if (mario != nullptr && mario->isGrounded == false)
+	if (this->_context->isGrounded == false)
 	{
-		mario->TransitionTo(new MarioFallState());
+		this->_context->TransitionTo(new MarioFallState());
 	}
 }
 
@@ -42,27 +40,16 @@ void MarioIdleState::OnKeyDown(int keyCode)
 		if (this->_context->name != "small mario")
 		{
 			this->_context->TransitionTo(new MarioSitState());
-		}
-		break;
+			break;
+		}	
 	case DIK_LEFT:
 	case DIK_RIGHT:
 	{
 		int direction = (keyCode - DIK_LEFT) - 1;
 		this->_context->TransitionTo(new MarioRunState(direction));
+		break;
 	}
-		break;
-	case DIK_K:
-		this->_context->TransitionTo(new MarioKickState());
-		break;
-	case DIK_H:
-		this->_context->TransitionTo(new MarioHoldState());
-		break;
-	case DIK_A:
-		if (this->_context->name == "raccoon mario")
-		{
-			this->_context->TransitionTo(new MarioAttackState());
-		}
-		break;
+		
 	default:
 		break;
 	}

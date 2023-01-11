@@ -180,9 +180,6 @@
     <ClInclude Include="Utils\CMath.h">
       <Filter>Utils\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Core\ObjectState.h">
-      <Filter>Core\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Mario\Mario.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
@@ -294,6 +291,12 @@
     <ClInclude Include="Game\Mario\MarioAttackState.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
+    <ClInclude Include="Graphic\Renderable.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\State.h">
+      <Filter>Core\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -344,9 +347,6 @@
     </ClCompile>
     <ClCompile Include="Game\Mario\MarioSitState.cpp">
       <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\ObjectState.cpp">
-      <Filter>Core\Source</Filter>
     </ClCompile>
     <ClCompile Include="Game\Mario\MarioJumpState.cpp">
       <Filter>Game\Mario</Filter>

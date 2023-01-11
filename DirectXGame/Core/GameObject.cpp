@@ -2,7 +2,20 @@
 #include "Camera.h"
 #include "../Utils/Debug.h"
 
-GameObject::GameObject(ObjectState* state)
+GameObject::GameObject()
+{
+	this->_position = VECTOR2D(0.0f, 0.0f);
+	this->_isTransformChanged = false;
+	this->_direction = DIRECTION::LEFT;
+	this->_parent = nullptr;
+	this->_children = vector<GameObject*>(0);
+	this->_showBoundingBox = true;
+	this->_isFlipped = false;
+	this->_renderable = nullptr;
+	this->_state = nullptr;
+}
+
+GameObject::GameObject(State* state)
 {
 	this->_position = VECTOR2D(0.0f, 0.0f);
 	this->_isTransformChanged = false;
@@ -15,7 +28,7 @@ GameObject::GameObject(ObjectState* state)
 	TransitionTo(state);
 }
 
-GameObject::GameObject(Renderable* renderable, ObjectState* state)
+GameObject::GameObject(Renderable* renderable, State* state)
 {
 	this->_position = VECTOR2D(0.0f, 0.0f);
 	this->_isTransformChanged = false;
@@ -182,7 +195,7 @@ VECTOR2D GameObject::GetWorldPosition()
 /// Transitions to specific state.
 /// </summary>
 /// <param name="state">The state.</param>
-void GameObject::TransitionTo(ObjectState* state)
+void GameObject::TransitionTo(State* state)
 {
 	if (state == nullptr)
 	{

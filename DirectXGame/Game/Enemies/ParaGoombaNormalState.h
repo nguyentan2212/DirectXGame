@@ -1,10 +1,10 @@
 #pragma once
-#include "../../Core/ObjectState.h"
+#include "../../Core/State.h"
 
 constexpr float PARAGOOMBA_SPEED_X = 25;
 constexpr float PARAGOOMBA_WALK_COOLDOWN = 2000.0f;
 
-class ParaGoombaNormalState: public ObjectState
+class ParaGoombaNormalState: public State
 {
 public:
 	ParaGoombaNormalState(int direction);

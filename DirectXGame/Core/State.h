@@ -1,18 +1,18 @@
 #pragma once
 #include <string>
 #include "../Utils/Property.h"
-#include "../Utils/Debug.h"
-#include "../Utils/CMath.h"
 #include "../Physic/CollisionEvent.h"
+#include "../Utils/Debug.h"
 
 using namespace::std;
 
 class GameObject;
-class ObjectState
+
+class State
 {
 public:
-	ObjectState() { this->_context = nullptr; this->_name = "default"; }
-	~ObjectState();
+	State() { this->_context = nullptr; this->_name = "default"; }
+	~State() {};
 
 	virtual void OnTransition() {};
 	virtual void Update(float deltaTime) {};
@@ -21,14 +21,14 @@ public:
 	virtual void OnKeyUp(int keyCode) {};
 	virtual void OnCollision(CollisionEvent colEvent) {};
 
+	PROPERTY(string, name);
+	GET(name) { return this->_name; }
+	SET(name) { this->_name = value; }
+
 	W_PROPERTY(GameObject*, context);
 	SET(context) { this->_context = value; }
-
-	R_PROPERTY(string, name);
-	GET(name) { return this->_name; }
 
 protected:
 	GameObject* _context;
 	string _name;
 };
-

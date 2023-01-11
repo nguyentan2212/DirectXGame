@@ -1,10 +1,9 @@
 #include "FireBall.h"
 #include "../Mario/Mario.h"
-#include "../../Core/ObjectState.h"
 #include "../Mario/MarioChangeFigureState.h"
 #include "../Mario/MarioDeathState.h"
 
-FireBall::FireBall(VECTOR2D begin, float maxLength): GameObject(new ObjectState())
+FireBall::FireBall(VECTOR2D begin, float maxLength): GameObject()
 {
 	this->_begin = begin;
 	this->_maxLength = maxLength;
