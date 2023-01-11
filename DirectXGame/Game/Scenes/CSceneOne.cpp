@@ -28,7 +28,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario(new MarioIdleState());
-	mario->position = VECTOR2D(50, 50);
+	mario->position = VECTOR2D(550, 50);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -58,21 +58,28 @@ void CSceneOne::InitObjects(json config)
 		GameObject* obj = nullptr;
 		if (item["class"].get<string>() == "brick")
 		{
-			obj = new Brick(Coin::ScoreCoin(position), position);
 			if (item["name"].get<string>() == "mushroom brick")
 			{
-				obj = new Brick(new Mushroom(position), position);
+				obj = Brick::CreateMushroomBrick(position);
+			}
+			else if (item["name"].get<string>() == "leaf brick")
+			{
+				obj = Brick::CreateLeafBrick(position);
+			}
+			else
+			{
+				obj = Brick::CreateCoinBrick(position);
 			}
 		}
-		/*else if (item["class"].get<string>() == "coin")
+		else if (item["class"].get<string>() == "coin")
 		{
-			obj = new Coin();
+			obj = new Coin(position);
 		}
 		else if (item["class"].get<string>() == "goomba")
 		{
 			obj = new Goomba();
 		}
-		else if (item["class"].get<string>() == "koopaparatroopa")
+		/*else if (item["class"].get<string>() == "koopaparatroopa")
 		{
 			obj = new KoopaParaTroopa();
 		}
@@ -83,11 +90,11 @@ void CSceneOne::InitObjects(json config)
 		else
 		{
 			obj = new GameObject(new ObjectState());
+			obj->width = item["width"].get<float>();
+			obj->height = item["height"].get<float>();
+			obj->name = item["name"].get<string>();
 		}
-		obj->width = item["width"].get<float>();
-		obj->height = item["height"].get<float>();
 		obj->position = position;
-		obj->name = obj->name.empty() ? item["name"].get<string>() : obj->name;
 		obj->showBoundingBox = true;
 		pool->AddGameObject(obj);
 	}

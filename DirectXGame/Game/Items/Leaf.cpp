@@ -1,17 +1,23 @@
 #include "Leaf.h"
-#include "../Mario/Mario.h"
 #include "../../Graphic/SpriteService.h"
-#include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
-#include "../Mario/MarioChangeFigureState.h"
+#include "../../Core/ObjectPool.h"
 
 Leaf::Leaf(VECTOR2D pos): GameObject(new ObjectState())
 {
 	this->position = pos;
-	this->_height = 16.0f;
-	this->_width = 16.0f;
+	this->_height = LEAF_SIZE;
+	this->_width = LEAF_SIZE;
 	this->_velocity = VECTOR2D(0.0f, LEAF_Y_SPEED);
 	this->_acceleration = VECTOR2D(0.0F, -LEAF_GRAVITY);
+	this->_name = "leaf";
+
+	ObjectPool* pool = ObjectPool::GetInstance();
+	SpriteService* sprites = SpriteService::GetInstance();
+	this->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
+	this->_score->velocity = VECTOR2D(0.0f, LEAF_SCORE_SPEED);
+	this->_score->isActive = false;
+	pool->AddGameObject(this->_score);
 }
 
 void Leaf::Update(float deltaTime)
@@ -20,61 +26,47 @@ void Leaf::Update(float deltaTime)
 	{
 		return;
 	}
-
-	if (GetWorldPosition().y <= -40)
+	// update score
+	if (this->_score != nullptr)
 	{
-		this->_isActive = false;
-		return;
+		this->_score->Update(deltaTime);
 	}
 
-	if (this->_renderIndex == 1)
+	if (this->_score != nullptr && this->_score->isActive
+		&& this->_score->position.y > this->_position.y + LEAF_SCORE_MAX_LENGHT)
 	{
-		if (this->_tempY <= 100.0f)
-		{
-			this->_tempY += LEAF_Y_SPEED / 3 * deltaTime / 1000;
-			//DebugOut((wchar_t*)L"[INFO] Brick tempY = %f \n", _tempY);
-		}
-		else
-		{
-			this->_renderIndex = 2;
-			this->_isActive = false;
-		}
+		this->_score->isActive = false;
+		this->isActive = false;
 	}
 
-	GameObject::Update(deltaTime);
-	//DebugOut((wchar_t*)L"[INFO] Leaf world y = %f \n", this->GetWorldPosition().y);
-}
-
-void Leaf::Render()
-{
-	if (this->_isActive == false)
-	{
-		return;
-	}
-	Camera* camera = Camera::GetInstance();
-	VECTOR2D cameraPosition = camera->position;
-	VECTOR2D worldPosition = GetWorldPosition() - cameraPosition;
-
-	SpriteService* sprites = SpriteService::GetInstance();
-	Sprite* sprite = sprites->GetSprite("mics114");
-
-	if (this->_renderIndex == 1)
-	{
-		sprite = sprites->GetSprite("hub-and-font/1000");
-		worldPosition = worldPosition + VECTOR2D(0.0f, this->_tempY);
-	}
-	sprite->Render(worldPosition, this->_isFlipped);
+	// main update
+	this->_velocity += this->_acceleration * deltaTime / 1000;
+	CollisionManager::Processing(this, deltaTime);
+	Translate(this->_velocity * deltaTime / 1000);
 }
 
 void Leaf::OnCollision(CollisionEvent colEvent)
 {
-	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
-	if (mario != nullptr)
+	if (colEvent.collisionObj->name == "ground")
 	{
-		this->_renderIndex = 1;
-		this->_velocity = VECTOR2D(0.0f, 0.0f);
-		this->_acceleration = VECTOR2D(0.0f, 0.0f);
-		mario->IncreaseScore(1000);
-		mario->TransitionTo(new MarioChangeFigureState("raccoon mario"));
+		this->_acceleration = VECTOR2D();
+		this->_velocity = VECTOR2D();
+		this->_isActive = false;
 	}
+	else if (colEvent.collisionObj->name == "mario")
+	{
+		this->_score->isActive = true;
+		this->_score->position = position + VECTOR2D(0.0f, LEAF_SIZE);
+	}
+}
+
+Renderable* Leaf::GetRenderable()
+{
+	if (this->_score->isActive)
+	{
+		return nullptr;
+	}
+
+	SpriteService* sprites = SpriteService::GetInstance();
+	return sprites->GetSprite("mics114");
 }

@@ -1,6 +1,7 @@
 #include "Mushroom.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Physic/CollisionManager.h"
+#include "../../Core/ObjectPool.h"
 
 Mushroom::Mushroom(VECTOR2D position): GameObject(new ObjectState())
 {
@@ -11,6 +12,13 @@ Mushroom::Mushroom(VECTOR2D position): GameObject(new ObjectState())
 	this->_velocity = VECTOR2D(0.0f, MUSHROOM_Y_SPEED);
 	this->_isReady = false;
 	this->_name = "mushroom";
+	
+	ObjectPool* pool = ObjectPool::GetInstance();
+	SpriteService* sprites = SpriteService::GetInstance();
+	this->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
+	this->_score->velocity = VECTOR2D(0.0f, MUSHROOM_SCORE_SPEED);
+	this->_score->isActive = false;
+	pool->AddGameObject(this->_score);
 }
 
 void Mushroom::Update(float deltaTime)
@@ -20,6 +28,20 @@ void Mushroom::Update(float deltaTime)
 		return;
 	}
 
+	// update score
+	if (this->_score != nullptr)
+	{
+		this->_score->Update(deltaTime);
+	}
+
+	if (this->_score != nullptr && this->_score->isActive 
+		&& this->_score->position.y > this->_position.y + MUSHROOM_SCORE_MAX_LENGHT)
+	{
+		this->_score->isActive = false;
+		this->isActive = false;
+	}
+
+	// mushroom update
 	if (this->_isReady == false && this->_acceleration.y == 0 && this->_position.y >= this->_beginY + MUSHROOM_SIZE)
 	{
 		this->_acceleration = VECTOR2D(0.0f, -MUSHROOM_GRAVITY);
@@ -35,6 +57,7 @@ void Mushroom::Update(float deltaTime)
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
 	}
 
+	// main update
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
@@ -58,6 +81,11 @@ void Mushroom::OnCollision(CollisionEvent colEvent)
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
 	}
+	else if (objName == "mario")
+	{
+		this->_score->isActive = true;
+		this->_score->position = position + VECTOR2D(0.0f, MUSHROOM_SIZE);
+	}
 }
 
 void Mushroom::Render()
@@ -67,6 +95,11 @@ void Mushroom::Render()
 
 Renderable* Mushroom::GetRenderable()
 {
+	if (this->_score->isActive)
+	{
+		return nullptr;
+	}
+
 	SpriteService* sprites = SpriteService::GetInstance();
 	return sprites->GetSprite("mics107");
 }

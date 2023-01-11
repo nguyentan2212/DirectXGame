@@ -6,6 +6,9 @@ constexpr float MUSHROOM_X_SPEED = 30;
 constexpr float MUSHROOM_Y_SPEED = 10;
 constexpr float MUSHROOM_SIZE = 16;
 
+constexpr float MUSHROOM_SCORE_SPEED = 20;
+constexpr float MUSHROOM_SCORE_MAX_LENGHT = 80;
+
 class Mushroom: public GameObject
 {
 public:
@@ -19,5 +22,6 @@ private:
 	Renderable* GetRenderable() override;
 	float _beginY;
 	bool _isReady;
+	GameObject* _score;
 };
 

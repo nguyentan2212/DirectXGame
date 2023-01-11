@@ -26,7 +26,7 @@ void Coin::Update(float deltaTime)
 		this->_score->Update(deltaTime);
 	}
 
-	if (this->_score != nullptr && this->_score->isActive && this->_score->position.y > this->_position.y + SCORE_MAX_LENGHT)
+	if (this->_score != nullptr && this->_score->isActive && this->_score->position.y > this->_position.y + COIN_SCORE_MAX_LENGHT)
 	{
 		this->_score->isActive = false;
 		this->isActive = false;
@@ -50,6 +50,7 @@ Coin* Coin::ScoreCoin(VECTOR2D position)
 {
 	Coin* pCoin = new Coin(position);
 
+	pCoin->_name = "score coin";
 	pCoin->_velocity = VECTOR2D(0.0f, COIN_SPEED);
 	pCoin->_acceleration = VECTOR2D(0.0f, -COIN_GRAVITY);
 
@@ -57,7 +58,7 @@ Coin* Coin::ScoreCoin(VECTOR2D position)
 	SpriteService* sprites = SpriteService::GetInstance();
 	pCoin->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
 	pCoin->_score->position = position + VECTOR2D(0.0f, COIN_SIZE);
-	pCoin->_score->velocity = VECTOR2D(0.0f, SCORE_SPEED);
+	pCoin->_score->velocity = VECTOR2D(0.0f, COIN_SCORE_SPEED);
 	pCoin->_score->isActive = false;
 	pool->AddGameObject(pCoin->_score);
 
@@ -72,5 +73,5 @@ Renderable* Coin::GetRenderable()
 	}
 
 	AnimationService* animations = AnimationService::GetInstance();
-	return animations->GetAnimation("coin");
+	return animations->GetAnimation(this->_name);
 }
