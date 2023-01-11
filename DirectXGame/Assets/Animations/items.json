@@ -29,6 +29,36 @@
     },
     {
       "name": "coin",
+      "defaultTime": 2000,
+      "frames": [
+        {
+          "sprite": "mics10"
+        },
+        {
+          "sprite": "mics63"
+        },
+        {
+          "sprite": "mics11"
+        },
+        {
+          "sprite": "mics105"
+        },
+        {
+          "sprite": "mics106"
+        },
+        {
+          "sprite": "mics105"
+        },
+        {
+          "sprite": "mics11"
+        },
+        {
+          "sprite": "mics63"
+        }
+      ]
+    },
+    {
+      "name": "score coin",
       "defaultTime": 800,
       "frames": [
         {
