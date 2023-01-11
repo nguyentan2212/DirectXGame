@@ -30,8 +30,7 @@ void MarioJumpState::Update(float deltaTime)
 
 void MarioJumpState::OnCollision(CollisionEvent colEvent)
 {
-    string st = typeid(*colEvent.collisionObj).name();
-    if (st == "class Brick")
+    if (colEvent.collisionObj->name == "brick")
     {
         this->_context->position += this->_context->velocity * colEvent.entryTime;
         this->_context->velocity = VECTOR2D(0, 0);
@@ -47,10 +46,6 @@ void MarioJumpState::OnKeyDown(int keyCode)
     {
         int direction = (keyCode - DIK_LEFT) - 1;
         this->_context->velocity = VECTOR2D(direction * MARIO_RUN_MAX_SPEED_X / 2.0f, this->_context->velocity.y);
-    }
-    else if (keyCode == DIK_A && this->_context->name == "raccoon mario")
-    {
-        this->_context->TransitionTo(new MarioAttackState());
     }
 }
 

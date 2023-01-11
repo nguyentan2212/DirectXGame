@@ -2,10 +2,6 @@
 #include "../../Core/GameObject.h"
 #include "MarioRunState.h"
 #include "MarioJumpState.h"
-#include "MarioSitState.h"
-#include "MarioKickState.h"
-#include "MarioHoldState.h"
-#include "MarioAttackState.h"
 #include "MarioFallState.h"
 #include <dinput.h>
 
@@ -36,12 +32,6 @@ void MarioIdleState::OnKeyDown(int keyCode)
 	case DIK_UP:
 		this->_context->TransitionTo(new MarioJumpState());
 		break;
-	case DIK_DOWN:
-		if (this->_context->name != "small mario")
-		{
-			this->_context->TransitionTo(new MarioSitState());
-			break;
-		}	
 	case DIK_LEFT:
 	case DIK_RIGHT:
 	{
@@ -49,7 +39,6 @@ void MarioIdleState::OnKeyDown(int keyCode)
 		this->_context->TransitionTo(new MarioRunState(direction));
 		break;
 	}
-		
 	default:
 		break;
 	}
