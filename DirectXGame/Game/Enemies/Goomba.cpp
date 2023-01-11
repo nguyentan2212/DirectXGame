@@ -1,43 +1,14 @@
 #include "Goomba.h"
-#include "../../Core/Camera.h"
 #include "../../Graphic/SpriteService.h"
+#include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
-#include "../Mario/Mario.h"
-#include "../Mario/MarioJumpState.h"
-#include "../Mario/MarioChangeFigureState.h"
-#include "../Mario/MarioDeathState.h"
 
 Goomba::Goomba(): GameObject(new ObjectState())
 {
 	this->_name = "goomba";
-	this->_width = 16;
-	this->_height = 16;
-	this->_isDeath = false;
+	this->_width = GOOMBA_SIZE;
+	this->_height = GOOMBA_SIZE;
 	this->_velocity = VECTOR2D(-GOOMBA_SPEED, 0.0f);
-}
-
-void Goomba::Render()
-{
-	if (this->_isActive == false)
-	{
-		return;
-	}
-
-	if (this->_isDeath == false)
-	{
-		GameObject::Render();
-		return;
-	}
-	SpriteService* sprites = SpriteService::GetInstance();
-	Sprite* sprite = sprites->GetSprite("enemies/goomba/2");
-
-	Camera* camera = Camera::GetInstance();
-	VECTOR2D pos = GetWorldPosition() - camera->position;
-	sprite->Render(pos, false, -0.1f);
-
-	// draw score
-	sprite = sprites->GetSprite("hub-and-font/100");
-	sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
 }
 
 void Goomba::Update(float deltaTime)
@@ -47,89 +18,47 @@ void Goomba::Update(float deltaTime)
 		return;
 	}
 
-	if (this->_isDeath)
+	Renderable* r = GetRenderable();
+	if (r != nullptr)
 	{
-		if (this->_tempY <= 80.0f)
-		{
-			this->_tempY += GOOMBA_SPEED * 1.5f * deltaTime / 1000;
-			DebugOut((wchar_t*)L"[INFO] Goomba tempY = %f \n", _tempY);
-		}
-		else
-		{
-			this->_isActive = false;
-		}
+		r->Update(deltaTime);
 	}
 
-	GameObject::Update(deltaTime);
-
-	VECTOR2D pos = GetWorldPosition();
-	if (pos.x <= -10.0f || pos.y <= -40.0f)
-	{
-		this->_isActive = false;
-	}
+	this->_acceleration = VECTOR2D(0.0f, -GOOMBA_GRAVITY);
+	this->_velocity += this->_acceleration * deltaTime / 1000;
+	this->_isGrounded = false;
+	CollisionManager::Processing(this, deltaTime);
+	Translate(this->_velocity * deltaTime / 1000);
 }
 
 void Goomba::OnCollision(CollisionEvent colEvent)
 {
-	string className = typeid(*colEvent.collisionObj).name();
-
-	if (colEvent.collisionObj->name == "ground" || colEvent.collisionObj->name == "pine" || 
-		colEvent.collisionObj->name == "border" || className == "class Brick")
+	string objName = colEvent.collisionObj->name;
+	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "brick"
+		|| objName == "panel")
 	{
-		if (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT)
+		if (colEvent.direction == Direction::DOWN)
+		{
+			this->_isGrounded = true;
+			this->_position += this->_velocity * colEvent.entryTime;
+			this->_velocity = VECTOR2D(this->_velocity.x, 0);
+			this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
+		}
+		else if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
 		{
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
-		}
-		else if (colEvent.direction == Direction::DOWN)
-		{
-			this->_velocity = VECTOR2D(this->_velocity.x, 0.0f);
-		}
-	}
-	else if (this->_isDeath == false)
-	{
-		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
-		if (mario != nullptr)
-		{
-			string stateName = mario->GetStateName();
-			if (stateName == "death")
-			{
-				return;
-			}
-			if (colEvent.direction == Direction::UP)
-			{
-				Death();
-				mario->IncreaseScore(100);
-				mario->TransitionTo(new MarioJumpState(0.5f));
-			}
-			else if (mario->GetStateName() == "attack")
-			{
-				mario->IncreaseScore(100);
-				Death();
-			}
-			else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
-			{
-				mario->TransitionTo(new MarioChangeFigureState("small mario"));
-			}
-			else if (stateName.find("change figure") == string::npos)
-			{
-				mario->TransitionTo(new MarioDeathState());
-			}
 		}
 	}
 }
 
 Renderable* Goomba::GetRenderable()
 {
+	if (this->_isDeath)
+	{
+		SpriteService* sprites = SpriteService::GetInstance();
+		return sprites->GetSprite("enemies/goomba/2");
+	}
+
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("goomba walk");
-}
-
-void Goomba::Death()
-{
-	this->_isDeath = true;
-	this->_velocity = VECTOR2D(0.0f, 0.0f);
-	VECTOR2D pos = GetWorldPosition();
-	pos.y -= 4.0f;
-	this->position = pos;
-	this->_height = 9.0f;
 }

@@ -2,21 +2,17 @@
 #include "../../Core/GameObject.h"
 
 constexpr float GOOMBA_SPEED = 30;
+constexpr float GOOMBA_GRAVITY = 120;
+constexpr float GOOMBA_SIZE = 16;
 
 class Goomba: public GameObject
 {
 public:
 	Goomba();
-
-	void Render() override;
 	void Update(float deltaTime) override;
 	void OnCollision(CollisionEvent colEvent) override;
 
 private:
-	bool _isDeath;
-	float _tempY;
 	Renderable* GetRenderable() override;
-
-	void Death();
+	bool _isDeath;
 };
-
