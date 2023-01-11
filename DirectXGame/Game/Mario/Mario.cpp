@@ -17,6 +17,12 @@ void Mario::Update(float deltaTime)
 		return;
 	}
 
+	Renderable* r = GetRenderable();
+	if (r != nullptr)
+	{
+		r->Update(deltaTime);
+	}
+
 	if (this->_velocity.x < 0)
 	{
 		this->_direction = DIRECTION::LEFT;
