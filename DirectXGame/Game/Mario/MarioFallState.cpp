@@ -24,6 +24,16 @@ void MarioFallState::Update(float deltaTime)
 
 void MarioFallState::OnCollision(CollisionEvent colEvent)
 {
+    GameObject* obj = colEvent.collisionObj;
+    Direction direction = colEvent.direction;
+
+    if (obj->name == "goomba" && direction == Direction::DOWN && obj->isBlocking == false)
+    {
+        obj->isBlocking = true;
+        this->_context->TransitionTo(new MarioJumpState(0.6f));
+        return;
+    }
+
     if (this->_context->isGrounded)
     {
         KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
