@@ -1,5 +1,5 @@
 #include "MarioFlyState.h"
-#include "Mario.h"
+#include "MarioConst.h"
 #include "MarioRunState.h"
 #include "MarioIdleState.h"
 #include <dinput.h>

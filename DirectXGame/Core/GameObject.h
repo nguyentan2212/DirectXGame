@@ -81,6 +81,9 @@ public:
 	PROPERTY(bool, isGrounded);
 	GET(isGrounded) { return this->_isGrounded; }
 	SET(isGrounded) { this->_isGrounded = value; }
+
+	R_PROPERTY(UINT, figure);
+	GET(figure) { return this->_figure; }
 #pragma endregion
 
 protected:
@@ -94,6 +97,7 @@ protected:
 	float _height = 0.0f;
 	bool _isActive = true;
 	bool _isGrounded = false;
+	UINT _figure;
 
 #pragma region Transform
 	VECTOR2D _position;

@@ -45,10 +45,6 @@ void MarioKickState::OnKeyDown(int keyCode)
 	{
 		this->_context->TransitionTo(new MarioJumpState());
 	}
-	else if (keyCode == DIK_DOWN)
-	{
-		this->_context->TransitionTo(new MarioSitState());
-	}
 	else if (keyCode == DIK_LEFT || keyCode == DIK_RIGHT)
 	{
 		int direction = (keyCode - DIK_LEFT) - 1;

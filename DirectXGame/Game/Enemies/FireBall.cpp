@@ -1,6 +1,5 @@
 #include "FireBall.h"
 #include "../Mario/Mario.h"
-#include "../Mario/MarioChangeFigureState.h"
 #include "../Mario/MarioDeathState.h"
 
 FireBall::FireBall(VECTOR2D begin, float maxLength): GameObject()
@@ -48,7 +47,7 @@ void FireBall::OnCollision(CollisionEvent colEvent)
 		string stateName = mario->GetStateName();
 		if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 		{
-			mario->TransitionTo(new MarioChangeFigureState("small mario"));
+			
 		}
 		else if (stateName.find("change figure") == string::npos)
 		{

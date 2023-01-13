@@ -3,7 +3,7 @@
 #include "MarioRunState.h"
 #include "MarioHoldState.h"
 #include "../../Core/GameObject.h"
-#include "Mario.h"
+#include "MarioConst.h"
 
 MarioRunAndHoldState::MarioRunAndHoldState(int direction)
 {

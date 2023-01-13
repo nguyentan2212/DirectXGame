@@ -1,6 +1,6 @@
 #include "MarioDeathState.h"
 #include "../../Core/GameObject.h"
-#include "Mario.h"
+#include "MarioConst.h"
 
 MarioDeathState::MarioDeathState()
 {

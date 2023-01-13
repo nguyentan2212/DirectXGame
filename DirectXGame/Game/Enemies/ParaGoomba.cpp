@@ -4,7 +4,6 @@
 #include "ParaGoombaNormalState.h"
 #include "../Mario/Mario.h"
 #include "../Mario/MarioJumpState.h"
-#include "../Mario/MarioChangeFigureState.h"
 #include "../Mario/MarioDeathState.h"
 
 ParaGoomba::ParaGoomba(): GameObject(new ParaGoombaNormalState(-1))
@@ -156,7 +155,7 @@ void ParaGoomba::OnCollision(CollisionEvent colEvent)
 		}
 		else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 		{
-			mario->TransitionTo(new MarioChangeFigureState("small mario"));
+			//
 		}
 		else if (stateName.find("change figure") == string::npos)
 		{

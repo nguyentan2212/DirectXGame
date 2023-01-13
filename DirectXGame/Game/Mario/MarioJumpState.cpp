@@ -4,7 +4,7 @@
 #include "MarioIdleState.h"
 #include "MarioFallState.h"
 #include "MarioAttackState.h"
-#include "Mario.h"
+#include "MarioConst.h"
 #include <dinput.h>
 
 MarioJumpState::MarioJumpState(float speedFactor)

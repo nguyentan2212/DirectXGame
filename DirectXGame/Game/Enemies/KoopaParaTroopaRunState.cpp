@@ -2,7 +2,6 @@
 #include "../../Core/GameObject.h"
 #include "../../Physic/CollisionManager.h"
 #include "../Mario/Mario.h"
-#include "../Mario/MarioChangeFigureState.h"
 #include "../Mario/MarioDeathState.h"
 
 KoopaParaTroopaRunState::KoopaParaTroopaRunState(int direction)
@@ -74,7 +73,7 @@ void KoopaParaTroopaRunState::OnCollision(CollisionEvent colEvent)
 			string stateName = mario->GetStateName();
 			if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 			{
-				mario->TransitionTo(new MarioChangeFigureState("small mario"));
+				
 			}
 			else if (stateName.find("change figure") == string::npos && stateName != "death")
 			{

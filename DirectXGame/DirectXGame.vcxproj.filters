@@ -261,9 +261,6 @@
     <ClInclude Include="Game\Mario\MarioDeathState.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Mario\MarioChangeFigureState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Enemies\KoopaParaTroopa.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
@@ -296,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="Core\State.h">
       <Filter>Core\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Mario\MarioConst.h">
+      <Filter>Game\Mario</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -418,9 +418,6 @@
       <Filter>Game\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Game\Mario\MarioDeathState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioChangeFigureState.cpp">
       <Filter>Game\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Game\Enemies\KoopaParaTroopa.cpp">

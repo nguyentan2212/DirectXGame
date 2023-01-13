@@ -2,7 +2,6 @@
 #include "../../Core/GameObject.h"
 #include "../Mario/Mario.h"
 #include "../Mario/MarioJumpState.h"
-#include "../Mario/MarioChangeFigureState.h"
 #include "../Mario/MarioDeathState.h"
 #include "KoopaParaTroopaStandState.h"
 
@@ -49,7 +48,6 @@ void KoopaParaTroopaWalkState::OnCollision(CollisionEvent colEvent)
 				string stateName = mario->GetStateName();
 				if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
 				{
-					mario->TransitionTo(new MarioChangeFigureState("small mario"));
 				}
 				else if (stateName.find("change figure") == string::npos && stateName != "death")
 				{

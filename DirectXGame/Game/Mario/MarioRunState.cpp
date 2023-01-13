@@ -2,8 +2,9 @@
 #include "MarioJumpState.h"
 #include "MarioIdleState.h"
 #include "MarioSitState.h"
-#include "Mario.h"
+#include "MarioConst.h"
 #include <dinput.h>
+#include "../../Core/GameObject.h"
 
 MarioRunState::MarioRunState(int direction): State()
 {

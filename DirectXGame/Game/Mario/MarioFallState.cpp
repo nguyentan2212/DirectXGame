@@ -5,7 +5,7 @@
 #include "MarioAttackState.h"
 #include "../../Core/GameObject.h"
 #include "../../Core/KeyboardHandler.h"
-#include "Mario.h"
+#include "MarioConst.h"
 
 MarioFallState::MarioFallState()
 {
@@ -24,23 +24,22 @@ void MarioFallState::Update(float deltaTime)
 
 void MarioFallState::OnCollision(CollisionEvent colEvent)
 {
-    Mario* mario = dynamic_cast<Mario*>(this->_context);
-    if (mario != nullptr && mario->isGrounded)
+    if (this->_context->isGrounded)
     {
         KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
         if (keyboard->IsKeyDown(DIK_LEFT)) // prev was running left
         {
-            mario->velocity = VECTOR2D(-abs(mario->velocity.x), 0.0f);
-            mario->TransitionTo(new MarioRunState(-1));
+            this->_context->velocity = VECTOR2D(-abs(this->_context->velocity.x), 0.0f);
+            this->_context->TransitionTo(new MarioRunState(-1));
         }
         else if (keyboard->IsKeyDown(DIK_RIGHT)) // prev was running left
         {
-            mario->velocity = VECTOR2D(abs(mario->velocity.x), 0.0f);
-            mario->TransitionTo(new MarioRunState(1));
+            this->_context->velocity = VECTOR2D(abs(this->_context->velocity.x), 0.0f);
+            this->_context->TransitionTo(new MarioRunState(1));
         }
         else
         {
-            mario->TransitionTo(new MarioIdleState());
+            this->_context->TransitionTo(new MarioIdleState());
         }
     }
 }
