@@ -1,13 +1,12 @@
 #include "FireBall.h"
-#include "../Mario/Mario.h"
-#include "../Mario/MarioDeathState.h"
+#include "../../Physic/CollisionManager.h"
 
 FireBall::FireBall(VECTOR2D begin, float maxLength): GameObject()
 {
 	this->_begin = begin;
 	this->_maxLength = maxLength;
-	this->_width = 9;
-	this->_height = 9;
+	this->_width = FIREBALL_SIZE;
+	this->_height = FIREBALL_SIZE;
 	this->_name = "fire ball";
 	this->_position = begin;
 }
@@ -25,9 +24,9 @@ void FireBall::Update(float deltaTime)
 		this->_isActive = false;
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
 	}
+	
+	CollisionManager::Processing(this, deltaTime);
 	GameObject::Update(deltaTime);
-	VECTOR2D pos = GetWorldPosition();
-	//DebugOut((wchar_t*)L"[INFO] Fire Ball pos x = %f, y = %f \n", pos.x, pos.y);
 }
 
 void FireBall::Render()
@@ -37,22 +36,12 @@ void FireBall::Render()
 
 void FireBall::OnCollision(CollisionEvent colEvent)
 {
-	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+	GameObject* obj = colEvent.collisionObj;
 
-	if (mario != nullptr)
+	if (obj->name == "mario")
 	{
 		this->_isActive = false;
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
-
-		string stateName = mario->GetStateName();
-		if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
-		{
-			
-		}
-		else if (stateName.find("change figure") == string::npos)
-		{
-			mario->TransitionTo(new MarioDeathState());
-		}
 	}
 }
 

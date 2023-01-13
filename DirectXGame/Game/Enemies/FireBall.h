@@ -1,6 +1,8 @@
 #pragma once
 #include "../../Core/GameObject.h"
 
+constexpr float FIREBALL_SIZE = 9;
+
 class FireBall: public GameObject
 {
 public:

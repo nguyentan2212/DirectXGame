@@ -1,5 +1,9 @@
 #pragma once
 #include "../../Core/GameObject.h"
+
+constexpr float FIRE_TRAP_WIDTH = 16;
+constexpr float FIRE_TRAP_HEIGHT = 32;
+
 class VenusFireTrap: public GameObject
 {
 public:

@@ -1,6 +1,5 @@
 #include "VenusFireTrapSleepState.h"
 #include "../../Core/ObjectPool.h"
-#include "../Mario/Mario.h"
 #include "VenusFireTrapAttackState.h"
 
 VenusFireTrapSleepState::VenusFireTrapSleepState()
@@ -25,12 +24,11 @@ void VenusFireTrapSleepState::Update(float deltaTime)
 	}
 
 	ObjectPool* pool = ObjectPool::GetInstance();
-	GameObject* result = pool->GetGameObjectWithClass("Mario");
-	Mario* mario = dynamic_cast<Mario*>(result);
+	GameObject* obj = pool->GetGameObjectWithName("mario");
 	
-	if (mario != nullptr)
+	if (obj != nullptr)
 	{
-		VECTOR2D temp = this->_context->GetWorldPosition() - mario->GetWorldPosition();
+		VECTOR2D temp = this->_context->GetWorldPosition() - obj->GetWorldPosition();
 		if (abs(temp.x) <= FIRE_TRAP_X_DISTANCE_DETECT)
 		{
 			Direction direction = temp.x < 0 ? Direction::RIGHT : Direction::LEFT;
