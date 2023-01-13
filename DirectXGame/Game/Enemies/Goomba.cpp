@@ -24,8 +24,22 @@ void Goomba::Update(float deltaTime)
 		r->Update(deltaTime);
 	}
 
+	if (this->_isDeath)
+	{
+		if (this->_deathDuration > 0)
+		{
+			this->_deathDuration -= deltaTime;
+		}
+		else
+		{
+			this->_isActive = false;
+		}
+	}
+
 	this->_acceleration = VECTOR2D(0.0f, -GOOMBA_GRAVITY);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
+	GameObject::IsBlocking();
+
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
 	Translate(this->_velocity * deltaTime / 1000);
@@ -48,6 +62,14 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 		{
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
+	}
+	else if (objName == "mario" && colEvent.direction == Direction::UP && this->_isDeath == false)
+	{
+		this->_velocity = VECTOR2D(0.0f, 0.0f);
+		this->_acceleration = VECTOR2D(0.0f, 0.0f);
+		this->_isDeath = true;
+		this->_height = GOOMBA_DEATH_HEIGHT;
+		this->_position = this->_position - VECTOR2D(0.0f, GOOMBA_SIZE - GOOMBA_DEATH_HEIGHT) / 2.0f;
 	}
 }
 
