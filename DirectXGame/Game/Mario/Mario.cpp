@@ -76,10 +76,12 @@ void Mario::OnKeyUp(int keyCode)
 
 void Mario::OnCollision(CollisionEvent colEvent)
 {
+	GameObject* obj = colEvent.collisionObj;
 	string objName = colEvent.collisionObj->name;
-	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "mushroom brick" 
+	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "brick" || objName == "mushroom brick"
 		|| objName == "leaf brick" || objName == "panel")
 	{
+		
 		if (colEvent.direction == Direction::DOWN)
 		{
 			this->_isGrounded = true;
@@ -87,7 +89,25 @@ void Mario::OnCollision(CollisionEvent colEvent)
 			this->_velocity = VECTOR2D(this->_velocity.x, 0);
 			this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
 		}
+		if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
+		{
+			this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
+			this->_acceleration = VECTOR2D(0.0f, this->_acceleration.y);
+		}
 	}
+	if (objName == "mushroom")
+	{
+		ChangeFigure(MARIO_SUPER);
+	}
+	else if (objName == "leaf")
+	{
+		ChangeFigure(MARIO_RACCOON);
+	}
+	if ((GetStateName() != "fall" && objName == "goomba") || objName == "fire ball")
+	{
+		this->ChangeFigure(MARIO_SMALL);
+	}
+
 	this->_state->OnCollision(colEvent);
 }
 

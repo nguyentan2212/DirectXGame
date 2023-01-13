@@ -68,13 +68,13 @@ void Brick::OnCollision(CollisionEvent colEvent)
 			this->_content->isActive = true;
 		}
 	}
-	else if (colEvent.collisionObj->name == "mario" &&this->_isTouched == false &&
+	/*else if (colEvent.collisionObj->name == "mario" &&this->_isTouched == false &&
 		(colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT)
 		&& this->_content->name == "leaf")
 	{
 		this->_isTouched = true;
 		this->_content->isActive = true;
-	}
+	}*/
 }
 
 Brick* Brick::CreateCoinBrick(VECTOR2D position)
@@ -84,10 +84,14 @@ Brick* Brick::CreateCoinBrick(VECTOR2D position)
 
 Brick* Brick::CreateMushroomBrick(VECTOR2D position)
 {
-	return new Brick(new Mushroom(position), position);
+	Brick* obj = new Brick(new Mushroom(position), position);
+	obj->name = "mushroom brick";
+	return obj;
 }
 
 Brick* Brick::CreateLeafBrick(VECTOR2D position)
 {
-	return new Brick(new Leaf(position), position);
+	Brick* obj = new Brick(new Leaf(position), position);
+	obj->name = "leaf brick";
+	return obj;
 }

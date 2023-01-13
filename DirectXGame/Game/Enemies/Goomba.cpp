@@ -2,6 +2,7 @@
 #include "../../Graphic/SpriteService.h"
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
+#include "../../Core/ObjectPool.h"
 
 Goomba::Goomba(): GameObject()
 {
@@ -9,6 +10,13 @@ Goomba::Goomba(): GameObject()
 	this->_width = GOOMBA_SIZE;
 	this->_height = GOOMBA_SIZE;
 	this->_velocity = VECTOR2D(-GOOMBA_SPEED, 0.0f);
+
+	ObjectPool* pool = ObjectPool::GetInstance();
+	SpriteService* sprites = SpriteService::GetInstance();
+	this->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
+	this->_score->velocity = VECTOR2D(0.0f, GOOMBA_SPEED);
+	this->_score->isActive = false;
+	pool->AddGameObject(this->_score);
 }
 
 void Goomba::Update(float deltaTime)
@@ -33,6 +41,7 @@ void Goomba::Update(float deltaTime)
 		else
 		{
 			this->_isActive = false;
+			this->_score->isActive = false;
 		}
 	}
 
@@ -70,6 +79,8 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 		this->_isDeath = true;
 		this->_height = GOOMBA_DEATH_HEIGHT;
 		this->_position = this->_position - VECTOR2D(0.0f, GOOMBA_SIZE - GOOMBA_DEATH_HEIGHT) / 2.0f;
+		this->_score->position = position + VECTOR2D(0.0f, GOOMBA_SIZE);
+		this->_score->isActive = true;
 	}
 }
 

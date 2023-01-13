@@ -41,6 +41,7 @@ void Leaf::Update(float deltaTime)
 
 	// main update
 	this->_velocity += this->_acceleration * deltaTime / 1000;
+	IsBlocking();
 	CollisionManager::Processing(this, deltaTime);
 	Translate(this->_velocity * deltaTime / 1000);
 }
@@ -57,6 +58,7 @@ void Leaf::OnCollision(CollisionEvent colEvent)
 	{
 		this->_score->isActive = true;
 		this->_score->position = position + VECTOR2D(0.0f, LEAF_SIZE);
+		this->_isBlocking = true;
 	}
 }
 

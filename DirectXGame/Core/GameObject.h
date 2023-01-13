@@ -88,8 +88,9 @@ public:
 	GET(isBlocking) { return this->_isBlocking; }
 	SET(isBlocking) { this->_isBlocking = value; }
 
-	R_PROPERTY(UINT, figure);
+	PROPERTY(UINT, figure);
 	GET(figure) { return this->_figure; }
+	SET(figure) { this->ChangeFigure(value); }
 #pragma endregion
 
 protected:
@@ -118,6 +119,7 @@ protected:
 	virtual void OnTransformChanged();
 	void CalculateWorldMatrix();
 	virtual Renderable* GetRenderable();
+	void ChangeFigure(UINT figure) {};
 #pragma endregion
 };
 
