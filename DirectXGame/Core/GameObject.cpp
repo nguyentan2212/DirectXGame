@@ -108,6 +108,15 @@ void GameObject::OnKeyDown(int keyCode)
 {
 }
 
+void GameObject::IsBlocking()
+{
+	if (this->_isBlocking)
+	{
+		this->_velocity = VECTOR2D(0.0f, 0.0f);
+		this->_acceleration = VECTOR2D(0.0f, 0.0f);
+	}
+}
+
 /// <summary>
 /// Translates object follow the specified VECTOR2D(x, y).
 /// </summary>

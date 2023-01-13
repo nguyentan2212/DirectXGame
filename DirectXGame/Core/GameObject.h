@@ -27,6 +27,8 @@ public:
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);
 
+	virtual void IsBlocking();
+
 	void AddChildObject(GameObject* child);
 	void RemoveChildObject(GameObject* child);
 	GameObject* GetChildWithName(string name);
@@ -82,6 +84,10 @@ public:
 	GET(isGrounded) { return this->_isGrounded; }
 	SET(isGrounded) { this->_isGrounded = value; }
 
+	PROPERTY(bool, isBlocking);
+	GET(isBlocking) { return this->_isBlocking; }
+	SET(isBlocking) { this->_isBlocking = value; }
+
 	R_PROPERTY(UINT, figure);
 	GET(figure) { return this->_figure; }
 #pragma endregion
@@ -98,6 +104,7 @@ protected:
 	bool _isActive = true;
 	bool _isGrounded = false;
 	UINT _figure;
+	bool _isBlocking = false;
 
 #pragma region Transform
 	VECTOR2D _position;
