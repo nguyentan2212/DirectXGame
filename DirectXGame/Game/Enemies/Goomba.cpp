@@ -58,7 +58,7 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 {
 	string objName = colEvent.collisionObj->name;
 	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "brick"
-		|| objName == "panel")
+		|| objName == "panel" || objName == "leaf brick")
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{

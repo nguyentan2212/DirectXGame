@@ -1,8 +1,5 @@
 #include "KoopaParaTroopaStandState.h"
 #include "../../Core/GameObject.h"
-#include "../Mario/Mario.h"
-#include "../Mario/MarioKickState.h"
-#include "KoopaParaTroopaRunState.h"
 
 KoopaParaTroopaStandState::KoopaParaTroopaStandState()
 {
@@ -12,7 +9,6 @@ KoopaParaTroopaStandState::KoopaParaTroopaStandState()
 
 void KoopaParaTroopaStandState::OnTransition()
 {
-	this->_context->width = 16;
 	this->_context->height = 16;
 	this->_context->velocity = VECTOR2D(0.0f, 0.0f);
 	this->_context->acceleration = VECTOR2D(0.0f, 0.0f);
@@ -27,18 +23,5 @@ void KoopaParaTroopaStandState::Update(float deltaTime)
 
 void KoopaParaTroopaStandState::OnCollision(CollisionEvent colEvent)
 {
-	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
-	if (mario != nullptr)
-	{
-		if (colEvent.direction == Direction::LEFT)
-		{
-			this->_context->TransitionTo(new KoopaParaTroopaRunState(1));
-			mario->TransitionTo(new MarioKickState());
-		}
-		else if (colEvent.direction == Direction::RIGHT)
-		{
-			this->_context->TransitionTo(new KoopaParaTroopaRunState(-1));
-			mario->TransitionTo(new MarioKickState());
-		}
-	}
+	
 }

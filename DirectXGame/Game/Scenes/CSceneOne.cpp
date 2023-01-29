@@ -79,11 +79,11 @@ void CSceneOne::InitObjects(json config)
 		{
 			obj = new Goomba();
 		}
-		/*else if (item["class"].get<string>() == "koopaparatroopa")
+		else if (item["class"].get<string>() == "koopaparatroopa")
 		{
 			obj = new KoopaParaTroopa();
 		}
-		else if (item["class"].get<string>() == "paragoomba")
+		/*else if (item["class"].get<string>() == "paragoomba")
 		{
 			obj = new ParaGoomba();
 		}*/

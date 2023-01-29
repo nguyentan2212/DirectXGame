@@ -14,7 +14,7 @@ class GameObject
 public: 
 	GameObject();
 	GameObject(State* state);
-	GameObject(Renderable* renderable, State* state = nullptr);
+	GameObject(Renderable* renderable, State* state = new State());
 	virtual ~GameObject();
 
 	virtual void Update(float deltaTime);

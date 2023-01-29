@@ -297,6 +297,9 @@
     <ClInclude Include="Game\Mario\MarioConst.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Items\Head.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -446,6 +449,9 @@
     </ClCompile>
     <ClCompile Include="Game\Mario\MarioAttackState.cpp">
       <Filter>Game\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Items\Head.cpp">
+      <Filter>Game\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
