@@ -1,7 +1,7 @@
 {
   "animations": [
     {
-      "name": "venus fire trap attack",
+      "name": "red venus fire trap attack down",
       "defaultTime": 400,
       "frames": [
         {
@@ -9,7 +9,13 @@
         },
         {
           "sprite": "enemies/venus-fire-trap/1"
-        },
+        }
+      ]
+    },
+    {
+      "name": "red venus fire trap attack up",
+      "defaultTime": 400,
+      "frames": [
         {
           "sprite": "enemies/venus-fire-trap/2"
         },
@@ -19,11 +25,44 @@
       ]
     },
     {
-      "name": "venus fire trap sleep",
+      "name": "red venus fire trap sleep",
       "defaultTime": 200,
       "frames": [
         {
           "sprite": "enemies/venus-fire-trap/0"
+        }
+      ]
+    },
+    {
+      "name": "green venus fire trap attack down",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "enemies/venus-fire-trap/4"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/5"
+        }
+      ]
+    },
+    {
+      "name": "green venus fire trap attack up",
+      "defaultTime": 400,
+      "frames": [
+        {
+          "sprite": "enemies/venus-fire-trap/6"
+        },
+        {
+          "sprite": "enemies/venus-fire-trap/7"
+        }
+      ]
+    },
+    {
+      "name": "green venus fire trap sleep",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "enemies/venus-fire-trap/4"
         }
       ]
     },

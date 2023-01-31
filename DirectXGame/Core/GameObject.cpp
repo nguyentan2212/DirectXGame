@@ -13,6 +13,7 @@ GameObject::GameObject()
 	this->_isFlipped = false;
 	this->_renderable = nullptr;
 	this->_state = nullptr;
+	SetState(0);
 }
 
 GameObject::GameObject(State* state)
@@ -26,6 +27,7 @@ GameObject::GameObject(State* state)
 	this->_isFlipped = false;
 	this->_renderable = nullptr;
 	TransitionTo(state);
+	SetState(0);
 }
 
 GameObject::GameObject(Renderable* renderable, State* state)
@@ -39,6 +41,7 @@ GameObject::GameObject(Renderable* renderable, State* state)
 	this->_isFlipped = false;
 	this->_renderable = renderable;
 	TransitionTo(state);
+	SetState(0);
 }
 
 GameObject::~GameObject()
@@ -115,6 +118,22 @@ void GameObject::IsBlocking()
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
 	}
+}
+
+void GameObject::SetState(UINT stateValue, string stateName)
+{
+	this->_states[stateName] = stateValue;
+}
+
+UINT GameObject::GetState(string stateName)
+{
+	auto it = this->_states.find(stateName);
+	if (it != this->_states.end())
+	{
+		return it->second;
+	}
+	DebugOut((wchar_t*)L"[ERROR] GameObject set to	WRONG STATE");
+	return -1;
 }
 
 /// <summary>

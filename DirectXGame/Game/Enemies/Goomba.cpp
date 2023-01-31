@@ -17,6 +17,7 @@ Goomba::Goomba(): GameObject()
 	this->_score->velocity = VECTOR2D(0.0f, GOOMBA_SPEED);
 	this->_score->isActive = false;
 	pool->AddGameObject(this->_score);
+	SetState(GOOMBA_WALK);
 }
 
 void Goomba::Update(float deltaTime)
@@ -32,7 +33,7 @@ void Goomba::Update(float deltaTime)
 		r->Update(deltaTime);
 	}
 
-	if (this->_isDeath)
+	if (GetState() == GOOMBA_DEATH)
 	{
 		if (this->_deathDuration > 0)
 		{
@@ -72,21 +73,35 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
 	}
-	else if (objName == "mario" && colEvent.direction == Direction::UP && this->_isDeath == false)
+	else if (objName == "mario" && colEvent.direction == Direction::UP)
 	{
-		this->_velocity = VECTOR2D(0.0f, 0.0f);
-		this->_acceleration = VECTOR2D(0.0f, 0.0f);
-		this->_isDeath = true;
-		this->_height = GOOMBA_DEATH_HEIGHT;
-		this->_position = this->_position - VECTOR2D(0.0f, GOOMBA_SIZE - GOOMBA_DEATH_HEIGHT) / 2.0f;
-		this->_score->position = position + VECTOR2D(0.0f, GOOMBA_SIZE);
-		this->_score->isActive = true;
+		SetState(GOOMBA_DEATH);
 	}
+}
+
+void Goomba::SetState(UINT stateValue, string stateName)
+{
+	if (GetState() == GOOMBA_DEATH)
+	{
+		return;
+	}
+
+	switch (stateValue)
+	{
+	case GOOMBA_WALK:
+		break;
+	case GOOMBA_DEATH:
+		Death();
+		break;
+	default:
+		return;
+	}
+	this->_states[stateName] = stateValue;
 }
 
 Renderable* Goomba::GetRenderable()
 {
-	if (this->_isDeath)
+	if (GetState() == GOOMBA_DEATH)
 	{
 		SpriteService* sprites = SpriteService::GetInstance();
 		return sprites->GetSprite("enemies/goomba/2");
@@ -94,4 +109,14 @@ Renderable* Goomba::GetRenderable()
 
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("goomba walk");
+}
+
+void Goomba::Death()
+{
+	this->_velocity = VECTOR2D(0.0f, 0.0f);
+	this->_acceleration = VECTOR2D(0.0f, 0.0f);
+	this->_height = GOOMBA_DEATH_HEIGHT;
+	this->_position = this->_position - VECTOR2D(0.0f, GOOMBA_SIZE - GOOMBA_DEATH_HEIGHT) / 2.0f;
+	this->_score->position = position + VECTOR2D(0.0f, GOOMBA_SIZE);
+	this->_score->isActive = true;
 }

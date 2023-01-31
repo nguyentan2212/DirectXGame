@@ -249,12 +249,6 @@
     <ClInclude Include="Game\Enemies\VenusFireTrap.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Enemies\VenusFireTrapSleepState.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Enemies\VenusFireTrapAttackState.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Enemies\Goomba.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
@@ -265,15 +259,6 @@
       <Filter>Game\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Game\Enemies\FireBall.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Enemies\KoopaParaTroopaWalkState.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Enemies\KoopaParaTroopaStandState.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Enemies\KoopaParaTroopaRunState.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Game\Enemies\ParaGoomba.h">
@@ -411,12 +396,6 @@
     <ClCompile Include="Game\Enemies\VenusFireTrap.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Enemies\VenusFireTrapSleepState.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Enemies\VenusFireTrapAttackState.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Enemies\Goomba.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
@@ -427,15 +406,6 @@
       <Filter>Game\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Game\Enemies\FireBall.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Enemies\KoopaParaTroopaWalkState.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Enemies\KoopaParaTroopaStandState.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Enemies\KoopaParaTroopaRunState.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Game\Enemies\ParaGoomba.cpp">

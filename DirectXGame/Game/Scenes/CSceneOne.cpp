@@ -28,7 +28,7 @@ CSceneOne::CSceneOne(): Scene()
 	InitObjects(config["objects"]);
 
 	Mario* mario = new Mario(new MarioIdleState());
-	mario->position = VECTOR2D(650, 50);
+	mario->position = VECTOR2D(300, 50);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -43,7 +43,7 @@ CSceneOne::CSceneOne(): Scene()
 	mario->AddChildObject(gui);
 	pool->AddGameObject(gui);
 
-	VenusFireTrap* trap = new VenusFireTrap();
+	VenusFireTrap* trap = new VenusFireTrap(VECTOR2D(367, 45));
 	trap->position = VECTOR2D(367, 45);
 	pool->AddGameObject(trap);
 }

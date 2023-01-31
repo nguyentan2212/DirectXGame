@@ -8,6 +8,10 @@ constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 65;
 constexpr float KOOPA_PARATROOPA_WALK_SPEED_X = 30;
 constexpr float KOOPA_PARATROOPA_GRAVITY = 120;
 
+constexpr UINT KOOPA_PARATROOPA_WALK = 0;
+constexpr UINT KOOPA_PARATROOPA_RUN = 1;
+constexpr UINT KOOPA_PARATROOPA_STUN = 2;
+
 class KoopaParaTroopa: public GameObject
 {
 public: 
@@ -16,10 +20,15 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	void OnCollision(CollisionEvent colEvent) override;
+	void SetState(UINT stateValue, string stateName = "default") override;
 
 private:
 	float _tempY = 0.0f;
 	Renderable* GetRenderable() override;
 	Head* _head;
+
+	void Walk();
+	void Run();
+	void Stun();
 };
 

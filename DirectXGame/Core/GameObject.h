@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <map>
+#include <string>
 #include "State.h"
 #include "../Graphic/Graphic.h"
 #include "../Graphic/AnimationService.h"
@@ -28,6 +30,9 @@ public:
 	virtual void OnKeyDown(int keyCode);
 
 	virtual void IsBlocking();
+
+	virtual void SetState(UINT stateValue, string stateName = "default");
+	virtual UINT GetState(string stateName = "default");
 
 	void AddChildObject(GameObject* child);
 	void RemoveChildObject(GameObject* child);
@@ -91,6 +96,7 @@ public:
 	PROPERTY(UINT, figure);
 	GET(figure) { return this->_figure; }
 	SET(figure) { this->ChangeFigure(value); }
+
 #pragma endregion
 
 protected:
@@ -106,6 +112,7 @@ protected:
 	bool _isGrounded = false;
 	UINT _figure;
 	bool _isBlocking = false;
+	map<string, UINT> _states;
 
 #pragma region Transform
 	VECTOR2D _position;

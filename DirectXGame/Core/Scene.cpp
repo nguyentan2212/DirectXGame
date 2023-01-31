@@ -33,6 +33,10 @@ void Scene::Update(float deltaTime)
 
 	for (GameObject* obj : objs)
 	{
+		/*string name = obj->name;
+		wstring wname = wstring(name.begin(), name.end());
+		LPCWSTR pwname = wname.c_str();
+		DebugOut(L"[INFO] Obj name:'%s', pos x: %f, pos y: %f  !\n", pwname, obj->position.x, obj->position.y);*/
 		obj->Update(deltaTime);
 	}
 }

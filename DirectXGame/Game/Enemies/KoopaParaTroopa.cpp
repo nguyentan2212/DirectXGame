@@ -1,11 +1,9 @@
 #include "KoopaParaTroopa.h"
-#include "KoopaParaTroopaWalkState.h"
-#include "KoopaParaTroopaStandState.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
 
-KoopaParaTroopa::KoopaParaTroopa(): GameObject(new KoopaParaTroopaWalkState())
+KoopaParaTroopa::KoopaParaTroopa(): GameObject()
 {
 	this->_name = "koopa paratroopa";
 	this->_width = KOOPA_PARATROOPA_WIDTH;
@@ -15,6 +13,7 @@ KoopaParaTroopa::KoopaParaTroopa(): GameObject(new KoopaParaTroopaWalkState())
 	this->_head->SetGravity(KOOPA_PARATROOPA_GRAVITY);
 	ObjectPool* pool = ObjectPool::GetInstance();
 	pool->AddGameObject(this->_head);
+	SetState(KOOPA_PARATROOPA_WALK);
 }
 
 void KoopaParaTroopa::Update(float deltaTime)
@@ -24,7 +23,7 @@ void KoopaParaTroopa::Update(float deltaTime)
 
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
-	this->_state->Update(deltaTime);
+	
 	GameObject::Update(deltaTime);
 	if (this->_velocity.x < 0)
 	{
@@ -55,12 +54,94 @@ void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 			this->_velocity = VECTOR2D(this->_velocity.x, 0);
 			this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
 		}
+		else if (GetState() == KOOPA_PARATROOPA_RUN)
+		{
+			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
+		}
 	}
+	else if (objName == "mario")
+	{
+		if (colEvent.direction == Direction::UP && GetState() == KOOPA_PARATROOPA_WALK)
+		{
+			SetState(KOOPA_PARATROOPA_STUN);
+		}
+	}
+}
+
+void KoopaParaTroopa::SetState(UINT stateValue, string stateName)
+{
+	switch (stateValue)
+	{
+	case KOOPA_PARATROOPA_WALK:
+		if (GetState() > 0)
+		{
+			return;
+		}
+		Walk();
+		break;
+	case KOOPA_PARATROOPA_RUN:
+		if (GetState() != KOOPA_PARATROOPA_STUN)
+		{
+			return;
+		}
+		Run();
+		break;
+	case KOOPA_PARATROOPA_STUN:
+		if (GetState() != KOOPA_PARATROOPA_WALK)
+		{
+			return;
+		}
+		Stun();
+		break;
+	default:
+		return;
+	}
+	this->_states[stateName] = stateValue;
 }
 
 Renderable* KoopaParaTroopa::GetRenderable()
 {
 	AnimationService* anis = AnimationService::GetInstance();
-	string stateName = this->_state->name;
-	return anis->GetAnimation("koopa paratroopa " + stateName);
+	string aniName = "koopa paratroopa ";
+
+	switch (GetState())
+	{
+	case KOOPA_PARATROOPA_WALK:
+		aniName += "walk";
+		break;
+	case KOOPA_PARATROOPA_RUN:
+		aniName += "run";
+		break;
+	case KOOPA_PARATROOPA_STUN:
+		aniName += "stand";
+		break;
+	default:
+		break;
+	}
+	return anis->GetAnimation(aniName);
+}
+
+void KoopaParaTroopa::Walk()
+{
+	this->velocity = VECTOR2D(KOOPA_PARATROOPA_WALK_SPEED_X, 0.0f);
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	this->_head->isActive = true;
+}
+
+void KoopaParaTroopa::Run()
+{
+	this->velocity = VECTOR2D(KOOPA_PARATROOPA_RUN_SPEED_X * this->_direction, 0.0f);
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	this->_head->isActive = false;
+}
+
+void KoopaParaTroopa::Stun()
+{
+	this->velocity = VECTOR2D(0.0f, 0.0f);
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	this->_height = KOOPA_PARATROOPA_WIDTH;
+	VECTOR2D pos = this->_position;
+	pos.y -= (KOOPA_PARATROOPA_HEIGHT - KOOPA_PARATROOPA_WIDTH) / 2;
+	this->position = pos;
+	this->_head->isActive = false;
 }
