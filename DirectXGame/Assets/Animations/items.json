@@ -2,7 +2,7 @@
   "animations": [
     {
       "name": "brick",
-      "defaultTime": 800,
+      "defaultTime": 2000,
       "frames": [
         {
           "sprite": "mics55"
