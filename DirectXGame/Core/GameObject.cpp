@@ -274,6 +274,14 @@ void GameObject::OnCollision(CollisionEvent colEvent)
 {
 }
 
+void GameObject::Grounding(float time)
+{
+	this->_isGrounded = true;
+	this->_position += this->_velocity * time;
+	this->_velocity = VECTOR2D(this->_velocity.x, 0);
+	this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
+}
+
 /// <summary>
 /// Calculates the world matrix.
 /// </summary>

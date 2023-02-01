@@ -47,6 +47,7 @@ public:
 	void DrawBoundingBox();
 
 	virtual void OnCollision(CollisionEvent colEvent);
+	virtual void Grounding(float time);
 
 #pragma region Properties
 	PROPERTY(VECTOR2D, position);

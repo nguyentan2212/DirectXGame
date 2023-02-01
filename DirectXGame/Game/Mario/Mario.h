@@ -7,7 +7,7 @@
 class Mario: public GameObject
 {
 public:
-	Mario(State* state);
+	Mario();
 
 	void Update(float deltaTime) override;
 	void Render() override;
@@ -20,9 +20,18 @@ public:
 	void IncreaseCoin(int coin = 1);
 	void UpdateRunSpeed(float speed);
 
+	void SetState(UINT stateValue, string stateName = "default") override;
 private:
 	Renderable* GetRenderable() override;
-
 	void ChangeFigure(UINT figure);
+
+	void Idle();
+	void Run(float acce_x);
+	void Jump(float speed);
+	void Fall();
+	void Fly();
+	void Sit();
+	void Death();
+	void Untouchable();
 };
 

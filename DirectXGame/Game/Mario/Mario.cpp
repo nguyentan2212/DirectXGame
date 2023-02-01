@@ -3,10 +3,11 @@
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
 
-Mario::Mario(State* state): GameObject(state)
+Mario::Mario(): GameObject()
 {
 	this->_showBoundingBox = true;
 	this->_name = "mario";
+	Jump(0);
 	ChangeFigure(MARIO_SMALL);
 }
 
@@ -41,7 +42,7 @@ void Mario::Update(float deltaTime)
 
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
-	this->_state->Update(deltaTime);
+
 	Translate(this->_velocity * deltaTime / 1000);
 }
 
@@ -54,45 +55,95 @@ void Mario::Render()
 void Mario::OnKeyDown(int keyCode)
 {
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
-	if (keyCode == DIK_X && keyboard->IsKeyDown(DIK_LCONTROL))
+	switch (keyCode)
 	{
-		ChangeFigure(MARIO_SMALL);
+	case DIK_X:
+		if (keyboard->IsKeyDown(DIK_LCONTROL))
+		{
+			ChangeFigure(MARIO_SMALL);
+		}
+		break;
+	case DIK_L:
+		if (keyboard->IsKeyDown(DIK_LCONTROL))
+		{
+			ChangeFigure(MARIO_SUPER);
+		}
+		break;
+	case DIK_R:
+		if (keyboard->IsKeyDown(DIK_LCONTROL))
+		{
+			ChangeFigure(MARIO_RACCOON);
+		}
+		break;
+	case DIK_A:
+		Run(-MARIO_X_ACCE);
+		break;
+	case DIK_D:
+		Run(MARIO_X_ACCE);
+		break;
+	case DIK_W:
+		if (this->_isGrounded)
+		{
+			Jump(MARIO_JUMP_SPEED_Y);
+		}
+		break;
+	case DIK_S:
+		if (this->_isGrounded)
+		{
+			Sit();
+		}
+		break;
+	default:
+		break;
 	}
-	else if (keyCode == DIK_R && keyboard->IsKeyDown(DIK_LCONTROL))
-	{
-		ChangeFigure(MARIO_RACCOON);
-	}
-	else if (keyCode == DIK_S && keyboard->IsKeyDown(DIK_LCONTROL))
-	{
-		ChangeFigure(MARIO_SUPER);
-	}
-	this->_state->OnKeyDown(keyCode);
 }
 
 void Mario::OnKeyUp(int keyCode)
 {
-	this->_state->OnKeyUp(keyCode);
+	switch (keyCode)
+	{
+	case DIK_A:
+	case DIK_D:
+		if (GetState() == MARIO_RUN)
+		{
+			Idle();
+		}
+		break;
+	case DIK_S:
+		Idle();
+	default:
+		break;
+	}
 }
 
 void Mario::OnCollision(CollisionEvent colEvent)
 {
+	if (GetState() == MARIO_DEATH)
+	{
+		return;
+	}
 	GameObject* obj = colEvent.collisionObj;
 	string objName = colEvent.collisionObj->name;
-	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "brick" || objName == "mushroom brick"
-		|| objName == "leaf brick" || objName == "panel")
+	string className = typeid(*colEvent.collisionObj).name();
+	if (className == "class Platform" || className == "class Brick")
 	{
-		
 		if (colEvent.direction == Direction::DOWN)
 		{
-			this->_isGrounded = true;
-			this->_position += this->_velocity * colEvent.entryTime;
-			this->_velocity = VECTOR2D(this->_velocity.x, 0);
-			this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
+			Grounding(colEvent.entryTime);
+			if (GetState() == MARIO_JUMP)
+			{
+				Idle();
+			}
 		}
 		if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
 		{
 			this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
 			this->_acceleration = VECTOR2D(0.0f, this->_acceleration.y);
+		}
+		if (className == "class Brick" && colEvent.direction == Direction::UP)
+		{
+			this->_position += this->_velocity * colEvent.entryTime;
+			Jump(0);
 		}
 	}
 	if (objName == "mushroom")
@@ -103,12 +154,17 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	{
 		ChangeFigure(MARIO_RACCOON);
 	}
-	if ((GetStateName() != "fall" && objName == "goomba") || objName == "fire ball")
+	if (objName == "fire ball" || objName == "goomba")
 	{
-		this->ChangeFigure(MARIO_SMALL);
+		if (GetState("figure") != MARIO_SMALL)
+		{
+			this->ChangeFigure(MARIO_SMALL);
+		}
+		else
+		{
+			Death();
+		}
 	}
-
-	this->_state->OnCollision(colEvent);
 }
 
 void Mario::IncreaseScore(int score)
@@ -150,28 +206,14 @@ void Mario::UpdateRunSpeed(float speed)
 	}
 }
 
+void Mario::SetState(UINT stateValue, string stateName)
+{
+	this->_states[stateName] = stateValue;
+}
+
 Renderable* Mario::GetRenderable()
 {
-	string aniName;
-	switch (this->_figure)
-	{
-	case MARIO_SMALL:
-	{
-		aniName = "small mario";
-		break;
-	}
-	case MARIO_SUPER:
-	{
-		aniName = "super mario";
-		break;
-	}
-	default:
-	{
-		aniName = "raccoon mario";
-		break;
-	}
-	}
-	aniName = aniName + " " + this->_state->name;
+	string aniName = figureNames[GetState("figure")] + " " + aniNames[GetState("default")];
 
 	AnimationService* animations = AnimationService::GetInstance();
 	return animations->GetAnimation(aniName);
@@ -179,40 +221,67 @@ Renderable* Mario::GetRenderable()
 
 void Mario::ChangeFigure(UINT figure)
 {
-	switch (figure)
-	{
-	case MARIO_SMALL:
-	{
-		this->_height = MARIO_SMALL_HEIGHT;
-		this->_width = MARIO_SMALL_WIDTH;
-		if (this->_figure != MARIO_SMALL)
-		{
-			this->_position = this->_position + VECTOR2D(0.0f, (MARIO_SMALL_HEIGHT - MARIO_SUPER_HEIGHT) / 2.0f);
-		}
-		break;
-	}
-	case MARIO_SUPER:
-	{
-		this->_height = MARIO_SUPER_HEIGHT;
-		this->_width = MARIO_SUPER_WIDTH;
-		if (this->_figure == MARIO_SMALL)
-		{
-			this->_position = this->_position + VECTOR2D(0.0f, (MARIO_SUPER_HEIGHT - MARIO_SMALL_HEIGHT) / 2.0f);
-		}
-		break;
-	}
-	case MARIO_RACCOON:
-	{
-		this->_height = MARIO_RACCOON_HEIGHT;
-		this->_width = MARIO_RACCOON_WIDTH;
-		if (this->_figure == MARIO_SMALL)
-		{
-			this->_position = this->_position + VECTOR2D(0.0f, (MARIO_SUPER_HEIGHT - MARIO_SMALL_HEIGHT) / 2.0f);
-		}
-		break;
-	}
-	default:
-		break;
-	}
+	this->_position = this->_position + VECTOR2D(0.0f, (mario_sizes[figure].second - this->_height) / 2 + 0.5f);
+	this->_width = mario_sizes[figure].first;
+	this->_height = mario_sizes[figure].second;
 	this->_figure = figure;
+	SetState(figure, "figure");
+}
+
+void Mario::Idle()
+{
+	if (GetState() == MARIO_SIT)
+	{
+		this->position = this->position - VECTOR2D(0.0f, (this->_height - mario_sizes[GetState("figure")].second) / 2);
+		this->_height = mario_sizes[GetState("figure")].second;
+	}
+	SetState(MARIO_IDLE);
+	this->_velocity = VECTOR2D(0.0f, 0.0f);
+	this->_acceleration = VECTOR2D(0.0f, 0.0f);
+}
+
+void Mario::Run(float acce_x)
+{
+	if (this->_isGrounded == false)
+	{
+		this->acceleration = VECTOR2D(0.0f, this->acceleration.y);
+		this->velocity = VECTOR2D(acce_x, this->velocity.y);
+		return;
+	}
+	SetState(MARIO_RUN);
+	this->_velocity = VECTOR2D(0.0f, 0.0f);
+	this->_acceleration = VECTOR2D(acce_x, 0.0f);
+}
+
+void Mario::Jump(float speed)
+{
+	SetState(MARIO_JUMP);
+	VECTOR2D vec = this->velocity;
+	vec.y = speed;
+	this->velocity = vec;
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+}
+
+void Mario::Sit()
+{
+	if (GetState() != MARIO_IDLE || GetState("figure") == MARIO_SMALL)
+	{
+		return;
+	}
+	SetState(MARIO_SIT);
+	this->_velocity = VECTOR2D(0.0f, 0.0f);
+	this->_acceleration = VECTOR2D(0.0f, 0.0f);
+	this->position = this->position - VECTOR2D(0.0f, (this->_height - MARIO_SIT_HEIGHT) / 2);
+	this->_height = MARIO_SIT_HEIGHT;
+}
+
+void Mario::Death()
+{
+	SetState(MARIO_DEATH);
+	this->velocity = VECTOR2D(0.0f, 100);
+	this->acceleration = VECTOR2D(this->acceleration.x, -MARIO_GRAVITY);
+}
+
+void Mario::Untouchable()
+{
 }

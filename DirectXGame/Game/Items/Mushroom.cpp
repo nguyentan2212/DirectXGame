@@ -72,10 +72,7 @@ void Mushroom::OnCollision(CollisionEvent colEvent)
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{
-			this->_isGrounded = true;
-			this->_position += this->_velocity * colEvent.entryTime;
-			this->_velocity = VECTOR2D(this->_velocity.x, 0);
-			this->_acceleration = VECTOR2D(0.0f, 0.0f);
+			Grounding(colEvent.entryTime);
 		}
 		else if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
 		{

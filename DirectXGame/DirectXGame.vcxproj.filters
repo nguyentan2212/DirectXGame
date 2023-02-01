@@ -285,6 +285,9 @@
     <ClInclude Include="Game\Items\Head.h">
       <Filter>Game\Items</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Items\Platform.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -421,6 +424,9 @@
       <Filter>Game\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Game\Items\Head.cpp">
+      <Filter>Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Items\Platform.cpp">
       <Filter>Game\Items</Filter>
     </ClCompile>
   </ItemGroup>

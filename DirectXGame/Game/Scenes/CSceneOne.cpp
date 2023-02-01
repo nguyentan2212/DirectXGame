@@ -15,6 +15,7 @@
 #include "../Enemies/KoopaParaTroopa.h"
 #include "../Enemies/ParaGoomba.h"
 #include "../Items/Mushroom.h"
+#include "../Items/Platform.h"
 
 CSceneOne::CSceneOne(): Scene()
 {
@@ -27,8 +28,8 @@ CSceneOne::CSceneOne(): Scene()
 	InitTilemap(config);
 	InitObjects(config["objects"]);
 
-	Mario* mario = new Mario(new MarioIdleState());
-	mario->position = VECTOR2D(300, 50);
+	Mario* mario = new Mario();
+	mario->position = VECTOR2D(100, 50);
 	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
@@ -87,6 +88,13 @@ void CSceneOne::InitObjects(json config)
 		{
 			obj = new ParaGoomba();
 		}*/
+		else if (item["class"].get<string>() == "platform")
+		{
+			obj = new Platform();
+			obj->width = item["width"].get<float>();
+			obj->height = item["height"].get<float>();
+			obj->name = item["name"].get<string>();
+		}
 		else
 		{
 			obj = new GameObject();

@@ -45,16 +45,15 @@ void KoopaParaTroopa::Render()
 void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 {
 	string objName = colEvent.collisionObj->name;
-	if (objName == "ground" || objName == "cloud" || objName == "panel")
+	string className = typeid(*colEvent.collisionObj).name();
+
+	if (className == "class Platform" || className == "class Brick")
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{
-			this->_isGrounded = true;
-			this->_position += this->_velocity * colEvent.entryTime;
-			this->_velocity = VECTOR2D(this->_velocity.x, 0);
-			this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
+			Grounding(colEvent.entryTime);
 		}
-		else if (GetState() == KOOPA_PARATROOPA_RUN)
+		else if (GetState() == KOOPA_PARATROOPA_RUN && objName != "panel")
 		{
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
@@ -65,6 +64,7 @@ void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 		{
 			SetState(KOOPA_PARATROOPA_STUN);
 		}
+		//SetState(KOOPA_PARATROOPA_RUN);
 	}
 }
 
