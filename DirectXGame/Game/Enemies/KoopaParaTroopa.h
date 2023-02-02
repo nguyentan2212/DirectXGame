@@ -4,8 +4,8 @@
 
 constexpr float KOOPA_PARATROOPA_WIDTH = 16;
 constexpr float KOOPA_PARATROOPA_HEIGHT = 26;
-constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 65;
-constexpr float KOOPA_PARATROOPA_WALK_SPEED_X = 30;
+constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 30;
+constexpr float KOOPA_PARATROOPA_WALK_SPEED_X = 20;
 constexpr float KOOPA_PARATROOPA_GRAVITY = 120;
 
 constexpr UINT KOOPA_PARATROOPA_WALK = 0;
@@ -25,7 +25,7 @@ public:
 private:
 	float _tempY = 0.0f;
 	Renderable* GetRenderable() override;
-	Head* _head;
+	Head* _head = nullptr;
 
 	void Walk();
 	void Run();

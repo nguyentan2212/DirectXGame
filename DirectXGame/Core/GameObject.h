@@ -15,8 +15,7 @@ class GameObject
 {
 public: 
 	GameObject();
-	GameObject(State* state);
-	GameObject(Renderable* renderable, State* state = new State());
+	GameObject(Renderable* renderable);
 	virtual ~GameObject();
 
 	virtual void Update(float deltaTime);
@@ -38,10 +37,7 @@ public:
 	void RemoveChildObject(GameObject* child);
 	GameObject* GetChildWithName(string name);
 
-	string GetStateName() const;
-
 	VECTOR2D GetWorldPosition();
-	void TransitionTo(State* state);
 
 	virtual Box GetBoundingBox();
 	void DrawBoundingBox();
@@ -94,16 +90,14 @@ public:
 	GET(isBlocking) { return this->_isBlocking; }
 	SET(isBlocking) { this->_isBlocking = value; }
 
-	PROPERTY(UINT, figure);
-	GET(figure) { return this->_figure; }
-	SET(figure) { this->ChangeFigure(value); }
-
+	PROPERTY(bool, isFlipped);
+	GET(isFlipped) { return this->_isFlipped; }
+	SET(isFlipped) { this->_isFlipped = value; }
 #pragma endregion
 
 protected:
 	GameObject* _parent;
 	vector<GameObject*> _children;
-	State* _state;
 	bool _showBoundingBox;
 	bool _isFlipped;
 	string _name;
@@ -111,7 +105,6 @@ protected:
 	float _height = 0.0f;
 	bool _isActive = true;
 	bool _isGrounded = false;
-	UINT _figure;
 	bool _isBlocking = false;
 	map<string, UINT> _states;
 
@@ -127,7 +120,7 @@ protected:
 	virtual void OnTransformChanged();
 	void CalculateWorldMatrix();
 	virtual Renderable* GetRenderable();
-	void ChangeFigure(UINT figure) {};
+	virtual void SetRenderable(Renderable* renderable);
 #pragma endregion
 };
 

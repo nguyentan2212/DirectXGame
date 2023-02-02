@@ -9,5 +9,8 @@ public:
 	CSceneOne();
 	void InitObjects(json config) override;
 	void Update(float deltaTime) override;
+
+private:
+	void CreateMario(VECTOR2D position);
 };
 

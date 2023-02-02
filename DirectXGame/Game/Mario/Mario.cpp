@@ -54,6 +54,11 @@ void Mario::Render()
 
 void Mario::OnKeyDown(int keyCode)
 {
+	if (GetState() == MARIO_DEATH)
+	{
+		return;
+	}
+
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	switch (keyCode)
 	{
@@ -108,6 +113,10 @@ void Mario::OnKeyUp(int keyCode)
 		{
 			Idle();
 		}
+		else if (GetState() == MARIO_JUMP)
+		{
+			this->velocity = VECTOR2D(0.0f, this->velocity.y);
+		}
 		break;
 	case DIK_S:
 		Idle();
@@ -137,6 +146,7 @@ void Mario::OnCollision(CollisionEvent colEvent)
 		}
 		if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
 		{
+			//DebugOut(L"[INFO] Mario v.x: %f, v.y = %f !\n", this->velocity.x, this->velocity.y);
 			this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
 			this->_acceleration = VECTOR2D(0.0f, this->_acceleration.y);
 		}
@@ -154,9 +164,13 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	{
 		ChangeFigure(MARIO_RACCOON);
 	}
-	if (objName == "fire ball" || objName == "goomba")
+	if (objName == "goomba" || className == "class ParaGoomba")
 	{
-		if (GetState("figure") != MARIO_SMALL)
+		if (colEvent.direction == Direction::DOWN)
+		{
+			Jump(MARIO_SUPER_JUMP_Y);
+		}
+		else if (GetState("figure") != MARIO_SMALL)
 		{
 			this->ChangeFigure(MARIO_SMALL);
 		}
@@ -224,7 +238,6 @@ void Mario::ChangeFigure(UINT figure)
 	this->_position = this->_position + VECTOR2D(0.0f, (mario_sizes[figure].second - this->_height) / 2 + 0.5f);
 	this->_width = mario_sizes[figure].first;
 	this->_height = mario_sizes[figure].second;
-	this->_figure = figure;
 	SetState(figure, "figure");
 }
 
@@ -244,7 +257,6 @@ void Mario::Run(float acce_x)
 {
 	if (this->_isGrounded == false)
 	{
-		this->acceleration = VECTOR2D(0.0f, this->acceleration.y);
 		this->velocity = VECTOR2D(acce_x, this->velocity.y);
 		return;
 	}
@@ -279,7 +291,7 @@ void Mario::Death()
 {
 	SetState(MARIO_DEATH);
 	this->velocity = VECTOR2D(0.0f, 100);
-	this->acceleration = VECTOR2D(this->acceleration.x, -MARIO_GRAVITY);
+	this->acceleration = VECTOR2D(0.0f, -MARIO_GRAVITY);
 }
 
 void Mario::Untouchable()

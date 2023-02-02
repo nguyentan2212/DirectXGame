@@ -5,19 +5,22 @@
 
 KoopaParaTroopa::KoopaParaTroopa(): GameObject()
 {
-	this->_name = "koopa paratroopa";
 	this->_width = KOOPA_PARATROOPA_WIDTH;
 	this->_height = KOOPA_PARATROOPA_HEIGHT;
-	this->_head = new Head(KOOPA_PARATROOPA_WIDTH / 2.0f, KOOPA_PARATROOPA_HEIGHT);
-	this->_head->body = this;
-	this->_head->SetGravity(KOOPA_PARATROOPA_GRAVITY);
-	ObjectPool* pool = ObjectPool::GetInstance();
-	pool->AddGameObject(this->_head);
 	SetState(KOOPA_PARATROOPA_WALK);
 }
 
 void KoopaParaTroopa::Update(float deltaTime)
 {
+	if (this->_head == nullptr)
+	{
+		this->_head = new Head(KOOPA_PARATROOPA_WIDTH * 0.5, KOOPA_PARATROOPA_HEIGHT);
+		this->_head->position = this->position + VECTOR2D(this->width / 2.0f, 0.0f);
+		this->_head->body = this;
+		this->_head->SetGravity(KOOPA_PARATROOPA_GRAVITY);
+		ObjectPool* pool = ObjectPool::GetInstance();
+		pool->AddGameObject(this->_head);
+	}
 	this->_acceleration = VECTOR2D(0.0f, -KOOPA_PARATROOPA_GRAVITY);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 
@@ -125,14 +128,20 @@ void KoopaParaTroopa::Walk()
 {
 	this->velocity = VECTOR2D(KOOPA_PARATROOPA_WALK_SPEED_X, 0.0f);
 	this->acceleration = VECTOR2D(0.0f, 0.0f);
-	this->_head->isActive = true;
+	if (this->_head != nullptr)
+	{
+		this->_head->isActive = true;
+	}
 }
 
 void KoopaParaTroopa::Run()
 {
 	this->velocity = VECTOR2D(KOOPA_PARATROOPA_RUN_SPEED_X * this->_direction, 0.0f);
 	this->acceleration = VECTOR2D(0.0f, 0.0f);
-	this->_head->isActive = false;
+	if (this->_head != nullptr)
+	{
+		this->_head->isActive = false;
+	}
 }
 
 void KoopaParaTroopa::Stun()
@@ -143,5 +152,8 @@ void KoopaParaTroopa::Stun()
 	VECTOR2D pos = this->_position;
 	pos.y -= (KOOPA_PARATROOPA_HEIGHT - KOOPA_PARATROOPA_WIDTH) / 2;
 	this->position = pos;
-	this->_head->isActive = false;
+	if (this->_head != nullptr)
+	{
+		this->_head->isActive = false;
+	}
 }

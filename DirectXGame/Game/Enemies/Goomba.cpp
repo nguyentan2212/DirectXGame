@@ -48,7 +48,6 @@ void Goomba::Update(float deltaTime)
 
 	this->_acceleration = VECTOR2D(0.0f, -GOOMBA_GRAVITY);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
-	GameObject::IsBlocking();
 
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
@@ -58,8 +57,9 @@ void Goomba::Update(float deltaTime)
 void Goomba::OnCollision(CollisionEvent colEvent)
 {
 	string objName = colEvent.collisionObj->name;
-	if (objName == "pine" || objName == "ground" || objName == "cloud" || objName == "brick"
-		|| objName == "panel" || objName == "leaf brick")
+
+	string className = typeid(*colEvent.collisionObj).name();
+	if (className == "class Platform" || className == "class Brick")
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{

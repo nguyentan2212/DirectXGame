@@ -183,18 +183,6 @@
     <ClInclude Include="Game\Mario\Mario.h">
       <Filter>Game\Mario</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Mario\MarioRunState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioSitState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioJumpState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioIdleState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
     <ClInclude Include="Physic\CollisionManager.h">
       <Filter>Physic\Header</Filter>
     </ClInclude>
@@ -213,18 +201,6 @@
     <ClInclude Include="Core\Camera.h">
       <Filter>Core\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Mario\MarioKickState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioRunAndHoldState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioHoldState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioFallState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
     <ClInclude Include="Game\GUI.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -233,9 +209,6 @@
     </ClInclude>
     <ClInclude Include="Game\Items\Coin.h">
       <Filter>Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioFlyState.h">
-      <Filter>Game\Mario</Filter>
     </ClInclude>
     <ClInclude Include="Game\Items\Mushroom.h">
       <Filter>Game\Items</Filter>
@@ -252,9 +225,6 @@
     <ClInclude Include="Game\Enemies\Goomba.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Mario\MarioDeathState.h">
-      <Filter>Game\Mario</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Enemies\KoopaParaTroopa.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
@@ -263,15 +233,6 @@
     </ClInclude>
     <ClInclude Include="Game\Enemies\ParaGoomba.h">
       <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Enemies\ParaGoombaNormalState.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Enemies\ParaGoombaJumpState.h">
-      <Filter>Game\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Mario\MarioAttackState.h">
-      <Filter>Game\Mario</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\Renderable.h">
       <Filter>Core\Header</Filter>
@@ -287,6 +248,12 @@
     </ClInclude>
     <ClInclude Include="Game\Items\Platform.h">
       <Filter>Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Items\Items.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemies\Enemies.h">
+      <Filter>Game\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -333,18 +300,6 @@
     <ClCompile Include="Game\Mario\Mario.cpp">
       <Filter>Game\Mario</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Mario\MarioRunState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioSitState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioJumpState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioIdleState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
     <ClCompile Include="Physic\CollisionManager.cpp">
       <Filter>Physic\Source</Filter>
     </ClCompile>
@@ -363,18 +318,6 @@
     <ClCompile Include="Core\Camera.cpp">
       <Filter>Core\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Mario\MarioKickState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioRunAndHoldState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioHoldState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioFallState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
     <ClCompile Include="Game\GUI.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -383,9 +326,6 @@
     </ClCompile>
     <ClCompile Include="Game\Items\Coin.cpp">
       <Filter>Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioFlyState.cpp">
-      <Filter>Game\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Game\Items\Mushroom.cpp">
       <Filter>Game\Items</Filter>
@@ -402,9 +342,6 @@
     <ClCompile Include="Game\Enemies\Goomba.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Mario\MarioDeathState.cpp">
-      <Filter>Game\Mario</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Enemies\KoopaParaTroopa.cpp">
       <Filter>Game\Enemies</Filter>
     </ClCompile>
@@ -413,15 +350,6 @@
     </ClCompile>
     <ClCompile Include="Game\Enemies\ParaGoomba.cpp">
       <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Enemies\ParaGoombaNormalState.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Enemies\ParaGoombaJumpState.cpp">
-      <Filter>Game\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Mario\MarioAttackState.cpp">
-      <Filter>Game\Mario</Filter>
     </ClCompile>
     <ClCompile Include="Game\Items\Head.cpp">
       <Filter>Game\Items</Filter>

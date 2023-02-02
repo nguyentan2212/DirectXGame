@@ -1,18 +1,19 @@
 #include "ParaGoomba.h"
-#include "../../Core/Camera.h"
 #include "../../Graphic/SpriteService.h"
-#include "ParaGoombaNormalState.h"
-#include "../Mario/Mario.h"
-#include "../Mario/MarioJumpState.h"
-#include "../Mario/MarioDeathState.h"
+#include "../../Graphic/AnimationService.h"
+#include "../../Physic/CollisionManager.h"
 
-ParaGoomba::ParaGoomba(): GameObject(new ParaGoombaNormalState(-1))
+ParaGoomba::ParaGoomba(): GameObject()
 {
-	this->_name = "paragoomba";
+	this->_width = PARAGOOMBA_WIDTH;
+	this->_height = PARAGOOMBA_HEIGHT;
 	this->_velocity = VECTOR2D(-PARAGOOMBA_SPEED_X, 0.0f);
-	SpriteService* sprites = SpriteService::GetInstance();
-	this->_lostWingScore = sprites->GetSprite("hub-and-font/400");
-	this->_deathScore = sprites->GetSprite("hub-and-font/800");
+	SetState(PARAGOOMBA_HAS_WING);
+
+	AnimationService* anis = AnimationService::GetInstance();
+	this->_leftWing = new GameObject(anis->GetAnimation("wing"));
+	this->_rightWing = new GameObject(anis->GetAnimation("wing"));
+	this->_rightWing->isFlipped = true;
 }
 
 void ParaGoomba::Render()
@@ -21,50 +22,17 @@ void ParaGoomba::Render()
 	{
 		return;
 	}
+
+	if (GetState() == PARAGOOMBA_HAS_WING)
+	{
+		this->_leftWing->Render();
+		this->_rightWing->Render();
+	}
+	if (this->_score != nullptr)
+	{
+		this->_score->Render();
+	}
 	GameObject::Render();
-
-	Camera* camera = Camera::GetInstance();
-	VECTOR2D pos = GetWorldPosition() - camera->position;
-
-	SpriteService* sprites = SpriteService::GetInstance();
-
-	Sprite* sprite = sprites->GetSprite("hub-and-font/400");
-
-	if (this->isLostWings && !this->isDeath && this->_lostWingScore != nullptr)
-	{
-		// draw score
-		sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
-		return;
-	}
-	else if (this->isDeath && this->_deathScore != nullptr)
-	{
-		sprite = sprites->GetSprite("enemies/paragoomba/2");
-		sprite->Render(pos, false, -0.1f);
-
-		// draw score
-		sprite = sprites->GetSprite("hub-and-font/800");
-		sprite->Render(pos + VECTOR2D(0.0f, this->_tempY));
-		return;
-	}
-
-	if (this->isLostWings)
-	{
-		return;
-	}
-
-	if (this->_state->name == "normal")
-	{
-		sprite = sprites->GetSprite("enemies/wing-1");
-		sprite->Render(pos + VECTOR2D(8.0f, 8.0f), false, -0.1f);
-		sprite->Render(pos + VECTOR2D(-8.0f, 8.0f), true, -0.1f);
-		return;
-	}
-
-	AnimationService* anis = AnimationService::GetInstance();
-	Animation* ani = anis->GetAnimation("wing");
-
-	ani->Render(pos + VECTOR2D(8.0f, 8.0f), false, -0.1f);
-	ani->Render(pos + VECTOR2D(-8.0f, 8.0f), true, -0.1f);
 }
 
 void ParaGoomba::Update(float deltaTime)
@@ -74,114 +42,154 @@ void ParaGoomba::Update(float deltaTime)
 		return;
 	}
 
-	this->_state->Update(deltaTime);
-	GameObject::Update(deltaTime);
-
-	VECTOR2D pos = GetWorldPosition();
-	if (pos.x <= -10.0f || pos.y <= -40.0f)
+	if (GetState() == PARAGOOMBA_DEATH)
 	{
-		this->_isActive = false;
-	}
-
-	AnimationService* anis = AnimationService::GetInstance();
-	Animation* ani = anis->GetAnimation("wing");
-	ani->Update(deltaTime);
-
-	if (this->isLostWings && !this->isDeath)
-	{
-		if (this->_tempY <= 80.0f && this->_lostWingScore != nullptr)
+		if (this->_deathDuration > 0)
 		{
-			this->_tempY += 45.0f * deltaTime / 1000;
-			//DebugOut((wchar_t*)L"[INFO] Para Goomba tempY = %f \n", _tempY);
+			this->_deathDuration -= deltaTime;
 		}
 		else
 		{
-			this->_tempY = 0.0f;
-			this->_lostWingScore = nullptr;
-		}
-	}
-	else if (this->isDeath)
-	{
-		if (this->_tempY <= 80.0f && this->_deathScore != nullptr)
-		{
-			this->_tempY += 45.0f * deltaTime / 1000;
-			//DebugOut((wchar_t*)L"[INFO] Para Goomba tempY = %f \n", _tempY);
-		}
-		else
-		{
-			this->_tempY = 0.0f;
-			this->_deathScore = nullptr;
 			this->_isActive = false;
+			this->_score->isActive = false;
 		}
+	}
+
+	if (GetState() == PARAGOOMBA_HAS_WING)
+	{
+		this->_leftWing->Update(deltaTime);
+		this->_leftWing->position = this->position + VECTOR2D(this->width / 2.0f, this->height / 2.0f);
+
+		this->_rightWing->Update(deltaTime);
+		this->_rightWing->position = this->position + VECTOR2D(-this->width / 2.0f, this->height / 2.0f);
+
+		if (this->_runDuration > 0)
+		{
+			this->_runDuration -= deltaTime;
+		}
+		else if (this->_isGrounded)
+		{
+			if (this->_jumpCount < 2)
+			{
+				this->_jumpCount++;
+				Jump(PARAGOOMBA_JUMP_SPEED);
+			}
+			else
+			{
+				this->_jumpCount = 0;
+				this->_runDuration = PARAGOOMBA_RUN_DURATION;
+				Jump(PARAGOOMBA_SUPER_JUMP_SPEED);
+			}
+		}
+	}
+
+	if (this->_score != nullptr)
+	{
+		if (this->_scoreDuration > 0)
+		{
+			this->_scoreDuration -= deltaTime;
+			this->_score->Update(deltaTime);
+		}
+		else
+		{
+			this->_score->isActive = false;
+			this->_scoreDuration = PARAGOOMBA_SCORE_DURATION;
+		}
+	}
+
+	this->_acceleration = VECTOR2D(0.0f, -PARAGOOMBA_GRAVITY);
+	this->_velocity += this->_acceleration * deltaTime / 1000;
+	this->_isGrounded = false;
+	CollisionManager::Processing(this, deltaTime);
+
+	Translate(this->_velocity * deltaTime / 1000);
+
+	Renderable* r = GetRenderable();
+	if (r != nullptr)
+	{
+		r->Update(deltaTime);
 	}
 }
 
 void ParaGoomba::OnCollision(CollisionEvent colEvent)
 {
-	this->_state->OnCollision(colEvent);
-
-	Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
-	if (mario != nullptr)
+	string objName = colEvent.collisionObj->name;
+	string className = typeid(*colEvent.collisionObj).name();
+	if (className == "class Platform" || className == "class Brick")
 	{
-		string stateName = mario->GetStateName();
-		if (stateName == "death")
+		if (colEvent.direction == Direction::DOWN)
 		{
-			return;
+			Grounding(colEvent.entryTime);
 		}
-		if (colEvent.direction == Direction::UP)
+		else if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
 		{
-			IsAttacked();
-			if (this->isLostWings)
-			{
-				mario->IncreaseScore(800);
-			}
-			else
-			{
-				mario->IncreaseScore(400);
-			}
-			mario->TransitionTo(new MarioJumpState(0.5f));
-		}
-		else if (mario->GetStateName() == "attack")
-		{
-			if (this->isLostWings)
-			{
-				mario->IncreaseScore(800);
-			}
-			else
-			{
-				mario->IncreaseScore(400);
-			}
-			IsAttacked();
-		}
-		else if (mario->name != "small mario" && stateName.find("change figure") == string::npos)
-		{
-			//
-		}
-		else if (stateName.find("change figure") == string::npos)
-		{
-			mario->TransitionTo(new MarioDeathState());
+			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
 	}
+
+	if (GetState() == PARAGOOMBA_DEATH)
+	{
+		return;
+	}
+
+	if (objName == "mario")
+	{
+		if (colEvent.direction == DIRECTION::UP)
+		{
+			if (GetState() == PARAGOOMBA_HAS_WING)
+			{
+				Jump(0);
+				SpriteService* sprites = SpriteService::GetInstance();
+				this->_score = new GameObject(sprites->GetSprite("hub-and-font/400"));
+				this->_score->position = this->position + VECTOR2D(0.0f, PARAGOOMBA_HEIGHT);
+				SetState(PARAGOOMBA_LOST_WING);
+			}
+			else
+			{
+				SpriteService* sprites = SpriteService::GetInstance();
+				this->_score = new GameObject(sprites->GetSprite("hub-and-font/1000"));
+				this->_score->position = this->position + VECTOR2D(0.0f, PARAGOOMBA_HEIGHT);
+				Death();
+			}
+		}
+	}
+}
+
+void ParaGoomba::SetState(UINT stateValue, string stateName)
+{
+	this->_states[stateName] = stateValue;
 }
 
 Renderable* ParaGoomba::GetRenderable()
 {
+	if (GetState() == PARAGOOMBA_DEATH)
+	{
+		SpriteService* sprites = SpriteService::GetInstance();
+		return sprites->GetSprite("enemies/paragoomba/2");
+	}
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("paragoomba walk");
 }
 
-void ParaGoomba::IsAttacked()
+void ParaGoomba::Jump(float speed)
 {
-	if (this->isLostWings)
+	if (GetState() != PARAGOOMBA_HAS_WING)
 	{
-		this->isDeath = true;
-		this->_velocity = VECTOR2D(0.0f, 0.0f);
-		VECTOR2D pos = GetWorldPosition();
-		this->position = pos;
-		this->_height = 9.0f;
+		return;
 	}
-	else
-	{
-		this->isLostWings = true;
-	}
+	VECTOR2D vec = this->velocity;
+	vec.y = speed;
+	this->velocity = vec;
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+}
+
+void ParaGoomba::Death()
+{
+	SetState(PARAGOOMBA_DEATH);
+	this->velocity = VECTOR2D(0.0f, 0.0f);
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	this->_height = PARAGOOMBA_DEATH_HEIGHT;
+	this->_position = this->_position - VECTOR2D(0.0f, PARAGOOMBA_HEIGHT - PARAGOOMBA_DEATH_HEIGHT) / 2.0f;
+	this->_leftWing->isActive = false;
+	this->_rightWing->isActive = false;
 }

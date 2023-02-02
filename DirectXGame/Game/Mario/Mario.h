@@ -28,7 +28,6 @@ private:
 	void Idle();
 	void Run(float acce_x);
 	void Jump(float speed);
-	void Fall();
 	void Fly();
 	void Sit();
 	void Death();

@@ -16,10 +16,14 @@ constexpr UINT FIRE_TRAP_SLEEP = 0;
 constexpr UINT FIRE_TRAP_AWAKE = 1;
 constexpr UINT FIRE_TRAP_ATTACK = 2;
 
+// figure
+constexpr UINT FIRE_TRAP_RED = 0;
+constexpr UINT FIRE_TRAP_GREEN = 1;
+
 class VenusFireTrap: public GameObject
 {
 public:
-	VenusFireTrap(VECTOR2D sleepPos);
+	VenusFireTrap(VECTOR2D sleepPos, string name = "red venus fire trap");
 
 	void Render() override;
 	void Update(float deltaTime) override;

@@ -3,9 +3,9 @@
 #include "../../Core/ObjectPool.h"
 #include "FireBall.h"
 
-VenusFireTrap::VenusFireTrap(VECTOR2D sleepPos): GameObject()
+VenusFireTrap::VenusFireTrap(VECTOR2D sleepPos, string name): GameObject()
 {
-	this->_name = "venus fire trap";
+	this->_name = name;
 	this->_width = FIRE_TRAP_WIDTH;
 	this->_height = FIRE_TRAP_HEIGHT;
 	this->_sleepPosition = sleepPos;
@@ -112,7 +112,7 @@ void VenusFireTrap::SetState(UINT stateValue, string stateName)
 
 Renderable* VenusFireTrap::GetRenderable()
 {
-	string aniName = "green " + this->_name + " ";
+	string aniName = this->_name + " ";
 	AnimationService* animations = AnimationService::GetInstance();
 
 	if (GetState() == FIRE_TRAP_SLEEP)

@@ -15,19 +15,19 @@ void Head::Update(float deltaTime)
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
-	
+
 	if (this->_isGrounded == false)
 	{
 		VECTOR2D v = this->body->velocity;
 		v.x *= -1.0f;
 		this->body->velocity = v;
 	}
-	
+
 	if (this->body->velocity.x > 0)
 	{
 		this->position = this->body->position + VECTOR2D(this->body->width / 2.0f, 0.0f);
 	}
-	else
+	else if (this->body->velocity.x < 0)
 	{
 		this->position = this->body->position - VECTOR2D(this->body->width / 2.0f, 0.0f);
 	}
@@ -36,7 +36,9 @@ void Head::Update(float deltaTime)
 void Head::OnCollision(CollisionEvent colEvent)
 {
 	string objName = colEvent.collisionObj->name;
-	if (objName == "ground" || objName == "cloud" || objName == "panel")
+	string className = typeid(*colEvent.collisionObj).name();
+
+	if (className == "class Platform" || className == "class Brick")
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{
