@@ -38,11 +38,16 @@ void Coin::Update(float deltaTime)
 
 void Coin::OnCollision(CollisionEvent colEvent)
 {
-	if (this->_score != nullptr && colEvent.collisionObj->name == "brick" && colEvent.direction == Direction::DOWN)
+	string className = typeid(*colEvent.collisionObj).name();
+	if (this->_score != nullptr && className == "class Brick" && colEvent.direction == Direction::DOWN)
 	{
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
 		this->_score->isActive = true;
+	}
+	else if (className == "class Mario" && this->name != "score coin")
+	{
+		this->isActive = false;
 	}
 }
 

@@ -23,14 +23,29 @@ public:
 	void SetState(UINT stateValue, string stateName = "default") override;
 private:
 	Renderable* GetRenderable() override;
+	void Grounding(float time) override;
 	void ChangeFigure(UINT figure);
 
 	void Idle();
-	void Run(float acce_x);
+	void Run(float direction);
 	void Jump(float speed);
 	void Fly();
 	void Sit();
 	void Death();
 	void Untouchable();
+	void Hold();
+	void Kick();
+
+	void OnCollisionWithPlatform(CollisionEvent colEvent);
+	void OnCollisionWithBrick(CollisionEvent colEvent);
+	void OnCollisionWithItem(CollisionEvent colEvent);
+	void OnCollisionWithGoomba(CollisionEvent colEvent);
+	void OnCollisionWithParaGoomba(CollisionEvent colEvent);
+	void OnCollisionWithKoopaParaTroopa(CollisionEvent colEvent);
+
+	bool IsKeyDown(int keyCode);
+
+	GameObject* _holdObj = nullptr;
+	float _kickTime = KICK_TIME;
 };
 

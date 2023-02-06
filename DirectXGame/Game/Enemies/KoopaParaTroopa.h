@@ -4,13 +4,14 @@
 
 constexpr float KOOPA_PARATROOPA_WIDTH = 16;
 constexpr float KOOPA_PARATROOPA_HEIGHT = 26;
-constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 30;
+constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 80;
 constexpr float KOOPA_PARATROOPA_WALK_SPEED_X = 20;
 constexpr float KOOPA_PARATROOPA_GRAVITY = 120;
 
 constexpr UINT KOOPA_PARATROOPA_WALK = 0;
 constexpr UINT KOOPA_PARATROOPA_RUN = 1;
 constexpr UINT KOOPA_PARATROOPA_STUN = 2;
+constexpr UINT KOOPA_PARATROOPA_IS_HELD = 3;
 
 class KoopaParaTroopa: public GameObject
 {
@@ -27,8 +28,6 @@ private:
 	Renderable* GetRenderable() override;
 	Head* _head = nullptr;
 
-	void Walk();
-	void Run();
 	void Stun();
 };
 

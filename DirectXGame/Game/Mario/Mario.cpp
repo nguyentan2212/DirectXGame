@@ -2,6 +2,7 @@
 #include "../GUI.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
+#include "../Enemies/KoopaParaTroopa.h"
 
 Mario::Mario(): GameObject()
 {
@@ -9,6 +10,7 @@ Mario::Mario(): GameObject()
 	this->_name = "mario";
 	Jump(0);
 	ChangeFigure(MARIO_SMALL);
+	SetState(MARIO_NOT_HOLD, "hold");
 }
 
 void Mario::Update(float deltaTime)
@@ -24,16 +26,15 @@ void Mario::Update(float deltaTime)
 		r->Update(deltaTime);
 	}
 
-	if (this->_velocity.x < 0)
+	if (IsKeyDown(BTN_A))
 	{
-		this->_direction = DIRECTION::LEFT;
+		this->_acceleration = VECTOR2D(this->_acceleration.x, -MARIO_WEEK_GRAVITY);
 	}
-	else if (this->_velocity.x > 0)
+	else
 	{
-		this->_direction = DIRECTION::RIGHT;
+		this->_acceleration = VECTOR2D(this->_acceleration.x, -MARIO_GRAVITY);
 	}
 
-	this->_acceleration = VECTOR2D(this->_acceleration.x, -MARIO_GRAVITY);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 	if (abs(this->_velocity.x) > MARIO_RUN_MAX_SPEED_X)
 	{
@@ -43,7 +44,37 @@ void Mario::Update(float deltaTime)
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
 
+	if (this->_isGrounded == false && GetState() != MARIO_JUMP && GetState() != MARIO_DEATH)
+	{
+		Jump(0);
+	}
+
+	if (this->_velocity.x < 0)
+	{
+		this->_direction = DIRECTION::LEFT;
+	}
+	else if (this->_velocity.x > 0)
+	{
+		this->_direction = DIRECTION::RIGHT;
+	}
 	Translate(this->_velocity * deltaTime / 1000);
+
+	if (IsKeyDown(BTN_B) && GetState("hold") == MARIO_HOLD)
+	{
+		Hold();
+	}
+	if (GetState() == MARIO_KICK)
+	{
+		if (this->_kickTime > 0)
+		{
+			this->_kickTime -= deltaTime;
+		}
+		else
+		{
+			this->_kickTime = KICK_TIME;
+			Idle();
+		}
+	}
 }
 
 void Mario::Render()
@@ -59,45 +90,55 @@ void Mario::OnKeyDown(int keyCode)
 		return;
 	}
 
-	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	switch (keyCode)
 	{
-	case DIK_X:
-		if (keyboard->IsKeyDown(DIK_LCONTROL))
+	case DIK_1:
+		if (IsKeyDown(DIK_LCONTROL))
 		{
 			ChangeFigure(MARIO_SMALL);
 		}
 		break;
-	case DIK_L:
-		if (keyboard->IsKeyDown(DIK_LCONTROL))
+	case DIK_2:
+		if (IsKeyDown(DIK_LCONTROL))
 		{
 			ChangeFigure(MARIO_SUPER);
 		}
 		break;
-	case DIK_R:
-		if (keyboard->IsKeyDown(DIK_LCONTROL))
+	case DIK_3:
+		if (IsKeyDown(DIK_LCONTROL))
 		{
 			ChangeFigure(MARIO_RACCOON);
 		}
 		break;
-	case DIK_A:
-		Run(-MARIO_X_ACCE);
+	case BTN_LEFT:
+		Run(F_LEFT);
 		break;
-	case DIK_D:
-		Run(MARIO_X_ACCE);
+	case BTN_RIGHT:
+		Run(F_RIGHT);
 		break;
-	case DIK_W:
+	case BTN_UP:
 		if (this->_isGrounded)
 		{
 			Jump(MARIO_JUMP_SPEED_Y);
 		}
 		break;
-	case DIK_S:
+	case BTN_DOWN:
 		if (this->_isGrounded)
 		{
 			Sit();
 		}
 		break;
+	case BTN_A:
+		break;
+	case BTN_B:
+		if (IsKeyDown(BTN_LEFT))
+		{
+			Run(F_LEFT);
+		}
+		else if (IsKeyDown(BTN_RIGHT))
+		{
+			Run(F_RIGHT);
+		}
 	default:
 		break;
 	}
@@ -107,19 +148,23 @@ void Mario::OnKeyUp(int keyCode)
 {
 	switch (keyCode)
 	{
-	case DIK_A:
-	case DIK_D:
+	case BTN_LEFT:
+	case BTN_RIGHT:
 		if (GetState() == MARIO_RUN)
 		{
 			Idle();
 		}
-		else if (GetState() == MARIO_JUMP)
-		{
-			this->velocity = VECTOR2D(0.0f, this->velocity.y);
-		}
 		break;
-	case DIK_S:
+	case BTN_DOWN:
 		Idle();
+		break;
+	case BTN_A:
+		break;
+	case BTN_B:
+		if (GetState("hold") == MARIO_HOLD)
+		{
+			Kick();
+		}
 	default:
 		break;
 	}
@@ -131,53 +176,32 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	{
 		return;
 	}
-	GameObject* obj = colEvent.collisionObj;
-	string objName = colEvent.collisionObj->name;
+
 	string className = typeid(*colEvent.collisionObj).name();
-	if (className == "class Platform" || className == "class Brick")
+
+	if (className == "class Platform")
 	{
-		if (colEvent.direction == Direction::DOWN)
-		{
-			Grounding(colEvent.entryTime);
-			if (GetState() == MARIO_JUMP)
-			{
-				Idle();
-			}
-		}
-		if (objName != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
-		{
-			//DebugOut(L"[INFO] Mario v.x: %f, v.y = %f !\n", this->velocity.x, this->velocity.y);
-			this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
-			this->_acceleration = VECTOR2D(0.0f, this->_acceleration.y);
-		}
-		if (className == "class Brick" && colEvent.direction == Direction::UP)
-		{
-			this->_position += this->_velocity * colEvent.entryTime;
-			Jump(0);
-		}
+		OnCollisionWithPlatform(colEvent);
 	}
-	if (objName == "mushroom")
+	else if (className == "class Brick")
 	{
-		ChangeFigure(MARIO_SUPER);
+		OnCollisionWithBrick(colEvent);
 	}
-	else if (objName == "leaf")
+	else if (className == "class Goomba")
 	{
-		ChangeFigure(MARIO_RACCOON);
+		OnCollisionWithGoomba(colEvent);
 	}
-	if (objName == "goomba" || className == "class ParaGoomba")
+	else if (className == "class ParaGoomba")
 	{
-		if (colEvent.direction == Direction::DOWN)
-		{
-			Jump(MARIO_SUPER_JUMP_Y);
-		}
-		else if (GetState("figure") != MARIO_SMALL)
-		{
-			this->ChangeFigure(MARIO_SMALL);
-		}
-		else
-		{
-			Death();
-		}
+		OnCollisionWithParaGoomba(colEvent);
+	}
+	else if (className == "class KoopaParaTroopa")
+	{
+		OnCollisionWithKoopaParaTroopa(colEvent);
+	}
+	else
+	{
+		OnCollisionWithItem(colEvent);
 	}
 }
 
@@ -229,8 +253,33 @@ Renderable* Mario::GetRenderable()
 {
 	string aniName = figureNames[GetState("figure")] + " " + aniNames[GetState("default")];
 
+	if (GetState("hold") == MARIO_HOLD && (GetState() == MARIO_IDLE || GetState() == MARIO_RUN || GetState() == MARIO_JUMP))
+	{
+		aniName += " hold";
+	}
+
 	AnimationService* animations = AnimationService::GetInstance();
 	return animations->GetAnimation(aniName);
+}
+
+void Mario::Grounding(float time)
+{
+	GameObject::Grounding(time);
+	if (GetState() == MARIO_JUMP)
+	{
+		if (IsKeyDown(BTN_LEFT))
+		{
+			Run(F_LEFT);
+		}
+		else if (IsKeyDown(BTN_RIGHT))
+		{
+			Run(F_RIGHT);
+		}
+		else
+		{
+			Idle();
+		}
+	}
 }
 
 void Mario::ChangeFigure(UINT figure)
@@ -253,16 +302,32 @@ void Mario::Idle()
 	this->_acceleration = VECTOR2D(0.0f, 0.0f);
 }
 
-void Mario::Run(float acce_x)
+void Mario::Run(float direction)
 {
 	if (this->_isGrounded == false)
 	{
-		this->velocity = VECTOR2D(acce_x, this->velocity.y);
+		if (this->velocity.x == 0.0f)
+		{
+			this->velocity = VECTOR2D(MARIO_RUN_LOW_SPEED * direction, this->velocity.y);
+		}
+		else if (this->velocity.x * direction < 0)
+		{
+			this->_velocity.x = direction * abs(this->_velocity.x);
+		}
 		return;
 	}
+
 	SetState(MARIO_RUN);
-	this->_velocity = VECTOR2D(0.0f, 0.0f);
-	this->_acceleration = VECTOR2D(acce_x, 0.0f);
+	if (IsKeyDown(BTN_B) && GetState("hold") == MARIO_NOT_HOLD)
+	{
+		this->_acceleration = VECTOR2D(MARIO_X_ACCE * direction, 0.0f);
+		DebugOut(L"[INFO] Mario fast run !\n");
+	}
+	else
+	{
+		this->_acceleration = VECTOR2D(0.0f, 0.0f);
+	}
+	this->_velocity = VECTOR2D(MARIO_RUN_LOW_SPEED * direction, 0.0f);
 }
 
 void Mario::Jump(float speed)
@@ -276,10 +341,11 @@ void Mario::Jump(float speed)
 
 void Mario::Sit()
 {
-	if (GetState() != MARIO_IDLE || GetState("figure") == MARIO_SMALL)
+	if (GetState() != MARIO_IDLE || GetState("figure") == MARIO_SMALL || GetState("hold") == MARIO_HOLD)
 	{
 		return;
 	}
+
 	SetState(MARIO_SIT);
 	this->_velocity = VECTOR2D(0.0f, 0.0f);
 	this->_acceleration = VECTOR2D(0.0f, 0.0f);
@@ -290,10 +356,201 @@ void Mario::Sit()
 void Mario::Death()
 {
 	SetState(MARIO_DEATH);
-	this->velocity = VECTOR2D(0.0f, 100);
+	this->velocity = VECTOR2D(0.0f, MARIO_JUMP_DEFLECT_SPEED);
 	this->acceleration = VECTOR2D(0.0f, -MARIO_GRAVITY);
 }
 
 void Mario::Untouchable()
 {
+}
+
+void Mario::Hold()
+{
+	if (this->_holdObj == nullptr)
+	{
+		return;
+	}
+	VECTOR2D pos = this->position;
+	if (this->velocity.x > 0)
+	{
+		this->_holdObj->position = pos + VECTOR2D(this->_width / 1.5f, 0.0f);
+	}
+	else if (this->velocity.x < 0)
+	{
+		this->_holdObj->position = pos - VECTOR2D(this->_width / 1.5f, 0.0f);
+	}
+	else
+	{
+		if (this->direction == DIRECTION::LEFT)
+		{
+			this->_holdObj->position = pos - VECTOR2D(this->_width / 1.5f, 0.0f);
+		}
+		else
+		{
+			this->_holdObj->position = pos + VECTOR2D(this->_width / 1.5f, 0.0f);
+		}
+	}
+}
+
+void Mario::Kick()
+{
+	SetState(MARIO_KICK);
+	if (this->velocity.x > 0)
+	{
+		this->_holdObj->direction = DIRECTION::RIGHT;
+	}
+	else if (this->velocity.x < 0)
+	{
+		this->_holdObj->direction = DIRECTION::LEFT;
+	}
+	else
+	{
+		this->_holdObj->direction = this->direction;
+	}
+
+	string className = typeid(*this->_holdObj).name();
+
+	if (className == "class KoopaParaTroopa")
+	{
+		this->_holdObj->SetState(KOOPA_PARATROOPA_RUN);
+	}
+	this->_holdObj = nullptr;
+	SetState(MARIO_NOT_HOLD, "hold");
+}
+
+void Mario::OnCollisionWithPlatform(CollisionEvent colEvent)
+{
+	if (colEvent.direction == Direction::DOWN)
+	{
+		Grounding(colEvent.entryTime);
+	}
+	if (colEvent.collisionObj->name != "panel" && (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
+	{
+		//DebugOut(L"[INFO] Mario v.x: %f, v.y = %f !\n", this->velocity.x, this->velocity.y);
+		this->_position += this->_velocity * colEvent.entryTime;
+		this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
+		this->_acceleration = VECTOR2D(0.0f, this->_acceleration.y);
+	}
+}
+
+void Mario::OnCollisionWithBrick(CollisionEvent colEvent)
+{
+	if (colEvent.direction == Direction::DOWN)
+	{
+		Grounding(colEvent.entryTime);
+	}
+	else
+	{
+		this->_position += this->_velocity * colEvent.entryTime;
+		this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
+	}
+}
+
+void Mario::OnCollisionWithItem(CollisionEvent colEvent)
+{
+	if (colEvent.collisionObj->name == "mushroom")
+	{
+		ChangeFigure(MARIO_SUPER);
+	}
+	else if (colEvent.collisionObj->name == "leaf")
+	{
+		ChangeFigure(MARIO_RACCOON);
+	}
+}
+
+void Mario::OnCollisionWithGoomba(CollisionEvent colEvent)
+{
+	if (colEvent.direction == Direction::DOWN)
+	{
+		if (IsKeyDown(DIK_W))
+		{
+			Jump(MARIO_SUPER_JUMP_Y);
+		}
+		else
+		{
+			Jump(MARIO_JUMP_SPEED_Y);
+		}
+	}
+	else if (GetState("figure") != MARIO_SMALL && GetState() != MARIO_ATTACK)
+	{
+		this->ChangeFigure(MARIO_SMALL);
+	}
+	else if (GetState() != MARIO_ATTACK)
+	{
+		Death();
+	}
+}
+
+void Mario::OnCollisionWithParaGoomba(CollisionEvent colEvent)
+{
+	if (colEvent.direction == Direction::DOWN)
+	{
+		if (IsKeyDown(DIK_W))
+		{
+			Jump(MARIO_SUPER_JUMP_Y);
+		}
+		else
+		{
+			Jump(MARIO_JUMP_SPEED_Y);
+		}
+	}
+	else if (GetState("figure") != MARIO_SMALL && GetState() != MARIO_ATTACK)
+	{
+		this->ChangeFigure(MARIO_SMALL);
+	}
+	else if (GetState() != MARIO_ATTACK)
+	{
+		Death();
+	}
+}
+
+void Mario::OnCollisionWithKoopaParaTroopa(CollisionEvent colEvent)
+{
+	DebugOut(L"[INFO] Collide with koopa paratroopa !\n");
+	if (colEvent.collisionObj->GetState() == KOOPA_PARATROOPA_STUN)
+	{
+		if (GetState() == MARIO_RUN && IsKeyDown(BTN_B))
+		{
+			SetState(MARIO_HOLD, "hold");
+			this->_holdObj = colEvent.collisionObj;
+			this->_holdObj->SetState(KOOPA_PARATROOPA_IS_HELD);
+		}
+	}
+	else if (colEvent.collisionObj->GetState() != KOOPA_PARATROOPA_RUN)
+	{
+		if (colEvent.direction == Direction::DOWN)
+		{
+			colEvent.collisionObj->SetState(KOOPA_PARATROOPA_STUN);
+			if (IsKeyDown(DIK_W))
+			{
+				Jump(MARIO_SUPER_JUMP_Y);
+			}
+			else
+			{
+				Jump(MARIO_JUMP_SPEED_Y);
+			}
+		}
+		else if (GetState("figure") != MARIO_SMALL && GetState() != MARIO_ATTACK)
+		{
+			this->ChangeFigure(MARIO_SMALL);
+		}
+		else if (GetState() != MARIO_ATTACK)
+		{
+			Death();
+		}
+	}
+	else if (GetState("figure") != MARIO_SMALL)
+	{
+		this->ChangeFigure(MARIO_SMALL);
+	}
+	else
+	{
+		Death();
+	}
+}
+
+bool Mario::IsKeyDown(int keyCode)
+{
+	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+	return keyboard->IsKeyDown(keyCode);
 }

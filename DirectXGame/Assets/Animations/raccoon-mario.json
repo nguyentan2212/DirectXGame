@@ -70,7 +70,7 @@
       ]
     },
     {
-      "name": "raccoon mario hold",
+      "name": "raccoon mario idle hold",
       "defaultTime": 300,
       "frames": [
         {
@@ -79,12 +79,21 @@
       ]
     },
     {
-      "name": "raccoon mario run and hold",
+      "name": "raccoon mario run hold",
       "defaultTime": 100,
       "frames": [
         {
           "sprite": "raccoon-mario/18"
         },
+        {
+          "sprite": "raccoon-mario/19"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario jump hold",
+      "defaultTime": 300,
+      "frames": [
         {
           "sprite": "raccoon-mario/19"
         }

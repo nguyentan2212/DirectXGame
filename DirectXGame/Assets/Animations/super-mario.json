@@ -49,7 +49,7 @@
       ]
     },
     {
-      "name": "super mario hold",
+      "name": "super mario idle hold",
       "defaultTime": 300,
       "frames": [
         {
@@ -58,12 +58,21 @@
       ]
     },
     {
-      "name": "super mario run and hold",
+      "name": "super mario run hold",
       "defaultTime": 100,
       "frames": [
         {
           "sprite": "super-mario/13"
         },
+        {
+          "sprite": "super-mario/14"
+        }
+      ]
+    },
+    {
+      "name": "super mario jump hold",
+      "defaultTime": 300,
+      "frames": [
         {
           "sprite": "super-mario/14"
         }

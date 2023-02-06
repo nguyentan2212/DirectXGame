@@ -40,7 +40,7 @@
       ]
     },
     {
-      "name": "small mario hold",
+      "name": "small mario idle hold",
       "defaultTime": 300,
       "frames": [
         {
@@ -49,12 +49,21 @@
       ]
     },
     {
-      "name": "small mario run and hold",
+      "name": "small mario run hold",
       "defaultTime": 100,
       "frames": [
         {
           "sprite": "small-mario/8"
         },
+        {
+          "sprite": "small-mario/9"
+        }
+      ]
+    },
+    {
+      "name": "small mario jump hold",
+      "defaultTime": 300,
+      "frames": [
         {
           "sprite": "small-mario/9"
         }

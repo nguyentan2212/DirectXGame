@@ -58,7 +58,9 @@ Renderable* Brick::GetRenderable()
 
 void Brick::OnCollision(CollisionEvent colEvent)
 {
-	if (colEvent.collisionObj->name == "mario" && colEvent.direction == Direction::DOWN && this->_isTouched == false)
+	string className = typeid(*colEvent.collisionObj).name();
+
+	if (className == "class Mario" && colEvent.direction == Direction::DOWN && this->_isTouched == false)
 	{
 		this->_velocity = VECTOR2D(0.0f, BRICK_BOUND_SPEED);
 		this->_acceleration = VECTOR2D(0.0f, -BRICK_GRAVITY);
@@ -68,13 +70,13 @@ void Brick::OnCollision(CollisionEvent colEvent)
 			this->_content->isActive = true;
 		}
 	}
-	/*else if (colEvent.collisionObj->name == "mario" &&this->_isTouched == false &&
+	else if (className == "class KoopaParaTroopa" && this->_isTouched == false &&
 		(colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT)
 		&& this->_content->name == "leaf")
 	{
 		this->_isTouched = true;
 		this->_content->isActive = true;
-	}*/
+	}
 }
 
 Brick* Brick::CreateCoinBrick(VECTOR2D position)

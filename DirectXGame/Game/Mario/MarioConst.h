@@ -1,14 +1,23 @@
 #pragma once
 #include <string>
 #include <utility>
-constexpr float MARIO_GRAVITY = 120;
+#include <dinput.h>
 
+constexpr float MARIO_GRAVITY = 120;
+constexpr float MARIO_WEEK_GRAVITY = 80;
+
+constexpr float F_LEFT = -1;
+constexpr float F_RIGHT = 1;
+
+constexpr float KICK_TIME = 300.0f;
+
+constexpr float MARIO_RUN_LOW_SPEED = 60;
 constexpr float MARIO_X_ACCE = 80;
-constexpr float MARIO_RUN_MAX_SPEED_X = 120;
+constexpr float MARIO_RUN_MAX_SPEED_X = 110;
 constexpr float MARIO_JUMP_SPEED_Y = 100;
 constexpr float MARIO_SUPER_JUMP_Y = 135;
-constexpr float MARIO_RUN_JUMP_SPEED_FACTOR_Y = 1.35f;
-constexpr float MARIO_JUMP_DEFLECT_SPEED = 400;
+constexpr float MARIO_JUMP_DEFLECT_SPEED = 130;
+
 constexpr float MARIO_SIT_HEIGHT = 18.0f;
 
 constexpr float MARIO_SMALL_HEIGHT = 16.0f;
@@ -34,8 +43,14 @@ constexpr UINT MARIO_FLY = 4;
 constexpr UINT MARIO_SIT = 5;
 constexpr UINT MARIO_DEATH = 6;
 constexpr UINT MARIO_UNTOUCHABLE = 7;
+constexpr UINT MARIO_KICK = 8;
+constexpr UINT MARIO_ATTACK = 9;
 
-const std::string aniNames[8] = {
+// hold state
+constexpr UINT MARIO_HOLD = 0;
+constexpr UINT MARIO_NOT_HOLD = 1;
+
+const std::string aniNames[10] = {
 	"idle",
 	"run",
 	"jump",
@@ -44,6 +59,8 @@ const std::string aniNames[8] = {
 	"sit",
 	"death",
 	"untouchable",
+	"kick",
+	"attack",
 };
 
 const std::string figureNames[3] = {
@@ -59,3 +76,9 @@ const std::pair<float, float> mario_sizes[3] = {
 	{23.0f, 28.0f}, // raccoon
 };
 
+#define BTN_UP		DIK_W
+#define BTN_DOWN	DIK_S
+#define BTN_LEFT	DIK_A
+#define BTN_RIGHT	DIK_D
+#define BTN_A		DIK_K
+#define BTN_B		DIK_L

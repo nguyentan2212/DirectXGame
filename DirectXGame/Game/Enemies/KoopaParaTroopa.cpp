@@ -2,6 +2,7 @@
 #include "../../Graphic/SpriteService.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
+#include "../Mario/MarioConst.h"
 
 KoopaParaTroopa::KoopaParaTroopa(): GameObject()
 {
@@ -12,6 +13,11 @@ KoopaParaTroopa::KoopaParaTroopa(): GameObject()
 
 void KoopaParaTroopa::Update(float deltaTime)
 {
+	if (GetState() == KOOPA_PARATROOPA_IS_HELD)
+	{
+		return;
+	}
+
 	if (this->_head == nullptr)
 	{
 		this->_head = new Head(KOOPA_PARATROOPA_WIDTH * 0.5, KOOPA_PARATROOPA_HEIGHT);
@@ -47,6 +53,10 @@ void KoopaParaTroopa::Render()
 
 void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 {
+	if (GetState() == KOOPA_PARATROOPA_IS_HELD)
+	{
+		return;
+	}
 	string objName = colEvent.collisionObj->name;
 	string className = typeid(*colEvent.collisionObj).name();
 
@@ -61,14 +71,6 @@ void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
 	}
-	else if (objName == "mario")
-	{
-		if (colEvent.direction == Direction::UP && GetState() == KOOPA_PARATROOPA_WALK)
-		{
-			SetState(KOOPA_PARATROOPA_STUN);
-		}
-		//SetState(KOOPA_PARATROOPA_RUN);
-	}
 }
 
 void KoopaParaTroopa::SetState(UINT stateValue, string stateName)
@@ -76,28 +78,31 @@ void KoopaParaTroopa::SetState(UINT stateValue, string stateName)
 	switch (stateValue)
 	{
 	case KOOPA_PARATROOPA_WALK:
-		if (GetState() > 0)
+		this->velocity = VECTOR2D(KOOPA_PARATROOPA_WALK_SPEED_X, 0.0f);
+		this->acceleration = VECTOR2D(0.0f, 0.0f);
+		if (this->_head != nullptr)
 		{
-			return;
+			this->_head->isActive = true;
 		}
-		Walk();
-		break;
-	case KOOPA_PARATROOPA_RUN:
-		if (GetState() != KOOPA_PARATROOPA_STUN)
-		{
-			return;
-		}
-		Run();
 		break;
 	case KOOPA_PARATROOPA_STUN:
-		if (GetState() != KOOPA_PARATROOPA_WALK)
-		{
-			return;
-		}
 		Stun();
 		break;
+	case KOOPA_PARATROOPA_RUN:
+		if (this->direction == DIRECTION::RIGHT)
+		{
+			this->velocity = VECTOR2D(KOOPA_PARATROOPA_RUN_SPEED_X, 0.0f);
+		}
+		else
+		{
+			this->velocity = VECTOR2D(-KOOPA_PARATROOPA_RUN_SPEED_X, 0.0f);
+		}
+		break;
+	case KOOPA_PARATROOPA_IS_HELD:
+		break;
+		
 	default:
-		return;
+		break;
 	}
 	this->_states[stateName] = stateValue;
 }
@@ -115,6 +120,7 @@ Renderable* KoopaParaTroopa::GetRenderable()
 	case KOOPA_PARATROOPA_RUN:
 		aniName += "run";
 		break;
+	case KOOPA_PARATROOPA_IS_HELD:
 	case KOOPA_PARATROOPA_STUN:
 		aniName += "stand";
 		break;
@@ -124,28 +130,12 @@ Renderable* KoopaParaTroopa::GetRenderable()
 	return anis->GetAnimation(aniName);
 }
 
-void KoopaParaTroopa::Walk()
-{
-	this->velocity = VECTOR2D(KOOPA_PARATROOPA_WALK_SPEED_X, 0.0f);
-	this->acceleration = VECTOR2D(0.0f, 0.0f);
-	if (this->_head != nullptr)
-	{
-		this->_head->isActive = true;
-	}
-}
-
-void KoopaParaTroopa::Run()
-{
-	this->velocity = VECTOR2D(KOOPA_PARATROOPA_RUN_SPEED_X * this->_direction, 0.0f);
-	this->acceleration = VECTOR2D(0.0f, 0.0f);
-	if (this->_head != nullptr)
-	{
-		this->_head->isActive = false;
-	}
-}
-
 void KoopaParaTroopa::Stun()
 {
+	if (GetState() != KOOPA_PARATROOPA_WALK)
+	{
+		return;
+	}
 	this->velocity = VECTOR2D(0.0f, 0.0f);
 	this->acceleration = VECTOR2D(0.0f, 0.0f);
 	this->_height = KOOPA_PARATROOPA_WIDTH;
