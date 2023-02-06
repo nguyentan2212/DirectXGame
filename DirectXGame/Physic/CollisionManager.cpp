@@ -222,11 +222,6 @@ CollisionEvent CollisionManager::CalcAABB(GameObject* objA, VECTOR2D vA, GameObj
 
 void CollisionManager::Processing(GameObject* obj, float deltaTime)
 {
-    if (obj->isBlocking)
-    {
-        return;
-    }
-
     ObjectPool* pool = ObjectPool::GetInstance();
     vector<GameObject*> objs = pool->GetAllGameObject();
     vector<CollisionEvent> result;

@@ -13,6 +13,7 @@ public:
 	static AnimationService* GetInstance();
 
 	void Init(json config);
+	void Update(float deltaTime);
 	Animation* GetAnimation(string name);
 
 private:

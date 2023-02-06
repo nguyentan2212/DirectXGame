@@ -42,12 +42,6 @@ void GameObject::Update(float deltaTime)
 
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 	Translate(this->_velocity * deltaTime / 1000);
-
-	Renderable* r = GetRenderable();
-	if (r)
-	{
-		r->Update(deltaTime);
-	}
 }
 
 void GameObject::Render()
@@ -87,15 +81,6 @@ void GameObject::OnKeyUp(int keyCode)
 /// <param name="keyCode">The key code.</param>
 void GameObject::OnKeyDown(int keyCode)
 {
-}
-
-void GameObject::IsBlocking()
-{
-	if (this->_isBlocking)
-	{
-		this->_velocity = VECTOR2D(0.0f, 0.0f);
-		this->_acceleration = VECTOR2D(0.0f, 0.0f);
-	}
 }
 
 void GameObject::SetState(UINT stateValue, string stateName)
@@ -227,8 +212,10 @@ void GameObject::OnCollision(CollisionEvent colEvent)
 void GameObject::Grounding(float time)
 {
 	this->_isGrounded = true;
-	this->_position += this->_velocity * time;
-	this->_velocity = VECTOR2D(this->_velocity.x, 0);
+	VECTOR2D pos = this->position;
+	pos.y += this->_velocity.y * time;
+	this->position = pos;
+	this->_velocity = VECTOR2D(this->_velocity.x, 0.0f);
 	this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
 }
 

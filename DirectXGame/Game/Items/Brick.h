@@ -16,7 +16,7 @@ public:
 	static Brick* CreateCoinBrick(VECTOR2D position);
 	static Brick* CreateMushroomBrick(VECTOR2D position);
 	static Brick* CreateLeafBrick(VECTOR2D position);
-
+	static Brick* CreateSoftBrick(VECTOR2D position);
 private:
 	Renderable* GetRenderable() override;
 	GameObject* _content;

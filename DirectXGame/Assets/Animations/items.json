@@ -2,7 +2,7 @@
   "animations": [
     {
       "name": "brick",
-      "defaultTime": 2000,
+      "defaultTime": 150,
       "frames": [
         {
           "sprite": "mics55"
@@ -24,6 +24,24 @@
       "frames": [
         {
           "sprite": "mics52"
+        }
+      ]
+    },
+    {
+      "name": "soft brick",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "mics56"
+        },
+        {
+          "sprite": "mics4"
+        },
+        {
+          "sprite": "mics57"
+        },
+        {
+          "sprite": "mics5"
         }
       ]
     },

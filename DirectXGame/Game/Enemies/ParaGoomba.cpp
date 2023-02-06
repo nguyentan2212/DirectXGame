@@ -103,12 +103,6 @@ void ParaGoomba::Update(float deltaTime)
 	CollisionManager::Processing(this, deltaTime);
 
 	Translate(this->_velocity * deltaTime / 1000);
-
-	Renderable* r = GetRenderable();
-	if (r != nullptr)
-	{
-		r->Update(deltaTime);
-	}
 }
 
 void ParaGoomba::OnCollision(CollisionEvent colEvent)

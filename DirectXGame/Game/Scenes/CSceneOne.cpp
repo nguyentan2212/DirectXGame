@@ -45,6 +45,10 @@ void CSceneOne::InitObjects(json config)
 			{
 				obj = Brick::CreateLeafBrick(position);
 			}
+			else if (item["name"].get<string>() == "soft brick")
+			{
+				obj = Brick::CreateSoftBrick(position);
+			}
 			else
 			{
 				obj = Brick::CreateCoinBrick(position);
@@ -107,7 +111,7 @@ void CSceneOne::CreateMario(VECTOR2D position)
 	ObjectPool* pool = ObjectPool::GetInstance();
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(1000, 100);
+	mario->position = VECTOR2D(1950, 100);
 	//mario->position = position;
 	pool->AddGameObject(mario);
 

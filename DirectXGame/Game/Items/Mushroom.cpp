@@ -59,7 +59,6 @@ void Mushroom::Update(float deltaTime)
 
 	// main update
 	this->_velocity += this->_acceleration * deltaTime / 1000;
-	IsBlocking();
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
 	Translate(this->_velocity * deltaTime / 1000);
@@ -82,7 +81,6 @@ void Mushroom::OnCollision(CollisionEvent colEvent)
 	else if (objName == "mario")
 	{
 		this->_score->isActive = true;
-		this->isBlocking = true;
 		this->_score->position = position + VECTOR2D(0.0f, MUSHROOM_SIZE);
 	}
 }

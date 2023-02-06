@@ -27,12 +27,6 @@ void Goomba::Update(float deltaTime)
 		return;
 	}
 
-	Renderable* r = GetRenderable();
-	if (r != nullptr)
-	{
-		r->Update(deltaTime);
-	}
-
 	if (GetState() == GOOMBA_DEATH)
 	{
 		if (this->_deathDuration > 0)

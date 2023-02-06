@@ -52,6 +52,14 @@ void AnimationService::Init(json config)
     }
 }
 
+void AnimationService::Update(float deltaTime)
+{
+    for (auto ani : this->_animations)
+    {
+        ani.second->Update(deltaTime);
+    }
+}
+
 Animation* AnimationService::GetAnimation(string name)
 {
     Animation* animation = this->_animations[name];

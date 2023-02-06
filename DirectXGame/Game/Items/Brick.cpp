@@ -53,6 +53,10 @@ Renderable* Brick::GetRenderable()
 	}
 
 	AnimationService* animations = AnimationService::GetInstance();
+	if (this->name == "soft brick")
+	{
+		return animations->GetAnimation("soft brick");
+	}
 	return animations->GetAnimation("brick");
 }
 
@@ -60,7 +64,7 @@ void Brick::OnCollision(CollisionEvent colEvent)
 {
 	string className = typeid(*colEvent.collisionObj).name();
 
-	if (className == "class Mario" && colEvent.direction == Direction::DOWN && this->_isTouched == false)
+	if (className == "class Mario" && this->name != "soft brick" && colEvent.direction == Direction::DOWN && this->_isTouched == false)
 	{
 		this->_velocity = VECTOR2D(0.0f, BRICK_BOUND_SPEED);
 		this->_acceleration = VECTOR2D(0.0f, -BRICK_GRAVITY);
@@ -95,5 +99,12 @@ Brick* Brick::CreateLeafBrick(VECTOR2D position)
 {
 	Brick* obj = new Brick(new Leaf(position), position);
 	obj->name = "leaf brick";
+	return obj;
+}
+
+Brick* Brick::CreateSoftBrick(VECTOR2D position)
+{
+	Brick* obj = new Brick(new Coin(position), position);
+	obj->name = "soft brick";
 	return obj;
 }

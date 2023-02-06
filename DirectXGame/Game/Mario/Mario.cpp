@@ -20,10 +20,20 @@ void Mario::Update(float deltaTime)
 		return;
 	}
 
-	Renderable* r = GetRenderable();
-	if (r != nullptr)
+	if (GetState() == MARIO_IDLE && this->_isGrounded == true)
 	{
-		r->Update(deltaTime);
+		if (IsKeyDown(BTN_LEFT))
+		{
+			Run(F_LEFT);
+		}
+		else if (IsKeyDown(BTN_RIGHT))
+		{
+			Run(F_RIGHT);
+		}
+		else
+		{
+			Idle();
+		}
 	}
 
 	if (IsKeyDown(BTN_A))
@@ -58,7 +68,7 @@ void Mario::Update(float deltaTime)
 		this->_direction = DIRECTION::RIGHT;
 	}
 	Translate(this->_velocity * deltaTime / 1000);
-
+	//DebugOut(L"[INFO] Mario vel.x: %f !\n", this->velocity.x);
 	if (IsKeyDown(BTN_B) && GetState("hold") == MARIO_HOLD)
 	{
 		Hold();
@@ -267,18 +277,7 @@ void Mario::Grounding(float time)
 	GameObject::Grounding(time);
 	if (GetState() == MARIO_JUMP)
 	{
-		if (IsKeyDown(BTN_LEFT))
-		{
-			Run(F_LEFT);
-		}
-		else if (IsKeyDown(BTN_RIGHT))
-		{
-			Run(F_RIGHT);
-		}
-		else
-		{
-			Idle();
-		}
+		Idle();
 	}
 }
 
@@ -431,6 +430,14 @@ void Mario::OnCollisionWithPlatform(CollisionEvent colEvent)
 		this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
 		this->_acceleration = VECTOR2D(0.0f, this->_acceleration.y);
 	}
+	else if (colEvent.direction == Direction::UP)
+	{
+		VECTOR2D pos = this->position;
+		pos.x += this->_velocity.x * colEvent.entryTime;
+		this->position = pos;
+		this->velocity = VECTOR2D(0.0f, 0.0f);
+	}
+
 }
 
 void Mario::OnCollisionWithBrick(CollisionEvent colEvent)
@@ -439,10 +446,20 @@ void Mario::OnCollisionWithBrick(CollisionEvent colEvent)
 	{
 		Grounding(colEvent.entryTime);
 	}
+	else if (colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT)
+	{
+		VECTOR2D pos = this->position;
+		pos.x += this->_velocity.x * colEvent.entryTime;
+		this->position = pos;
+		this->velocity = VECTOR2D(0.0f, 0.0f);
+		DebugOut(L"[INFO] Mario collide with brick pos.x: %f !\n", this->position.x);
+	}
 	else
 	{
-		this->_position += this->_velocity * colEvent.entryTime;
-		this->_velocity = VECTOR2D(0.0f, this->_velocity.y);
+		VECTOR2D pos = this->position;
+		pos.y = this->velocity.y * colEvent.entryTime;
+		this->_velocity = VECTOR2D(this->_velocity.x, 0.0f);
+		this->_acceleration = VECTOR2D(this->_acceleration.x, 0.0f);
 	}
 }
 
@@ -553,4 +570,56 @@ bool Mario::IsKeyDown(int keyCode)
 {
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	return keyboard->IsKeyDown(keyCode);
+}
+
+void Mario::BlockLeft()
+{
+	this->_blockMask |= 8;
+}
+
+void Mario::BlockUp()
+{
+	this->_blockMask |= 4;
+}
+
+void Mario::BlockRight()
+{
+	this->_blockMask |= 2;
+}
+
+void Mario::BlockDown()
+{
+	this->_blockMask |= 1;
+}
+
+void Mario::CheckDirectionBlocking()
+{
+	VECTOR2D v = this->velocity;
+	// block left
+	if ((this->_blockMask & 8) == 8 && v.x < 0) 
+	{
+		v.x = 0;
+		this->velocity = v;
+	}
+
+	// block up
+	if ((this->_blockMask & 4) == 4 && v.y > 0)
+	{
+		v.y = 0;
+		this->velocity = v;
+	}
+
+	// block right
+	if ((this->_blockMask & 2) == 2 && v.x > 0)
+	{
+		v.x = 0;
+		this->velocity = v;
+	}
+
+	// block down
+	if ((this->_blockMask & 1) == 1 && v.y < 0)
+	{
+		v.y = 0;
+		this->velocity = v;
+	}
 }

@@ -28,8 +28,6 @@ public:
 	virtual void OnKeyUp(int keyCode);
 	virtual void OnKeyDown(int keyCode);
 
-	virtual void IsBlocking();
-
 	virtual void SetState(UINT stateValue, string stateName = "default");
 	virtual UINT GetState(string stateName = "default");
 
@@ -86,10 +84,6 @@ public:
 	GET(isGrounded) { return this->_isGrounded; }
 	SET(isGrounded) { this->_isGrounded = value; }
 
-	PROPERTY(bool, isBlocking);
-	GET(isBlocking) { return this->_isBlocking; }
-	SET(isBlocking) { this->_isBlocking = value; }
-
 	PROPERTY(bool, isFlipped);
 	GET(isFlipped) { return this->_isFlipped; }
 	SET(isFlipped) { this->_isFlipped = value; }
@@ -105,7 +99,6 @@ protected:
 	float _height = 0.0f;
 	bool _isActive = true;
 	bool _isGrounded = false;
-	bool _isBlocking = false;
 	map<string, UINT> _states;
 
 #pragma region Transform
