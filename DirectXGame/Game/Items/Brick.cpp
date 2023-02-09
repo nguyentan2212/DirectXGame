@@ -11,10 +11,10 @@ Brick::Brick(GameObject* content, VECTOR2D position): GameObject()
 {
 	this->_position = position;
 	this->_beginY = position.y;
-	this->_isTouched = false;
 	this->_name = "brick";
 	this->_height = BRICK_SIZE;
 	this->_width = BRICK_SIZE;
+	SetState(BRICK_UNTOUCHED);
 
 	ObjectPool* pool = ObjectPool::GetInstance();
 	this->_content = content;
@@ -32,7 +32,7 @@ void Brick::Update(float deltaTime)
 	this->_content->Update(deltaTime);
 	CollisionManager::Processing(this, deltaTime);
 	GameObject::Update(deltaTime);
-	if (this->_position.y < this->_beginY && this->_isTouched)
+	if (this->_position.y < this->_beginY && GetState() == BRICK_TOUCHED)
 	{
 		this->_position = VECTOR2D(this->_position.x, this->_beginY);
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
@@ -46,7 +46,7 @@ void Brick::Update(float deltaTime)
 
 Renderable* Brick::GetRenderable()
 {
-	if (this->_isTouched)
+	if (GetState() == BRICK_TOUCHED)
 	{
 		SpriteService* sprites = SpriteService::GetInstance();
 		return sprites->GetSprite("mics52");
@@ -64,21 +64,21 @@ void Brick::OnCollision(CollisionEvent colEvent)
 {
 	string className = typeid(*colEvent.collisionObj).name();
 
-	if (className == "class Mario" && this->name != "soft brick" && colEvent.direction == Direction::DOWN && this->_isTouched == false)
+	if (className == "class Mario" && this->name != "soft brick" && colEvent.direction == Direction::DOWN && GetState() == BRICK_UNTOUCHED)
 	{
 		this->_velocity = VECTOR2D(0.0f, BRICK_BOUND_SPEED);
 		this->_acceleration = VECTOR2D(0.0f, -BRICK_GRAVITY);
-		this->_isTouched = true;
+		SetState(BRICK_TOUCHED);
 		if (this->_content->name == "score coin")
 		{
 			this->_content->isActive = true;
 		}
 	}
-	else if (className == "class KoopaParaTroopa" && this->_isTouched == false &&
+	else if (className == "class KoopaParaTroopa" && GetState() == BRICK_UNTOUCHED &&
 		(colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT)
 		&& this->_content->name == "leaf")
 	{
-		this->_isTouched = true;
+		SetState(BRICK_TOUCHED);
 		this->_content->isActive = true;
 	}
 }

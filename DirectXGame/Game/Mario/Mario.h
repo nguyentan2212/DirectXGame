@@ -47,13 +47,8 @@ private:
 
 	GameObject* _holdObj = nullptr;
 	float _kickTime = KICK_TIME;
+	float _untouchableTime = UNTOUCHABLE_TIME;
 	UINT _blockMask;
-
-	void BlockLeft();
-	void BlockUp();
-	void BlockRight();
-	void BlockDown();
-	
-	void CheckDirectionBlocking();
+	string _preFigure;
 };
 

@@ -111,7 +111,7 @@ void CSceneOne::CreateMario(VECTOR2D position)
 	ObjectPool* pool = ObjectPool::GetInstance();
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(1950, 100);
+	mario->position = VECTOR2D(150, 70);
 	//mario->position = position;
 	pool->AddGameObject(mario);
 

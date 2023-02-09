@@ -88,7 +88,7 @@
       ]
     },
     {
-      "name": "super mario change figure small mario",
+      "name": "super mario untouchable small mario",
       "defaultTime": 100,
       "frames": [
         {
@@ -101,43 +101,22 @@
           "sprite": "small-mario/0"
         },
         {
-          "sprite": "super-mario/30"
+          "sprite": "super-mario/0"
         },
         {
           "sprite": "small-mario/0"
         },
         {
-          "sprite": "super-mario/30"
-        },
-        {
-          "sprite": "small-mario/0"
+          "sprite": "super-mario/0"
         },
         {
           "sprite": "super-mario/30"
         },
         {
-          "sprite": "small-mario/0"
-        }
-      ]
-    },
-    {
-      "name": "super mario change figure raccoon mario",
-      "defaultTime": 200,
-      "frames": [
-        {
-          "sprite": "mics110"
+          "sprite": "super-mario/0"
         },
         {
-          "sprite": "mics108"
-        },
-        {
-          "sprite": "mics109"
-        },
-        {
-          "sprite": "mics110"
-        },
-        {
-          "sprite": "mics111"
+          "sprite": "super-mario/30"
         }
       ]
     }

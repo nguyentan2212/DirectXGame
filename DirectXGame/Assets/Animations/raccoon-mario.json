@@ -124,7 +124,28 @@
       ]
     },
     {
-      "name": "raccoon mario change figure small mario",
+      "name": "raccoon mario untouchable small mario",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "mics110"
+        },
+        {
+          "sprite": "mics108"
+        },
+        {
+          "sprite": "mics109"
+        },
+        {
+          "sprite": "mics110"
+        },
+        {
+          "sprite": "mics111"
+        }
+      ]
+    },
+    {
+      "name": "raccoon mario untouchable super mario",
       "defaultTime": 200,
       "frames": [
         {
