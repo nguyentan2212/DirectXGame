@@ -110,6 +110,7 @@ void KoopaParaTroopa::SetState(UINT stateValue, string stateName)
 Renderable* KoopaParaTroopa::GetRenderable()
 {
 	AnimationService* anis = AnimationService::GetInstance();
+	SpriteService* sprites = SpriteService::GetInstance();
 	string aniName = "koopa paratroopa ";
 
 	switch (GetState())
@@ -122,7 +123,7 @@ Renderable* KoopaParaTroopa::GetRenderable()
 		break;
 	case KOOPA_PARATROOPA_IS_HELD:
 	case KOOPA_PARATROOPA_STUN:
-		aniName += "stand";
+		return sprites->GetSprite("enemies/koopa-paratroopa/2");
 		break;
 	default:
 		break;

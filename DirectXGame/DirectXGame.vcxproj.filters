@@ -255,6 +255,9 @@
     <ClInclude Include="Game\Enemies\Enemies.h">
       <Filter>Game\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Enemies\KoopaTroopa.h">
+      <Filter>Game\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -356,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="Game\Items\Platform.cpp">
       <Filter>Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemies\KoopaTroopa.cpp">
+      <Filter>Game\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

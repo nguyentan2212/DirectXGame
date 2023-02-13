@@ -9,7 +9,6 @@
 #include "../../Core/ObjectPool.h"
 #include "../Items/Items.h"
 #include "../Enemies/Enemies.h"
-
 CSceneOne::CSceneOne(): Scene()
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
@@ -83,6 +82,21 @@ void CSceneOne::InitObjects(json config)
 			obj->height = item["height"].get<float>();
 			obj->name = item["name"].get<string>();
 		}
+		else if (item["class"].get<string>() == "koopa troopa")
+		{
+			string name = item["name"].get<string>();
+			if (name.find("giant") != string::npos)
+			{
+				obj = new KoopaTroopa(true);
+			}
+			else
+			{
+				obj = new KoopaTroopa(false);
+			}
+			obj->width = item["width"].get<float>();
+			obj->height = item["height"].get<float>();
+			obj->name = item["name"].get<string>();
+		}
 		else
 		{
 			obj = new GameObject();
@@ -111,7 +125,7 @@ void CSceneOne::CreateMario(VECTOR2D position)
 	ObjectPool* pool = ObjectPool::GetInstance();
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(150, 70);
+	mario->position = VECTOR2D(1380, 70);
 	//mario->position = position;
 	pool->AddGameObject(mario);
 

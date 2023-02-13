@@ -27,7 +27,7 @@ private:
 	float _tempY = 0.0f;
 	Renderable* GetRenderable() override;
 	Head* _head = nullptr;
-
+	
 	void Stun();
 };
 

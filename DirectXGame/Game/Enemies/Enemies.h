@@ -4,3 +4,4 @@
 #include "ParaGoomba.h"
 #include "KoopaParaTroopa.h"
 #include "VenusFireTrap.h"
+#include "KoopaTroopa.h"

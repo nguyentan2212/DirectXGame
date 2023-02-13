@@ -124,15 +124,6 @@
       ]
     },
     {
-      "name": "koopa paratroopa stand",
-      "defaultTime": 200,
-      "frames": [
-        {
-          "sprite": "enemies/koopa-paratroopa/2"
-        }
-      ]
-    },
-    {
       "name": "paragoomba walk",
       "defaultTime": 400,
       "frames": [
@@ -141,6 +132,33 @@
         },
         {
           "sprite": "enemies/paragoomba/1"
+        }
+      ]
+    },
+    {
+      "name": "koopa troopa walk",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "enemies/koopa-troopa/0"
+        },
+        {
+          "sprite": "enemies/koopa-troopa/1"
+        }
+      ]
+    },
+    {
+      "name": "koopa troopa run",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "enemies/koopa-troopa/4"
+        },
+        {
+          "sprite": "enemies/koopa-troopa/5"
+        },
+        {
+          "sprite": "enemies/koopa-troopa/6"
         }
       ]
     },
