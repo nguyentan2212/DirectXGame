@@ -24,6 +24,7 @@ CSceneOne::CSceneOne(): Scene()
 void CSceneOne::InitObjects(json config)
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
+	int count = 0;
 	for (json item : config)
 	{
 		VECTOR2D position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
@@ -85,8 +86,9 @@ void CSceneOne::InitObjects(json config)
 		else if (item["class"].get<string>() == "koopa troopa")
 		{
 			string name = item["name"].get<string>();
-			if (name.find("giant") != string::npos)
+			if (name.find("giant") != string::npos && count < 1)
 			{
+				count++;
 				obj = new KoopaTroopa(true);
 			}
 			else
@@ -125,7 +127,7 @@ void CSceneOne::CreateMario(VECTOR2D position)
 	ObjectPool* pool = ObjectPool::GetInstance();
 
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(1380, 70);
+	mario->position = VECTOR2D(800, 70);
 	//mario->position = position;
 	pool->AddGameObject(mario);
 

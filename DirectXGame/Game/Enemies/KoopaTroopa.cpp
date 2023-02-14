@@ -18,6 +18,16 @@ KoopaTroopa::KoopaTroopa(bool hasWing) : GameObject()
 
 void KoopaTroopa::Update(float deltaTime)
 {
+	if (this->_isActive == false || GetState() == KOOPA_TROOPA_IS_HELD)
+	{
+		return;
+	}
+
+	if (GetState() == KOOPA_TROOPA_STUN && this->_isGrounded)
+	{
+		return;
+	}
+
 	if (this->_head == nullptr)
 	{
 		this->_head = new Head(KOOPA_TROOPA_WIDTH * 0.5, KOOPA_TROOPA_HEIGHT);
@@ -85,8 +95,11 @@ void KoopaTroopa::Render()
 		return;
 	}
 	_isFlipped = this->_direction == DIRECTION::LEFT ? false : true;
+
 	if (GetState("wing") == KOOPA_TROOPA_HAS_WING)
 	{
+		UINT TEMP = GetState("wing");
+		TEMP = GetState();
 		this->_wing->isFlipped = this->_isFlipped;
 		this->_wing->Render();
 	}
@@ -133,6 +146,22 @@ void KoopaTroopa::OnCollision(CollisionEvent colEvent)
 
 void KoopaTroopa::SetState(UINT stateValue, string stateName)
 {
+	if (stateValue == KOOPA_TROOPA_STUN && stateName == "default")
+	{
+		Stun();
+	}
+	else if (stateValue == KOOPA_TROOPA_RUN && stateName == "default")
+	{
+		if (this->direction == DIRECTION::RIGHT)
+		{
+			this->velocity = VECTOR2D(KOOPA_TROOPA_RUN_SPEED_X, 0.0f);
+		}
+		else
+		{
+			this->velocity = VECTOR2D(-KOOPA_TROOPA_RUN_SPEED_X, 0.0f);
+		}
+	}
+
 	this->_states[stateName] = stateValue;
 }
 
@@ -159,10 +188,6 @@ Renderable* KoopaTroopa::GetRenderable()
 		break;
 	}
 	return anis->GetAnimation(aniName);
-}
-
-void KoopaTroopa::Jump(float speed)
-{
 }
 
 void KoopaTroopa::ToggleHead()
@@ -196,4 +221,19 @@ void KoopaTroopa::Jump()
 	vec.y = KOOPA_TROOPA_JUMP_SPEED;
 	this->velocity = vec;
 	this->acceleration = VECTOR2D(0.0f, 0.0f);
+}
+
+void KoopaTroopa::Stun()
+{
+	SetState(KOOPA_TROOPA_LOST_WING,"wing");
+	this->velocity = VECTOR2D(0.0f, 0.0f);
+	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	this->_height = KOOPA_TROOPA_WIDTH;
+	VECTOR2D pos = this->_position;
+	pos.y -= (KOOPA_TROOPA_HEIGHT - KOOPA_TROOPA_WIDTH) / 2;
+	this->position = pos;
+	if (this->_head != nullptr)
+	{
+		this->_head->isActive = false;
+	}
 }

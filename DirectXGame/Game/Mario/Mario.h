@@ -42,12 +42,14 @@ private:
 	void OnCollisionWithGoomba(CollisionEvent colEvent);
 	void OnCollisionWithParaGoomba(CollisionEvent colEvent);
 	void OnCollisionWithKoopaParaTroopa(CollisionEvent colEvent);
+	void OnCollisionWithKoopaTroopa(CollisionEvent colEvent);
 
 	bool IsKeyDown(int keyCode);
 
 	GameObject* _holdObj = nullptr;
 	float _kickTime = KICK_TIME;
 	float _untouchableTime = UNTOUCHABLE_TIME;
+	float _flyingTime;
 	UINT _blockMask;
 	string _preFigure;
 };

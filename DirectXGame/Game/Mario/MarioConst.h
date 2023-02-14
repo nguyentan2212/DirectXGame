@@ -4,13 +4,16 @@
 #include <dinput.h>
 
 constexpr float MARIO_GRAVITY =					120;
-constexpr float MARIO_WEEK_GRAVITY =			80;
+constexpr float MARIO_WEEK_GRAVITY =			70;
+constexpr float MARIO_EXTRA_WEEK_GRAVITY =		50;
+
 
 constexpr float F_LEFT =						-1;
 constexpr float F_RIGHT =						1;
 
 constexpr float KICK_TIME =						300.0f;
 constexpr float UNTOUCHABLE_TIME =				1000.0f;
+constexpr float MARIO_FLYING_TIME =				4000.0f;
 
 constexpr float MARIO_RUN_LOW_SPEED =			60;
 constexpr float MARIO_X_ACCE =					80;
