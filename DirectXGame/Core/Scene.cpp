@@ -9,10 +9,16 @@
 
 Scene::Scene(string configPath)
 {
-	fstream file(configPath);
+	/*fstream file(configPath);
 	json config = json::parse(file);
 	InitTilemap(config);
 	InitObjects(config["objects"]);
+
+	ObjectPool* pool = ObjectPool::GetInstance();
+	for (GameObject* obj : this->_objs)
+	{
+		pool->AddGameObject(obj);
+	}*/
 }
 
 Scene::~Scene()
@@ -29,8 +35,7 @@ void Scene::Update(float deltaTime)
 	keyboard->Processing();
 
 	ObjectPool* pool = ObjectPool::GetInstance();
-	vector<GameObject*> objs = pool->GetAllGameObject();
-
+	vector<GameObject*> objs = pool->GetAllGameObject(true);
 	for (GameObject* obj : objs)
 	{
 		obj->Update(deltaTime);
@@ -43,8 +48,7 @@ void Scene::Render()
 {
 	RenderTileMap();
 	ObjectPool* pool = ObjectPool::GetInstance();
-	vector<GameObject*> objs = pool->GetAllGameObject();
-	
+	vector<GameObject*> objs = pool->GetAllGameObject(true);
 	for (GameObject* obj : objs)
 	{
 		obj->Render();
@@ -54,11 +58,15 @@ void Scene::Render()
 void Scene::DrawBoundingBox()
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
-	vector<GameObject*> objs = pool->GetAllGameObject();
+	vector<GameObject*> objs = pool->GetAllGameObject(true);
 	for (GameObject* obj : objs)
 	{
 		obj->DrawBoundingBox();
 	}
+}
+
+void Scene::OnChanged()
+{
 }
 
 void Scene::InitTilemap(json config)
@@ -110,7 +118,6 @@ void Scene::InitTilemap(json config)
 
 void Scene::InitObjects(json config)
 {
-	ObjectPool* pool = ObjectPool::GetInstance();
 	for (json item : config)
 	{
 		GameObject* obj = new GameObject();
@@ -119,7 +126,7 @@ void Scene::InitObjects(json config)
 		obj->position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
 		obj->name = item["name"].get<string>();
 		obj->showBoundingBox = true;
-		pool->AddGameObject(obj);
+		this->_objs.push_back(obj);
 	}
 }
 

@@ -47,7 +47,7 @@
     },
     {
       "name": "coin",
-      "defaultTime": 2000,
+      "defaultTime": 200,
       "frames": [
         {
           "sprite": "mics10"
@@ -77,7 +77,7 @@
     },
     {
       "name": "score coin",
-      "defaultTime": 800,
+      "defaultTime": 400,
       "frames": [
         {
           "sprite": "mics10"

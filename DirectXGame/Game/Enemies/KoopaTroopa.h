@@ -10,12 +10,14 @@ constexpr float KOOPA_TROOPA_JUMP_SPEED = 120;
 constexpr float KOOPA_TROOPA_GRAVITY = 120;
 constexpr float KOOPA_TROOPA_RUN_DURATION = 2000;
 constexpr float KOOPA_TROOPA_REMOVE_HEAD_DISTANCE = 200;
+constexpr float KOOPA_TROOPA_JUMP_DEFLECT_SPEED = 60;
 
 constexpr UINT KOOPA_TROOPA_WALK = 0;
 constexpr UINT KOOPA_TROOPA_RUN = 1;
 constexpr UINT KOOPA_TROOPA_STUN = 2;
 constexpr UINT KOOPA_TROOPA_IS_HELD = 3;
 constexpr UINT KOOPA_TROOPA_JUMP = 4;
+constexpr UINT KOOPA_TROOPA_DEATH = 5;
 
 constexpr UINT KOOPA_TROOPA_HAS_WING = 0;
 constexpr UINT KOOPA_TROOPA_LOST_WING = 1;
@@ -35,6 +37,7 @@ private:
 	Renderable* GetRenderable() override;
 	Head* _head = nullptr;
 	float _runDuration = KOOPA_TROOPA_RUN_DURATION;
+	float _gravity = KOOPA_TROOPA_GRAVITY;
 
 	GameObject* _score = nullptr;
 	GameObject* _wing = nullptr;
@@ -42,5 +45,6 @@ private:
 	void ToggleHead();
 	void Jump();
 	void Stun();
+	void Death();
 };
 

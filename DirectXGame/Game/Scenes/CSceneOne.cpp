@@ -1,30 +1,34 @@
 #include "CSceneOne.h"
 #include <fstream>
 #include "CSceneWorldMap.h"
+#include "CSceneHidden.h"
 #include "../Mario/Mario.h"
-#include "../GUI.h"
 #include "../../Core/KeyboardHandler.h"
 #include "../../Core/Camera.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
 #include "../Items/Items.h"
 #include "../Enemies/Enemies.h"
+
 CSceneOne::CSceneOne(): Scene()
 {
-	ObjectPool* pool = ObjectPool::GetInstance();
-	pool->Clear();
-
 	string configPath = SCENE_ONE;
+	this->_sceneId = SCENE_ONE_ID;
 	fstream file(configPath);
 	json config = json::parse(file);
 	InitTilemap(config);
 	InitObjects(config["objects"]);
+
+	ObjectPool* pool = ObjectPool::GetInstance();
+	pool->Clear();
+	for (GameObject* obj : this->_objs)
+	{
+		pool->AddGameObject(obj);
+	}
 }
 
 void CSceneOne::InitObjects(json config)
 {
-	ObjectPool* pool = ObjectPool::GetInstance();
-	int count = 0;
 	for (json item : config)
 	{
 		VECTOR2D position = VECTOR2D(item["x"], (float)this->_height * this->_tileHeight - item["y"]) - VECTOR2D(-item["width"].get<float>(), item["height"]) / 2.0f;
@@ -86,9 +90,8 @@ void CSceneOne::InitObjects(json config)
 		else if (item["class"].get<string>() == "koopa troopa")
 		{
 			string name = item["name"].get<string>();
-			if (name.find("giant") != string::npos && count < 1)
+			if (name.find("giant") != string::npos)
 			{
-				count++;
 				obj = new KoopaTroopa(true);
 			}
 			else
@@ -108,7 +111,7 @@ void CSceneOne::InitObjects(json config)
 		}
 		obj->position = position;
 		obj->showBoundingBox = true;
-		pool->AddGameObject(obj);
+		this->_objs.push_back(obj);
 	}
 }
 
@@ -116,30 +119,40 @@ void CSceneOne::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
-	if (keyboard->IsKeyDown(DIK_LCONTROL) && keyboard->IsKeyDown(DIK_0))
+	if (keyboard->IsKeyDown(DIK_LCONTROL) && keyboard->IsKeyDown(DIK_8))
 	{
-		this->_context->TransitionTo(new CSceneWorldMap());
+		this->_context->TransitionTo(SCENE_HIDDEN_ID);
 	}
+}
+
+void CSceneOne::OnChanged()
+{
+	ObjectPool* pool = ObjectPool::GetInstance();
+	pool->Clear();
+	for (GameObject* obj : this->_objs)
+	{
+		pool->AddGameObject(obj);
+	}
+
+	Camera* camera = Camera::GetInstance();
+	GameObject* mario = pool->GetGameObjectWithClass("Mario");
+	camera->Follow(mario);
 }
 
 void CSceneOne::CreateMario(VECTOR2D position)
 {
-	ObjectPool* pool = ObjectPool::GetInstance();
-
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(800, 70);
+	mario->position = VECTOR2D(650, 50);
 	//mario->position = position;
-	pool->AddGameObject(mario);
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	keyboard->AddListener(mario);
 
 	Camera* camera = Camera::GetInstance();
-	camera->Follow(mario);
+	
 	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
 	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
 
-	GUI* gui = new GUI();
-	mario->AddChildObject(gui);
-	pool->AddGameObject(gui);
+	camera->Follow(mario);
+	this->_objs.push_back(mario);
 }

@@ -151,6 +151,7 @@
     <None Include="Assets\Textures\super-mario.json" />
     <None Include="Assets\Textures\world-map-1.json" />
     <None Include="Assets\Textures\world-map-2.json" />
+    <None Include="Assets\Tilemaps\hidden-map.json" />
     <None Include="Assets\Tilemaps\stage-1.json" />
     <None Include="Assets\Tilemaps\world-map.json" />
     <None Include="packages.config" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Game\Items\Platform.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioConst.h" />
+    <ClInclude Include="Game\Scenes\CSceneHidden.h" />
     <ClInclude Include="Game\Scenes\CSceneOne.h" />
     <ClInclude Include="Game\Scenes\CSceneWorldMap.h" />
     <ClInclude Include="Graphic\Animation.h" />
@@ -221,6 +223,7 @@
     <ClCompile Include="Game\Items\Mushroom.cpp" />
     <ClCompile Include="Game\Items\Platform.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
+    <ClCompile Include="Game\Scenes\CSceneHidden.cpp" />
     <ClCompile Include="Game\Scenes\CSceneOne.cpp" />
     <ClCompile Include="Game\Scenes\CSceneWorldMap.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />

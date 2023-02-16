@@ -71,7 +71,7 @@ void KoopaTroopa::Update(float deltaTime)
 			this->_head->isActive = false;
 		}
 	}
-	this->_acceleration = VECTOR2D(0.0f, -KOOPA_TROOPA_GRAVITY);
+	this->_acceleration = VECTOR2D(0.0f, -this->_gravity);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 
 	this->_isGrounded = false;
@@ -112,6 +112,10 @@ void KoopaTroopa::Render()
 
 void KoopaTroopa::OnCollision(CollisionEvent colEvent)
 {
+	if (this->_isBlocking)
+	{
+		return;
+	}
 	string objName = colEvent.collisionObj->name;
 	string className = typeid(*colEvent.collisionObj).name();
 
@@ -140,7 +144,6 @@ void KoopaTroopa::OnCollision(CollisionEvent colEvent)
 		{
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
-		
 	}
 }
 
@@ -161,7 +164,10 @@ void KoopaTroopa::SetState(UINT stateValue, string stateName)
 			this->velocity = VECTOR2D(-KOOPA_TROOPA_RUN_SPEED_X, 0.0f);
 		}
 	}
-
+	else if (stateValue == KOOPA_TROOPA_DEATH && stateName == "default")
+	{
+		Death();
+	}
 	this->_states[stateName] = stateValue;
 }
 
@@ -184,6 +190,8 @@ Renderable* KoopaTroopa::GetRenderable()
 	case KOOPA_TROOPA_STUN:
 		return sprites->GetSprite("enemies/koopa-troopa/2");
 		break;
+	case KOOPA_TROOPA_DEATH:
+		return sprites->GetSprite("enemies/koopa-troopa/3");
 	default:
 		break;
 	}
@@ -236,4 +244,14 @@ void KoopaTroopa::Stun()
 	{
 		this->_head->isActive = false;
 	}
+}
+
+void KoopaTroopa::Death()
+{
+	SetState(KOOPA_TROOPA_DEATH);
+	this->_velocity = VECTOR2D(0.0f, KOOPA_TROOPA_JUMP_DEFLECT_SPEED);
+	this->_gravity = KOOPA_TROOPA_GRAVITY;
+	/*this->_score->position = position + VECTOR2D(0.0f, KOOPA_TROOPA_HEIGHT);
+	this->_score->isActive = true;*/
+	this->_isBlocking = true;
 }

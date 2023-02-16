@@ -11,10 +11,12 @@ constexpr float PARAGOOMBA_SUPER_JUMP_SPEED = 70.0;
 constexpr float PARAGOOMBA_DEATH_DURATION = 1500;
 constexpr float PARAGOOMBA_RUN_DURATION = 3000;
 constexpr float PARAGOOMBA_SCORE_DURATION = 1500;
+constexpr float PARAGOOMBA_JUMP_DEFLECT_SPEED = 60;
 // state
 constexpr UINT PARAGOOMBA_HAS_WING = 0;
 constexpr UINT PARAGOOMBA_LOST_WING = 1;
-constexpr UINT PARAGOOMBA_DEATH = 2;
+constexpr UINT PARAGOOMBA_DEATH_BY_JUMP = 2;
+constexpr UINT PARAGOOMBA_DEATH_BY_ATTACK = 3;
 
 class ParaGoomba: public GameObject
 {
@@ -36,7 +38,7 @@ private:
 	float _deathDuration = PARAGOOMBA_DEATH_DURATION;
 	float _runDuration = PARAGOOMBA_RUN_DURATION;
 	float _scoreDuration = PARAGOOMBA_SCORE_DURATION;
-
+	float _gravity = PARAGOOMBA_GRAVITY;
 	void Jump(float speed);
 	void Death();
 };

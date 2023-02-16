@@ -101,18 +101,22 @@ void GameEngine::Run()
     }
 }
 
-void GameEngine::TransitionTo(Scene* scene)
+void GameEngine::AddScene(Scene* scene, UINT sceneId)
 {
+    this->_scenes[sceneId] = scene;
+    scene->context = this;
+}
+
+void GameEngine::TransitionTo(UINT sceneId)
+{
+    Scene* scene = this->_scenes[sceneId];
     if (scene == nullptr)
     {
         DebugOut((wchar_t*)L"[ERROR] Scene transition to NULL");
         return;
     }
-
-    if (this->_currentScene != nullptr)
-        delete this->_currentScene;
     this->_currentScene = scene;
-    this->_currentScene->context = this;
+    this->_currentScene->OnChanged();
 }
 
 void GameEngine::Update(float deltaTime)

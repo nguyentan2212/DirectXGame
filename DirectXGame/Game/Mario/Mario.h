@@ -2,7 +2,7 @@
 #include <dinput.h>
 #include "MarioConst.h"
 #include "../../Core/GameObject.h"
-
+#include "../GUI.h"
 
 class Mario: public GameObject
 {
@@ -35,6 +35,7 @@ private:
 	void Untouchable();
 	void Hold();
 	void Kick();
+	void Attack();
 
 	void OnCollisionWithPlatform(CollisionEvent colEvent);
 	void OnCollisionWithBrick(CollisionEvent colEvent);
@@ -47,9 +48,11 @@ private:
 	bool IsKeyDown(int keyCode);
 
 	GameObject* _holdObj = nullptr;
+	GUI* _gui;
 	float _kickTime = KICK_TIME;
 	float _untouchableTime = UNTOUCHABLE_TIME;
 	float _flyingTime;
+	float _attackTime;
 	UINT _blockMask;
 	string _preFigure;
 };

@@ -167,7 +167,7 @@
     },
     {
       "name": "raccoon mario attack",
-      "defaultTime": 200,
+      "defaultTime": 100,
       "frames": [
         {
           "sprite": "raccoon-mario/14"

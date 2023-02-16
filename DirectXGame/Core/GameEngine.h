@@ -2,6 +2,7 @@
 #include <vector>
 #include <Windows.h>
 #include <string>
+#include <map>
 #include "Timer.h"
 #include "GameObject.h"
 
@@ -20,7 +21,9 @@ public:
 	static GameEngine* GetInstance();
 	void Init(HINSTANCE hInstance, int nCmdShow);
 
-	void TransitionTo(Scene* scene);
+	void AddScene(Scene* scene, UINT sceneId);
+	void TransitionTo(UINT sceneId);
+
 	void Run();
 private:
 	GameEngine();
@@ -40,6 +43,7 @@ private:
 	float _fps = FPS;
 
 	Scene* _currentScene;
+	map<UINT, Scene*> _scenes;
 
 	static GameEngine* _instance;
 };

@@ -82,30 +82,29 @@ void VenusFireTrap::OnCollision(CollisionEvent colEvent)
 
 void VenusFireTrap::SetState(UINT stateValue, string stateName)
 {
-	if (stateValue == GetState())
+	if (stateName == "default")
 	{
-		return;
-	}
-	switch (stateValue)
-	{
-	case FIRE_TRAP_SLEEP:
-		if (GetState() != FIRE_TRAP_ATTACK)
+		switch (stateValue)
 		{
-			return;
+		case FIRE_TRAP_SLEEP:
+			if (GetState() != FIRE_TRAP_ATTACK)
+			{
+				return;
+			}
+			Sleep();
+			break;
+		case FIRE_TRAP_AWAKE:
+			Awake();
+			break;
+		case FIRE_TRAP_ATTACK:
+			if (GetState() != FIRE_TRAP_AWAKE)
+			{
+				break;
+			}
+			break;
+		default:
+			break;
 		}
-		Sleep();
-		break;
-	case FIRE_TRAP_AWAKE:
-		Awake();
-		break;
-	case FIRE_TRAP_ATTACK:
-		if (GetState() != FIRE_TRAP_AWAKE)
-		{
-			return;
-		}
-		break;
-	default:
-		return;
 	}
 	this->_states[stateName] = stateValue;
 }
@@ -159,6 +158,7 @@ void VenusFireTrap::Attack()
 	VECTOR2D pos = this->position + VECTOR2D(0.0f, FIRE_TRAP_HEIGHT * 0.5f);
 
 	FireBall* fire = new FireBall(pos, FIRE_BALL_MAX_DISTANCE);
+
 	VECTOR2D v = this->_attackTarget->position - pos;
 	D3DXVec2Normalize(&v, &v);
 	fire->velocity = v * FIRE_BALL_SPEED;

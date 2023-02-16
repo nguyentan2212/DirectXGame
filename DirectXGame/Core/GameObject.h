@@ -87,6 +87,10 @@ public:
 	PROPERTY(bool, isFlipped);
 	GET(isFlipped) { return this->_isFlipped; }
 	SET(isFlipped) { this->_isFlipped = value; }
+
+	PROPERTY(bool, isBlocking);
+	GET(isBlocking) { return this->_isBlocking; }
+	SET(isBlocking) { this->_isBlocking = value; }
 #pragma endregion
 
 protected:
@@ -100,6 +104,7 @@ protected:
 	bool _isActive = true;
 	bool _isGrounded = false;
 	map<string, UINT> _states;
+	bool _isBlocking = false;
 
 #pragma region Transform
 	VECTOR2D _position;

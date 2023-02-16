@@ -18,8 +18,5 @@ void CSceneWorldMap::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
-	if (keyboard->IsKeyDown(DIK_LCONTROL) && keyboard->IsKeyDown(DIK_1))
-	{
-		this->_context->TransitionTo(new CSceneOne());
-	}
+	
 }

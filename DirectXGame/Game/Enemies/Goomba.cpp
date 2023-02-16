@@ -3,6 +3,7 @@
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
+#include "../../Game/Mario/MarioConst.h"
 
 Goomba::Goomba(): GameObject()
 {
@@ -27,7 +28,7 @@ void Goomba::Update(float deltaTime)
 		return;
 	}
 
-	if (GetState() == GOOMBA_DEATH)
+	if (GetState() == GOOMBA_DEATH_BY_JUMP || GetState() == GOOMBA_DEATH_BY_ATTACK)
 	{
 		if (this->_deathDuration > 0)
 		{
@@ -40,7 +41,7 @@ void Goomba::Update(float deltaTime)
 		}
 	}
 
-	this->_acceleration = VECTOR2D(0.0f, -GOOMBA_GRAVITY);
+	this->_acceleration = VECTOR2D(0.0f, -this->_gravity);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 
 	this->_isGrounded = false;
@@ -50,8 +51,11 @@ void Goomba::Update(float deltaTime)
 
 void Goomba::OnCollision(CollisionEvent colEvent)
 {
+	if (this->_isBlocking)
+	{
+		return;
+	}
 	string objName = colEvent.collisionObj->name;
-
 	string className = typeid(*colEvent.collisionObj).name();
 	if (className == "class Platform" || className == "class Brick")
 	{
@@ -64,15 +68,22 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
 	}
-	else if (objName == "mario" && colEvent.direction == Direction::UP)
+	else if (objName == "mario")
 	{
-		SetState(GOOMBA_DEATH);
+		if (colEvent.direction == Direction::UP)
+		{
+			SetState(GOOMBA_DEATH_BY_JUMP);
+		}
+		else if (colEvent.collisionObj->GetState() == MARIO_ATTACK)
+		{
+			SetState(GOOMBA_DEATH_BY_ATTACK);
+		}
 	}
 }
 
 void Goomba::SetState(UINT stateValue, string stateName)
 {
-	if (GetState() == GOOMBA_DEATH)
+	if (GetState() == GOOMBA_DEATH_BY_JUMP || GetState() == GOOMBA_DEATH_BY_ATTACK)
 	{
 		return;
 	}
@@ -81,21 +92,27 @@ void Goomba::SetState(UINT stateValue, string stateName)
 	{
 	case GOOMBA_WALK:
 		break;
-	case GOOMBA_DEATH:
+	case GOOMBA_DEATH_BY_JUMP:
+	case GOOMBA_DEATH_BY_ATTACK:
 		Death();
 		break;
 	default:
-		return;
+		break;
 	}
 	this->_states[stateName] = stateValue;
 }
 
 Renderable* Goomba::GetRenderable()
 {
-	if (GetState() == GOOMBA_DEATH)
+	if (GetState() == GOOMBA_DEATH_BY_JUMP)
 	{
 		SpriteService* sprites = SpriteService::GetInstance();
 		return sprites->GetSprite("enemies/goomba/2");
+	}
+	if (GetState() == GOOMBA_DEATH_BY_ATTACK)
+	{
+		SpriteService* sprites = SpriteService::GetInstance();
+		return sprites->GetSprite("enemies/goomba/3");
 	}
 
 	AnimationService* anis = AnimationService::GetInstance();
@@ -104,10 +121,19 @@ Renderable* Goomba::GetRenderable()
 
 void Goomba::Death()
 {
-	this->_velocity = VECTOR2D(0.0f, 0.0f);
-	this->_acceleration = VECTOR2D(0.0f, 0.0f);
-	this->_height = GOOMBA_DEATH_HEIGHT;
-	this->_position = this->_position - VECTOR2D(0.0f, GOOMBA_SIZE - GOOMBA_DEATH_HEIGHT) / 2.0f;
+	if (GetState() == GOOMBA_DEATH_BY_JUMP)
+	{
+		this->_velocity = VECTOR2D(0.0f, 0.0f);
+		this->_gravity = 0;
+		this->_height = GOOMBA_DEATH_HEIGHT;
+		this->_position = this->_position - VECTOR2D(0.0f, GOOMBA_SIZE - GOOMBA_DEATH_HEIGHT) / 2.0f;
+	}
+	else
+	{
+		this->_velocity = VECTOR2D(0.0f, GOOMBA_JUMP_DEFLECT_SPEED);
+		this->_gravity = GOOMBA_GRAVITY;
+	}
 	this->_score->position = position + VECTOR2D(0.0f, GOOMBA_SIZE);
 	this->_score->isActive = true;
+	this->_isBlocking = true;
 }

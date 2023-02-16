@@ -14,6 +14,7 @@ constexpr float F_RIGHT =						1;
 constexpr float KICK_TIME =						300.0f;
 constexpr float UNTOUCHABLE_TIME =				1000.0f;
 constexpr float MARIO_FLYING_TIME =				4000.0f;
+constexpr float MARIO_ATTACK_TIME =				600.0f;
 
 constexpr float MARIO_RUN_LOW_SPEED =			60;
 constexpr float MARIO_X_ACCE =					80;

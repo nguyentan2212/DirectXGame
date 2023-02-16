@@ -18,6 +18,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual void DrawBoundingBox();
+	virtual void OnChanged();
 
 	W_PROPERTY(GameEngine*, context);
 	SET(context) { this->_context = value; }
@@ -29,10 +30,12 @@ protected:
 	int _height;
 	int _tileWidth;
 	int _tileHeight;
+	UINT _sceneId = 0;
 
 	vector<vector<Sprite*>> _tilemap;
 	vector<string> _tilesetNames;
 	vector<int> _tilesetFirstIds;
+	vector<GameObject*> _objs;
 
 	virtual void InitTilemap(json config);
 	virtual void InitObjects(json config);

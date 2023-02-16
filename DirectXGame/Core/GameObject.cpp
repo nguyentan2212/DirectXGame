@@ -95,7 +95,7 @@ UINT GameObject::GetState(string stateName)
 	{
 		return it->second;
 	}
-	DebugOut((wchar_t*)L"[ERROR] GameObject set to	WRONG STATE");
+	DebugOut((wchar_t*)L"[ERROR] GameObject set to WRONG STATE \n");
 	return -1;
 }
 

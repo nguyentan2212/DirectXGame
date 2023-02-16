@@ -2,6 +2,7 @@
 #include "../../Graphic/SpriteService.h"
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
+#include "../Mario/MarioConst.h"
 
 ParaGoomba::ParaGoomba(): GameObject()
 {
@@ -42,7 +43,7 @@ void ParaGoomba::Update(float deltaTime)
 		return;
 	}
 
-	if (GetState() == PARAGOOMBA_DEATH)
+	if (GetState() == PARAGOOMBA_DEATH_BY_JUMP || GetState() == PARAGOOMBA_DEATH_BY_ATTACK)
 	{
 		if (this->_deathDuration > 0)
 		{
@@ -97,7 +98,7 @@ void ParaGoomba::Update(float deltaTime)
 		}
 	}
 
-	this->_acceleration = VECTOR2D(0.0f, -PARAGOOMBA_GRAVITY);
+	this->_acceleration = VECTOR2D(0.0f, -this->_gravity);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
@@ -107,6 +108,10 @@ void ParaGoomba::Update(float deltaTime)
 
 void ParaGoomba::OnCollision(CollisionEvent colEvent)
 {
+	if (this->_isBlocking)
+	{
+		return;
+	}
 	string objName = colEvent.collisionObj->name;
 	string className = typeid(*colEvent.collisionObj).name();
 	if (className == "class Platform" || className == "class Brick")
@@ -121,30 +126,32 @@ void ParaGoomba::OnCollision(CollisionEvent colEvent)
 		}
 	}
 
-	if (GetState() == PARAGOOMBA_DEATH)
-	{
-		return;
-	}
-
 	if (objName == "mario")
 	{
+		SpriteService* sprites = SpriteService::GetInstance();
 		if (colEvent.direction == DIRECTION::UP)
 		{
 			if (GetState() == PARAGOOMBA_HAS_WING)
 			{
 				Jump(0);
-				SpriteService* sprites = SpriteService::GetInstance();
 				this->_score = new GameObject(sprites->GetSprite("hub-and-font/400"));
 				this->_score->position = this->position + VECTOR2D(0.0f, PARAGOOMBA_HEIGHT);
 				SetState(PARAGOOMBA_LOST_WING);
 			}
 			else
 			{
-				SpriteService* sprites = SpriteService::GetInstance();
 				this->_score = new GameObject(sprites->GetSprite("hub-and-font/1000"));
 				this->_score->position = this->position + VECTOR2D(0.0f, PARAGOOMBA_HEIGHT);
+				SetState(PARAGOOMBA_DEATH_BY_JUMP);
 				Death();
 			}
+		}
+		else if (colEvent.collisionObj->GetState() == MARIO_ATTACK)
+		{
+			this->_score = new GameObject(sprites->GetSprite("hub-and-font/1000"));
+			this->_score->position = this->position + VECTOR2D(0.0f, PARAGOOMBA_HEIGHT);
+			SetState(PARAGOOMBA_DEATH_BY_ATTACK);
+			Death();
 		}
 	}
 }
@@ -156,10 +163,15 @@ void ParaGoomba::SetState(UINT stateValue, string stateName)
 
 Renderable* ParaGoomba::GetRenderable()
 {
-	if (GetState() == PARAGOOMBA_DEATH)
+	if (GetState() == PARAGOOMBA_DEATH_BY_JUMP)
 	{
 		SpriteService* sprites = SpriteService::GetInstance();
 		return sprites->GetSprite("enemies/paragoomba/2");
+	}
+	if (GetState() == PARAGOOMBA_DEATH_BY_ATTACK)
+	{
+		SpriteService* sprites = SpriteService::GetInstance();
+		return sprites->GetSprite("enemies/paragoomba/3");
 	}
 	AnimationService* anis = AnimationService::GetInstance();
 	return anis->GetAnimation("paragoomba walk");
@@ -179,11 +191,19 @@ void ParaGoomba::Jump(float speed)
 
 void ParaGoomba::Death()
 {
-	SetState(PARAGOOMBA_DEATH);
-	this->velocity = VECTOR2D(0.0f, 0.0f);
-	this->acceleration = VECTOR2D(0.0f, 0.0f);
-	this->_height = PARAGOOMBA_DEATH_HEIGHT;
-	this->_position = this->_position - VECTOR2D(0.0f, PARAGOOMBA_HEIGHT - PARAGOOMBA_DEATH_HEIGHT) / 2.0f;
+	if (GetState() == PARAGOOMBA_DEATH_BY_JUMP)
+	{
+		this->velocity = VECTOR2D(0.0f, 0.0f);
+		this->_gravity = 0;
+		this->_height = PARAGOOMBA_DEATH_HEIGHT;
+		this->_position = this->_position - VECTOR2D(0.0f, PARAGOOMBA_HEIGHT - PARAGOOMBA_DEATH_HEIGHT) / 2.0f;
+	}
+	else
+	{
+		this->velocity = VECTOR2D(0.0f, PARAGOOMBA_JUMP_DEFLECT_SPEED);
+		this->_gravity = PARAGOOMBA_GRAVITY;
+	}
 	this->_leftWing->isActive = false;
 	this->_rightWing->isActive = false;
+	this->_isBlocking = true;
 }

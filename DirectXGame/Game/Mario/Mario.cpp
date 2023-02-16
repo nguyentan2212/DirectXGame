@@ -1,5 +1,4 @@
 #include "Mario.h"
-#include "../GUI.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
 #include "../Enemies/KoopaParaTroopa.h"
@@ -16,10 +15,12 @@ Mario::Mario(): GameObject()
 	SetState(MARIO_TOUCHABLE, "touchable");
 	ChangeFigure(MARIO_SMALL);
 	Jump(0);
+	this->_gui = new GUI();
 }
 
 void Mario::Update(float deltaTime)
 {
+	this->_gui->Update(deltaTime);
 	if (this->_isActive == false)
 	{
 		return;
@@ -73,6 +74,34 @@ void Mario::Update(float deltaTime)
 	}
 
 	this->_velocity += this->_acceleration * deltaTime / 1000;
+
+	if (GetState() == MARIO_ATTACK)
+	{
+		if (this->_attackTime > 0)
+		{
+			this->_attackTime -= deltaTime;
+		}
+		else if (this->_isGrounded)
+		{
+			if (IsKeyDown(BTN_LEFT))
+			{
+				Run(F_LEFT);
+			}
+			else if (IsKeyDown(BTN_RIGHT))
+			{
+				Run(F_RIGHT);
+			}
+			else
+			{
+				Idle();
+			}
+		}
+		else
+		{
+			Jump(0);
+		}
+	}
+
 	if (abs(this->_velocity.x) > MARIO_RUN_MAX_SPEED_X)
 	{
 		this->_velocity.x = this->_velocity.x > 0 ? MARIO_RUN_MAX_SPEED_X : -MARIO_RUN_MAX_SPEED_X;
@@ -81,8 +110,7 @@ void Mario::Update(float deltaTime)
 	this->_isGrounded = false;
 	CollisionManager::Processing(this, deltaTime);
 
-	if (this->_isGrounded == false && GetState() != MARIO_JUMP 
-		&& GetState() != MARIO_DEATH && GetState() != MARIO_FLY)
+	if (this->_isGrounded == false && (GetState() == MARIO_RUN || GetState() == MARIO_IDLE))
 	{
 		Jump(0);
 	}
@@ -119,6 +147,7 @@ void Mario::Render()
 {
 	_isFlipped = this->_direction == DIRECTION::LEFT ? false : true;
 	GameObject::Render(-0.1);
+	this->_gui->Render();
 }
 
 void Mario::OnKeyDown(int keyCode)
@@ -172,6 +201,10 @@ void Mario::OnKeyDown(int keyCode)
 		{
 			Fly();
 		}
+		else if (GetState("figure") == MARIO_RACCOON)
+		{
+			Attack();
+		}
 		break;
 	case BTN_B:
 		if (IsKeyDown(BTN_LEFT))
@@ -199,7 +232,10 @@ void Mario::OnKeyUp(int keyCode)
 		}
 		break;
 	case BTN_DOWN:
-		Idle();
+		if (GetState() == MARIO_SIT)
+		{
+			Idle();
+		}
 		break;
 	case BTN_A:
 		break;
@@ -215,7 +251,7 @@ void Mario::OnKeyUp(int keyCode)
 
 void Mario::OnCollision(CollisionEvent colEvent)
 {
-	if (GetState() == MARIO_DEATH)
+	if (GetState() == MARIO_DEATH || colEvent.collisionObj->isBlocking)
 	{
 		return;
 	}
@@ -256,41 +292,17 @@ void Mario::OnCollision(CollisionEvent colEvent)
 
 void Mario::IncreaseScore(int score)
 {
-	GameObject* temp = GetChildWithName("gui");
-	if (temp != nullptr)
-	{
-		GUI* gui = dynamic_cast<GUI*>(temp);
-		if (gui != nullptr)
-		{
-			gui->IncreaseScore(score);
-		}
-	}
+	_gui->IncreaseScore(score);
 }
 
 void Mario::IncreaseCoin(int coin)
 {
-	GameObject* temp = GetChildWithName("gui");
-	if (temp != nullptr)
-	{
-		GUI* gui = dynamic_cast<GUI*>(temp);
-		if (gui != nullptr)
-		{
-			gui->IncreaseCoin(coin);
-		}
-	}
+	_gui->IncreaseCoin(coin);
 }
 
 void Mario::UpdateRunSpeed(float speed)
 {
-	GameObject* temp = GetChildWithName("gui");
-	if (temp != nullptr)
-	{
-		GUI* gui = dynamic_cast<GUI*>(temp);
-		if (gui != nullptr)
-		{
-			gui->UpdateRunSpeed(abs(speed));
-		}
-	}
+	_gui->UpdateRunSpeed(abs(speed));
 }
 
 void Mario::SetState(UINT stateValue, string stateName)
@@ -321,7 +333,6 @@ Renderable* Mario::GetRenderable()
 	{
 		aniName = aniName + " fast";
 	}
-
 	AnimationService* animations = AnimationService::GetInstance();
 	return animations->GetAnimation(aniName);
 }
@@ -356,6 +367,7 @@ void Mario::Idle()
 	SetState(MARIO_IDLE);
 	this->_velocity = VECTOR2D(0.0f, 0.0f);
 	this->_acceleration = VECTOR2D(0.0f, 0.0f);
+	DebugOut(L"[MARIO] Idle !\n");
 }
 
 void Mario::Run(float direction)
@@ -370,6 +382,7 @@ void Mario::Run(float direction)
 		{
 			this->_velocity.x = direction * abs(this->_velocity.x);
 		}
+		DebugOut(L"[MARIO] Jump Run !\n");
 		return;
 	}
 
@@ -384,6 +397,7 @@ void Mario::Run(float direction)
 		this->_acceleration = VECTOR2D(0.0f, 0.0f);
 	}
 	this->_velocity = VECTOR2D(MARIO_RUN_LOW_SPEED * direction, 0.0f);
+	DebugOut(L"[MARIO] Run !\n");
 }
 
 void Mario::Jump(float speed)
@@ -393,6 +407,7 @@ void Mario::Jump(float speed)
 	vec.y = speed;
 	this->velocity = vec;
 	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	DebugOut(L"[MARIO] Jump !\n");
 }
 
 void Mario::Fly()
@@ -403,6 +418,7 @@ void Mario::Fly()
 	vec.y = MARIO_JUMP_SPEED_Y;
 	this->velocity = vec;
 	this->acceleration = VECTOR2D(0.0f, 0.0f);
+	DebugOut(L"[MARIO] Fly !\n");
 }
 
 void Mario::Sit()
@@ -417,6 +433,7 @@ void Mario::Sit()
 	this->_acceleration = VECTOR2D(0.0f, 0.0f);
 	this->position = this->position - VECTOR2D(0.0f, (this->_height - MARIO_SIT_HEIGHT) / 2);
 	this->_height = MARIO_SIT_HEIGHT;
+	DebugOut(L"[MARIO] Sit !\n");
 }
 
 void Mario::Death()
@@ -424,10 +441,12 @@ void Mario::Death()
 	SetState(MARIO_DEATH);
 	this->velocity = VECTOR2D(0.0f, MARIO_JUMP_DEFLECT_SPEED);
 	this->acceleration = VECTOR2D(0.0f, -MARIO_GRAVITY);
+	DebugOut(L"[MARIO] Death !\n");
 }
 
 void Mario::Untouchable()
 {
+	DebugOut(L"[MARIO] Untouchable !\n");
 }
 
 void Mario::Hold()
@@ -456,6 +475,7 @@ void Mario::Hold()
 			this->_holdObj->position = pos + VECTOR2D(this->_width / 1.5f, 0.0f);
 		}
 	}
+	DebugOut(L"[MARIO] Hold !\n");
 }
 
 void Mario::Kick()
@@ -486,6 +506,14 @@ void Mario::Kick()
 	}
 	this->_holdObj = nullptr;
 	SetState(MARIO_NOT_HOLD, "hold");
+	DebugOut(L"[MARIO] Kick !\n");
+}
+
+void Mario::Attack()
+{
+	SetState(MARIO_ATTACK);
+	this->_attackTime = MARIO_ATTACK_TIME;
+	DebugOut(L"[MARIO] Attack !\n");
 }
 
 void Mario::OnCollisionWithPlatform(CollisionEvent colEvent)
@@ -579,6 +607,10 @@ void Mario::OnCollisionWithGoomba(CollisionEvent colEvent)
 
 void Mario::OnCollisionWithParaGoomba(CollisionEvent colEvent)
 {
+	if (GetState() == MARIO_ATTACK)
+	{
+		return;
+	}
 	if (colEvent.direction == Direction::DOWN)
 	{
 		if (IsKeyDown(DIK_W))
