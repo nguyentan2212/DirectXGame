@@ -61,7 +61,10 @@ void Scene::DrawBoundingBox()
 	vector<GameObject*> objs = pool->GetAllGameObject(true);
 	for (GameObject* obj : objs)
 	{
-		obj->DrawBoundingBox();
+		if (obj->showBoundingBox)
+		{
+			obj->DrawBoundingBox();
+		}
 	}
 }
 

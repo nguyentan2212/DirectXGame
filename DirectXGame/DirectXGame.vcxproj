@@ -180,6 +180,8 @@
     <ClInclude Include="Game\Items\Leaf.h" />
     <ClInclude Include="Game\Items\Mushroom.h" />
     <ClInclude Include="Game\Items\Platform.h" />
+    <ClInclude Include="Game\MapMario.h" />
+    <ClInclude Include="Game\MapMonster.h" />
     <ClInclude Include="Game\Mario\Mario.h" />
     <ClInclude Include="Game\Mario\MarioConst.h" />
     <ClInclude Include="Game\Scenes\CSceneHidden.h" />
@@ -222,6 +224,8 @@
     <ClCompile Include="Game\Items\Leaf.cpp" />
     <ClCompile Include="Game\Items\Mushroom.cpp" />
     <ClCompile Include="Game\Items\Platform.cpp" />
+    <ClCompile Include="Game\MapMario.cpp" />
+    <ClCompile Include="Game\MapMonster.cpp" />
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Scenes\CSceneHidden.cpp" />
     <ClCompile Include="Game\Scenes\CSceneOne.cpp" />

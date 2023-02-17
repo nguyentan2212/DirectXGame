@@ -138,7 +138,7 @@ void CSceneOne::OnChanged(UINT preSceneId)
 
 	GameObject* mario = pool->GetGameObjectWithClass("Mario");
 	mario->SetState(SCENE_ONE_ID, "scene");
-
+	mario->isActive = true;
 	if (preSceneId == SCENE_HIDDEN_ID)
 	{
 		GameObject* portal = pool->GetGameObjectWithName("portal out");

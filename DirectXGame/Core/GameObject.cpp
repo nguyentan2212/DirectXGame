@@ -9,7 +9,7 @@ GameObject::GameObject()
 	this->_direction = DIRECTION::LEFT;
 	this->_parent = nullptr;
 	this->_children = vector<GameObject*>(0);
-	this->_showBoundingBox = true;
+	this->_showBoundingBox = false;
 	this->_isFlipped = false;
 	this->_renderable = nullptr;
 	SetState(0);
@@ -22,7 +22,7 @@ GameObject::GameObject(Renderable* renderable)
 	this->_direction = DIRECTION::LEFT;
 	this->_parent = nullptr;
 	this->_children = vector<GameObject*>(0);
-	this->_showBoundingBox = true;
+	this->_showBoundingBox = false;
 	this->_isFlipped = false;
 	this->_renderable = renderable;
 	SetState(0);

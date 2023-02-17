@@ -76,6 +76,7 @@ void CSceneHidden::OnChanged(UINT preSceneId)
 
 	GameObject* mario = pool->GetGameObjectWithClass("Mario");
 	mario->SetState(SCENE_HIDDEN_ID, "scene");
+	mario->isActive = true;
 	pool->Clear();
 	for (GameObject* obj : this->_objs)
 	{

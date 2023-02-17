@@ -134,6 +134,45 @@
           "sprite": "mics137"
         }
       ]
+    },
+    {
+      "name": "glass",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "world-map-138"
+        },
+        {
+          "sprite": "world-map-139"
+        },
+        {
+          "sprite": "world-map-140"
+        }
+      ]
+    },
+    {
+      "name": "monster",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "world-map-141"
+        },
+        {
+          "sprite": "world-map-142"
+        }
+      ]
+    },
+    {
+      "name": "map mario",
+      "defaultTime": 300,
+      "frames": [
+        {
+          "sprite": "world-map-121"
+        },
+        {
+          "sprite": "world-map-136"
+        }
+      ]
     }
   ]
 }

@@ -10,5 +10,6 @@ public:
 	CSceneWorldMap();
 	void Update(float deltaTime) override;
 	void OnChanged(UINT preSceneId) override;
+	void InitObjects(json config) override;
 };
 

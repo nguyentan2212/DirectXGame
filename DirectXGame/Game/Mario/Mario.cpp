@@ -19,6 +19,7 @@ Mario::Mario(): GameObject()
 	ChangeFigure(MARIO_SMALL);
 	Jump(0);
 	this->_gui = new GUI();
+	this->_isActive = false;
 }
 
 void Mario::Update(float deltaTime)
@@ -155,7 +156,7 @@ void Mario::Render()
 
 void Mario::OnKeyDown(int keyCode)
 {
-	if (GetState() == MARIO_DEATH)
+	if (GetState() == MARIO_DEATH || this->_isActive == false)
 	{
 		return;
 	}
@@ -225,6 +226,7 @@ void Mario::OnKeyDown(int keyCode)
 
 void Mario::OnKeyUp(int keyCode)
 {
+	if (this->_isActive == false)
 	switch (keyCode)
 	{
 	case BTN_LEFT:

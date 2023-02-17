@@ -17,7 +17,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
 	app->AddScene(new CSceneWorldMap(), SCENE_WORLD_MAP_ID);
 	app->AddScene(new CSceneOne(), SCENE_ONE_ID);
 	app->AddScene(new CSceneHidden(), SCENE_HIDDEN_ID);
-	app->TransitionTo(SCENE_ONE_ID);
+	app->TransitionTo(SCENE_WORLD_MAP_ID);
 	//app->TransitionTo(SCENE_HIDDEN_ID);
 	app->Run();
 
