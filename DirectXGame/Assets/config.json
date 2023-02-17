@@ -1,8 +1,8 @@
 {
   "fps": 60,
   "window": {
-    "width": 275,
-    "height": 230
+    "width": 256,
+    "height": 204
   },
   "textures": [
     {

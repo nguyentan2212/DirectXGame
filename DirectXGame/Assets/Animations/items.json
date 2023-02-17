@@ -116,6 +116,24 @@
           "sprite": "hub-and-font/label-f-white"
         }
       ]
+    },
+    {
+      "name": "bonus",
+      "defaultTime": 100,
+      "frames": [
+        {
+          "sprite": "mics134"
+        },
+        {
+          "sprite": "mics135"
+        },
+        {
+          "sprite": "mics136"
+        },
+        {
+          "sprite": "mics137"
+        }
+      ]
     }
   ]
 }

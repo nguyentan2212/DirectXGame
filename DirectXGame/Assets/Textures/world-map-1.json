@@ -1,10 +1,10 @@
 {
   "columns": 11,
-  "imageheight": 138,
-  "imagewidth": 376,
-  "margin": 2,
-  "spacing": 2,
+  "imageheight": 69,
+  "imagewidth": 188,
+  "margin": 1,
+  "spacing": 1,
   "tilecount": 44,
-  "tileheight": 32,
-  "tilewidth": 32
+  "tileheight": 16,
+  "tilewidth": 16
 }

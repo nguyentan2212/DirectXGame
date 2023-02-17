@@ -81,7 +81,7 @@ void GameEngine::Init(HINSTANCE hInstance, int nCmdShow)
 
     // Init camera
     Camera* camera = Camera::GetInstance();
-    camera->Init(WINDOW_WIDTH, WINDOW_HEIGHT);
+    camera->Init(config["window"]["width"].get<float>(), config["window"]["height"].get<float>());
 
     // Timer begin
     this->_timer = new Timer(this->_fps);

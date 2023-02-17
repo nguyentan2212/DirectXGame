@@ -2,11 +2,12 @@
 #include "../../Core/GameObject.h"
 #include "../Items/Head.h"
 
-constexpr float KOOPA_PARATROOPA_WIDTH = 16;
+constexpr float KOOPA_PARATROOPA_WIDTH = 14;
 constexpr float KOOPA_PARATROOPA_HEIGHT = 26;
-constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 80;
+constexpr float KOOPA_PARATROOPA_STUN_HEIGHT = 15;
+constexpr float KOOPA_PARATROOPA_RUN_SPEED_X = 70;
 constexpr float KOOPA_PARATROOPA_WALK_SPEED_X = 20;
-constexpr float KOOPA_PARATROOPA_GRAVITY = 120;
+constexpr float KOOPA_PARATROOPA_GRAVITY = 130;
 
 constexpr UINT KOOPA_PARATROOPA_WALK = 0;
 constexpr UINT KOOPA_PARATROOPA_RUN = 1;
@@ -28,6 +29,7 @@ private:
 	Renderable* GetRenderable() override;
 	Head* _head = nullptr;
 	
+	bool _brickCollisionBlock = false;
 	void Stun();
 };
 

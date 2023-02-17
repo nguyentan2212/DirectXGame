@@ -62,7 +62,7 @@ void Mario::Update(float deltaTime)
 			this->_flyingTime -= deltaTime;
 			this->_acceleration = VECTOR2D(0.0f, 0.0f);
 		}
-		else if (GetState() == MARIO_FLY)
+		else if (GetState("figure") == MARIO_RACCOON)
 		{
 			this->_acceleration = VECTOR2D(this->_acceleration.x, -MARIO_EXTRA_WEEK_GRAVITY);
 		}
@@ -204,7 +204,7 @@ void Mario::OnKeyDown(int keyCode)
 		{
 			Fly();
 		}
-		else if (GetState("figure") == MARIO_RACCOON)
+		else if (GetState("figure") == MARIO_RACCOON && IsKeyDown(BTN_LEFT) == false && IsKeyDown(BTN_RIGHT) == false)
 		{
 			Attack();
 		}
@@ -341,6 +341,11 @@ Renderable* Mario::GetRenderable()
 		&& GetState("figure") == MARIO_RACCOON)
 	{
 		aniName = aniName + " fast";
+	}
+
+	if (GetState("figure") == MARIO_RACCOON && GetState() == MARIO_JUMP && IsKeyDown(BTN_A))
+	{
+		aniName = "raccoon mario fall";
 	}
 	AnimationService* animations = AnimationService::GetInstance();
 	return animations->GetAnimation(aniName);
@@ -646,7 +651,7 @@ void Mario::OnCollisionWithKoopaParaTroopa(CollisionEvent colEvent)
 	DebugOut(L"[INFO] Collide with koopa paratroopa !\n");
 	if (colEvent.collisionObj->GetState() == KOOPA_PARATROOPA_STUN)
 	{
-		if (GetState() == MARIO_RUN && IsKeyDown(BTN_B))
+		if (GetState() != MARIO_HOLD && IsKeyDown(BTN_B))
 		{
 			SetState(MARIO_HOLD, "hold");
 			this->_holdObj = colEvent.collisionObj;

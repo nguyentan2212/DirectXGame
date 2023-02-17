@@ -44,11 +44,11 @@ void Camera::Update(float deltaTime)
 
 	if (this->_position.x + this->_width > this->_topRight.x)
 	{
-		this->_position.x = this->_topRight.x - this->width;
+		this->_position.x = max(this->_topRight.x - this->width, this->_bottomLeft.x);
 	}
-	if (this->_position.y + this->height > this->_topRight.y)
+	if (this->_position.y + this->_height > this->_topRight.y)
 	{
-		this->_position.y = this->_topRight.y - this->height;
+		this->_position.y = max(this->_topRight.y - this->_height, this->_bottomLeft.y);
 	}
 }
 

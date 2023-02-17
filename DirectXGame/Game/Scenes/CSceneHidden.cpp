@@ -17,12 +17,12 @@ CSceneHidden::CSceneHidden(): Scene()
 	InitTilemap(config);
 	InitObjects(config["objects"]);
 
-	ObjectPool* pool = ObjectPool::GetInstance();
+	/*ObjectPool* pool = ObjectPool::GetInstance();
 	pool->Clear();
 	for (GameObject* obj : this->_objs)
 	{
 		pool->AddGameObject(obj);
-	}
+	}*/
 
 	Camera* camera = Camera::GetInstance();
 	camera->Follow(nullptr);

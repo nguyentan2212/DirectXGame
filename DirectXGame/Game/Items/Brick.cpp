@@ -75,11 +75,13 @@ void Brick::OnCollision(CollisionEvent colEvent)
 		}
 	}
 	else if (className == "class KoopaParaTroopa" && GetState() == BRICK_UNTOUCHED &&
-		(colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT)
-		&& this->_content->name == "leaf")
+		(colEvent.direction == Direction::LEFT || colEvent.direction == Direction::RIGHT))
 	{
-		SetState(BRICK_TOUCHED);
-		this->_content->isActive = true;
+		if (this->_content->name == "leaf")
+		{
+			SetState(BRICK_TOUCHED);
+			this->_content->isActive = true;
+		}
 	}
 }
 

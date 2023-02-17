@@ -18,6 +18,8 @@ public:
 	void Render(float x, float y, bool isFlipped = false, float zIndex = 0.0f) override;
 	void Render(VECTOR2D position, bool isFlipped = false, float zIndex = 0.0f) override;
 
+	Sprite* GetCurrentSprite();
+
 private:
 	DWORD _defaultTime;
 	int _currentFrame;

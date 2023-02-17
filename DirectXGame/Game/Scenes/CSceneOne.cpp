@@ -19,12 +19,12 @@ CSceneOne::CSceneOne(): Scene()
 	InitTilemap(config);
 	InitObjects(config["objects"]);
 
-	ObjectPool* pool = ObjectPool::GetInstance();
+	/*ObjectPool* pool = ObjectPool::GetInstance();
 	pool->Clear();
 	for (GameObject* obj : this->_objs)
 	{
 		pool->AddGameObject(obj);
-	}
+	}*/
 }
 
 void CSceneOne::InitObjects(json config)
@@ -153,7 +153,7 @@ void CSceneOne::OnChanged(UINT preSceneId)
 void CSceneOne::CreateMario(VECTOR2D position)
 {
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(650, 50);
+	mario->position = VECTOR2D(1950, 50);
 	mario->SetState(SCENE_ONE_ID, "scene");
 	//mario->position = position;
 

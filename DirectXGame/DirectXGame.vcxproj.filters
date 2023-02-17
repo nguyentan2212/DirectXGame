@@ -383,12 +383,6 @@
     <Image Include="Assets\Textures\mics.png">
       <Filter>Assets\Textures</Filter>
     </Image>
-    <Image Include="Assets\Textures\world-map-1.png">
-      <Filter>Assets\Textures</Filter>
-    </Image>
-    <Image Include="Assets\Textures\world-map-2.png">
-      <Filter>Assets\Textures</Filter>
-    </Image>
     <Image Include="Assets\Textures\raccoon-mario.png">
       <Filter>Assets\Textures</Filter>
     </Image>
@@ -399,6 +393,12 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="Assets\Textures\enemies.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\world-map-1.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\world-map-2.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>

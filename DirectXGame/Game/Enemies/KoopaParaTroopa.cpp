@@ -31,6 +31,8 @@ void KoopaParaTroopa::Update(float deltaTime)
 	this->_velocity += this->_acceleration * deltaTime / 1000;
 
 	this->_isGrounded = false;
+	this->_brickCollisionBlock = false;
+	DebugOut((wchar_t*)L"[INFO] Koopa new frame \n");
 	CollisionManager::Processing(this, deltaTime);
 	
 	GameObject::Update(deltaTime);
@@ -60,16 +62,38 @@ void KoopaParaTroopa::OnCollision(CollisionEvent colEvent)
 	string objName = colEvent.collisionObj->name;
 	string className = typeid(*colEvent.collisionObj).name();
 
-	if (className == "class Platform" || className == "class Brick")
+	if (className == "class Platform")
 	{
 		if (colEvent.direction == Direction::DOWN)
 		{
 			Grounding(colEvent.entryTime);
 		}
-		else if (GetState() == KOOPA_PARATROOPA_RUN && objName != "panel")
+		else if ((colEvent.direction == DIRECTION::LEFT || colEvent.direction == DIRECTION::RIGHT)
+			&& (objName != "panel" || objName == "pine"))
 		{
 			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
 		}
+	}
+
+	if (className == "class Brick")
+	{
+		if (colEvent.direction == Direction::DOWN)
+		{
+			Grounding(colEvent.entryTime);
+		}
+		else if ((colEvent.direction == DIRECTION::LEFT || colEvent.direction == DIRECTION::RIGHT)
+			&& this->_brickCollisionBlock == false)
+		{
+			if (objName == "soft brick")
+			{
+				colEvent.collisionObj->isActive = false;
+				this->_brickCollisionBlock = true;
+			}
+			DebugOut((wchar_t*)L"[INFO] Koopa BEFORE vel.x: %f \n", this->velocity.x);
+			this->_velocity = VECTOR2D(-this->_velocity.x, this->_velocity.y);
+			DebugOut((wchar_t*)L"[INFO] Koopa AFTER vel.x: %f \n", this->velocity.x);
+		}
+		
 	}
 }
 

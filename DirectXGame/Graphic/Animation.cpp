@@ -42,6 +42,11 @@ void Animation::Render(VECTOR2D position, bool isFlipped, float zIndex)
 	Render(position.x, position.y, isFlipped, zIndex);
 }
 
+Sprite* Animation::GetCurrentSprite()
+{
+	return this->_frames[this->_currentFrame]->sprite;
+}
+
 void Animation::Render(float x, float y, bool isFlipped, float zIndex)
 {
 	this->_frames[this->_currentFrame]->sprite->Render(x, y, isFlipped, zIndex);
