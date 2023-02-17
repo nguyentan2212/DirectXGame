@@ -44,6 +44,7 @@ private:
 	void OnCollisionWithParaGoomba(CollisionEvent colEvent);
 	void OnCollisionWithKoopaParaTroopa(CollisionEvent colEvent);
 	void OnCollisionWithKoopaTroopa(CollisionEvent colEvent);
+	void OnCollisionWithPortal(CollisionEvent colEvent);
 
 	bool IsKeyDown(int keyCode);
 

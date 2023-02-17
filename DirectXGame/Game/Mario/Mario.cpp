@@ -4,6 +4,9 @@
 #include "../Enemies/KoopaParaTroopa.h"
 #include "../Enemies/KoopaTroopa.h"
 #include "../Items/Brick.h"
+#include "../Scenes/CSceneOne.h"
+#include "../Scenes/CSceneHidden.h"
+#include "../../Core/GameEngine.h"
 
 Mario::Mario(): GameObject()
 {
@@ -257,11 +260,17 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	}
 
 	string className = typeid(*colEvent.collisionObj).name();
+	string name = colEvent.collisionObj->name;
+
 	UINT t = GetState("touchable");
 
-	if (className == "class Platform")
+	if (className == "class Platform" && name != "portal in" && name != "portal out")
 	{
 		OnCollisionWithPlatform(colEvent);
+	}
+	else if (name == "portal in" || name == "portal out")
+	{
+		OnCollisionWithPortal(colEvent);
 	}
 	else if (className == "class Brick")
 	{
@@ -719,6 +728,29 @@ void Mario::OnCollisionWithKoopaTroopa(CollisionEvent colEvent)
 	else
 	{
 		Death();
+	}
+}
+
+void Mario::OnCollisionWithPortal(CollisionEvent colEvent)
+{
+	GameEngine* app = GameEngine::GetInstance();
+
+	switch (GetState("scene"))
+	{
+	case SCENE_ONE_ID:
+		if (colEvent.collisionObj->name == "portal in" && colEvent.direction == DIRECTION::DOWN)
+		{
+			app->TransitionTo(SCENE_HIDDEN_ID);
+		}
+		break;
+	case SCENE_HIDDEN_ID:
+		if (colEvent.collisionObj->name == "portal out" && colEvent.direction == DIRECTION::UP)
+		{
+			app->TransitionTo(SCENE_ONE_ID);
+		}
+		break;
+	default:
+		break;
 	}
 }
 

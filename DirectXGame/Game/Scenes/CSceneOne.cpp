@@ -125,7 +125,7 @@ void CSceneOne::Update(float deltaTime)
 	}
 }
 
-void CSceneOne::OnChanged()
+void CSceneOne::OnChanged(UINT preSceneId)
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
 	pool->Clear();
@@ -135,7 +135,18 @@ void CSceneOne::OnChanged()
 	}
 
 	Camera* camera = Camera::GetInstance();
+
 	GameObject* mario = pool->GetGameObjectWithClass("Mario");
+	mario->SetState(SCENE_ONE_ID, "scene");
+
+	if (preSceneId == SCENE_HIDDEN_ID)
+	{
+		GameObject* portal = pool->GetGameObjectWithName("portal out");
+		mario->position = portal->position;
+	}
+
+	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
+	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
 	camera->Follow(mario);
 }
 
@@ -143,16 +154,13 @@ void CSceneOne::CreateMario(VECTOR2D position)
 {
 	Mario* mario = new Mario();
 	mario->position = VECTOR2D(650, 50);
+	mario->SetState(SCENE_ONE_ID, "scene");
 	//mario->position = position;
 
 	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
 	keyboard->AddListener(mario);
 
 	Camera* camera = Camera::GetInstance();
-	
-	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
-	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
-
 	camera->Follow(mario);
 	this->_objs.push_back(mario);
 }

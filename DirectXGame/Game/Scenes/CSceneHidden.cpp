@@ -70,11 +70,12 @@ void CSceneHidden::Update(float deltaTime)
 	}
 }
 
-void CSceneHidden::OnChanged()
+void CSceneHidden::OnChanged(UINT preSceneId)
 {
 	ObjectPool* pool = ObjectPool::GetInstance();
 
 	GameObject* mario = pool->GetGameObjectWithClass("Mario");
+	mario->SetState(SCENE_HIDDEN_ID, "scene");
 	pool->Clear();
 	for (GameObject* obj : this->_objs)
 	{
@@ -86,4 +87,6 @@ void CSceneHidden::OnChanged()
 	mario->position = portalIn->position - VECTOR2D(0.0f, mario->height / 2.0f);
 	Camera* camera = Camera::GetInstance();
 	camera->Follow(mario);
+	camera->bottomLeft = VECTOR2D(0.0f, -32.0f);
+	camera->topRight = VECTOR2D(this->_width * this->_tileWidth, this->_height * this->_tileHeight);
 }

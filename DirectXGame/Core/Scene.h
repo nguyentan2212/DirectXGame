@@ -18,11 +18,13 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual void DrawBoundingBox();
-	virtual void OnChanged();
+	virtual void OnChanged(UINT preSceneId);
 
 	W_PROPERTY(GameEngine*, context);
 	SET(context) { this->_context = value; }
 
+	R_PROPERTY(UINT, sceneId);
+	GET(sceneId) { return this->_sceneId; }
 protected:
 	GameEngine* _context;
 

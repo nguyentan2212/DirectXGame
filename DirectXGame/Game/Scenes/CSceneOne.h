@@ -10,7 +10,7 @@ public:
 	CSceneOne();
 	void InitObjects(json config) override;
 	void Update(float deltaTime) override;
-	void OnChanged() override;
+	void OnChanged(UINT preSceneId) override;
 
 private:
 	void CreateMario(VECTOR2D position);

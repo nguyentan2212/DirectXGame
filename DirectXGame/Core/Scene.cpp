@@ -65,7 +65,7 @@ void Scene::DrawBoundingBox()
 	}
 }
 
-void Scene::OnChanged()
+void Scene::OnChanged(UINT preSceneId)
 {
 }
 

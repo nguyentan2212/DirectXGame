@@ -38,7 +38,7 @@ GameEngine* GameEngine::GetInstance()
 {
     if (_instance == nullptr)
     {
-        return new GameEngine();
+        _instance = new GameEngine();
     }
     return _instance;
 }
@@ -115,8 +115,13 @@ void GameEngine::TransitionTo(UINT sceneId)
         DebugOut((wchar_t*)L"[ERROR] Scene transition to NULL");
         return;
     }
+    UINT preSceneId = -1;
+    if (this->_currentScene != nullptr)
+    {
+        preSceneId = this->_currentScene->sceneId;
+    }
     this->_currentScene = scene;
-    this->_currentScene->OnChanged();
+    this->_currentScene->OnChanged(preSceneId);
 }
 
 void GameEngine::Update(float deltaTime)

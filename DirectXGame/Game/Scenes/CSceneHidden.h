@@ -10,6 +10,6 @@ public:
 	CSceneHidden();
 	void InitObjects(json config) override;
 	void Update(float deltaTime) override;
-	void OnChanged() override;
+	void OnChanged(UINT preSceneId) override;
 };
 
