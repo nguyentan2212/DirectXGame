@@ -3,6 +3,7 @@
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
+#include "../Mario/Mario.h"
 
 Coin::Coin(VECTOR2D position): GameObject()
 {
@@ -10,7 +11,6 @@ Coin::Coin(VECTOR2D position): GameObject()
 	this->_position = position;
 	this->_width = COIN_SIZE;
 	this->_height = COIN_SIZE;
-	this->_position = position;
 	this->_score = nullptr;
 }
 
@@ -48,6 +48,17 @@ void Coin::OnCollision(CollisionEvent colEvent)
 	else if (className == "class Mario" && this->name != "score coin")
 	{
 		this->isActive = false;
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+		mario->IncreaseCoin();
+	}
+}
+
+void Coin::Render()
+{
+	GameObject::Render();
+	if (this->_score != nullptr && this->_score->isActive)
+	{
+		this->_score->Render();
 	}
 }
 
@@ -59,13 +70,11 @@ Coin* Coin::ScoreCoin(VECTOR2D position)
 	pCoin->_velocity = VECTOR2D(0.0f, COIN_SPEED);
 	pCoin->_acceleration = VECTOR2D(0.0f, -COIN_GRAVITY);
 
-	ObjectPool* pool = ObjectPool::GetInstance();
 	SpriteService* sprites = SpriteService::GetInstance();
-	pCoin->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
+	pCoin->_score = new GameObject(sprites->GetSprite("hub-and-font/200"));
 	pCoin->_score->position = position + VECTOR2D(0.0f, COIN_SIZE);
 	pCoin->_score->velocity = VECTOR2D(0.0f, COIN_SCORE_SPEED);
 	pCoin->_score->isActive = false;
-	pool->AddGameObject(pCoin->_score);
 
 	return pCoin;
 }

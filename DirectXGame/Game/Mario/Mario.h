@@ -21,10 +21,13 @@ public:
 	void UpdateRunSpeed(float speed);
 
 	void SetState(UINT stateValue, string stateName = "default") override;
+	void ChangeFigure(UINT figure);
+	void HitByFire();
+
 private:
 	Renderable* GetRenderable() override;
 	void Grounding(float time) override;
-	void ChangeFigure(UINT figure);
+	
 
 	void Idle();
 	void Run(float direction);
@@ -56,5 +59,9 @@ private:
 	float _attackTime;
 	UINT _blockMask;
 	string _preFigure;
+	bool _brickCollisionBlock = false;
+	GameObject* _portal = nullptr;
+
+	void Teleport();
 };
 

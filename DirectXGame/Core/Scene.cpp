@@ -51,6 +51,10 @@ void Scene::Render()
 	vector<GameObject*> objs = pool->GetAllGameObject(true);
 	for (GameObject* obj : objs)
 	{
+		if (obj->name == "score coin")
+		{
+			DebugOut(L"[INFO] score coin!\n");
+		}
 		obj->Render();
 	}
 }

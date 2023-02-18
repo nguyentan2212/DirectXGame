@@ -3,7 +3,7 @@
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/ObjectPool.h"
-#include "../../Game/Mario/MarioConst.h"
+#include "../../Game/Mario/Mario.h"
 
 Goomba::Goomba(): GameObject()
 {
@@ -12,12 +12,10 @@ Goomba::Goomba(): GameObject()
 	this->_height = GOOMBA_SIZE;
 	this->_velocity = VECTOR2D(-GOOMBA_SPEED, 0.0f);
 
-	ObjectPool* pool = ObjectPool::GetInstance();
 	SpriteService* sprites = SpriteService::GetInstance();
 	this->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
 	this->_score->velocity = VECTOR2D(0.0f, GOOMBA_SPEED);
 	this->_score->isActive = false;
-	pool->AddGameObject(this->_score);
 	SetState(GOOMBA_WALK);
 }
 
@@ -40,6 +38,28 @@ void Goomba::Update(float deltaTime)
 			this->_score->isActive = false;
 		}
 	}
+	if (this->_score != nullptr && this->_score->isActive)
+	{
+		this->_score->Update(deltaTime);
+	}
+	
+	ObjectPool* pool = ObjectPool::GetInstance();
+	if (this->_head == nullptr)
+	{
+		this->_head = new Head(GOOMBA_SIZE * 0.5, GOOMBA_SIZE);
+		this->_head->position = this->position + VECTOR2D(this->width / 2.0f, 0.0f);
+		this->_head->body = this;
+		this->_head->SetGravity(GOOMBA_GRAVITY);
+		
+		pool->AddGameObject(this->_head);
+	}
+
+	GameObject* mario = pool->GetGameObjectWithClass("Mario");
+	float distance = abs(this->position.x - mario->position.x);
+	if (distance < GOOMBA_REMOVE_HEAD_DISTANCE)
+	{
+		this->_head->isActive = false;
+	}
 
 	this->_acceleration = VECTOR2D(0.0f, -this->_gravity);
 	this->_velocity += this->_acceleration * deltaTime / 1000;
@@ -51,7 +71,7 @@ void Goomba::Update(float deltaTime)
 
 void Goomba::OnCollision(CollisionEvent colEvent)
 {
-	if (this->_isBlocking)
+	if (this->_isBlocking || GetState() == GOOMBA_DEATH_BY_JUMP || GetState() == GOOMBA_DEATH_BY_ATTACK)
 	{
 		return;
 	}
@@ -70,14 +90,18 @@ void Goomba::OnCollision(CollisionEvent colEvent)
 	}
 	else if (objName == "mario")
 	{
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
 		if (colEvent.direction == Direction::UP)
 		{
 			SetState(GOOMBA_DEATH_BY_JUMP);
+			mario->IncreaseScore(SCORE_GOOMBA_DEATH);
 		}
 		else if (colEvent.collisionObj->GetState() == MARIO_ATTACK)
 		{
 			SetState(GOOMBA_DEATH_BY_ATTACK);
+			mario->IncreaseScore(SCORE_GOOMBA_DEATH);
 		}
+
 	}
 }
 
@@ -87,7 +111,7 @@ void Goomba::SetState(UINT stateValue, string stateName)
 	{
 		return;
 	}
-
+	this->_states[stateName] = stateValue;
 	switch (stateValue)
 	{
 	case GOOMBA_WALK:
@@ -99,7 +123,16 @@ void Goomba::SetState(UINT stateValue, string stateName)
 	default:
 		break;
 	}
-	this->_states[stateName] = stateValue;
+	
+}
+
+void Goomba::Render()
+{
+	GameObject::Render();
+	if (this->_score != nullptr && this->_score->isActive)
+	{
+		this->_score->Render();
+	}
 }
 
 Renderable* Goomba::GetRenderable()
@@ -135,5 +168,4 @@ void Goomba::Death()
 	}
 	this->_score->position = position + VECTOR2D(0.0f, GOOMBA_SIZE);
 	this->_score->isActive = true;
-	this->_isBlocking = true;
 }

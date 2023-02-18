@@ -4,8 +4,8 @@
 #include <dinput.h>
 
 constexpr float MARIO_GRAVITY =					120;
-constexpr float MARIO_WEEK_GRAVITY =			70;
-constexpr float MARIO_EXTRA_WEEK_GRAVITY =		50;
+constexpr float MARIO_WEEK_GRAVITY =			90;
+constexpr float MARIO_EXTRA_WEEK_GRAVITY =		70;
 
 
 constexpr float F_LEFT =						-1;
@@ -58,6 +58,10 @@ constexpr UINT MARIO_NOT_HOLD = 1;
 constexpr UINT MARIO_UNTOUCHABLE = 0;
 constexpr UINT MARIO_TOUCHABLE = 1;
 
+// brick block state
+constexpr UINT MARIO_BRICK_NOT_BLOCKING = 0;
+constexpr UINT MARIO_BRICK_BLOCKING = 1;
+
 const std::string aniNames[9] = {
 	"idle",
 	"run",
@@ -89,11 +93,3 @@ const std::pair<float, float> mario_sizes[3] = {
 #define BTN_RIGHT	DIK_D
 #define BTN_A		DIK_K
 #define BTN_B		DIK_L
-
-constexpr UINT SCORE_GOOMBA_DEATH =			100;
-constexpr UINT SCORE_PARAGOOMBA_LOST_WING = 400;
-constexpr UINT SCORE_PARAGOOMBA_DEATH =		800;
-
-constexpr UINT SCORE_COIN_BRICK = 200;
-constexpr UINT SCORE_POWER_MUSHROOM = 1000;
-constexpr UINT SCORE_LEAF = 1000;

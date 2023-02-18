@@ -56,6 +56,9 @@
     <None Include="Assets\Tilemaps\hidden-map.json">
       <Filter>Assets\Tilemaps</Filter>
     </None>
+    <None Include="Assets\Textures\start-scene.json">
+      <Filter>Assets\Textures</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -270,6 +273,12 @@
     <ClInclude Include="Game\MapMario.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Scenes\CSceneStart.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Items\BonusBox.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\GameEngine.cpp">
@@ -384,6 +393,12 @@
     <ClCompile Include="Game\MapMario.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Scenes\CSceneStart.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Items\BonusBox.cpp">
+      <Filter>Game\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\bounding-box.png">
@@ -411,6 +426,9 @@
       <Filter>Assets\Textures</Filter>
     </Image>
     <Image Include="Assets\Textures\world-map-2.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\start-scene.png">
       <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>

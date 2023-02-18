@@ -43,6 +43,9 @@ public:
 	virtual void OnCollision(CollisionEvent colEvent);
 	virtual void Grounding(float time);
 
+	virtual Renderable* GetRenderable();
+	virtual void SetRenderable(Renderable* renderable);
+
 #pragma region Properties
 	PROPERTY(VECTOR2D, position);
 	GET(position) { return this->_position; }
@@ -117,8 +120,7 @@ protected:
 
 	virtual void OnTransformChanged();
 	void CalculateWorldMatrix();
-	virtual Renderable* GetRenderable();
-	virtual void SetRenderable(Renderable* renderable);
+	
 #pragma endregion
 };
 

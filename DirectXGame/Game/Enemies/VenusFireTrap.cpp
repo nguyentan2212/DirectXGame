@@ -2,6 +2,8 @@
 #include "../../Core/GameObject.h"
 #include "../../Core/ObjectPool.h"
 #include "FireBall.h"
+#include "../../Physic/CollisionManager.h"
+#include "../Mario/Mario.h"
 
 VenusFireTrap::VenusFireTrap(VECTOR2D sleepPos, string name): GameObject()
 {
@@ -63,7 +65,7 @@ void VenusFireTrap::Update(float deltaTime)
 	default:
 		break;
 	}
-
+	CollisionManager::Processing(this, deltaTime);
 	VECTOR2D temp = this->position - this->_attackTarget->position;
 	this->direction = temp.x < 0 ? Direction::RIGHT : Direction::LEFT;
 	GameObject::Update(deltaTime);
@@ -78,6 +80,15 @@ void VenusFireTrap::Render()
 
 void VenusFireTrap::OnCollision(CollisionEvent colEvent)
 {
+	if (colEvent.collisionObj->name == "mario")
+	{
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+		if (mario->GetState() == MARIO_ATTACK)
+		{
+			mario->IncreaseScore(200);
+			SetState(FIRE_TRAP_DEATH);
+		}
+	}
 }
 
 void VenusFireTrap::SetState(UINT stateValue, string stateName)
@@ -102,6 +113,8 @@ void VenusFireTrap::SetState(UINT stateValue, string stateName)
 				break;
 			}
 			break;
+		case FIRE_TRAP_DEATH:
+			this->_isActive = false;
 		default:
 			break;
 		}

@@ -1,7 +1,7 @@
 #include "Mushroom.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Physic/CollisionManager.h"
-#include "../../Core/ObjectPool.h"
+#include "../Mario/Mario.h"
 
 Mushroom::Mushroom(VECTOR2D position): GameObject()
 {
@@ -13,12 +13,10 @@ Mushroom::Mushroom(VECTOR2D position): GameObject()
 	this->_isReady = false;
 	this->_name = "mushroom";
 	
-	ObjectPool* pool = ObjectPool::GetInstance();
 	SpriteService* sprites = SpriteService::GetInstance();
-	this->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
+	this->_score = new GameObject(sprites->GetSprite("hub-and-font/1000"));
 	this->_score->velocity = VECTOR2D(0.0f, MUSHROOM_SCORE_SPEED);
 	this->_score->isActive = false;
-	pool->AddGameObject(this->_score);
 }
 
 void Mushroom::Update(float deltaTime)
@@ -82,12 +80,19 @@ void Mushroom::OnCollision(CollisionEvent colEvent)
 	{
 		this->_score->isActive = true;
 		this->_score->position = position + VECTOR2D(0.0f, MUSHROOM_SIZE);
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+		mario->ChangeFigure(MARIO_SUPER);
+		mario->IncreaseScore(SCORE_MUSHROOM);
 	}
 }
 
 void Mushroom::Render()
 {
 	GameObject::Render(0.1f);
+	if (this->_score != nullptr && this->_score->isActive)
+	{
+		this->_score->Render(0.1f);
+	}
 }
 
 Renderable* Mushroom::GetRenderable()

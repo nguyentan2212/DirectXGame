@@ -817,7 +817,7 @@
       "class": "brick",
       "height": 16,
       "id": 128,
-      "name": "soft brick",
+      "name": "soft brick btn",
       "properties": [
         {
           "name": "subname",

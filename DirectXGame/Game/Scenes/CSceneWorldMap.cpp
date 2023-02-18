@@ -7,6 +7,7 @@
 #include "../../Graphic/SpriteService.h"
 #include "../MapMonster.h"
 #include "../MapMario.h"
+#include "../GUI.h"
 
 CSceneWorldMap::CSceneWorldMap(): Scene(SCENE_WORLD_MAP)
 {
@@ -52,7 +53,7 @@ void CSceneWorldMap::OnChanged(UINT preSceneId)
 	camera->Follow(nullptr);
 
 	camera->position = VECTOR2D((float)this->_tileWidth, (float)this->_tileHeight);
-	camera->bottomLeft = VECTOR2D((float)this->_tileWidth, (float)this->_tileHeight);
+	camera->bottomLeft = VECTOR2D((float)this->_tileWidth, (float)this->_tileHeight * (-2.5f));
 	camera->topRight = VECTOR2D((float)this->_width * this->_tileWidth, (float)this->_height * this->_tileHeight);
 }
 
@@ -95,4 +96,5 @@ void CSceneWorldMap::InitObjects(json config)
 		obj->showBoundingBox = false;
 		this->_objs.push_back(obj);
 	}
+	this->_objs.push_back(new GUI());
 }

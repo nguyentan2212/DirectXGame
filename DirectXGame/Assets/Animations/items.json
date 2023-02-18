@@ -119,19 +119,19 @@
     },
     {
       "name": "bonus",
-      "defaultTime": 100,
+      "defaultTime": 300,
       "frames": [
         {
-          "sprite": "mics134"
+          "sprite": "mics107"
         },
         {
-          "sprite": "mics135"
+          "sprite": "mics128"
         },
         {
-          "sprite": "mics136"
+          "sprite": "mics131"
         },
         {
-          "sprite": "mics137"
+          "sprite": "mics132"
         }
       ]
     },
@@ -171,6 +171,21 @@
         },
         {
           "sprite": "world-map-136"
+        }
+      ]
+    },
+    {
+      "name": "soft brick btn",
+      "defaultTime": 200,
+      "frames": [
+        {
+          "sprite": "mics120"
+        },
+        {
+          "sprite": "mics121"
+        },
+        {
+          "sprite": "mics122"
         }
       ]
     }

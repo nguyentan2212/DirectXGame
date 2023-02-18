@@ -2,7 +2,7 @@
   "fps": 60,
   "window": {
     "width": 256,
-    "height": 204
+    "height": 236
   },
   "textures": [
     {
@@ -94,6 +94,16 @@
         "h": 60
       },
       "spritePath": "Assets/Textures/enemies.json"
+    },
+    {
+      "name": "start-scene",
+      "type": "spritesheet",
+      "image": "Assets/Textures/start-scene.png",
+      "size": {
+        "w": 256,
+        "h": 224
+      },
+      "spritePath": "Assets/Textures/start-scene.json"
     }
   ],
   "animations": [

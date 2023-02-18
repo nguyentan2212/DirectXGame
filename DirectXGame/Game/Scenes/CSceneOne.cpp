@@ -52,6 +52,11 @@ void CSceneOne::InitObjects(json config)
 			else if (item["name"].get<string>() == "soft brick")
 			{
 				obj = Brick::CreateSoftBrick(position);
+				
+			}
+			else if (item["name"].get<string>() == "soft brick btn")
+			{
+				obj = Brick::CreateSoftBrickWithButton(position);
 			}
 			else
 			{
@@ -98,6 +103,13 @@ void CSceneOne::InitObjects(json config)
 			{
 				obj = new KoopaTroopa(false);
 			}
+			obj->width = item["width"].get<float>();
+			obj->height = item["height"].get<float>();
+			obj->name = item["name"].get<string>();
+		}
+		else if (item["name"].get<string>() == "bonus box")
+		{
+			obj = new BonusBox();
 			obj->width = item["width"].get<float>();
 			obj->height = item["height"].get<float>();
 			obj->name = item["name"].get<string>();
@@ -153,7 +165,7 @@ void CSceneOne::OnChanged(UINT preSceneId)
 void CSceneOne::CreateMario(VECTOR2D position)
 {
 	Mario* mario = new Mario();
-	mario->position = VECTOR2D(1950, 50);
+	mario->position = VECTOR2D(2650, 50);
 	mario->SetState(SCENE_ONE_ID, "scene");
 	//mario->position = position;
 

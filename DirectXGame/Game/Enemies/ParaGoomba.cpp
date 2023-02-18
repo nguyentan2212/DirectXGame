@@ -3,6 +3,7 @@
 #include "../../Graphic/AnimationService.h"
 #include "../../Physic/CollisionManager.h"
 #include "../Mario/MarioConst.h"
+#include "../../Core/ObjectPool.h"
 
 ParaGoomba::ParaGoomba(): GameObject()
 {
@@ -96,6 +97,23 @@ void ParaGoomba::Update(float deltaTime)
 			this->_score->isActive = false;
 			this->_scoreDuration = PARAGOOMBA_SCORE_DURATION;
 		}
+	}
+
+	ObjectPool* pool = ObjectPool::GetInstance();
+	if (this->_head == nullptr)
+	{
+		this->_head = new Head(PARAGOOMBA_WIDTH * 0.5, PARAGOOMBA_HEIGHT);
+		this->_head->position = this->position + VECTOR2D(this->width / 2.0f, 0.0f);
+		this->_head->body = this;
+		this->_head->SetGravity(PARAGOOMBA_GRAVITY);
+
+		pool->AddGameObject(this->_head);
+	}
+	GameObject* mario = pool->GetGameObjectWithClass("Mario");
+	float distance = abs(this->position.x - mario->position.x);
+	if (distance < PARAGOOMBA_REMOVE_HEAD_DISTANCE)
+	{
+		this->_head->isActive = false;
 	}
 
 	this->_acceleration = VECTOR2D(0.0f, -this->_gravity);
@@ -205,5 +223,4 @@ void ParaGoomba::Death()
 	}
 	this->_leftWing->isActive = false;
 	this->_rightWing->isActive = false;
-	this->_isBlocking = true;
 }

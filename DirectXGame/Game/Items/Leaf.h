@@ -7,6 +7,8 @@ constexpr float LEAF_SIZE = 16;
 
 constexpr float LEAF_SCORE_SPEED = 20;
 constexpr float LEAF_SCORE_MAX_LENGHT = 80;
+constexpr UINT SCORE_LEAF = 1000;
+
 class Leaf : public GameObject
 {
 public:
@@ -14,6 +16,7 @@ public:
 
 	void Update(float deltaTime) override;
 	void OnCollision(CollisionEvent colEvent) override;
+	void Render() override;
 
 private:
 	Renderable* GetRenderable() override;

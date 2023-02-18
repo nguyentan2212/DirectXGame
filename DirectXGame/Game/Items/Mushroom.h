@@ -8,6 +8,7 @@ constexpr float MUSHROOM_SIZE = 16;
 
 constexpr float MUSHROOM_SCORE_SPEED = 20;
 constexpr float MUSHROOM_SCORE_MAX_LENGHT = 80;
+constexpr UINT SCORE_MUSHROOM = 1000;
 
 class Mushroom: public GameObject
 {

@@ -15,7 +15,7 @@ public:
 
 	void Update(float deltaTime) override;
 	void OnCollision(CollisionEvent colEvent) override;
-
+	void Render() override;
 	static Coin* ScoreCoin(VECTOR2D position);
 
 private:

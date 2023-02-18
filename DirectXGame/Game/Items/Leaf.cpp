@@ -1,7 +1,7 @@
 #include "Leaf.h"
 #include "../../Graphic/SpriteService.h"
 #include "../../Physic/CollisionManager.h"
-#include "../../Core/ObjectPool.h"
+#include "../Mario/Mario.h"
 
 Leaf::Leaf(VECTOR2D pos): GameObject()
 {
@@ -12,12 +12,10 @@ Leaf::Leaf(VECTOR2D pos): GameObject()
 	this->_acceleration = VECTOR2D(0.0F, -LEAF_GRAVITY);
 	this->_name = "leaf";
 
-	ObjectPool* pool = ObjectPool::GetInstance();
 	SpriteService* sprites = SpriteService::GetInstance();
-	this->_score = new GameObject(sprites->GetSprite("hub-and-font/100"));
+	this->_score = new GameObject(sprites->GetSprite("hub-and-font/1000"));
 	this->_score->velocity = VECTOR2D(0.0f, LEAF_SCORE_SPEED);
 	this->_score->isActive = false;
-	pool->AddGameObject(this->_score);
 }
 
 void Leaf::Update(float deltaTime)
@@ -57,6 +55,17 @@ void Leaf::OnCollision(CollisionEvent colEvent)
 	{
 		this->_score->isActive = true;
 		this->_score->position = position + VECTOR2D(0.0f, LEAF_SIZE);
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+		mario->ChangeFigure(MARIO_RACCOON);
+	}
+}
+
+void Leaf::Render()
+{
+	GameObject::Render();
+	if (this->_score != nullptr && this->_score->isActive)
+	{
+		this->_score->Render(0.1f);
 	}
 }
 

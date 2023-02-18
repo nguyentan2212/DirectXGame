@@ -1,5 +1,6 @@
 #include "FireBall.h"
 #include "../../Physic/CollisionManager.h"
+#include "../Mario/Mario.h"
 
 FireBall::FireBall(VECTOR2D begin, float maxLength): GameObject()
 {
@@ -42,6 +43,8 @@ void FireBall::OnCollision(CollisionEvent colEvent)
 	{
 		this->_isActive = false;
 		this->_velocity = VECTOR2D(0.0f, 0.0f);
+		Mario* mario = dynamic_cast<Mario*>(colEvent.collisionObj);
+		mario->HitByFire();
 	}
 }
 

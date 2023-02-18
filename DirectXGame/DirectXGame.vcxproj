@@ -148,6 +148,7 @@
     <None Include="Assets\Textures\mics.json" />
     <None Include="Assets\Textures\raccoon-mario.json" />
     <None Include="Assets\Textures\small-mario.json" />
+    <None Include="Assets\Textures\start-scene.json" />
     <None Include="Assets\Textures\super-mario.json" />
     <None Include="Assets\Textures\world-map-1.json" />
     <None Include="Assets\Textures\world-map-2.json" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Game\Enemies\ParaGoomba.h" />
     <ClInclude Include="Game\Enemies\VenusFireTrap.h" />
     <ClInclude Include="Game\GUI.h" />
+    <ClInclude Include="Game\Items\BonusBox.h" />
     <ClInclude Include="Game\Items\Brick.h" />
     <ClInclude Include="Game\Items\Coin.h" />
     <ClInclude Include="Game\Items\Head.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="Game\Mario\MarioConst.h" />
     <ClInclude Include="Game\Scenes\CSceneHidden.h" />
     <ClInclude Include="Game\Scenes\CSceneOne.h" />
+    <ClInclude Include="Game\Scenes\CSceneStart.h" />
     <ClInclude Include="Game\Scenes\CSceneWorldMap.h" />
     <ClInclude Include="Graphic\Animation.h" />
     <ClInclude Include="Graphic\AnimationFrame.h" />
@@ -218,6 +221,7 @@
     <ClCompile Include="Game\Enemies\ParaGoomba.cpp" />
     <ClCompile Include="Game\Enemies\VenusFireTrap.cpp" />
     <ClCompile Include="Game\GUI.cpp" />
+    <ClCompile Include="Game\Items\BonusBox.cpp" />
     <ClCompile Include="Game\Items\Brick.cpp" />
     <ClCompile Include="Game\Items\Coin.cpp" />
     <ClCompile Include="Game\Items\Head.cpp" />
@@ -229,6 +233,7 @@
     <ClCompile Include="Game\Mario\Mario.cpp" />
     <ClCompile Include="Game\Scenes\CSceneHidden.cpp" />
     <ClCompile Include="Game\Scenes\CSceneOne.cpp" />
+    <ClCompile Include="Game\Scenes\CSceneStart.cpp" />
     <ClCompile Include="Game\Scenes\CSceneWorldMap.cpp" />
     <ClCompile Include="Graphic\Animation.cpp" />
     <ClCompile Include="Graphic\AnimationFrame.cpp" />
@@ -250,6 +255,7 @@
     <Image Include="Assets\Textures\mics.png" />
     <Image Include="Assets\Textures\raccoon-mario.png" />
     <Image Include="Assets\Textures\small-mario.png" />
+    <Image Include="Assets\Textures\start-scene.png" />
     <Image Include="Assets\Textures\super-mario.png" />
     <Image Include="Assets\Textures\world-map-1.png" />
     <Image Include="Assets\Textures\world-map-2.png" />

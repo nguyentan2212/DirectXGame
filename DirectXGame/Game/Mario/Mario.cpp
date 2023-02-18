@@ -1,8 +1,7 @@
 #include "Mario.h"
 #include "../../Physic/CollisionManager.h"
 #include "../../Core/KeyboardHandler.h"
-#include "../Enemies/KoopaParaTroopa.h"
-#include "../Enemies/KoopaTroopa.h"
+#include "../Enemies/Enemies.h"
 #include "../Items/Brick.h"
 #include "../Scenes/CSceneOne.h"
 #include "../Scenes/CSceneHidden.h"
@@ -16,6 +15,7 @@ Mario::Mario(): GameObject()
 	SetState(MARIO_SMALL,"figure");
 	SetState(MARIO_NOT_HOLD, "hold");
 	SetState(MARIO_TOUCHABLE, "touchable");
+	SetState(MARIO_BRICK_NOT_BLOCKING, "brick");
 	ChangeFigure(MARIO_SMALL);
 	Jump(0);
 	this->_gui = new GUI();
@@ -30,6 +30,10 @@ void Mario::Update(float deltaTime)
 		return;
 	}
 
+	if (this->position.y < -48.0f && GetState() != MARIO_DEATH)
+	{
+		Death();
+	}
 	if (GetState("touchable") == MARIO_UNTOUCHABLE)
 	{
 		this->_untouchableTime -= deltaTime;
@@ -112,7 +116,19 @@ void Mario::Update(float deltaTime)
 	}
 
 	this->_isGrounded = false;
+	SetState(MARIO_BRICK_NOT_BLOCKING, "brick");
 	CollisionManager::Processing(this, deltaTime);
+
+	if (this->_portal != nullptr)
+	{
+		VECTOR2D distance = this->position - this->_portal->position;
+		float length = D3DXVec2Length(&distance);
+		if (length <= this->_portal->height)
+		{
+			Teleport();
+			DebugOut(L"[INFO] Collide with portal !\n");
+		}
+	}
 
 	if (this->_isGrounded == false && (GetState() == MARIO_RUN || GetState() == MARIO_IDLE))
 	{
@@ -227,6 +243,9 @@ void Mario::OnKeyDown(int keyCode)
 void Mario::OnKeyUp(int keyCode)
 {
 	if (this->_isActive == false)
+	{
+		return;
+	}
 	switch (keyCode)
 	{
 	case BTN_LEFT:
@@ -264,8 +283,12 @@ void Mario::OnCollision(CollisionEvent colEvent)
 	string className = typeid(*colEvent.collisionObj).name();
 	string name = colEvent.collisionObj->name;
 
-	UINT t = GetState("touchable");
+	wstring wname = wstring(name.begin(), name.end());
+	LPCWSTR pwname = wname.c_str();
+	//DebugOut(L"[INFO] Mario collide with name:'%s'!\n", pwname);
 
+	UINT t = GetState("touchable");
+	
 	if (className == "class Platform" && name != "portal in" && name != "portal out")
 	{
 		OnCollisionWithPlatform(colEvent);
@@ -304,6 +327,7 @@ void Mario::OnCollision(CollisionEvent colEvent)
 void Mario::IncreaseScore(int score)
 {
 	_gui->IncreaseScore(score);
+	DebugOut(L"[INFO] Increase Score!\n");
 }
 
 void Mario::IncreaseCoin(int coin)
@@ -371,6 +395,23 @@ void Mario::ChangeFigure(UINT figure)
 	this->_preFigure = figureNames[GetState("figure")];
 	SetState(figure, "figure");
 	SetState(MARIO_UNTOUCHABLE, "touchable");
+}
+
+void Mario::HitByFire()
+{
+	if (GetState("touchable") == MARIO_UNTOUCHABLE)
+	{
+		return;
+	}
+
+	if (GetState("figure") != MARIO_SMALL)
+	{
+		ChangeFigure(MARIO_SMALL);
+	}
+	else
+	{
+		Death();
+	}
 }
 
 void Mario::Idle()
@@ -575,33 +616,17 @@ void Mario::OnCollisionWithBrick(CollisionEvent colEvent)
 		pos.y = this->velocity.y * colEvent.entryTime;
 		this->_velocity = VECTOR2D(this->_velocity.x, 0.0f);
 		this->_acceleration = VECTOR2D(this->_acceleration.x, -MARIO_GRAVITY);
-		if (colEvent.collisionObj->GetState() == BRICK_UNTOUCHED && colEvent.collisionObj->name == "brick")
-		{
-			IncreaseCoin();
-			IncreaseScore(SCORE_COIN_BRICK);
-		}
 	}
 }
 
 void Mario::OnCollisionWithItem(CollisionEvent colEvent)
 {
-	if (colEvent.collisionObj->name == "mushroom")
-	{
-		ChangeFigure(MARIO_SUPER);
-		IncreaseScore(SCORE_POWER_MUSHROOM);
-	}
-	else if (colEvent.collisionObj->name == "leaf")
-	{
-		ChangeFigure(MARIO_RACCOON);
-		IncreaseScore(SCORE_LEAF);
-	}
 }
 
 void Mario::OnCollisionWithGoomba(CollisionEvent colEvent)
 {
 	if (colEvent.direction == Direction::DOWN)
 	{
-		IncreaseScore(100);
 		if (IsKeyDown(DIK_W))
 		{
 			Jump(MARIO_SUPER_JUMP_Y);
@@ -610,6 +635,7 @@ void Mario::OnCollisionWithGoomba(CollisionEvent colEvent)
 		{
 			Jump(MARIO_JUMP_SPEED_Y);
 		}
+		colEvent.collisionObj->isBlocking = true;
 	}
 	else if (GetState("figure") != MARIO_SMALL && GetState() != MARIO_ATTACK)
 	{
@@ -637,6 +663,7 @@ void Mario::OnCollisionWithParaGoomba(CollisionEvent colEvent)
 		{
 			Jump(MARIO_JUMP_SPEED_Y);
 		}
+		colEvent.collisionObj->isBlocking = true;
 	}
 	else if (GetState("figure") != MARIO_SMALL && GetState() != MARIO_ATTACK)
 	{
@@ -740,18 +767,28 @@ void Mario::OnCollisionWithKoopaTroopa(CollisionEvent colEvent)
 
 void Mario::OnCollisionWithPortal(CollisionEvent colEvent)
 {
-	GameEngine* app = GameEngine::GetInstance();
+	this->_portal = colEvent.collisionObj;
+}
 
+bool Mario::IsKeyDown(int keyCode)
+{
+	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
+	return keyboard->IsKeyDown(keyCode);
+}
+
+void Mario::Teleport()
+{
+	GameEngine* app = GameEngine::GetInstance();
 	switch (GetState("scene"))
 	{
 	case SCENE_ONE_ID:
-		if (colEvent.collisionObj->name == "portal in" && colEvent.direction == DIRECTION::DOWN)
+		if (this->_portal->name == "portal in" && IsKeyDown(BTN_DOWN))
 		{
 			app->TransitionTo(SCENE_HIDDEN_ID);
 		}
 		break;
 	case SCENE_HIDDEN_ID:
-		if (colEvent.collisionObj->name == "portal out" && colEvent.direction == DIRECTION::UP)
+		if (this->_portal->name == "portal out" && IsKeyDown(BTN_UP))
 		{
 			app->TransitionTo(SCENE_ONE_ID);
 		}
@@ -759,10 +796,4 @@ void Mario::OnCollisionWithPortal(CollisionEvent colEvent)
 	default:
 		break;
 	}
-}
-
-bool Mario::IsKeyDown(int keyCode)
-{
-	KeyboardHandler* keyboard = KeyboardHandler::GetInstance();
-	return keyboard->IsKeyDown(keyCode);
 }

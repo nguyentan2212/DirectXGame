@@ -5,3 +5,4 @@
 #include "Leaf.h"
 #include "Mushroom.h"
 #include "Platform.h"
+#include "BonusBox.h"

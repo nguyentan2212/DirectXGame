@@ -32,7 +32,7 @@ void KoopaParaTroopa::Update(float deltaTime)
 
 	this->_isGrounded = false;
 	this->_brickCollisionBlock = false;
-	DebugOut((wchar_t*)L"[INFO] Koopa new frame \n");
+	//DebugOut((wchar_t*)L"[INFO] Koopa new frame \n");
 	CollisionManager::Processing(this, deltaTime);
 	
 	GameObject::Update(deltaTime);
